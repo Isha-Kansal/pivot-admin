@@ -76,7 +76,7 @@ const Users = () => {
             <CPagination
               activePage={page}
               onActivePageChange={pageChange}
-              pages={5}
+              pages={2}
               doubleArrows={false}
               align="center"
             />
