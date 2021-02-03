@@ -37,7 +37,7 @@ const TheSidebar = () => {
           name="sygnet"
           height={35}
         /> */}
-        <p>Admin Panel</p>
+        <p>Admin Panel - Pivot</p>
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement
