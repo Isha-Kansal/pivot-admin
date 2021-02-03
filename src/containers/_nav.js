@@ -6,6 +6,27 @@ const _nav = [
 
     icon: "cil-drop",
   },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Planners",
+    to: "/planners",
+
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Experts",
+    to: "/experts",
+
+    icon: "cil-drop",
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Resources",
+    to: "/resources",
+
+    icon: "cil-drop",
+  },
 
   {
     _tag: "CSidebarNavDropdown",
