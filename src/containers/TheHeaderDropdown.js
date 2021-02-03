@@ -23,7 +23,7 @@ const TheHeaderDropdown = () => {
       <CDropdownMenu className="pt-0" placement="bottom-end">
         <CDropdownItem>
           <CIcon name="cil-lock-locked" className="mfe-2" />
-          Lock Account
+          Logout
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>
