@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import Pagination from "react-js-pagination";
 import {
   CBadge,
   CCard,
@@ -41,7 +42,7 @@ const Users = () => {
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
-
+  console.log("u48956485968945", usersData);
   return (
     <CRow>
       <form>
@@ -64,7 +65,7 @@ const Users = () => {
               ]}
               hover
               striped
-              itemsPerPage={5}
+              itemsPerPage={10}
               activePage={page}
               clickableRows
               onRowClick={(item) => history.push(`/users/${item.id}`)}
@@ -76,13 +77,19 @@ const Users = () => {
                 ),
               }}
             />
-            <CPagination
-              activePage={page}
-              onActivePageChange={pageChange}
-              pages={2}
-              doubleArrows={false}
-              align="center"
-            />
+            {usersData.length > 10 && (
+              <Pagination
+                className="mt-3 mx-auto w-fit-content"
+                itemClass="page-item"
+                linkClass="page-link"
+                activeClass="active"
+                activePage={page}
+                itemsCountPerPage={10}
+                totalItemsCount={usersData.length}
+                pageRangeDisplayed={5}
+                onChange={pageChange}
+              />
+            )}
           </CCardBody>
         </CCard>
       </CCol>
