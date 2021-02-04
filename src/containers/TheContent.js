@@ -34,7 +34,7 @@ const TheContent = () => {
                 )
               );
             })}
-            <Redirect from="/" to="/users" />
+            <Redirect to="/login" />
           </Switch>
         </Suspense>
       </CContainer>

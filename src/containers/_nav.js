@@ -1,5 +1,7 @@
 import resources from "../assets/icons/resourcesIcon.svg";
 import planners from "../assets/icons/plannerIcon.svg";
+import experts from "../assets/icons/expertsIcon.svg";
+import users from "../assets/icons/user1.svg";
 const _nav = [
   {
     _tag: "CSidebarNavItem",
@@ -7,7 +9,7 @@ const _nav = [
     to: "/users",
 
     icon: {
-      src: resources,
+      src: users,
     },
   },
   {
@@ -24,7 +26,9 @@ const _nav = [
     name: "Experts",
     to: "/experts",
 
-    icon: "cil-drop",
+    icon: {
+      src: experts,
+    },
   },
   {
     _tag: "CSidebarNavItem",
