@@ -44,6 +44,9 @@ const Users = () => {
 
   return (
     <CRow>
+      <form>
+        <input type="search" className="form-control" placeholder="Search" />
+      </form>
       <CCol xl={12}>
         <CCard>
           <CCardHeader>
