@@ -3,7 +3,7 @@ const usersData = [
     id: 0,
     name: "John Doe",
     email: "a@a.com",
-    country: "India",
+    country: "Australia",
     gender: "Male",
     current_role: "abc",
     current_industry: "abc",

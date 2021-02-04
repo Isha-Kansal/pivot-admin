@@ -9,7 +9,6 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CPagination,
 } from "@coreui/react";
 
 import usersData from "./UsersData";
@@ -34,29 +33,53 @@ const Users = () => {
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
+  const [search, setSearch] = useState("");
 
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/users?page=${newPage}`);
   };
-
+  const handleSearch = (e) => {
+    console.log("8e4568904867", e.target.value);
+    setSearch(e.target.value);
+  };
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
   console.log("u48956485968945", usersData);
+  const filterRecords = () => {
+    console.log("48568485798497", usersData, search);
+    // const search = search.trim().replace(/ +/g, " ");
+    if (!search) return usersData;
+    return (
+      usersData &&
+      usersData.filter((data) => {
+        let isTrue =
+          data.email.toLowerCase().includes(search) ||
+          data.country.toLowerCase().includes(search) ||
+          data.name.toLowerCase().includes(search);
+        return isTrue;
+      })
+    );
+  };
+  const searchRecords = filterRecords();
+  console.log("49856784987984", searchRecords);
   return (
     <CRow>
       <form>
-        <input type="search" className="form-control" placeholder="Search" />
+        <input
+          type="search"
+          className="form-control"
+          placeholder="Search"
+          required
+          onChange={handleSearch}
+        />
       </form>
       <CCol xl={12}>
         <CCard>
-          <CCardHeader>
-            Users
-            {/* <small className="text-muted"> example</small> */}
-          </CCardHeader>
+          <CCardHeader>Users</CCardHeader>
           <CCardBody>
             <CDataTable
-              items={usersData}
+              items={searchRecords}
               fields={[
                 { key: "name", _classes: "font-weight-bold" },
                 "email",
