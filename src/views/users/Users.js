@@ -13,21 +13,6 @@ import {
 
 import usersData from "./UsersData";
 
-const getBadge = (status) => {
-  switch (status) {
-    case "Active":
-      return "success";
-    case "Inactive":
-      return "secondary";
-    case "Pending":
-      return "warning";
-    case "Banned":
-      return "danger";
-    default:
-      return "primary";
-  }
-};
-
 const Users = () => {
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
@@ -86,19 +71,10 @@ const Users = () => {
                 "country",
                 // "status",
               ]}
-              hover
-              striped
               itemsPerPage={10}
               activePage={page}
               clickableRows
               onRowClick={(item) => history.push(`/users/${item.id}`)}
-              scopedSlots={{
-                status: (item) => (
-                  <td>
-                    <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
-                  </td>
-                ),
-              }}
             />
             {usersData.length > 10 && (
               <Pagination

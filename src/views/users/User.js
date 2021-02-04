@@ -3,6 +3,7 @@ import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 
 import usersData from "./UsersData";
+import { Button } from "reactstrap";
 
 const User = ({ match }) => {
   const user = usersData.find((user) => user.id.toString() === match.params.id);
@@ -23,7 +24,7 @@ const User = ({ match }) => {
         <CCard>
           <CCardHeader>User id: {match.params.id}</CCardHeader>
           <CCardBody>
-            <table className="table table-striped table-hover">
+            <table className="table">
               <tbody>
                 {userDetails.map(([key, value], index) => {
                   return (
