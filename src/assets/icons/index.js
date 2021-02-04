@@ -1,7 +1,7 @@
 import { sygnet } from "./sygnet";
 import { logo } from "./logo";
 import { logoNegative } from "./logo-negative";
-import { resources } from "./resourcesIcon.svg";
+import { resources } from "../icons/resourcesIcon.svg";
 
 import {
   cibSkype,

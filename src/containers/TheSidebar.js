@@ -12,6 +12,7 @@ import {
   CSidebarNavItem,
 } from "@coreui/react";
 
+import logo from "../assets/icons/logo.png";
 import CIcon from "@coreui/icons-react";
 
 // sidebar nav config
@@ -27,17 +28,8 @@ const TheSidebar = () => {
       onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
-        {/* <CIcon
-          className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
-        /> */}
-        {/* <CIcon
-          className="c-sidebar-brand-minimized"
-          name="sygnet"
-          height={35}
-        /> */}
-        <p>Admin Panel - Pivot</p>
+        <CIcon className="c-sidebar-brand-full" src={logo} height={35} />
+        <CIcon className="c-sidebar-brand-minimized" src={logo} height={35} />
       </CSidebarBrand>
       <CSidebarNav>
         <CCreateElement
