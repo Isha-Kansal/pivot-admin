@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import {
   CBadge,
+  CButton,
   CCard,
   CCardBody,
   CCardHeader,
@@ -12,6 +13,7 @@ import {
 } from "@coreui/react";
 
 import usersData from "./UsersData";
+import { cibRubygems } from "@coreui/icons";
 
 const Users = () => {
   const history = useHistory();
@@ -48,6 +50,11 @@ const Users = () => {
   };
   const searchRecords = filterRecords();
   console.log("49856784987984", searchRecords);
+  const onBlock = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    alert("user Blocked");
+  };
   return (
     <CRow>
       <form>
@@ -69,8 +76,20 @@ const Users = () => {
                 { key: "name", _classes: "font-weight-bold" },
                 "email",
                 "country",
-                // "status",
+                "action",
               ]}
+              scopedSlots={{
+                action: (item) => (
+                  <td>
+                    <CButton
+                      style={{ backgroundColor: "rgb(200,200,200)" }}
+                      onClick={onBlock}
+                    >
+                      Block
+                    </CButton>
+                  </td>
+                ),
+              }}
               itemsPerPage={10}
               activePage={page}
               clickableRows
