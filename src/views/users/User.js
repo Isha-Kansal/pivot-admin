@@ -22,7 +22,7 @@ const User = ({ match }) => {
     <CRow>
       <CCol lg={12}>
         <CCard>
-          <CCardHeader>User id: {match.params.id}</CCardHeader>
+          {/* <CCardHeader>User id: {match.params.id}</CCardHeader> */}
           <CCardBody>
             <table className="table">
               <tbody>
