@@ -9,6 +9,7 @@ import {
   CCardHeader,
   CCol,
   CDataTable,
+  CLabel,
   CRow,
 } from "@coreui/react";
 
@@ -48,6 +49,20 @@ const Users = () => {
       })
     );
   };
+  const getBadge = (status) => {
+    switch (status) {
+      case "Verified":
+        return "success";
+      case "Inactive":
+        return "secondary";
+      case "Pending":
+        return "warning";
+      case "Not Verified":
+        return "danger";
+      default:
+        return "primary";
+    }
+  };
   const searchRecords = filterRecords();
   console.log("49856784987984", searchRecords);
   const onBlock = (e) => {
@@ -75,10 +90,22 @@ const Users = () => {
               fields={[
                 { key: "name", _classes: "font-weight-bold" },
                 "email",
+                "status",
                 "country",
                 "action",
               ]}
+              // scopedSlots={{
+
+              // }}
               scopedSlots={{
+                status: (item) => (
+                  <td>
+                    <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+                  </td>
+                  // <td>
+
+                  // </td>
+                ),
                 action: (item) => (
                   <td>
                     <CButton
