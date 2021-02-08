@@ -8,6 +8,7 @@ import {
   CCol,
   CRow,
   CButton,
+  CDataTable,
 } from "@coreui/react";
 
 const Experts = (props) => {
@@ -39,7 +40,22 @@ const Experts = (props) => {
             </CButton>{" "}
           </CCardHeader>
 
-          <CCardBody></CCardBody>
+          <CCardBody>
+            <CDataTable
+              // items={}
+              fields={[
+                { key: "name", _classes: "font-weight-bold" },
+                "designation",
+                "expertise",
+                "fields",
+                "about",
+              ]}
+              itemsPerPage={10}
+              activePage={page}
+              clickableRows
+              onRowClick={(item) => history.push(`/users/${item.id}`)}
+            />
+          </CCardBody>
         </CCard>
       </CCol>
     </CRow>

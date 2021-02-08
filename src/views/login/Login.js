@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { NotificationManager } from "react-notifications";
 import {
   CButton,
   CCard,
@@ -16,7 +17,10 @@ import {
 } from "@coreui/react";
 import { FormText } from "reactstrap";
 import CIcon from "@coreui/icons-react";
-
+import { loginByAdmin } from "../store/action";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 class Login extends Component {
   constructor(props) {
     super();
@@ -41,19 +45,40 @@ class Login extends Component {
     e.preventDefault();
 
     const { name, password } = this.state;
-    // if (name === "") {
-    //   this.setState({ errorText: "Name can not be empty", errorType: "name" });
-    // } else if (password === "") {
-    //   this.setState({
-    //     errorText: "Password can not be empty",
-    //     errorType: "password",
-    //   });
-    // }
-    // else this.authenticateAdmin();
+    if (name === "") {
+      this.setState({ errorText: "Name can not be empty", errorType: "name" });
+    } else if (password === "") {
+      this.setState({
+        errorText: "Password can not be empty",
+        errorType: "password",
+      });
+    } else this.authenticateAdmin();
 
-    this.props.history.push("/users");
+    // this.props.history.push("/users");
   };
+  authenticateAdmin = () => {
+    let formData = {
+      email: "admin@gmail.com",
+      password: "Admin@123",
+    };
 
+    this.props.loginByAdmin("user/login", formData, (value) => {
+      console.log("9458794597894789", value);
+      this.setState({
+        loading: false,
+      });
+
+      if (value.status === 200) {
+        NotificationManager.success(value.message, "", 1000);
+
+        localStorage.setItem("isLoggedIn", true);
+
+        this.props.history.push("/users");
+      } else {
+        NotificationManager.error(value.message, "", 1000);
+      }
+    });
+  };
   render() {
     const { errorText, errorType, loading } = this.state;
     return (
@@ -129,4 +154,17 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      loginByAdmin,
+    },
+    dispatch
+  );
+};
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

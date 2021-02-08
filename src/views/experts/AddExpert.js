@@ -13,7 +13,10 @@ import {
   CLabel,
   CRow,
 } from "@coreui/react";
+import CameraIcon from "../../assets/icons/photo-camera.svg";
+import { Input } from "reactstrap";
 import CIcon from "@coreui/icons-react";
+import Avatar from "../../assets/icons/avatar.png";
 class AddExpert extends Component {
   constructor(props) {
     super();
@@ -25,8 +28,21 @@ class AddExpert extends Component {
       about: "",
       errorType: "",
       errorText: "",
+      expertImage: null,
     };
   }
+  uploadImage = (event) => {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        // props.setImage(reader.result);
+        this.setState({
+          expertImage: reader.result,
+        });
+      }.bind(this);
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
   errorShow = (type) => {
     const { errorType, errorText } = this.state;
     return errorType === type ? <p>{errorText}</p> : null;
@@ -137,7 +153,14 @@ class AddExpert extends Component {
   };
 
   render() {
-    const { name, designation, expertise, about, fields } = this.state;
+    const {
+      name,
+      designation,
+      expertise,
+      about,
+      fields,
+      expertImage,
+    } = this.state;
     console.log("AddExpertAddExpertAddExpertAddExpert");
     return (
       <CRow>
@@ -147,6 +170,29 @@ class AddExpert extends Component {
               <CButton onClick={this.handleBack} className="backBtn">
                 <i className="fas fa-arrow-left"></i>Back
               </CButton>
+              <div className="update-profile-image">
+                <img
+                  id="output"
+                  src={expertImage ? expertImage : Avatar}
+                  alt="profile"
+                  className="profile negative-margin"
+                />
+                <div>
+                  <Input
+                    type="file"
+                    accept="image/*"
+                    id="f-upload"
+                    name="myImage"
+                    onChange={this.uploadImage}
+                    className="d-none"
+                  />
+                  <label htmlFor="f-upload" class="custom-file-upload">
+                    <div className="camera-btn" onClick={this.uploadImage}>
+                      <img src={CameraIcon} alt="camera" />
+                    </div>
+                  </label>
+                </div>
+              </div>
             </CCardHeader>
             <CCardBody>
               <CForm
