@@ -127,19 +127,21 @@ const Users = () => {
               clickableRows
               onRowClick={(item) => history.push(`/users/${item.id}`)}
             />
-            {usersData.length > 10 && (
-              <Pagination
-                className="mt-3 mx-auto w-fit-content"
-                itemClass="page-item"
-                linkClass="page-link"
-                activeClass="active"
-                activePage={page}
-                itemsCountPerPage={10}
-                totalItemsCount={usersData.length}
-                pageRangeDisplayed={5}
-                onChange={pageChange}
-              />
-            )}
+            <div className="text-center pagination-input">
+              {usersData.length > 10 && (
+                <Pagination
+                  className="mt-3 mx-auto w-fit-content"
+                  itemClass="page-item"
+                  linkClass="page-link"
+                  activeClass="active"
+                  activePage={page}
+                  itemsCountPerPage={10}
+                  totalItemsCount={usersData.length}
+                  pageRangeDisplayed={5}
+                  onChange={pageChange}
+                />
+              )}
+            </div>
           </CCardBody>
         </CCard>
       </CCol>
