@@ -1,9 +1,5 @@
-import resources from "../assets/icons/resourcesIcon.svg";
-import planners from "../assets/icons/plannerIcon.svg";
-import experts from "../assets/icons/expertsIcon.svg";
-import users from "../assets/icons/user1.svg";
 import { Planners, Users, Experts, Resources } from "../containers/icons";
-import CIcon from "@coreui/icons-react";
+
 const _nav = [
   {
     _tag: "CSidebarNavItem",

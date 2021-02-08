@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import { NotificationManager } from "react-notifications";
 import {
   CButton,
@@ -54,8 +54,6 @@ class Login extends Component {
         errorType: "password",
       });
     } else this.authenticateAdmin();
-
-    // this.props.history.push("/users");
   };
   authenticateAdmin = () => {
     const { name, password } = this.state;

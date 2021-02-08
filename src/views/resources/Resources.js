@@ -11,7 +11,6 @@ import {
 } from "@coreui/react";
 
 const Resources = (props) => {
-  const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
