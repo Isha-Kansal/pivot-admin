@@ -43,7 +43,7 @@ class Login extends Component {
     });
   };
   onHandleSubmit = (e) => {
-    e.preventDefault();
+    e && e.preventDefault();
 
     const { name, password } = this.state;
     if (name === "") {
@@ -86,6 +86,13 @@ class Login extends Component {
       }
     });
   };
+  onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+
+      this.onHandleSubmit();
+    }
+  };
   render() {
     const { errorText, errorType, loading, name, password } = this.state;
     console.log("489r79049709", loading);
@@ -98,7 +105,7 @@ class Login extends Component {
                 {loading && <Loader />}
                 <CCard className="p-4">
                   <CCardBody>
-                    <CForm onSubmit={this.onHandleSubmit}>
+                    <CForm onKeyDown={(e) => this.onKeyDown(e)}>
                       <h1>Login</h1>
                       <p className="text-muted">Sign In to your account</p>
                       <div className="mb-3">
