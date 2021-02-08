@@ -8,3 +8,11 @@
   display: flex;
   justify-content: center;
 }
+button {
+  &.icon {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    outline: 0;
+  }
+}

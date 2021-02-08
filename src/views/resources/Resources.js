@@ -8,6 +8,7 @@ import {
   CCol,
   CRow,
   CButton,
+  CDataTable,
 } from "@coreui/react";
 
 const Resources = (props) => {
@@ -23,7 +24,7 @@ const Resources = (props) => {
   };
   return (
     <CRow>
-      <CCol xl={6}>
+      <CCol xl={12}>
         <CCard>
           <CCardHeader>
             <CButton
@@ -35,7 +36,25 @@ const Resources = (props) => {
               Add Resource
             </CButton>{" "}
           </CCardHeader>
-          <CCardBody></CCardBody>
+          <CCardBody>
+            <CCardBody>
+              <CDataTable
+                // items={}
+                fields={[
+                  { key: "name", _classes: "font-weight-bold" },
+                  "format",
+                  "pricing",
+                  "unique selling proposition",
+                  "pros & cons",
+                  "details",
+                ]}
+                itemsPerPage={10}
+                activePage={page}
+                clickableRows
+                // onRowClick={(item) => history.push(`/users/${item.id}`)}
+              />
+            </CCardBody>
+          </CCardBody>
         </CCard>
       </CCol>
     </CRow>
