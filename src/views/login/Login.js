@@ -15,6 +15,7 @@ import {
   CInputGroupText,
   CRow,
 } from "@coreui/react";
+import Loader from "../../loader";
 import { FormText } from "reactstrap";
 import CIcon from "@coreui/icons-react";
 import { loginByAdmin } from "../store/action";
@@ -57,6 +58,9 @@ class Login extends Component {
     // this.props.history.push("/users");
   };
   authenticateAdmin = () => {
+    this.setState({
+      loading: true,
+    });
     let formData = {
       email: "admin@gmail.com",
       password: "Admin@123",
@@ -81,12 +85,14 @@ class Login extends Component {
   };
   render() {
     const { errorText, errorType, loading } = this.state;
+    console.log("489r79049709", loading);
     return (
       <div className="c-app c-default-layout flex-row align-items-center">
         <CContainer>
           <CRow className="justify-content-center">
             <CCol md="8">
               <CCardGroup>
+                {loading && <Loader />}
                 <CCard className="p-4">
                   <CCardBody>
                     <CForm onSubmit={this.onHandleSubmit}>
