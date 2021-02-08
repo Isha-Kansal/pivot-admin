@@ -19,7 +19,6 @@ const Resources = (props) => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
   const addResource = () => {
-    console.log("598679895679", props);
     props.history.push("/addResource");
   };
   return (

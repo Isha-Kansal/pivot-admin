@@ -27,15 +27,13 @@ const Users = () => {
     currentPage !== newPage && history.push(`/users?page=${newPage}`);
   };
   const handleSearch = (e) => {
-    console.log("8e4568904867", e.target.value);
     setSearch(e.target.value);
   };
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
-  console.log("u48956485968945", usersData);
+
   const filterRecords = () => {
-    console.log("48568485798497", usersData, search);
     // const search = search.trim().replace(/ +/g, " ");
     if (!search) return usersData;
     return (
@@ -64,7 +62,7 @@ const Users = () => {
     }
   };
   const searchRecords = filterRecords();
-  console.log("49856784987984", searchRecords);
+
   const onBlock = (e) => {
     e.preventDefault();
     e.stopPropagation();

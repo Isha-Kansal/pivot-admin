@@ -15,7 +15,7 @@ async function callLoginByAdmin(data) {
 
 function* loginByAdmin(action) {
   const response = yield call(callLoginByAdmin, action);
-  console.log("4586749689485678", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {

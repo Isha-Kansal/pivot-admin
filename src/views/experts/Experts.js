@@ -21,7 +21,6 @@ const Experts = (props) => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
   const addExpert = () => {
-    console.log("598679895679", props);
     props.history.push("/addExpert");
   };
   return (

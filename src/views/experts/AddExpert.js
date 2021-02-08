@@ -161,7 +161,7 @@ class AddExpert extends Component {
       fields,
       expertImage,
     } = this.state;
-    console.log("AddExpertAddExpertAddExpertAddExpert");
+
     return (
       <CRow>
         <CCol xs="12" sm="12">
