@@ -26,7 +26,7 @@ const TheSidebar = () => {
       show={show}
       onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
     >
-      <CSidebarBrand className="d-md-down-none" to="/">
+      <CSidebarBrand className="d-md-down-none" to="/users">
         <LogoFull className="c-sidebar-brand-full" height={35} />
         <LogoMinimized className="c-sidebar-brand-minimized" height={35} />
       </CSidebarBrand>

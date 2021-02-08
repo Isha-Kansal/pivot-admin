@@ -9,7 +9,6 @@ import { apiCallGet } from "../../common/axios";
 import { apiCallPost } from "../../common/axios";
 
 async function callLoginByAdmin(data) {
-  debugger;
   const res = await apiCallPost(data.url, data.payload);
   return res;
 }
