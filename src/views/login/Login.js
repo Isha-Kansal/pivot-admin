@@ -58,12 +58,13 @@ class Login extends Component {
     // this.props.history.push("/users");
   };
   authenticateAdmin = () => {
+    const { name, password } = this.state;
     this.setState({
       loading: true,
     });
     let formData = {
-      email: "admin@gmail.com",
-      password: "Admin@123",
+      email: name,
+      password: password,
     };
 
     this.props.loginByAdmin("user/login", formData, (value) => {
@@ -79,12 +80,16 @@ class Login extends Component {
 
         this.props.history.push("/users");
       } else {
-        NotificationManager.error(value.message, "", 1000);
+        NotificationManager.error("Please enter valid credentials", "", 1000);
+        this.setState({
+          name: "",
+          password: "",
+        });
       }
     });
   };
   render() {
-    const { errorText, errorType, loading } = this.state;
+    const { errorText, errorType, loading, name, password } = this.state;
     console.log("489r79049709", loading);
     return (
       <div className="c-app c-default-layout flex-row align-items-center">
@@ -109,7 +114,7 @@ class Login extends Component {
                           placeholder="Username"
                           autoComplete="username"
                           onChange={(e) => this.handleChange(e, "name")}
-                          value={this.state.name}
+                          value={name}
                         />
                         {errorType === "name" && (
                           <FormText color="danger">{errorText}</FormText>
@@ -126,7 +131,7 @@ class Login extends Component {
                           placeholder="Password"
                           autoComplete="current-password"
                           onChange={(e) => this.handleChange(e, "password")}
-                          value={this.state.password}
+                          value={password}
                         />
                         {errorType === "password" && (
                           <FormText color="danger">{errorText}</FormText>
