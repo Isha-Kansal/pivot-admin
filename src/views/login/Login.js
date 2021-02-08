@@ -66,7 +66,6 @@ class Login extends Component {
     };
 
     this.props.loginByAdmin("user/login", formData, (value) => {
-      console.log("9458794597894789", value);
       this.setState({
         loading: false,
       });
@@ -95,7 +94,7 @@ class Login extends Component {
   };
   render() {
     const { errorText, errorType, loading, name, password } = this.state;
-    console.log("489r79049709", loading);
+
     return (
       <div className="c-app c-default-layout flex-row align-items-center">
         <CContainer>
