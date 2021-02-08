@@ -103,40 +103,54 @@ class Login extends Component {
                     <CForm onSubmit={this.onHandleSubmit}>
                       <h1>Login</h1>
                       <p className="text-muted">Sign In to your account</p>
-                      <CInputGroup className="mb-3">
-                        <CInputGroupPrepend>
-                          <CInputGroupText>
-                            <CIcon name="cil-user" />
-                          </CInputGroupText>
-                        </CInputGroupPrepend>
-                        <CInput
-                          type="text"
-                          placeholder="Username"
-                          autoComplete="username"
-                          onChange={(e) => this.handleChange(e, "name")}
-                          value={name}
-                        />
-                        {errorType === "name" && (
-                          <FormText color="danger">{errorText}</FormText>
-                        )}
-                      </CInputGroup>
-                      <CInputGroup className="mb-4">
-                        <CInputGroupPrepend>
-                          <CInputGroupText>
-                            <CIcon name="cil-lock-locked" />
-                          </CInputGroupText>
-                        </CInputGroupPrepend>
-                        <CInput
-                          type="password"
-                          placeholder="Password"
-                          autoComplete="current-password"
-                          onChange={(e) => this.handleChange(e, "password")}
-                          value={password}
-                        />
-                        {errorType === "password" && (
-                          <FormText color="danger">{errorText}</FormText>
-                        )}
-                      </CInputGroup>
+                      <div className="mb-3">
+                        <CInputGroup>
+                          <CInputGroupPrepend>
+                            <CInputGroupText>
+                              <CIcon name="cil-user" />
+                            </CInputGroupText>
+                          </CInputGroupPrepend>
+                          <CInput
+                            type="text"
+                            placeholder="Username"
+                            autoComplete="username"
+                            onChange={(e) => this.handleChange(e, "name")}
+                            value={name}
+                          />
+                        </CInputGroup>
+                        <p className="mb-0">
+                          {errorType === "name" && (
+                            <FormText color="danger" className="error">
+                              {errorText}
+                            </FormText>
+                          )}
+                        </p>
+                      </div>
+                      <div className="mb-4">
+                        <CInputGroup>
+                          <CInputGroupPrepend>
+                            <CInputGroupText>
+                              <CIcon name="cil-lock-locked" />
+                            </CInputGroupText>
+                          </CInputGroupPrepend>
+                          <CInput
+                            type="password"
+                            placeholder="Password"
+                            autoComplete="current-password"
+                            onChange={(e) => this.handleChange(e, "password")}
+                            value={password}
+                          />
+                        </CInputGroup>
+                        <p className="mb-0">
+                          {" "}
+                          {errorType === "password" && (
+                            <FormText color="danger" className="error">
+                              {errorText}
+                            </FormText>
+                          )}
+                        </p>
+                      </div>
+
                       <CRow>
                         <CCol xs="6">
                           <CButton

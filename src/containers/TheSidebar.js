@@ -34,6 +34,7 @@ const TheSidebar = () => {
       <CSidebarNav>
         <CCreateElement
           items={navigation}
+          className="sidebar-nav"
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,
