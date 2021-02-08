@@ -72,15 +72,20 @@ const Users = () => {
   };
   return (
     <CRow>
-      <form>
-        <input
-          type="search"
-          className="form-control"
-          placeholder="Search"
-          required
-          onChange={handleSearch}
-        />
-      </form>
+      <CCol xl={12}>
+        <form>
+          <div className="text-center search-input">
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Search"
+              required
+              onChange={handleSearch}
+            />
+          </div>
+        </form>
+      </CCol>
+
       <CCol xl={12}>
         <CCard>
           <CCardHeader>Users</CCardHeader>
