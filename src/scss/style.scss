@@ -13,3 +13,21 @@
 .error {
   font-size: 14px;
 }
+
+.block-btn {
+  color: white;
+  margin: 0px 3px;
+  padding: 2px 9px;
+  font-size: 13px;
+  font-weight: 600;
+  border: none;
+  &.Unblock-btn {
+    background-color: #76c476 !important;
+  }
+  &.block-btn {
+    background-color: #e55353;
+  }
+  &.Deactive-btn {
+    background-color: #e48a44;
+  }
+}

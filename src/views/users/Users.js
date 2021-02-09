@@ -122,10 +122,25 @@ const Users = () => {
                 action: (item) => (
                   <td>
                     <CButton
-                      style={{ backgroundColor: "rgb(200,200,200)" }}
+                      // style={{ backgroundColor: "rgb(200,200,200)" }}
                       onClick={onBlock}
+                      className="block-btn block-btn"
                     >
                       Block
+                    </CButton>
+                    <CButton
+                      // style={{ backgroundColor: "rgb(200,200,200)" }}
+                      onClick={onBlock}
+                      className="Unblock-btn block-btn"
+                    >
+                      UnBlock
+                    </CButton>
+                    <CButton
+                      // style={{ backgroundColor: "rgb(200,200,200)" }}
+                      onClick={onBlock}
+                      className="Deactive-btn block-btn"
+                    >
+                      Deactivate
                     </CButton>
                   </td>
                 ),
