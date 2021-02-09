@@ -71,7 +71,7 @@ class Login extends Component {
       });
 
       if (value.status === 200) {
-        NotificationManager.success(value.message, "", 1000);
+        NotificationManager.success("Login Successfully", "", 1000);
 
         localStorage.setItem("isLoggedIn", true);
 
