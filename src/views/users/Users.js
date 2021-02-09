@@ -16,7 +16,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import usersData from "./UsersData";
+
 import { fetchUsers } from "../store/action";
 const Users = () => {
   const history = useHistory();
@@ -46,10 +46,10 @@ const Users = () => {
   }, []);
   const filterRecords = () => {
     // const search = search.trim().replace(/ +/g, " ");
-    if (!search) return usersData;
+    if (!search) return usersDetails;
     return (
-      usersData &&
-      usersData.filter((data) => {
+      usersDetails &&
+      usersDetails.filter((data) => {
         let isTrue =
           data.email.toLowerCase().includes(search) ||
           data.country.toLowerCase().includes(search) ||
@@ -59,6 +59,7 @@ const Users = () => {
     );
   };
   const getBadge = (status) => {
+    console.log("89567986985", status);
     switch (status) {
       case "Verified":
         return "success";
@@ -78,6 +79,13 @@ const Users = () => {
     e.preventDefault();
     e.stopPropagation();
     alert("user Blocked");
+  };
+
+  const userDetail = (e, id) => {
+    history.push({
+      pathname: `/users/${id}`,
+      state: usersDetails,
+    });
   };
   return (
     <CRow>
@@ -114,11 +122,14 @@ const Users = () => {
               scopedSlots={{
                 status: (item) => (
                   <td>
-                    <CBadge color={getBadge(item.status)}>{item.status}</CBadge>
+                    <CBadge
+                      color={getBadge(
+                        !item.is_verified ? "Not Verified" : "Verified"
+                      )}
+                    >
+                      {!item.is_verified ? "Not Verified" : "Verified"}
+                    </CBadge>
                   </td>
-                  // <td>
-
-                  // </td>
                 ),
                 action: (item) => (
                   <td>
@@ -134,10 +145,18 @@ const Users = () => {
               itemsPerPage={10}
               activePage={page}
               clickableRows
-              onRowClick={(item) => history.push(`/users/${item.id}`)}
+              //  onRowClick={(item) => history.push(`/users/${item._id}`)}
+              onRowClick={(item) =>
+                history.push({
+                  pathname: `/users/${item._id}`,
+                  state: usersDetails,
+                })
+              }
+              // onRowClick={(e, id) => userDetail(e, id)}
             />
+
             <div className="text-center pagination-input">
-              {usersData.length > 10 && (
+              {usersDetails.length > 10 && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"
@@ -145,7 +164,7 @@ const Users = () => {
                   activeClass="active"
                   activePage={page}
                   itemsCountPerPage={10}
-                  totalItemsCount={usersData.length}
+                  totalItemsCount={usersDetails.length}
                   pageRangeDisplayed={5}
                   onChange={pageChange}
                 />
