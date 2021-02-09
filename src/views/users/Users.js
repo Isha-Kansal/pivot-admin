@@ -17,7 +17,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-
+import usersData from "./UsersData";
 import { fetchUsers } from "../store/action";
 const Users = () => {
   const history = useHistory();
@@ -82,7 +82,7 @@ const Users = () => {
     setModalOpen(false);
     console.log("47899456798", type);
   };
-
+  console.log("945789849879894", usersDetails, usersData);
   return (
     <CRow>
       <CCol xl={12}>
