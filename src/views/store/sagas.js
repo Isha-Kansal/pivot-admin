@@ -38,7 +38,7 @@ function* loginByAdmin(action) {
 
 function* fetchUsers(action) {
   const response = yield call(callFetchUsers, action);
-  console.log("478567894897894857", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {

@@ -65,7 +65,6 @@ class AddResource extends Component {
       value: e.target.value,
     };
     newArray[index] = prosToUpdate;
-    console.log("prosToUpdateprosToUpdate=", prosToUpdate);
 
     this.clearError();
     this.setState({ [e.target.name]: e.target.value, pros: newArray });
@@ -200,7 +199,7 @@ class AddResource extends Component {
       plusBit,
       pros,
     } = this.state;
-    console.log("87679456788946", pros);
+
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -305,7 +304,6 @@ class AddResource extends Component {
                     {pros &&
                       pros.length > 0 &&
                       pros.map((el, index) => {
-                        console.log("48976948597845897", el);
                         return (
                           <div>
                             {/* <input value={el.value} /> */}

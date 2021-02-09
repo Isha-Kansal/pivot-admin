@@ -13,19 +13,15 @@ const User = (props) => {
   useEffect(() => {
     dispatch(
       fetchUsers("user/all", (value) => {
-        console.log("4978984578948", value);
-
         setUsersDetails(value.data.users);
       })
     );
   }, []);
-  // let userDetailsData = [];
-  // userDetailsData = props && props.history.location.state;
-  // console.log("4897894784675687568ghjnghj987", userDetailsData);
+
   const user =
     usersDetails &&
     usersDetails.find((user) => user._id.toString() === props.match.params.id);
-  console.log("48956784987984957", user);
+
   const detailsOfUser = user
     ? Object.entries(user)
     : [
@@ -37,8 +33,6 @@ const User = (props) => {
         ],
       ];
 
-  const result = detailsOfUser.map(({ __v, index, ...rest }) => ({ ...rest }));
-  console.log("498799487984987", result);
   return (
     <CRow>
       <CCol lg={12}>
@@ -47,7 +41,6 @@ const User = (props) => {
             <table className="table">
               <tbody>
                 {detailsOfUser.map(([key, value], index) => {
-                  console.log("detailsOfUser", key, value);
                   let keyDetails;
                   if (key === "is_verified") {
                     keyDetails = "Status";

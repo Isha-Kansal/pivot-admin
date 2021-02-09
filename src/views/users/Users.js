@@ -38,8 +38,6 @@ const Users = () => {
   useEffect(() => {
     dispatch(
       fetchUsers("user/all", (value) => {
-        console.log("4978984578948", value);
-
         setUsersDetails(value.data.users);
       })
     );
@@ -59,14 +57,10 @@ const Users = () => {
     );
   };
   const getBadge = (status) => {
-    console.log("89567986985", status);
     switch (status) {
       case "Verified":
         return "success";
-      case "Inactive":
-        return "secondary";
-      case "Pending":
-        return "warning";
+
       case "Not Verified":
         return "danger";
       default:
