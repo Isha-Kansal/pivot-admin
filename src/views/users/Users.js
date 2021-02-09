@@ -75,12 +75,6 @@ const Users = () => {
     alert("user Blocked");
   };
 
-  const userDetail = (e, id) => {
-    history.push({
-      pathname: `/users/${id}`,
-      state: usersDetails,
-    });
-  };
   return (
     <CRow>
       <CCol xl={12}>
@@ -110,10 +104,9 @@ const Users = () => {
                 "country",
                 "action",
               ]}
-              // scopedSlots={{
-
-              // }}
               scopedSlots={{
+                name: (item) => <td>{item.name ? item.name : "-"}</td>,
+                email: (item) => <td>{item.email ? item.email : "-"}</td>,
                 status: (item) => (
                   <td>
                     <CBadge
@@ -125,6 +118,7 @@ const Users = () => {
                     </CBadge>
                   </td>
                 ),
+                country: (item) => <td>{item.country ? item.country : "-"}</td>,
                 action: (item) => (
                   <td>
                     <CButton
@@ -139,14 +133,12 @@ const Users = () => {
               itemsPerPage={10}
               activePage={page}
               clickableRows
-              //  onRowClick={(item) => history.push(`/users/${item._id}`)}
               onRowClick={(item) =>
                 history.push({
                   pathname: `/users/${item._id}`,
                   state: usersDetails,
                 })
               }
-              // onRowClick={(e, id) => userDetail(e, id)}
             />
 
             <div className="text-center pagination-input">
