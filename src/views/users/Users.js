@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import CommonModal from "../../common/commonModal";
 import {
   CBadge,
   CButton,
@@ -24,6 +25,7 @@ const Users = () => {
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
   const [usersDetails, setUsersDetails] = useState([]);
   const dispatch = useDispatch();
   const pageChange = (newPage) => {
@@ -72,7 +74,10 @@ const Users = () => {
   const onBlock = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    alert("user Blocked");
+    setModalOpen(!modalOpen);
+  };
+  const blockUser = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -121,22 +126,17 @@ const Users = () => {
                 country: (item) => <td>{item.country ? item.country : "-"}</td>,
                 action: (item) => (
                   <td>
-                    <CButton
-                      // style={{ backgroundColor: "rgb(200,200,200)" }}
-                      onClick={onBlock}
-                      className="block-btn block-btn"
-                    >
+                    <CButton onClick={onBlock} className="block-btn block-btn">
                       Block
                     </CButton>
-                    <CButton
-                      // style={{ backgroundColor: "rgb(200,200,200)" }}
+                    {/* <CButton
+                    
                       onClick={onBlock}
                       className="Unblock-btn block-btn"
                     >
                       UnBlock
-                    </CButton>
+                    </CButton> */}
                     <CButton
-                      // style={{ backgroundColor: "rgb(200,200,200)" }}
                       onClick={onBlock}
                       className="Deactive-btn block-btn"
                     >
@@ -168,6 +168,15 @@ const Users = () => {
                   totalItemsCount={usersDetails.length}
                   pageRangeDisplayed={5}
                   onChange={pageChange}
+                />
+              )}
+            </div>
+            <div>
+              {modalOpen && (
+                <CommonModal
+                  isOpen={modalOpen}
+                  toggle={onBlock}
+                  blockUser={blockUser}
                 />
               )}
             </div>
