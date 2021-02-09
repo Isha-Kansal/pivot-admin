@@ -26,6 +26,7 @@ const Users = () => {
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
+  const [type, setType] = useState("");
   const [usersDetails, setUsersDetails] = useState([]);
   const dispatch = useDispatch();
   const pageChange = (newPage) => {
@@ -71,13 +72,15 @@ const Users = () => {
   };
   const searchRecords = filterRecords();
 
-  const onBlock = (e) => {
+  const onBlock = (e, type) => {
+    setType(type);
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
   };
   const blockUser = () => {
     setModalOpen(false);
+    console.log("47899456798", type);
   };
 
   return (
@@ -126,7 +129,10 @@ const Users = () => {
                 country: (item) => <td>{item.country ? item.country : "-"}</td>,
                 action: (item) => (
                   <td>
-                    <CButton onClick={onBlock} className="block-btn block-btn">
+                    <CButton
+                      onClick={(e) => onBlock(e, "block")}
+                      className="block-btn block-btn"
+                    >
                       Block
                     </CButton>
                     {/* <CButton
@@ -137,7 +143,7 @@ const Users = () => {
                       UnBlock
                     </CButton> */}
                     <CButton
-                      onClick={onBlock}
+                      onClick={(e) => onBlock(e, "deactivate")}
                       className="Deactive-btn block-btn"
                     >
                       Deactivate
@@ -177,6 +183,7 @@ const Users = () => {
                   isOpen={modalOpen}
                   toggle={onBlock}
                   blockUser={blockUser}
+                  type={type}
                 />
               )}
             </div>
