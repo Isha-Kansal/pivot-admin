@@ -12,17 +12,20 @@ import {
   CLabel,
   CRow,
 } from "@coreui/react";
-
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 import usersData from "./UsersData";
-import { cibRubygems } from "@coreui/icons";
-
+import { fetchUsers } from "../store/action";
 const Users = () => {
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
-
+  const [usersDetails, setUsersDetails] = useState([]);
+  const dispatch = useDispatch();
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/users?page=${newPage}`);
   };
@@ -32,7 +35,15 @@ const Users = () => {
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
+  useEffect(() => {
+    dispatch(
+      fetchUsers("user/all", (value) => {
+        console.log("4978984578948", value);
 
+        setUsersDetails(value.data.users);
+      })
+    );
+  }, []);
   const filterRecords = () => {
     // const search = search.trim().replace(/ +/g, " ");
     if (!search) return usersData;
@@ -147,4 +158,15 @@ const Users = () => {
   );
 };
 
-export default Users;
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchUsers,
+    },
+    dispatch
+  );
+};
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Users));
