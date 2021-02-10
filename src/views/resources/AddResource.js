@@ -33,6 +33,7 @@ class AddResource extends Component {
       expertImage: null,
       plusBit: false,
       pros: [],
+      cons: [],
     };
   }
   // uploadImage = (event) => {
@@ -57,17 +58,42 @@ class AddResource extends Component {
       errorText: "",
     });
   };
-  inputHandler = (e, index) => {
-    let prosToUpdate = this.state.pros[index];
-    const newArray = [...this.state.pros];
-    prosToUpdate = {
-      ...prosToUpdate,
-      value: e.target.value,
-    };
-    newArray[index] = prosToUpdate;
+  inputHandler = (e) => {
+    // let prosToUpdate = this.state.pros[index];
+    // const newArray = [...this.state.pros];
+    // prosToUpdate = {
+    //   ...prosToUpdate,
+    //   value: e.target.value,
+    // };
+    // newArray[index] = prosToUpdate;
 
     this.clearError();
-    this.setState({ [e.target.name]: e.target.value, pros: newArray });
+    this.setState({ [e.target.name]: e.target.value });
+  };
+  inputProsCons = (e, index, type) => {
+    if (type === "prosAdd") {
+      let prosToUpdate = this.state.pros[index];
+      const newArray = [...this.state.pros];
+      prosToUpdate = {
+        ...prosToUpdate,
+        value: e.target.value,
+      };
+      newArray[index] = prosToUpdate;
+
+      this.clearError();
+      this.setState({ [e.target.name]: e.target.value, pros: newArray });
+    } else {
+      let consToUpdate = this.state.cons[index];
+      const newArray = [...this.state.cons];
+      consToUpdate = {
+        ...consToUpdate,
+        value: e.target.value,
+      };
+      newArray[index] = consToUpdate;
+
+      this.clearError();
+      this.setState({ [e.target.name]: e.target.value, cons: newArray });
+    }
   };
   onSubmit = (e) => {
     const {
@@ -169,24 +195,33 @@ class AddResource extends Component {
     e.preventDefault();
     this.props.history.push("/resources");
   };
-  handlePlusButton = (e) => {
-    const { pros } = this.state;
-    const newArr = [...pros];
-    e.preventDefault();
-    e.stopPropagation();
-    let newPros = {
-      value: "",
-    };
-    newArr.push(newPros);
-    this.setState({
-      pros: newArr,
-    });
-    // let arr = [];
-    // arr.push(true);
-    // this.setState({
-    //   plusBit: true,
-    //   pros: [...arr],
-    // });
+  handlePlusButton = (e, type) => {
+    console.log("847984857840", type);
+    if (type === "prosAdd") {
+      const { pros } = this.state;
+      const newArr = [...pros];
+      e.preventDefault();
+      e.stopPropagation();
+      let newPros = {
+        value: "",
+      };
+      newArr.push(newPros);
+      this.setState({
+        pros: newArr,
+      });
+    } else {
+      const { cons } = this.state;
+      const newArr = [...cons];
+      e.preventDefault();
+      e.stopPropagation();
+      let newCons = {
+        value: "",
+      };
+      newArr.push(newCons);
+      this.setState({
+        cons: newArr,
+      });
+    }
   };
   render() {
     const {
@@ -198,6 +233,7 @@ class AddResource extends Component {
       expertImage,
       plusBit,
       pros,
+      cons,
     } = this.state;
 
     return (
@@ -295,7 +331,10 @@ class AddResource extends Component {
                   </CCol>
                   <CCol xs="12" md="9">
                     <CLabel htmlFor="pros">Pros</CLabel>
-                    <button className="icon" onClick={this.handlePlusButton}>
+                    <button
+                      className="icon"
+                      onClick={(e) => this.handlePlusButton(e, "prosAdd")}
+                    >
                       <img src={ADD} className="ml-3" />
                     </button>
 
@@ -314,7 +353,7 @@ class AddResource extends Component {
                               placeholder={`${index + 1}.`}
                               autoComplete={`pros${index}`}
                               onChange={(e) => {
-                                this.inputHandler(e, index);
+                                this.inputProsCons(e, index, "prosAdd");
                               }}
                               // value={`pros${index}`}
                             />
@@ -324,6 +363,33 @@ class AddResource extends Component {
 
                     {/* {this.errorShow("fields")} */}
                     <CLabel htmlFor="cons">Cons</CLabel>
+                    <button
+                      className="icon"
+                      onClick={(e) => this.handlePlusButton(e, "consAdd")}
+                    >
+                      <img src={ADD} className="ml-3" />
+                    </button>
+                    <br />
+                    {cons &&
+                      cons.length > 0 &&
+                      cons.map((el, index) => {
+                        return (
+                          <div>
+                            {/* <input value={el.value} /> */}
+                            <CInput
+                              type="text"
+                              id={`cons${index}`}
+                              name={`cons${index}`}
+                              placeholder={`${index + 1}.`}
+                              autoComplete={`cons${index}`}
+                              onChange={(e) => {
+                                this.inputProsCons(e, index, "consAdd");
+                              }}
+                              // value={`pros${index}`}
+                            />
+                          </div>
+                        );
+                      })}
                   </CCol>
                 </CFormGroup>
 
