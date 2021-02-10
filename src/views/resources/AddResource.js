@@ -16,6 +16,7 @@ import {
 } from "@coreui/react";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
 import ADD from "../../assets/icons/add.svg";
+import CANCEL from "../../assets/icons/cancel.svg";
 import { Input } from "reactstrap";
 import CIcon from "@coreui/icons-react";
 import Avatar from "../../assets/icons/avatar.png";
@@ -189,7 +190,9 @@ class AddResource extends Component {
       name: "",
       format: "",
       pricing: "",
-
+      details: [],
+      pros: [],
+      cons: [],
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
@@ -236,6 +239,37 @@ class AddResource extends Component {
         value: "",
       };
       newArr.push(newDetails);
+      this.setState({
+        details: newArr,
+      });
+    }
+  };
+  handleCancel = (e, index, type) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (type === "prosAdd") {
+      const { pros } = this.state;
+      console.log("94586794897894", pros);
+      const newArr = [...pros];
+      newArr.splice(index, 1);
+      this.setState({
+        pros: newArr,
+      });
+    }
+    if (type === "consAdd") {
+      const { cons } = this.state;
+      console.log("94586794897894", cons);
+      const newArr = [...cons];
+      newArr.splice(index, 1);
+      this.setState({
+        cons: newArr,
+      });
+    }
+    if (type === "detailsAdd") {
+      const { details } = this.state;
+      console.log("94586794897894", details);
+      const newArr = [...details];
+      newArr.splice(index, 1);
       this.setState({
         details: newArr,
       });
@@ -349,21 +383,21 @@ class AddResource extends Component {
                     <CLabel htmlFor="prosCons">Pros & Cons</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CLabel htmlFor="pros">Pros</CLabel>
-                    <button
-                      className="icon"
-                      onClick={(e) => this.handlePlusButton(e, "prosAdd")}
-                    >
-                      <img src={ADD} className="ml-3" />
-                    </button>
-
-                    <br />
+                    <div class="d-flex justify-content-between add-list">
+                      <CLabel htmlFor="pros">Pros</CLabel>
+                      <button
+                        className="icon"
+                        onClick={(e) => this.handlePlusButton(e, "prosAdd")}
+                      >
+                        <img src={ADD} className="ml-3" />
+                      </button>
+                    </div>
 
                     {pros &&
                       pros.length > 0 &&
                       pros.map((el, index) => {
                         return (
-                          <div>
+                          <div className="d-flex align-items-center mb-2 ">
                             {/* <input value={el.value} /> */}
                             <CInput
                               type="text"
@@ -376,24 +410,34 @@ class AddResource extends Component {
                               }}
                               // value={`pros${index}`}
                             />
+                            <button
+                              className="icon"
+                              onClick={(e) =>
+                                this.handleCancel(e, index, "prosAdd")
+                              }
+                            >
+                              <img src={CANCEL} className="ml-3" />
+                            </button>
                           </div>
                         );
                       })}
 
                     {/* {this.errorShow("fields")} */}
-                    <CLabel htmlFor="cons">Cons</CLabel>
-                    <button
-                      className="icon"
-                      onClick={(e) => this.handlePlusButton(e, "consAdd")}
-                    >
-                      <img src={ADD} className="ml-3" />
-                    </button>
-                    <br />
+                    <div class="d-flex justify-content-between add-list">
+                      <CLabel htmlFor="cons">Cons</CLabel>
+                      <button
+                        className="icon"
+                        onClick={(e) => this.handlePlusButton(e, "consAdd")}
+                      >
+                        <img src={ADD} className="ml-3" />
+                      </button>
+                    </div>
+
                     {cons &&
                       cons.length > 0 &&
                       cons.map((el, index) => {
                         return (
-                          <div>
+                          <div className="d-flex align-items-center mb-2">
                             {/* <input value={el.value} /> */}
                             <CInput
                               type="text"
@@ -406,6 +450,14 @@ class AddResource extends Component {
                               }}
                               // value={`pros${index}`}
                             />
+                            <button
+                              className="icon"
+                              onClick={(e) =>
+                                this.handleCancel(e, index, "consAdd")
+                              }
+                            >
+                              <img src={CANCEL} className="ml-3" />
+                            </button>
                           </div>
                         );
                       })}
@@ -417,21 +469,21 @@ class AddResource extends Component {
                     <CLabel htmlFor="details">Details</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CLabel htmlFor="addDetails">Add</CLabel>
-                    <button
-                      className="icon"
-                      onClick={(e) => this.handlePlusButton(e, "detailsAdd")}
-                    >
-                      <img src={ADD} className="ml-3" />
-                    </button>
-
-                    <br />
+                    <div class="d-flex justify-content-between add-list">
+                      <CLabel htmlFor="addDetails">Add</CLabel>
+                      <button
+                        className="icon"
+                        onClick={(e) => this.handlePlusButton(e, "detailsAdd")}
+                      >
+                        <img src={ADD} className="ml-3" />
+                      </button>
+                    </div>
 
                     {details &&
                       details.length > 0 &&
                       details.map((el, index) => {
                         return (
-                          <div>
+                          <div className="d-flex align-items-center mb-2">
                             {/* <input value={el.value} /> */}
                             <CInput
                               type="text"
@@ -444,6 +496,15 @@ class AddResource extends Component {
                               }}
                               // value={`pros${index}`}
                             />
+
+                            <button
+                              className="icon"
+                              onClick={(e) =>
+                                this.handleCancel(e, index, "detailsAdd")
+                              }
+                            >
+                              <img src={CANCEL} className="ml-3" />
+                            </button>
                           </div>
                         );
                       })}
