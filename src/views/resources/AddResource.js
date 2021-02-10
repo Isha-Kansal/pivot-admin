@@ -26,7 +26,7 @@ class AddResource extends Component {
       name: "",
       format: "",
       pricing: "",
-      fields: "",
+
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
@@ -114,7 +114,7 @@ class AddResource extends Component {
       name,
       format,
       pricing,
-      fields,
+
       uniqueSellingProposition,
     } = this.state;
 
@@ -170,17 +170,7 @@ class AddResource extends Component {
       });
       return;
     }
-    if (fields === "") {
-      this.setState({
-        errorType: "fields",
-        errorText: (
-          <span className="text-danger">
-            <b>Please enter the fields</b>
-          </span>
-        ),
-      });
-      return;
-    }
+
     if (uniqueSellingProposition === "") {
       this.setState({
         errorType: "uniqueSellingProposition",
@@ -199,7 +189,7 @@ class AddResource extends Component {
       name: "",
       format: "",
       pricing: "",
-      fields: "",
+
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
@@ -257,7 +247,7 @@ class AddResource extends Component {
       format,
       pricing,
       uniqueSellingProposition,
-      fields,
+
       expertImage,
       plusBit,
       pros,
