@@ -16,6 +16,7 @@ const TheLayout = React.lazy(() => import("./containers/TheLayout"));
 const Login = React.lazy(() => import("./views/login/Login"));
 const AddExpert = React.lazy(() => import("./views/experts/AddExpert"));
 const AddResource = React.lazy(() => import("./views/resources/AddResource"));
+const EditResource = React.lazy(() => import("./views/resources/EditResource"));
 class App extends Component {
   render() {
     return (
@@ -46,6 +47,12 @@ class App extends Component {
                 path="/addResource"
                 name="Add Resource"
                 render={(props) => <AddResource {...props} />}
+              />
+              <Route
+                exact
+                path="/editResource"
+                name="Edit Resource"
+                render={(props) => <EditResource {...props} />}
               />
             </Switch>
           </React.Suspense>

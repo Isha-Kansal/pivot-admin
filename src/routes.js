@@ -7,6 +7,7 @@ const Experts = React.lazy(() => import("./views/experts/Experts"));
 const AddExpert = React.lazy(() => import("./views/experts/AddExpert"));
 const Resources = React.lazy(() => import("./views/resources/Resources"));
 const AddResource = React.lazy(() => import("./views/resources/AddResource"));
+const EditResource = React.lazy(() => import("./views/resources/EditResource"));
 const routes = [
   { path: "/users", exact: true, name: "Users", component: Users },
   { path: "/users/:id", exact: true, name: "User Details", component: User },
@@ -19,6 +20,12 @@ const routes = [
     exact: true,
     name: "Add Resource",
     component: AddResource,
+  },
+  {
+    path: "/editResource",
+    exact: true,
+    name: "Edit Resource",
+    component: EditResource,
   },
 ];
 
