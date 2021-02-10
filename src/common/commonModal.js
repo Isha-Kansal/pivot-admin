@@ -5,7 +5,7 @@ import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 
 class CommonModal extends React.Component {
   render() {
-    const { isOpen, toggle, loading, blockUser, type } = this.props;
+    const { isOpen, toggle, loading, blockUser, type, id } = this.props;
     console.log("dhjfgdjh", this.props);
     return (
       <Modal
@@ -23,14 +23,14 @@ class CommonModal extends React.Component {
             <h2>Want to Deactivate</h2>
           )}
           {type === "block" ? (
-            <p>Do you really want to block this user ?</p>
+            <p>Do you really want to block this {id} user ?</p>
           ) : (
-            <p>Do you really want to deactivate this user ?</p>
+            <p>Do you really want to deactivate this {id} user ?</p>
           )}
           <div className="text-center deleteBtn mt-4">
             <Button
               color="primary"
-              onClick={() => blockUser()}
+              onClick={() => blockUser(id)}
               // disabled={loading}
             >
               Yes, Confirmed

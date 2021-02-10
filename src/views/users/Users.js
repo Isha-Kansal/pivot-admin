@@ -19,6 +19,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import usersData from "./UsersData";
 import { fetchUsers } from "../store/action";
+
 const Users = () => {
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
@@ -27,6 +28,8 @@ const Users = () => {
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [type, setType] = useState("");
+  const [unBlock, setUnblock] = useState([]);
+  const [idUser, setIdUser] = useState("");
   const [usersDetails, setUsersDetails] = useState([]);
   const dispatch = useDispatch();
   const pageChange = (newPage) => {
@@ -48,13 +51,22 @@ const Users = () => {
   const filterRecords = () => {
     // const search = search.trim().replace(/ +/g, " ");
     if (!search) return usersDetails;
+
     return (
       usersDetails &&
       usersDetails.filter((data) => {
-        let isTrue =
-          data.email.toLowerCase().includes(search) ||
-          data.country.toLowerCase().includes(search) ||
-          data.name.toLowerCase().includes(search);
+        console.log("4576489678947", data);
+        let isTrue;
+        if (data.email) {
+          isTrue = data.email.toLowerCase().includes(search);
+        }
+        if (data.country) {
+          isTrue = data.country.toLowerCase().includes(search);
+        }
+        if (data.name) {
+          isTrue = data.name.toLowerCase().includes(search);
+        }
+
         return isTrue;
       })
     );
@@ -72,17 +84,24 @@ const Users = () => {
   };
   const searchRecords = filterRecords();
 
-  const onBlock = (e, type) => {
+  const onBlock = (e, type, item) => {
+    console.log("48978948798", item._id);
+    setIdUser(item._id);
     setType(type);
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
   };
-  const blockUser = () => {
-    setModalOpen(false);
-    console.log("47899456798", type);
+  const blockUser = (id) => {
+    if (idUser === id) {
+      setModalOpen(false);
+      console.log("47899456798", type);
+      let arr = unBlock.slice();
+      arr.push(id);
+      setUnblock(arr);
+    }
   };
-  console.log("945789849879894", usersDetails, usersData);
+  console.log("945789849hdfgdj879894", unBlock);
   return (
     <CRow>
       <CCol xl={12}>
@@ -129,19 +148,22 @@ const Users = () => {
                 country: (item) => <td>{item.country ? item.country : "-"}</td>,
                 action: (item) => (
                   <td>
-                    <CButton
-                      onClick={(e) => onBlock(e, "block")}
-                      className="block-btn block-btn"
-                    >
-                      Block
-                    </CButton>
-                    {/* <CButton
-                    
-                      onClick={onBlock}
-                      className="Unblock-btn block-btn"
-                    >
-                      UnBlock
-                    </CButton> */}
+                    {!unBlock.includes(item._id) ? (
+                      <CButton
+                        onClick={(e) => onBlock(e, "block", item)}
+                        className="block-btn block-btn"
+                      >
+                        Block
+                      </CButton>
+                    ) : (
+                      <CButton
+                        // onClick={(e) => onBlock(e, "block", item)}
+                        className="Unblock-btn block-btn"
+                      >
+                        UnBlock
+                      </CButton>
+                    )}
+
                     <CButton
                       onClick={(e) => onBlock(e, "deactivate")}
                       className="Deactive-btn block-btn"
@@ -182,7 +204,8 @@ const Users = () => {
                 <CommonModal
                   isOpen={modalOpen}
                   toggle={onBlock}
-                  blockUser={blockUser}
+                  blockUser={(e) => blockUser(e, idUser)}
+                  id={idUser}
                   type={type}
                 />
               )}
