@@ -6,6 +6,9 @@ import {
   FETCH_USERS_FAILED,
   FETCH_USERS_SUCCESS,
   FETCH_USERS_REQUEST,
+  USER_STATUS_FAILED,
+  USER_STATUS_SUCCESS,
+  USER_STATUS_REQUEST,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -19,7 +22,10 @@ async function callFetchUsers(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
-
+async function callUserStatus(data) {
+  const res = await apiCallPost(data.url, data.payload);
+  return res;
+}
 function* loginByAdmin(action) {
   const response = yield call(callLoginByAdmin, action);
 
@@ -51,8 +57,24 @@ function* fetchUsers(action) {
     }
   }
 }
+function* userStatus(action) {
+  const response = yield call(callUserStatus, action);
+  console.log("4978947894897894", response);
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: USER_STATUS_SUCCESS,
+        userStatus: response.data,
+      });
+    } else {
+      yield put({ type: USER_STATUS_FAILED });
+    }
+  }
+}
 
 export default function* LoginByAdminWatcher() {
   yield takeLatest(LOGIN_BY_ADMIN_REQUEST, loginByAdmin);
   yield takeLatest(FETCH_USERS_REQUEST, fetchUsers);
+  yield takeLatest(USER_STATUS_REQUEST, userStatus);
 }

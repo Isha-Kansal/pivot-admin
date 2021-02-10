@@ -18,9 +18,9 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import usersData from "./UsersData";
-import { fetchUsers } from "../store/action";
+import { fetchUsers, userStatus } from "../store/action";
 
-const Users = () => {
+const Users = (props) => {
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
@@ -85,7 +85,7 @@ const Users = () => {
   const searchRecords = filterRecords();
 
   const onBlock = (e, type, item) => {
-    console.log("48978948798", item._id);
+    console.log("48978948798", type);
     setIdUser(item._id);
     setType(type);
     e.preventDefault();
@@ -99,9 +99,20 @@ const Users = () => {
       let arr = unBlock.slice();
       arr.push(id);
       setUnblock(arr);
+      callApi(type, id);
     }
   };
   console.log("945789849hdfgdj879894", unBlock);
+  const callApi = (type, id) => {
+    let obj = {
+      type: type,
+      id: id,
+    };
+    console.log("457978948794857", obj);
+    props.userStatus("user/change-status", obj, (value) => {
+      console.log("95689859859", value);
+    });
+  };
   return (
     <CRow>
       <CCol xl={12}>
@@ -224,6 +235,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchUsers,
+      userStatus,
     },
     dispatch
   );
