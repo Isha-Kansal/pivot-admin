@@ -51,6 +51,7 @@ class AddResource extends Component {
   //   }
   // };
   errorShow = (type) => {
+    console.log("485789497894", type);
     const { errorType, errorText } = this.state;
     return errorType === type ? <p>{errorText}</p> : null;
   };
@@ -61,14 +62,6 @@ class AddResource extends Component {
     });
   };
   inputHandler = (e) => {
-    // let prosToUpdate = this.state.pros[index];
-    // const newArray = [...this.state.pros];
-    // prosToUpdate = {
-    //   ...prosToUpdate,
-    //   value: e.target.value,
-    // };
-    // newArray[index] = prosToUpdate;
-
     this.clearError();
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -115,8 +108,10 @@ class AddResource extends Component {
       name,
       format,
       pricing,
-
+      details,
       uniqueSellingProposition,
+      pros,
+      cons,
     } = this.state;
 
     if (name === "") {
@@ -171,6 +166,39 @@ class AddResource extends Component {
       });
       return;
     }
+    if (pros.length === 0) {
+      this.setState({
+        errorType: "pros",
+        errorText: (
+          <span className="text-danger">
+            <b>Please add some pros</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (cons.length === 0) {
+      this.setState({
+        errorType: "cons",
+        errorText: (
+          <span className="text-danger">
+            <b>Please add some cons</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (details.length === 0) {
+      this.setState({
+        errorType: "details",
+        errorText: (
+          <span className="text-danger">
+            <b>Please add some details</b>
+          </span>
+        ),
+      });
+      return;
+    }
 
     if (uniqueSellingProposition === "") {
       this.setState({
@@ -185,6 +213,8 @@ class AddResource extends Component {
     }
   };
   resetState = (e) => {
+    const { name, format } = this.state;
+    console.log("895849587984597845", name, format);
     e.preventDefault();
     this.setState({
       name: "",
@@ -392,7 +422,7 @@ class AddResource extends Component {
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
-
+                    {this.errorShow("pros")}
                     {pros &&
                       pros.length > 0 &&
                       pros.map((el, index) => {
@@ -432,7 +462,7 @@ class AddResource extends Component {
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
-
+                    {this.errorShow("cons")}
                     {cons &&
                       cons.length > 0 &&
                       cons.map((el, index) => {
@@ -478,7 +508,7 @@ class AddResource extends Component {
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
-
+                    {this.errorShow("details")}
                     {details &&
                       details.length > 0 &&
                       details.map((el, index) => {
@@ -505,11 +535,10 @@ class AddResource extends Component {
                             >
                               <img src={CANCEL} className="ml-3" />
                             </button>
+                            {/* {this.errorShow("details")} */}
                           </div>
                         );
                       })}
-
-                    {/* {this.errorShow("fields")} */}
                   </CCol>
                 </CFormGroup>
 
