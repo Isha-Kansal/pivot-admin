@@ -34,6 +34,7 @@ class AddResource extends Component {
       plusBit: false,
       pros: [],
       cons: [],
+      details: [],
     };
   }
   // uploadImage = (event) => {
@@ -82,7 +83,8 @@ class AddResource extends Component {
 
       this.clearError();
       this.setState({ [e.target.name]: e.target.value, pros: newArray });
-    } else {
+    }
+    if (type === "consAdd") {
       let consToUpdate = this.state.cons[index];
       const newArray = [...this.state.cons];
       consToUpdate = {
@@ -93,6 +95,18 @@ class AddResource extends Component {
 
       this.clearError();
       this.setState({ [e.target.name]: e.target.value, cons: newArray });
+    }
+    if (type === "detailsAdd") {
+      let detailsToUpdate = this.state.details[index];
+      const newArray = [...this.state.details];
+      detailsToUpdate = {
+        ...detailsToUpdate,
+        value: e.target.value,
+      };
+      newArray[index] = detailsToUpdate;
+
+      this.clearError();
+      this.setState({ [e.target.name]: e.target.value, details: newArray });
     }
   };
   onSubmit = (e) => {
@@ -209,7 +223,8 @@ class AddResource extends Component {
       this.setState({
         pros: newArr,
       });
-    } else {
+    }
+    if (type === "consAdd") {
       const { cons } = this.state;
       const newArr = [...cons];
       e.preventDefault();
@@ -220,6 +235,19 @@ class AddResource extends Component {
       newArr.push(newCons);
       this.setState({
         cons: newArr,
+      });
+    }
+    if (type === "detailsAdd") {
+      const { details } = this.state;
+      const newArr = [...details];
+      e.preventDefault();
+      e.stopPropagation();
+      let newDetails = {
+        value: "",
+      };
+      newArr.push(newDetails);
+      this.setState({
+        details: newArr,
       });
     }
   };
@@ -234,6 +262,7 @@ class AddResource extends Component {
       plusBit,
       pros,
       cons,
+      details,
     } = this.state;
 
     return (
@@ -390,6 +419,46 @@ class AddResource extends Component {
                           </div>
                         );
                       })}
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel htmlFor="details">Details</CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <CLabel htmlFor="addDetails">Add</CLabel>
+                    <button
+                      className="icon"
+                      onClick={(e) => this.handlePlusButton(e, "detailsAdd")}
+                    >
+                      <img src={ADD} className="ml-3" />
+                    </button>
+
+                    <br />
+
+                    {details &&
+                      details.length > 0 &&
+                      details.map((el, index) => {
+                        return (
+                          <div>
+                            {/* <input value={el.value} /> */}
+                            <CInput
+                              type="text"
+                              id={`details${index}`}
+                              name={`details${index}`}
+                              placeholder={`${index + 1}.`}
+                              autoComplete={`details${index}`}
+                              onChange={(e) => {
+                                this.inputProsCons(e, index, "detailsAdd");
+                              }}
+                              // value={`pros${index}`}
+                            />
+                          </div>
+                        );
+                      })}
+
+                    {/* {this.errorShow("fields")} */}
                   </CCol>
                 </CFormGroup>
 
