@@ -12,7 +12,7 @@ export const apiCallPost = async (url, data) => {
       headers: {
         "Content-Type": content,
         Accept: "application/json",
-        // Authorization: `Bearer ${authToken || ""}`,
+        Authorization: `Bearer ${authToken || ""}`,
       },
     })
     .then((res) => {
@@ -27,7 +27,7 @@ export const apiCallGet = async (url) => {
     .get(`${backendUrl}/${url}`, {
       headers: {
         Accept: "application/json",
-        // Authorization: `Bearer ${authToken || ""}`,
+        Authorization: `Bearer ${authToken || ""}`,
       },
     })
     .then((res) => {
