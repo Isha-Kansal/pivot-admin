@@ -162,7 +162,13 @@ const Users = (props) => {
                 "action",
               ]}
               scopedSlots={{
-                name: (item) => <td>{item.name ? item.name : "-"}</td>,
+                name: (item) => (
+                  <td>
+                    {item.first_name && item.last_name
+                      ? item.first_name + " " + item.last_name
+                      : "-"}
+                  </td>
+                ),
                 email: (item) => <td>{item.email ? item.email : "-"}</td>,
                 status: (item) => (
                   <td>
