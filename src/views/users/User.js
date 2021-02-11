@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
+import {
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CRow,
+  CBadge,
+} from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -23,81 +30,116 @@ const User = (props) => {
     usersDetails &&
     usersDetails.find((user) => user._id.toString() === props.match.params.id);
 
-  const detailsOfUser = user
-    ? Object.entries(user)
-    : [
-        [
-          "id",
-          <span>
-            <CIcon className="text-muted" name="cui-icon-ban" /> Not found
-          </span>,
-        ],
-      ];
+  console.log("detailssss", user);
+  const getBadge = (status) => {
+    switch (status) {
+      case "Verified":
+        return "success";
 
+      case "Not Verified":
+        return "danger";
+      default:
+        return "primary";
+    }
+  };
   return (
     <CRow>
       <CCol lg={12}>
         <CCard>
           <CCardHeader>Account Details</CCardHeader>
           <CCardBody>
-            <table className="table">
-              <tbody>
-                {detailsOfUser.map(([key, value], index) => {
-                  console.log("489678948798", key, value);
-                  let keyDetails = titleCase(key);
-                  if (key === "first_name") {
-                    keyDetails = "First Name";
-                  }
-                  if (key === "role") {
-                    keyDetails = "Current Role";
-                  }
-                  if (key === "last_name") {
-                    keyDetails = "Last Name";
-                  }
-                  if (key === "full_time_work_experience") {
-                    keyDetails = "Work Experience";
-                  }
-                  if (key === "reason_for_career_change") {
-                    keyDetails = "Career Change Reason";
-                  }
+            {user && (
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <td>UID</td>
+                    <td>
+                      <strong>{user._id}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Status</td>
 
-                  if (key === "contact_no") {
-                    keyDetails = "Contact";
-                  }
-
-                  if (key === "is_verified") {
-                    keyDetails = "Status";
-
-                    if (!value) {
-                      value = "Not Verified";
-                    } else {
-                      value = "Verified";
-                    }
-                  }
-                  if (key === "status") {
-                    return null;
-                  }
-                  if (key === "_id") {
-                    keyDetails = "UID";
-                  }
-
-                  if (key === "password") {
-                    return null;
-                  }
-                  if (key === "__v") {
-                    return null;
-                  }
-                  return (
-                    <tr key={index.toString()}>
-                      <td>{`${keyDetails}`}</td>
-                      <td>
-                        <strong>{value}</strong>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                    <td>
+                      {/* <strong
+                        color={getBadge(
+                          !user.is_verified ? "Not Verified" : "Verified"
+                        )}
+                      >
+                        {user.is_verified ? "Verified" : "Not Verified"}
+                      </strong> */}
+                      <CBadge
+                        color={getBadge(
+                          !user.is_verified ? "Not Verified" : "Verified"
+                        )}
+                      >
+                        {!user.is_verified ? "Not Verified" : "Verified"}
+                      </CBadge>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>First name</td>
+                    <td>
+                      <strong>{user.first_name}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Last name</td>
+                    <td>
+                      <strong>{user.last_name}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Contact</td>
+                    <td>
+                      <strong>{user.contact_no}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Email</td>
+                    <td>
+                      <strong>{user.email}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Gender</td>
+                    <td>
+                      <strong>{user.gender}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Role</td>
+                    <td>
+                      <strong>{user.role}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Country</td>
+                    <td>
+                      <strong>{user.country}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Industry</td>
+                    <td>
+                      <strong>{user.industry}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Work Experience</td>
+                    <td>
+                      <strong>{user.full_time_work_experience}</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Career Change Reason</td>
+                    <td>
+                      <strong>{user.reason_for_career_change}</strong>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
           </CCardBody>
         </CCard>
       </CCol>
