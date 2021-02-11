@@ -13,10 +13,7 @@ class CommonModal extends React.Component {
         toggle={toggle}
         className="deleteModal mt-5 modal-dialog-centered"
       >
-        <ModalHeader toggle={toggle}></ModalHeader>
-        <ModalBody className="text-center">
-          <div className="text-center mb-3"></div>
-
+        <ModalHeader toggle={toggle}>
           {type === "block" ? (
             <h2>Want to Block</h2>
           ) : type === "unblock" ? (
@@ -26,6 +23,10 @@ class CommonModal extends React.Component {
           ) : (
             ""
           )}
+        </ModalHeader>
+        <ModalBody className="text-center">
+          <div className="text-center mb-3"></div>
+
           {type === "block" ? (
             <p>Do you really want to block this {id} user ?</p>
           ) : type === "unblock" ? (
@@ -37,7 +38,7 @@ class CommonModal extends React.Component {
           )}
           <div className="text-center deleteBtn mt-4">
             <Button
-              color="primary"
+              color="success"
               onClick={() => blockUser(id)}
               // disabled={loading}
             >
