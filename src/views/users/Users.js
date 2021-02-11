@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import CommonModal from "../../common/commonModal";
+import { NotificationManager } from "react-notifications";
 import {
   CBadge,
   CButton,
@@ -41,13 +42,26 @@ const Users = (props) => {
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
   }, [currentPage, page]);
+
   useEffect(() => {
-    dispatch(
-      fetchUsers("user/all", (value) => {
-        setUsersDetails(value.data.users);
-      })
-    );
+    callApiToFetchAllUsers();
   }, []);
+
+  const callApiToFetchAllUsers = () => {
+    props.fetchUsers("user/all", (value) => {
+      console.log("7586783869839869", value);
+      setUsersDetails(value.data.users);
+    });
+  };
+  // useEffect(() => {
+  //   dispatch(
+  //     fetchUsers("user/all", (value) => {
+  //       console.log("7586783869839869", value);
+  //       setUsersDetails(value.data.users);
+  //     })
+  //   );
+  // }, []);
+
   const filterRecords = () => {
     // const search = search.trim().replace(/ +/g, " ");
     if (!search) return usersDetails;
@@ -96,9 +110,9 @@ const Users = (props) => {
     if (idUser === id) {
       setModalOpen(false);
       console.log("47899456798", type);
-      let arr = unBlock.slice();
-      arr.push(id);
-      setUnblock(arr);
+      // let arr = unBlock.slice();
+      // arr.push(id);
+      // setUnblock(arr);
       callApi(type, id);
     }
   };
@@ -110,9 +124,14 @@ const Users = (props) => {
     };
     console.log("457978948794857", obj);
     props.userStatus("user/change-status", obj, (value) => {
-      console.log("95689859859", value);
+      console.log("95689859859", value, id);
+      if (value.status === 200) {
+        NotificationManager.success(value.message, "", 1000);
+        callApiToFetchAllUsers();
+      }
     });
   };
+  console.log("4986784987984978", usersDetails);
   return (
     <CRow>
       <CCol xl={12}>
@@ -159,28 +178,39 @@ const Users = (props) => {
                 country: (item) => <td>{item.country ? item.country : "-"}</td>,
                 action: (item) => (
                   <td>
-                    {!unBlock.includes(item._id) ? (
+                    {item.status !== "blocked" && (
                       <CButton
                         onClick={(e) => onBlock(e, "block", item)}
                         className="block-btn block-btn"
                       >
                         Block
                       </CButton>
-                    ) : (
+                    )}
+                    {item.status === "blocked" && (
                       <CButton
-                        // onClick={(e) => onBlock(e, "block", item)}
+                        onClick={(e) => onBlock(e, "unblock", item)}
                         className="Unblock-btn block-btn"
                       >
                         UnBlock
                       </CButton>
                     )}
 
-                    <CButton
-                      onClick={(e) => onBlock(e, "deactivate")}
-                      className="Deactive-btn block-btn"
-                    >
-                      Deactivate
-                    </CButton>
+                    {item.status !== "inactivated" && (
+                      <CButton
+                        onClick={(e) => onBlock(e, "deactivate")}
+                        className="Deactive-btn block-btn"
+                      >
+                        Deactivate
+                      </CButton>
+                    )}
+                    {item.status === "inactivated" && (
+                      <CButton
+                        onClick={(e) => onBlock(e, "activate")}
+                        className="Unblock-btn block-btn"
+                      >
+                        Activate
+                      </CButton>
+                    )}
                   </td>
                 ),
               }}
