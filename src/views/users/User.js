@@ -161,15 +161,14 @@ const User = (props) => {
                       </td>
                     </tr>
                   )}
-                  {user.reason_for_career_change ||
-                    (user.reason_for_career_change.length !== 0 && (
-                      <tr>
-                        <td>Career Change Reason</td>
-                        <td>
-                          <strong>{user.reason_for_career_change}</strong>
-                        </td>
-                      </tr>
-                    ))}
+                  {user.reason_for_career_change && (
+                    <tr>
+                      <td>Career Change Reason</td>
+                      <td>
+                        <strong>{user.reason_for_career_change}</strong>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             )}
