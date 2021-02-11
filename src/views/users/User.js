@@ -32,11 +32,17 @@ const User = (props) => {
 
   console.log("detailssss", user);
   const getBadge = (status) => {
+    console.log("dfgdfgdfgdfg", status);
     switch (status) {
       case "Verified":
         return "success";
 
       case "Not Verified":
+        return "danger";
+      case "Activated":
+        return "success";
+
+      case "Blocked":
         return "danger";
       default:
         return "primary";
@@ -52,6 +58,19 @@ const User = (props) => {
               <table className="table">
                 <tbody>
                   <tr>
+                    <td>Action</td>
+
+                    <td>
+                      <CBadge
+                        color={getBadge(
+                          user.status === "blocked" ? "Blocked" : "Activated"
+                        )}
+                      >
+                        {user.status === "blocked" ? "Blocked" : "Activated"}
+                      </CBadge>
+                    </td>
+                  </tr>
+                  <tr>
                     <td>UID</td>
                     <td>
                       <strong>{user._id}</strong>
@@ -61,13 +80,6 @@ const User = (props) => {
                     <td>Status</td>
 
                     <td>
-                      {/* <strong
-                        color={getBadge(
-                          !user.is_verified ? "Not Verified" : "Verified"
-                        )}
-                      >
-                        {user.is_verified ? "Verified" : "Not Verified"}
-                      </strong> */}
                       <CBadge
                         color={getBadge(
                           !user.is_verified ? "Not Verified" : "Verified"
@@ -77,66 +89,87 @@ const User = (props) => {
                       </CBadge>
                     </td>
                   </tr>
-                  <tr>
-                    <td>First name</td>
-                    <td>
-                      <strong>{user.first_name}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Last name</td>
-                    <td>
-                      <strong>{user.last_name}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Contact</td>
-                    <td>
-                      <strong>{user.contact_no}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Email</td>
-                    <td>
-                      <strong>{user.email}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Gender</td>
-                    <td>
-                      <strong>{user.gender}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Role</td>
-                    <td>
-                      <strong>{user.role}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Country</td>
-                    <td>
-                      <strong>{user.country}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Industry</td>
-                    <td>
-                      <strong>{user.industry}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Work Experience</td>
-                    <td>
-                      <strong>{user.full_time_work_experience}</strong>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Career Change Reason</td>
-                    <td>
-                      <strong>{user.reason_for_career_change}</strong>
-                    </td>
-                  </tr>
+                  {user.first_name && (
+                    <tr>
+                      <td>First name</td>
+                      <td>
+                        <strong>{user.first_name}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.last_name && (
+                    <tr>
+                      <td>Last name</td>
+                      <td>
+                        <strong>{user.last_name}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.contact_no && (
+                    <tr>
+                      <td>Contact</td>
+                      <td>
+                        <strong>{user.contact_no}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.email && (
+                    <tr>
+                      <td>Email</td>
+                      <td>
+                        <strong>{user.email}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.gender && (
+                    <tr>
+                      <td>Gender</td>
+                      <td>
+                        <strong>{user.gender}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.role && (
+                    <tr>
+                      <td>Role</td>
+                      <td>
+                        <strong>{user.role}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.country && (
+                    <tr>
+                      <td>Country</td>
+                      <td>
+                        <strong>{user.country}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.industry && (
+                    <tr>
+                      <td>Industry</td>
+                      <td>
+                        <strong>{user.industry}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.full_time_work_experience && (
+                    <tr>
+                      <td>Work Experience</td>
+                      <td>
+                        <strong>{user.full_time_work_experience}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {user.reason_for_career_change ||
+                    (user.reason_for_career_change.length !== 0 && (
+                      <tr>
+                        <td>Career Change Reason</td>
+                        <td>
+                          <strong>{user.reason_for_career_change}</strong>
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             )}

@@ -222,7 +222,7 @@ const Users = (props) => {
                         </CButton>
                       </div>
                     ) : (
-                      ""
+                      "-"
                     )}
 
                     {/* {item.status !== "blocked" && (
