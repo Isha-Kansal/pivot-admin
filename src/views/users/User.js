@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
+import { titleCase } from "../../common/stringFunction";
 
 import { fetchUsers } from "../store/action";
 const User = (props) => {
@@ -42,7 +43,28 @@ const User = (props) => {
             <table className="table">
               <tbody>
                 {detailsOfUser.map(([key, value], index) => {
-                  let keyDetails;
+                  console.log("489678948798", key, value);
+                  let keyDetails = titleCase(key);
+                  if (key === "first_name") {
+                    keyDetails = "First Name";
+                  }
+                  if (key === "role") {
+                    keyDetails = "Current Role";
+                  }
+                  if (key === "last_name") {
+                    keyDetails = "Last Name";
+                  }
+                  if (key === "full_time_work_experience") {
+                    keyDetails = "Work Experience";
+                  }
+                  if (key === "reason_for_career_change") {
+                    keyDetails = "Career Change Reason";
+                  }
+
+                  if (key === "contact_no") {
+                    keyDetails = "Contact";
+                  }
+
                   if (key === "is_verified") {
                     keyDetails = "Status";
 
@@ -52,18 +74,18 @@ const User = (props) => {
                       value = "Verified";
                     }
                   }
+                  if (key === "status") {
+                    return null;
+                  }
                   if (key === "_id") {
-                    keyDetails = "ID";
+                    keyDetails = "UID";
                   }
-                  if (key === "email") {
-                    keyDetails = "Email";
-                  }
+
                   if (key === "password") {
-                    keyDetails = "Password";
+                    return null;
                   }
                   if (key === "__v") {
-                    keyDetails = "";
-                    value = "";
+                    return null;
                   }
                   return (
                     <tr key={index.toString()}>

@@ -150,7 +150,7 @@ const Users = (props) => {
 
       <CCol xl={12}>
         <CCard>
-          <CCardHeader>Users</CCardHeader>
+          {/* <CCardHeader>Users</CCardHeader> */}
           <CCardBody>
             <CDataTable
               items={searchRecords}
@@ -193,21 +193,21 @@ const Users = (props) => {
                         >
                           Block
                         </CButton>{" "}
-                        <CButton
+                        {/* <CButton
                           onClick={(e) => onBlock(e, "deactivate", item)}
                           className="Deactive-btn block-btn"
                         >
                           Deactivate
-                        </CButton>
+                        </CButton> */}
                       </div>
                     ) : item.status === "deactivated" ? (
                       <div>
-                        <CButton
+                        {/* <CButton
                           onClick={(e) => onBlock(e, "activate", item)}
                           className="Unblock-btn block-btn"
                         >
                           Activate
-                        </CButton>
+                        </CButton> */}
                         <CButton
                           onClick={(e) => onBlock(e, "block", item)}
                           className="block-btn block-btn"

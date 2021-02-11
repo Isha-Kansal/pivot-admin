@@ -66,11 +66,13 @@ class Login extends Component {
     };
 
     this.props.loginByAdmin("user/login", formData, (value) => {
+      console.log("83569856984596", value);
       this.setState({
         loading: false,
       });
 
       if (value.status === 200) {
+        localStorage.setItem("auth_token", value.data.user.auth_token);
         NotificationManager.success("Login Successfully", "", 1000);
 
         localStorage.setItem("isLoggedIn", true);
