@@ -19,13 +19,21 @@ class CommonModal extends React.Component {
 
           {type === "block" ? (
             <h2>Want to Block</h2>
-          ) : (
+          ) : type === "unblock" ? (
+            <h2>Want to Unblock</h2>
+          ) : type === "deactivate" ? (
             <h2>Want to Deactivate</h2>
+          ) : (
+            ""
           )}
           {type === "block" ? (
             <p>Do you really want to block this {id} user ?</p>
-          ) : (
+          ) : type === "unblock" ? (
+            <p>Do you really want to unblock this {id} user ?</p>
+          ) : type === "deactivate" ? (
             <p>Do you really want to deactivate this {id} user ?</p>
+          ) : (
+            ""
           )}
           <div className="text-center deleteBtn mt-4">
             <Button

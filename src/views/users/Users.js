@@ -99,7 +99,7 @@ const Users = (props) => {
   const searchRecords = filterRecords();
 
   const onBlock = (e, type, item) => {
-    console.log("48978948798", type);
+    console.log("48978948798", type, item);
     setIdUser(item._id);
     setType(type);
     e.preventDefault();
@@ -178,7 +178,48 @@ const Users = (props) => {
                 country: (item) => <td>{item.country ? item.country : "-"}</td>,
                 action: (item) => (
                   <td>
-                    {item.status !== "blocked" && (
+                    {item.status === "blocked" ? (
+                      <CButton
+                        onClick={(e) => onBlock(e, "unblock", item)}
+                        className="Unblock-btn block-btn"
+                      >
+                        UnBlock
+                      </CButton>
+                    ) : item.status === "activated" ? (
+                      <div>
+                        <CButton
+                          onClick={(e) => onBlock(e, "block", item)}
+                          className="block-btn block-btn"
+                        >
+                          Block
+                        </CButton>{" "}
+                        <CButton
+                          onClick={(e) => onBlock(e, "deactivate", item)}
+                          className="Deactive-btn block-btn"
+                        >
+                          Deactivate
+                        </CButton>
+                      </div>
+                    ) : item.status === "deactivated" ? (
+                      <div>
+                        <CButton
+                          onClick={(e) => onBlock(e, "activate", item)}
+                          className="Unblock-btn block-btn"
+                        >
+                          Activate
+                        </CButton>
+                        <CButton
+                          onClick={(e) => onBlock(e, "block", item)}
+                          className="block-btn block-btn"
+                        >
+                          Block
+                        </CButton>
+                      </div>
+                    ) : (
+                      ""
+                    )}
+
+                    {/* {item.status !== "blocked" && (
                       <CButton
                         onClick={(e) => onBlock(e, "block", item)}
                         className="block-btn block-btn"
@@ -210,7 +251,7 @@ const Users = (props) => {
                       >
                         Activate
                       </CButton>
-                    )}
+                    )} */}
                   </td>
                 ),
               }}
@@ -244,7 +285,7 @@ const Users = (props) => {
               {modalOpen && (
                 <CommonModal
                   isOpen={modalOpen}
-                  toggle={onBlock}
+                  toggle={(e) => onBlock(e, type, idUser)}
                   blockUser={(e) => blockUser(e, idUser)}
                   id={idUser}
                   type={type}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
+import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -37,6 +37,7 @@ const User = (props) => {
     <CRow>
       <CCol lg={12}>
         <CCard>
+          <CCardHeader>Account Details</CCardHeader>
           <CCardBody>
             <table className="table">
               <tbody>
