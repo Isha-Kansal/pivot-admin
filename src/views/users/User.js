@@ -17,23 +17,20 @@ import { titleCase } from "../../common/stringFunction";
 
 import { fetchUsers, fetchOneUser } from "../store/action";
 const User = (props) => {
-  const [usersDetails, setUsersDetails] = useState([]);
+  const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
+
+    const user_id = props && props.match.params.id;
     dispatch(
-      fetchUsers(`user/all?offset=1&limit=10&search=" "`, (value) => {
-        console.log("849794897894867", value);
-        setUsersDetails(value.data.users);
+      fetchOneUser(`user/${user_id}`, (value) => {
+        setUser(value.data.user);
         setLoading(false);
       })
     );
   }, []);
-
-  const user =
-    usersDetails &&
-    usersDetails.find((user) => user._id.toString() === props.match.params.id);
 
   const getBadge = (status) => {
     switch (status) {

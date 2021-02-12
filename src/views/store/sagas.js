@@ -26,7 +26,7 @@ async function callFetchUsers(data) {
   return res;
 }
 async function callFetchOneUser(data) {
-  const res = await apiCallPost(data.url, data.payload);
+  const res = await apiCallGet(data.payload);
   return res;
 }
 async function callUserStatus(data) {

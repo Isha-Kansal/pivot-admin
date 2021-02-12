@@ -23,10 +23,10 @@ export const fetchUsers = (body, callback) => {
   };
 };
 
-export const fetchOneUser = (url, body, callback) => {
+export const fetchOneUser = (body, callback) => {
   return {
     type: FETCH_USERS_REQUEST,
-    url,
+
     payload: body,
     callback,
   };
