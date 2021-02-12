@@ -23,7 +23,8 @@ const User = (props) => {
   useEffect(() => {
     setLoading(true);
     dispatch(
-      fetchUsers("user/all", (value) => {
+      fetchUsers(`user/all?offset=1&limit=10&search=" "`, (value) => {
+        console.log("849794897894867", value);
         setUsersDetails(value.data.users);
         setLoading(false);
       })
