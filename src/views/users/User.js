@@ -7,6 +7,7 @@ import {
   CRow,
   CBadge,
 } from "@coreui/react";
+import Loader from "../../loader";
 import CIcon from "@coreui/icons-react";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -17,11 +18,14 @@ import { titleCase } from "../../common/stringFunction";
 import { fetchUsers } from "../store/action";
 const User = (props) => {
   const [usersDetails, setUsersDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   useEffect(() => {
+    setLoading(true);
     dispatch(
       fetchUsers("user/all", (value) => {
         setUsersDetails(value.data.users);
+        setLoading(false);
       })
     );
   }, []);
@@ -49,7 +53,8 @@ const User = (props) => {
   return (
     <CRow>
       <CCol lg={12}>
-        <CCard>
+        <CCard className="position-relative">
+          {loading && <Loader />}
           <CCardHeader>Account Details</CCardHeader>
           <CCardBody>
             {user && (
