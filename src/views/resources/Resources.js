@@ -43,7 +43,6 @@ const Resources = (props) => {
     return (
       resourcesData &&
       resourcesData.filter((data) => {
-        console.log("4576489678947", data);
         let isTrue;
 
         if (data.name) {

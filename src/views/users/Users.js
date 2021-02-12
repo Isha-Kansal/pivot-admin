@@ -32,7 +32,7 @@ const Users = (props) => {
   const [unBlock, setUnblock] = useState([]);
   const [idUser, setIdUser] = useState("");
   const [usersDetails, setUsersDetails] = useState([]);
-  const dispatch = useDispatch();
+
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/users?page=${newPage}`);
   };
@@ -49,18 +49,9 @@ const Users = (props) => {
 
   const callApiToFetchAllUsers = () => {
     props.fetchUsers("user/all", (value) => {
-      console.log("7586783869839869", value);
       setUsersDetails(value.data.users);
     });
   };
-  // useEffect(() => {
-  //   dispatch(
-  //     fetchUsers("user/all", (value) => {
-  //       console.log("7586783869839869", value);
-  //       setUsersDetails(value.data.users);
-  //     })
-  //   );
-  // }, []);
 
   const filterRecords = () => {
     // const search = search.trim().replace(/ +/g, " ");
@@ -69,7 +60,6 @@ const Users = (props) => {
     return (
       usersDetails &&
       usersDetails.filter((data) => {
-        console.log("4576489678947", data);
         let isTrue;
         if (data.email) {
           isTrue = data.email.toLowerCase().includes(search);
@@ -99,7 +89,6 @@ const Users = (props) => {
   const searchRecords = filterRecords();
 
   const onBlock = (e, type, item) => {
-    console.log("48978948798", type, item);
     setIdUser(item._id);
     setType(type);
     e.preventDefault();
@@ -109,29 +98,28 @@ const Users = (props) => {
   const blockUser = (id) => {
     if (idUser === id) {
       setModalOpen(false);
-      console.log("47899456798", type);
+
       // let arr = unBlock.slice();
       // arr.push(id);
       // setUnblock(arr);
       callApi(type, id);
     }
   };
-  console.log("945789849hdfgdj879894", unBlock);
+
   const callApi = (type, id) => {
     let obj = {
       type: type,
       id: id,
     };
-    console.log("457978948794857", obj);
+
     props.userStatus("user/change-status", obj, (value) => {
-      console.log("95689859859", value, id);
       if (value.status === 200) {
         NotificationManager.success(value.message, "", 1000);
         callApiToFetchAllUsers();
       }
     });
   };
-  console.log("4986784987984978", usersDetails);
+
   return (
     <CRow>
       <CCol xl={12}>

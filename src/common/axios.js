@@ -1,6 +1,6 @@
 import axois from "axios";
 import { config } from "../config";
-
+import { NotificationManager } from "react-notifications";
 export const apiCallPost = async (url, data) => {
   const authToken = localStorage.getItem("auth_token");
   let backendUrl = config.apiUrlInnow8;
@@ -16,6 +16,11 @@ export const apiCallPost = async (url, data) => {
       },
     })
     .then((res) => {
+      if (res && res.data && res.data.status === 401) {
+        localStorage.clear();
+        localStorage.setItem("isLoggedIn", false);
+        NotificationManager.info(res.data.message, "", 1000);
+      }
       return res;
     });
 };
@@ -31,6 +36,11 @@ export const apiCallGet = async (url) => {
       },
     })
     .then((res) => {
+      if (res && res.data && res.data.status === 401) {
+        localStorage.clear();
+        localStorage.setItem("isLoggedIn", false);
+        NotificationManager.info(res.data.message, "", 1000);
+      }
       return res;
     });
 };

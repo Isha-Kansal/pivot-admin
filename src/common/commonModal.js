@@ -6,7 +6,7 @@ import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
 class CommonModal extends React.Component {
   render() {
     const { isOpen, toggle, loading, blockUser, type, id } = this.props;
-    console.log("dhjfgdjh", this.props);
+
     return (
       <Modal
         isOpen={isOpen}
@@ -28,11 +28,11 @@ class CommonModal extends React.Component {
           <div className="text-center mb-3"></div>
 
           {type === "block" ? (
-            <p>Do you really want to block this {id} user ?</p>
+            <p>Do you really want to block this user ?</p>
           ) : type === "unblock" ? (
-            <p>Do you really want to unblock this {id} user ?</p>
+            <p>Do you really want to unblock this user ?</p>
           ) : type === "deactivate" ? (
-            <p>Do you really want to deactivate this {id} user ?</p>
+            <p>Do you really want to deactivate this user ?</p>
           ) : (
             ""
           )}

@@ -59,7 +59,7 @@ function* fetchUsers(action) {
 }
 function* userStatus(action) {
   const response = yield call(callUserStatus, action);
-  console.log("4978947894897894", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {

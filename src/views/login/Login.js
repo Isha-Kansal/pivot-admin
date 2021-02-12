@@ -66,7 +66,6 @@ class Login extends Component {
     };
 
     this.props.loginByAdmin("user/login", formData, (value) => {
-      console.log("83569856984596", value);
       this.setState({
         loading: false,
       });

@@ -30,9 +30,7 @@ const User = (props) => {
     usersDetails &&
     usersDetails.find((user) => user._id.toString() === props.match.params.id);
 
-  console.log("detailssss", user);
   const getBadge = (status) => {
-    console.log("dfgdfgdfgdfg", status);
     switch (status) {
       case "Verified":
         return "success";

@@ -51,7 +51,6 @@ class AddResource extends Component {
   //   }
   // };
   errorShow = (type) => {
-    console.log("485789497894", type);
     const { errorType, errorText } = this.state;
     return errorType === type ? <p>{errorText}</p> : null;
   };
@@ -214,7 +213,7 @@ class AddResource extends Component {
   };
   resetState = (e) => {
     const { name, format } = this.state;
-    console.log("895849587984597845", name, format);
+
     e.preventDefault();
     this.setState({
       name: "",
@@ -233,7 +232,6 @@ class AddResource extends Component {
     this.props.history.push("/resources");
   };
   handlePlusButton = (e, type) => {
-    console.log("847984857840", type);
     if (type === "prosAdd") {
       const { pros } = this.state;
       const newArr = [...pros];
@@ -279,7 +277,7 @@ class AddResource extends Component {
     e.stopPropagation();
     if (type === "prosAdd") {
       const { pros } = this.state;
-      console.log("94586794897894", pros);
+
       const newArr = [...pros];
       newArr.splice(index, 1);
       this.setState({
@@ -288,7 +286,7 @@ class AddResource extends Component {
     }
     if (type === "consAdd") {
       const { cons } = this.state;
-      console.log("94586794897894", cons);
+
       const newArr = [...cons];
       newArr.splice(index, 1);
       this.setState({
@@ -297,7 +295,7 @@ class AddResource extends Component {
     }
     if (type === "detailsAdd") {
       const { details } = this.state;
-      console.log("94586794897894", details);
+
       const newArr = [...details];
       newArr.splice(index, 1);
       this.setState({
