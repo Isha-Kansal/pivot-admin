@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import Tooltip from "../../common/toolTip";
 import {
   CCard,
   CCardBody,
@@ -30,8 +31,15 @@ const Resources = (props) => {
   const addResource = () => {
     props.history.push("/addResource");
   };
-  const editResource = () => {
+  const editResource = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     props.history.push("/editResource");
+  };
+  const deleteResource = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    alert("deleted");
   };
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -69,19 +77,21 @@ const Resources = (props) => {
           </div>
         </form>
       </CCol>
+      <CCol xl={12}>
+        <div>
+          <CButton
+            style={{ width: 150 }}
+            block
+            color="info"
+            onClick={addResource}
+          >
+            Add Resource
+          </CButton>
+        </div>
+      </CCol>
 
       <CCol xl={12}>
         <CCard>
-          <CCardHeader>
-            <CButton
-              style={{ width: 150 }}
-              block
-              color="info"
-              onClick={addResource}
-            >
-              Add Resource
-            </CButton>{" "}
-          </CCardHeader>
           <CCardBody>
             <CCardBody>
               <CDataTable
@@ -93,17 +103,28 @@ const Resources = (props) => {
                   "action",
                 ]}
                 scopedSlots={{
-                  action: (item) => (
+                  action: (item, index) => (
                     <td>
-                      <button className="icon" onClick={editResource}>
+                      <button
+                        id={`edit-${index}`}
+                        className="icon"
+                        onClick={editResource}
+                      >
                         <img src={EDIT} className="ml-3" />
                       </button>
+                      <Tooltip placement="left" target={`edit-${index}`}>
+                        Edit
+                      </Tooltip>
                       <button
                         className="icon"
-                        // onClick={(e) => this.handlePlusButton(e, "prosAdd")}
+                        onClick={deleteResource}
+                        id={`delete-${index}`}
                       >
                         <img src={DELETE} className="ml-3" />
                       </button>
+                      <Tooltip placement="right" target={`delete-${index}`}>
+                        Delete
+                      </Tooltip>
                     </td>
                   ),
                 }}

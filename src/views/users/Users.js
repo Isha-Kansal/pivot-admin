@@ -51,15 +51,15 @@ const Users = (props) => {
 
   const callApiToFetchAllUsers = () => {
     setLoading(true);
-    let obj = {
-      offset: page,
-      limit: 10,
-    };
 
-    props.fetchUsers("user/all", (value) => {
-      setLoading(false);
-      setUsersDetails(value.data.users);
-    });
+    let limit = 10;
+    props.fetchUsers(
+      `user/all?offset=${page}&limit=${limit}&search=${search}`,
+      (value) => {
+        setLoading(false);
+        setUsersDetails(value.data.users);
+      }
+    );
   };
 
   const filterRecords = () => {
