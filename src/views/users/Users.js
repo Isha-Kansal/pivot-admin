@@ -38,16 +38,19 @@ const Users = (props) => {
         setLoading(false);
         setUsersDetails(value.data.users);
         setCount(value.data.count);
+
         setPage(newPage);
       }
     );
   };
   const handleSearch = (e) => {
     setSearch(e.target.value);
+    setPage(1);
   };
-  useEffect(() => {
-    currentPage !== page && setPage(currentPage);
-  }, [currentPage, page]);
+  // useEffect(() => {
+  //   debugger;
+  //   currentPage !== page && setPage(currentPage);
+  // }, [currentPage, page]);
 
   useEffect(() => {
     callApiToFetchAllUsers();
