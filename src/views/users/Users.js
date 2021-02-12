@@ -14,6 +14,7 @@ import {
   CLabel,
   CRow,
 } from "@coreui/react";
+import Loader from "../../loader";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -32,6 +33,7 @@ const Users = (props) => {
   const [unBlock, setUnblock] = useState([]);
   const [idUser, setIdUser] = useState("");
   const [usersDetails, setUsersDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/users?page=${newPage}`);
@@ -48,7 +50,9 @@ const Users = (props) => {
   }, []);
 
   const callApiToFetchAllUsers = () => {
+    setLoading(true);
     props.fetchUsers("user/all", (value) => {
+      setLoading(false);
       setUsersDetails(value.data.users);
     });
   };
@@ -137,8 +141,9 @@ const Users = (props) => {
       </CCol>
 
       <CCol xl={12}>
-        <CCard>
+        <CCard className="position-relative">
           {/* <CCardHeader>Users</CCardHeader> */}
+          {loading && <Loader />}
           <CCardBody>
             <CDataTable
               items={searchRecords}

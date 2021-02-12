@@ -101,8 +101,9 @@ class Login extends Component {
         <CContainer>
           <CRow className="justify-content-center">
             <CCol md="8">
-              <CCardGroup>
+              <CCardGroup className="position-relative">
                 {loading && <Loader />}
+
                 <CCard className="p-4">
                   <CCardBody>
                     <CForm onKeyDown={(e) => this.onKeyDown(e)}>
@@ -162,6 +163,7 @@ class Login extends Component {
                             color="primary"
                             className="px-4"
                             onClick={this.onHandleSubmit}
+                            disabled={loading}
                           >
                             Login
                           </CButton>
