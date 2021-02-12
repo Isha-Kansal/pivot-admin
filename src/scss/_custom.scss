@@ -21,3 +21,12 @@ button {
   padding: 5px 10px;
   margin-bottom: 10px;
 }
+.c-main {
+  position: relative;
+  .no-user-found {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

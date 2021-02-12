@@ -95,8 +95,8 @@ const Users = (props) => {
         return "primary";
     }
   };
-  // const searchRecords = filterRecords();
-  const searchRecords = [];
+  const searchRecords = filterRecords();
+
   const onBlock = (e, type, item) => {
     setIdUser(item._id);
     setType(type);
@@ -129,7 +129,7 @@ const Users = (props) => {
     });
   };
   if (searchRecords.length === 0) {
-    return <h3 className="text-center">No Users Found!</h3>;
+    return <h3 className="text-center no-user-found">No Users Found!</h3>;
   } else {
     return (
       <CRow>
