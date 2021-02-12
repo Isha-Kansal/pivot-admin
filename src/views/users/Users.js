@@ -95,8 +95,8 @@ const Users = (props) => {
         return "primary";
     }
   };
-  const searchRecords = filterRecords();
-
+  // const searchRecords = filterRecords();
+  const searchRecords = [];
   const onBlock = (e, type, item) => {
     setIdUser(item._id);
     setType(type);
@@ -128,102 +128,111 @@ const Users = (props) => {
       }
     });
   };
+  if (searchRecords.length === 0) {
+    return <h3 className="text-center">No Users Found!</h3>;
+  } else {
+    return (
+      <CRow>
+        <CCol xl={12}>
+          <form>
+            <div className="text-center search-input">
+              <input
+                type="search"
+                className="form-control"
+                placeholder="Search"
+                required
+                onChange={handleSearch}
+              />
+            </div>
+          </form>
+        </CCol>
 
-  return (
-    <CRow>
-      <CCol xl={12}>
-        <form>
-          <div className="text-center search-input">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search"
-              required
-              onChange={handleSearch}
-            />
-          </div>
-        </form>
-      </CCol>
-
-      <CCol xl={12}>
-        <CCard className="position-relative">
-          {/* <CCardHeader>Users</CCardHeader> */}
-          {loading && <Loader />}
-          <CCardBody>
-            <CDataTable
-              items={searchRecords}
-              fields={[
-                { key: "name", _classes: "font-weight-bold" },
-                "email",
-                "status",
-                "country",
-                "action",
-              ]}
-              scopedSlots={{
-                name: (item) => (
-                  <td>
-                    {item.first_name && item.last_name
-                      ? item.first_name + " " + item.last_name
-                      : "-"}
-                  </td>
-                ),
-                email: (item) => <td>{item.email ? item.email : "-"}</td>,
-                status: (item) => (
-                  <td>
-                    <CBadge
-                      color={getBadge(
-                        !item.is_verified ? "Not Verified" : "Verified"
-                      )}
-                    >
-                      {!item.is_verified ? "Not Verified" : "Verified"}
-                    </CBadge>
-                  </td>
-                ),
-                country: (item) => <td>{item.country ? item.country : "-"}</td>,
-                action: (item) => (
-                  <td>
-                    {item.status === "blocked" ? (
-                      <CButton
-                        onClick={(e) => onBlock(e, "unblock", item)}
-                        className="Unblock-btn block-btn"
+        <CCol xl={12}>
+          <CCard className="position-relative">
+            {/* <CCardHeader>Users</CCardHeader> */}
+            {loading && <Loader />}
+            <CCardBody>
+              <CDataTable
+                items={searchRecords}
+                fields={[
+                  { key: "name", _classes: "font-weight-bold" },
+                  "email",
+                  "status",
+                  "country",
+                  "action",
+                ]}
+                scopedSlots={{
+                  name: (item) => (
+                    <td>
+                      {item.first_name && item.last_name
+                        ? item.first_name + " " + item.last_name
+                        : "-"}
+                    </td>
+                  ),
+                  email: (item) => <td>{item.email ? item.email : "-"}</td>,
+                  status: (item) => (
+                    <td>
+                      <CBadge
+                        color={getBadge(
+                          !item.is_verified ? "Not Verified" : "Verified"
+                        )}
                       >
-                        UnBlock
-                      </CButton>
-                    ) : item.status === "activated" ? (
-                      <div>
+                        {!item.is_verified ? "Not Verified" : "Verified"}
+                      </CBadge>
+                    </td>
+                  ),
+                  country: (item) => (
+                    <td>{item.country ? item.country : "-"}</td>
+                  ),
+                  action: (item) => (
+                    <td>
+                      {item.status === "blocked" ? (
                         <CButton
-                          onClick={(e) => onBlock(e, "block", item)}
-                          className="block-btn block-btn"
+                          onClick={(e) => onBlock(e, "unblock", item)}
+                          className="Unblock-btn block-btn"
                         >
-                          Block
-                        </CButton>{" "}
-                        {/* <CButton
+                          UnBlock
+                        </CButton>
+                      ) : item.status === "activated" ? (
+                        <div>
+                          <CButton
+                            onClick={(e) => onBlock(e, "block", item)}
+                            className="block-btn block-btn"
+                          >
+                            Block
+                          </CButton>{" "}
+                          {/* <CButton
                           onClick={(e) => onBlock(e, "deactivate", item)}
                           className="Deactive-btn block-btn"
                         >
                           Deactivate
                         </CButton> */}
-                      </div>
-                    ) : item.status === "deactivated" ? (
-                      <div>
-                        {/* <CButton
+                        </div>
+                      ) : item.status === "deactivated" ? (
+                        <div>
+                          {/* <CButton
                           onClick={(e) => onBlock(e, "activate", item)}
                           className="Unblock-btn block-btn"
                         >
                           Activate
                         </CButton> */}
+                          <CButton
+                            onClick={(e) => onBlock(e, "block", item)}
+                            className="block-btn block-btn"
+                          >
+                            Block
+                          </CButton>
+                        </div>
+                      ) : (
                         <CButton
                           onClick={(e) => onBlock(e, "block", item)}
                           className="block-btn block-btn"
                         >
                           Block
                         </CButton>
-                      </div>
-                    ) : (
-                      "-"
-                    )}
+                      )}
 
-                    {/* {item.status !== "blocked" && (
+                      {/* {item.status !== "blocked" && (
                       <CButton
                         onClick={(e) => onBlock(e, "block", item)}
                         className="block-btn block-btn"
@@ -256,51 +265,52 @@ const Users = (props) => {
                         Activate
                       </CButton>
                     )} */}
-                  </td>
-                ),
-              }}
-              itemsPerPage={10}
-              activePage={page}
-              clickableRows
-              onRowClick={(item) =>
-                history.push({
-                  pathname: `/users/${item._id}`,
-                  state: usersDetails,
-                })
-              }
-            />
+                    </td>
+                  ),
+                }}
+                itemsPerPage={10}
+                activePage={page}
+                clickableRows
+                onRowClick={(item) =>
+                  history.push({
+                    pathname: `/users/${item._id}`,
+                    state: usersDetails,
+                  })
+                }
+              />
 
-            <div className="text-center pagination-input">
-              {usersDetails.length > 10 && (
-                <Pagination
-                  className="mt-3 mx-auto w-fit-content"
-                  itemClass="page-item"
-                  linkClass="page-link"
-                  activeClass="active"
-                  activePage={page}
-                  itemsCountPerPage={10}
-                  totalItemsCount={usersDetails.length}
-                  pageRangeDisplayed={5}
-                  onChange={pageChange}
-                />
-              )}
-            </div>
-            <div>
-              {modalOpen && (
-                <CommonModal
-                  isOpen={modalOpen}
-                  toggle={(e) => onBlock(e, type, idUser)}
-                  blockUser={(e) => blockUser(e, idUser)}
-                  id={idUser}
-                  type={type}
-                />
-              )}
-            </div>
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
-  );
+              <div className="text-center pagination-input">
+                {usersDetails.length > 10 && (
+                  <Pagination
+                    className="mt-3 mx-auto w-fit-content"
+                    itemClass="page-item"
+                    linkClass="page-link"
+                    activeClass="active"
+                    activePage={page}
+                    itemsCountPerPage={10}
+                    totalItemsCount={usersDetails.length}
+                    pageRangeDisplayed={5}
+                    onChange={pageChange}
+                  />
+                )}
+              </div>
+              <div>
+                {modalOpen && (
+                  <CommonModal
+                    isOpen={modalOpen}
+                    toggle={(e) => onBlock(e, type, idUser)}
+                    blockUser={(e) => blockUser(e, idUser)}
+                    id={idUser}
+                    type={type}
+                  />
+                )}
+              </div>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    );
+  }
 };
 
 const mapStateToProps = (state) => {
