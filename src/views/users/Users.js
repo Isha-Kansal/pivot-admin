@@ -151,7 +151,7 @@ const Users = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {usersDetails && usersDetails.length === 0 && (
+                {usersDetails && usersDetails.length === 0 && !loading && (
                   <h3 className="text-center no-user-found">No Users Found!</h3>
                 )}
                 {usersDetails &&
