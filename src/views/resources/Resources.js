@@ -3,6 +3,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Tooltip from "../../common/toolTip";
+import CommonModal from "../../common/commonModal";
 import {
   CCard,
   CCardBody,
@@ -22,6 +23,8 @@ const Resources = (props) => {
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
+  const [modalOpen, setModalOpen] = useState(false);
+
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/resources?page=${newPage}`);
   };
@@ -36,10 +39,12 @@ const Resources = (props) => {
     e.stopPropagation();
     props.history.push("/editResource");
   };
-  const deleteResource = (e) => {
+  const deleteResource = (e, item) => {
+    console.log("8459694857", item);
     e.preventDefault();
     e.stopPropagation();
-    alert("deleted");
+    setModalOpen(!modalOpen);
+    // alert("deleted");
   };
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -117,7 +122,7 @@ const Resources = (props) => {
                       </Tooltip>
                       <button
                         className="icon"
-                        onClick={deleteResource}
+                        onClick={(e) => deleteResource(e, item.id)}
                         id={`delete-${index}`}
                       >
                         <img src={DELETE} className="ml-3" />
@@ -155,6 +160,17 @@ const Resources = (props) => {
                 doubleArrows={false}
                 align="center"
               /> */}
+              <div>
+                {modalOpen && (
+                  <CommonModal
+                    isOpen={modalOpen}
+                    toggle={(e) => deleteResource(e)}
+                    // blockUser={(e) => blockUser(e, idUser)}
+                    // id={idUser}
+                    // type={type}
+                  />
+                )}
+              </div>
             </CCardBody>
           </CCardBody>
         </CCard>

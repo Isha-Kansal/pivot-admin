@@ -8,12 +8,16 @@ const {
   USER_STATUS_FAILED,
   USER_STATUS_REQUEST,
   USER_STATUS_SUCCESS,
+  FETCH_ONE_USER_FAILED,
+  FETCH_ONE_USER_SUCCESS,
+  FETCH_ONE_USER_REQUEST,
 } = require("./types");
 
 const initialState = {
   loginData: {},
   usersData: {},
   userStatus: {},
+  oneUserData: {},
 };
 
 const LoginAndNavigationReducer = (state = initialState, action) => {
@@ -50,6 +54,24 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
         ...state,
       };
     }
+
+    case FETCH_ONE_USER_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_ONE_USER_SUCCESS: {
+      return {
+        ...state,
+        oneUserData: action.oneUserData || {},
+      };
+    }
+    case FETCH_ONE_USER_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
     case USER_STATUS_REQUEST: {
       return {
         ...state,
