@@ -3,24 +3,14 @@ import { useHistory, useLocation } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import CommonModal from "../../common/commonModal";
 import { NotificationManager } from "react-notifications";
-import { Table, Card, CardHeader, Button } from "reactstrap";
-import {
-  CBadge,
-  CButton,
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CDataTable,
-  CLabel,
-  CRow,
-} from "@coreui/react";
+import { Table } from "reactstrap";
+import { CBadge, CButton, CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import Loader from "../../loader";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import usersData from "./UsersData";
+
 import { fetchUsers, userStatus } from "../store/action";
 
 const Users = (props) => {
@@ -32,13 +22,12 @@ const Users = (props) => {
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [type, setType] = useState("");
-  const [unBlock, setUnblock] = useState([]);
+
   const [idUser, setIdUser] = useState("");
   const [usersDetails, setUsersDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
-    console.log("498568459689458978", newPage);
     currentPage !== newPage && history.push(`/users?page=${newPage}`);
     setLoading(true);
 
@@ -74,33 +63,10 @@ const Users = (props) => {
         setLoading(false);
         setUsersDetails(value.data.users);
         setCount(value.data.count);
-        // setPage(newPage);
       }
     );
   };
 
-  const filterRecords = () => {
-    // const search = search.trim().replace(/ +/g, " ");
-    if (!search) return usersDetails;
-
-    return (
-      usersDetails &&
-      usersDetails.filter((data) => {
-        let isTrue;
-        if (data.email) {
-          isTrue = data.email.toLowerCase().includes(search);
-        }
-        if (data.country) {
-          isTrue = data.country.toLowerCase().includes(search);
-        }
-        if (data.name) {
-          isTrue = data.name.toLowerCase().includes(search);
-        }
-
-        return isTrue;
-      })
-    );
-  };
   const getBadge = (status) => {
     switch (status) {
       case "Verified":
@@ -112,7 +78,6 @@ const Users = (props) => {
         return "primary";
     }
   };
-  // const searchRecords = filterRecords();
 
   const onBlock = (e, type, item) => {
     setIdUser(item._id);
@@ -145,10 +110,7 @@ const Users = (props) => {
       }
     });
   };
-  // if (usersDetails.length === 0) {
-  //   return <h3 className="text-center no-user-found">No Users Found!</h3>;
-  // } else {
-  console.log("4958698459867945789", usersDetails, count);
+
   return (
     <CRow>
       <CCol xl={12}>
@@ -169,7 +131,11 @@ const Users = (props) => {
         <CCard className="position-relative">
           {loading && <Loader />}
           <CCardBody>
-            <Table className="table" style={{ minHeight: "150px" }}>
+            <Table
+              className={`table ${
+                usersDetails.length === 0 ? "tableHeight" : ""
+              }`}
+            >
               <thead>
                 <tr>
                   <th className="text-nowrap ">Name</th>

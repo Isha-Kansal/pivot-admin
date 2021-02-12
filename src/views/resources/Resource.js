@@ -8,7 +8,7 @@ const Resource = ({ match }) => {
   const resource = resourcesData.find(
     (resource) => resource.id.toString() === match.params.id
   );
-  console.log("8945869489789", resource);
+
   // const resourcesDetails = resource
   //   ? Object.entries(resource)
   //   : [

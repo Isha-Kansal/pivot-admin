@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import {
   CCard,
   CCardBody,
@@ -48,6 +48,7 @@ const User = (props) => {
         return "primary";
     }
   };
+
   return (
     <CRow>
       <CCol lg={12}>
@@ -162,14 +163,24 @@ const User = (props) => {
                       </td>
                     </tr>
                   )}
-                  {user.reason_for_career_change && (
-                    <tr>
-                      <td>Career Change Reason</td>
-                      <td>
-                        <strong>{user.reason_for_career_change}</strong>
-                      </td>
-                    </tr>
-                  )}
+
+                  {user.reason_for_career_change &&
+                    user.reason_for_career_change.length > 0 &&
+                    user.reason_for_career_change.map((item, key) => {
+                      const length = user.reason_for_career_change.length;
+                      return (
+                        <tr>
+                          <td>Career Change Reason</td>
+                          <td>
+                            <strong>
+                              <Fragment key={key}>
+                                {key === length - 1 ? item : `${item} , `}
+                              </Fragment>
+                            </strong>
+                          </td>
+                        </tr>
+                      );
+                    })}
                 </tbody>
               </table>
             )}

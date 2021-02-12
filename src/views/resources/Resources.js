@@ -40,7 +40,6 @@ const Resources = (props) => {
     props.history.push("/editResource");
   };
   const deleteResource = (e, item) => {
-    console.log("8459694857", item);
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
