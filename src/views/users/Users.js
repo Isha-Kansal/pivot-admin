@@ -7,7 +7,7 @@ import { Table } from "reactstrap";
 import { CBadge, CButton, CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import Loader from "../../loader";
 import { connect } from "react-redux";
-import { useDispatch } from "react-redux";
+
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 
