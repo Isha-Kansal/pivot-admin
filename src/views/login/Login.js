@@ -164,6 +164,7 @@ class Login extends Component {
                             className="px-4"
                             onClick={this.onHandleSubmit}
                             disabled={loading}
+                            className="login-btn"
                           >
                             Login
                           </CButton>

@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Tooltip from "../../common/toolTip";
 import CommonModal from "../../common/commonModal";
-import AddResource from "../../assets/icons/add-resource.svg";
+
 import {
   CCard,
   CCardBody,
@@ -82,11 +82,11 @@ const Resources = (props) => {
           </div>
           <div className="text-right resource-btn">
             <CButton block color="info" onClick={addResource} id="addResource">
-              <img src={AddResource} />
-            </CButton>
-            <Tooltip placement="left" target="addResource">
               Add Resource
-            </Tooltip>
+            </CButton>
+            {/* <Tooltip placement="left" target="addResource">
+              Add Resource
+            </Tooltip> */}
           </div>
         </form>
       </CCol>

@@ -43,14 +43,25 @@ button {
   right: 0;
   transform: translateY(-50%);
   button {
-    padding: 0 !important;
-    background: transparent !important;
-    border: 0 !important;
-    outline: 0;
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 13px;
+    border: 1px solid #f9ae76 !important;
+
+    background-color: #f9ae76 !important;
+    padding: 7px 15px;
   }
 }
 .breadcrumb-item {
   a {
     color: rgb(255, 174, 117);
+  }
+}
+.login-btn {
+  background: rgb(255, 174, 117) !important;
+  border: 0 !important;
+  &:focus,
+  &:active {
+    box-shadow: 0 0 0 0.2rem #fab37e7d !important;
   }
 }

@@ -20,6 +20,7 @@ import CANCEL from "../../assets/icons/cancel.svg";
 import { Input } from "reactstrap";
 import CIcon from "@coreui/icons-react";
 import Avatar from "../../assets/icons/avatar.png";
+import BackArrow from "../../assets/icons/left-arrow.svg";
 class AddResource extends Component {
   constructor(props) {
     super();
@@ -323,7 +324,7 @@ class AddResource extends Component {
           <CCard>
             <CCardHeader>
               <CButton onClick={this.handleBack} className="backBtn">
-                <i className="fas fa-arrow-left"></i>Back
+                <img src={BackArrow} className="mr-2" /> Back
               </CButton>
               {/* <div className="update-profile-image">
                 <img
