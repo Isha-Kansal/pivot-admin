@@ -81,9 +81,12 @@ const Resources = (props) => {
             />
           </div>
           <div className="text-right resource-btn">
-            <CButton block color="info" onClick={addResource}>
+            <CButton block color="info" onClick={addResource} id="addResource">
               <img src={AddResource} />
             </CButton>
+            <Tooltip placement="left" target="addResource">
+              Add Resource
+            </Tooltip>
           </div>
         </form>
       </CCol>
