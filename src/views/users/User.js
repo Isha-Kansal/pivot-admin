@@ -49,6 +49,11 @@ const User = (props) => {
     }
   };
 
+  let reasonForCareerChange =
+    user &&
+    user.reason_for_career_change &&
+    user.reason_for_career_change.join(", ");
+
   return (
     <CRow>
       <CCol lg={12}>
@@ -111,7 +116,7 @@ const User = (props) => {
                     <tr>
                       <td>Contact</td>
                       <td>
-                        <strong>{user.contact_no}</strong>
+                        <strong>{user.contact_no.value}</strong>
                       </td>
                     </tr>
                   )}
@@ -164,23 +169,14 @@ const User = (props) => {
                     </tr>
                   )}
 
-                  {user.reason_for_career_change &&
-                    user.reason_for_career_change.length > 0 &&
-                    user.reason_for_career_change.map((item, key) => {
-                      const length = user.reason_for_career_change.length;
-                      return (
-                        <tr>
-                          <td>Career Change Reason</td>
-                          <td>
-                            <strong>
-                              <Fragment key={key}>
-                                {key === length - 1 ? item : `${item} , `}
-                              </Fragment>
-                            </strong>
-                          </td>
-                        </tr>
-                      );
-                    })}
+                  {reasonForCareerChange && (
+                    <tr>
+                      <td>Career Change Reason</td>
+                      <td>
+                        <strong>{reasonForCareerChange}</strong>
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             )}
