@@ -65,7 +65,7 @@ const User = (props) => {
               <table className="table">
                 <tbody>
                   <tr>
-                    <td>Action</td>
+                    <td>Status</td>
 
                     <td>
                       <CBadge
@@ -84,7 +84,7 @@ const User = (props) => {
                     </td>
                   </tr>
                   <tr>
-                    <td>Status</td>
+                    <td>Email Verification</td>
 
                     <td>
                       <CBadge
