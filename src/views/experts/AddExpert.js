@@ -12,6 +12,7 @@ import {
   CInput,
   CLabel,
   CRow,
+  CSelect,
 } from "@coreui/react";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
 import { Input } from "reactstrap";
@@ -21,13 +22,23 @@ class AddExpert extends Component {
   constructor(props) {
     super();
     this.state = {
-      name: "",
+      first_name: "",
+      last_name: "",
+      email: "",
+      contact: "",
+      gender: "",
+      country: "",
       designation: "",
       expertise: "",
+      experience: "",
+      role: "",
+      industry: "",
       fields: "",
       about: "",
       errorType: "",
       errorText: "",
+      service: "",
+      rate: "",
       expertImage: null,
     };
   }
@@ -57,12 +68,33 @@ class AddExpert extends Component {
     this.clearError();
     this.setState({ [e.target.name]: e.target.value });
   };
-  onSubmit = (e) => {
-    const { name, designation, expertise, fields, about } = this.state;
+  validateEmail = (email) => {
+    var re = /^(([^<>()\]\\.,;:\s@“]+(\.[^<>()\]\\.,;:\s@“]+)*)|(“.+“))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-    if (name === "") {
+    return re.test(String(email).toLowerCase());
+  };
+  onSubmit = (e) => {
+    const {
+      first_name,
+      last_name,
+      email,
+      contact,
+      gender,
+      country,
+      designation,
+      experience,
+      role,
+      industry,
+      expertise,
+      fields,
+      about,
+      service,
+      rate,
+    } = this.state;
+
+    if (first_name === "") {
       this.setState({
-        errorType: "name",
+        errorType: "first_name",
         errorText: (
           <span className="text-danger">
             <b>Name should not be empty</b>
@@ -71,12 +103,12 @@ class AddExpert extends Component {
       });
       return;
     }
-    if (name !== "") {
+    if (first_name !== "") {
       let filter = /^[a-zA-Z0-9]+([-_\s]{1}[a-zA-Z0-9]+)*$/;
 
-      if (!filter.test(name)) {
+      if (!filter.test(first_name)) {
         this.setState({
-          errorType: "name",
+          errorType: "first_name",
           errorText: (
             <span className="text-danger">
               <b>
@@ -90,6 +122,123 @@ class AddExpert extends Component {
         return;
       }
     }
+
+    if (last_name === "") {
+      this.setState({
+        errorType: "last_name",
+        errorText: (
+          <span className="text-danger">
+            <b>Name should not be empty</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (last_name !== "") {
+      let filter = /^[a-zA-Z0-9]+([-_\s]{1}[a-zA-Z0-9]+)*$/;
+
+      if (!filter.test(last_name)) {
+        this.setState({
+          errorType: "last_name",
+          errorText: (
+            <span className="text-danger">
+              <b>
+                {" "}
+                Name should be combination of alphanumeric text, underscore,
+                space and hyphen
+              </b>
+            </span>
+          ),
+        });
+        return;
+      }
+    }
+
+    if (email === "") {
+      this.setState({
+        errorType: "email",
+        errorText: (
+          <span className="text-danger">
+            <b>Email Id is empty</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (!this.validateEmail(email)) {
+      this.setState({
+        errorType: "email",
+        errorText: (
+          <span className="text-danger">
+            <b>Invalid email</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
+    if (contact === "") {
+      this.setState({
+        errorType: "contact",
+        errorText: <span className="text-danger">Mobile number is empty</span>,
+        loading: false,
+      });
+
+      return;
+    } else if (contact.length < 10 || contact.length > 10) {
+      this.setState({
+        errorType: "contact",
+        errorText: (
+          <span className="text-danger">
+            {" "}
+            <b>Phone number should be of length 10</b>
+          </span>
+        ),
+        loading: false,
+      });
+
+      return;
+    } else if (contact !== "") {
+      let filter = /^\d{10}$/;
+      if (!filter.test(contact)) {
+        this.setState({
+          errorType: "contact",
+          errorText: (
+            <span className="text-danger">
+              {" "}
+              <b>Please enter valid phone number</b>
+            </span>
+          ),
+          loading: false,
+        });
+
+        return;
+      }
+    }
+
+    if (gender === "") {
+      this.setState({
+        errorType: "gender",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your gender</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (country === "") {
+      this.setState({
+        errorType: "country",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your country</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
     if (designation === "") {
       this.setState({
         errorType: "designation",
@@ -112,17 +261,75 @@ class AddExpert extends Component {
       });
       return;
     }
-    if (fields === "") {
+    if (role === "") {
       this.setState({
-        errorType: "fields",
+        errorType: "role",
         errorText: (
           <span className="text-danger">
-            <b>Please enter the fields</b>
+            <b>Select your current role</b>
           </span>
         ),
       });
       return;
     }
+    if (industry === "") {
+      this.setState({
+        errorType: "industry",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your industry</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
+    if (experience === "") {
+      this.setState({
+        errorType: "experience",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your experience</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
+    if (fields === "") {
+      this.setState({
+        errorType: "fields",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your fields</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (service === "") {
+      this.setState({
+        errorType: "service",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your service</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (rate === "") {
+      this.setState({
+        errorType: "rate",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your rate</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
     if (about === "") {
       this.setState({
         errorType: "about",
@@ -138,13 +345,19 @@ class AddExpert extends Component {
   resetState = (e) => {
     e.preventDefault();
     this.setState({
-      name: "",
+      first_name: "",
+      last_name: "",
       designation: "",
       expertise: "",
       fields: "",
       about: "",
       errorType: "",
       errorText: "",
+      role: "",
+      industry: "",
+      experience: "",
+      service: "",
+      rate: "",
     });
   };
   handleBack = (e) => {
@@ -154,12 +367,19 @@ class AddExpert extends Component {
 
   render() {
     const {
-      name,
+      first_name,
+      last_name,
       designation,
       expertise,
       about,
       fields,
       expertImage,
+      role,
+      industry,
+      email,
+      contact,
+      service,
+      rate,
     } = this.state;
 
     return (
@@ -201,88 +421,261 @@ class AddExpert extends Component {
                 encType="multipart/form-data"
                 className="form-horizontal"
               >
-                <CFormGroup row></CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel htmlFor="name">Name</CLabel>
+                <CFormGroup row className="my-0">
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="first_name">First Name</CLabel>
+                      <CInput
+                        id="first_name"
+                        name="first_name"
+                        placeholder="First Name"
+                        onChange={this.inputHandler}
+                        value={first_name}
+                      />
+                      {this.errorShow("first_name")}
+                    </CFormGroup>
                   </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput
-                      id="name"
-                      name="name"
-                      placeholder="Name"
-                      onChange={this.inputHandler}
-                      value={name}
-                    />
-                    {this.errorShow("name")}
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel htmlFor="designation">Designation</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput
-                      type="text"
-                      id="designation"
-                      name="designation"
-                      placeholder="Designation"
-                      autoComplete="designation"
-                      onChange={this.inputHandler}
-                      value={designation}
-                    />
-                    {this.errorShow("designation")}
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel htmlFor="expertise">Expertise</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput
-                      type="text"
-                      id="expertise"
-                      name="expertise"
-                      placeholder="Expertise"
-                      autoComplete="expertise"
-                      onChange={this.inputHandler}
-                      value={expertise}
-                    />
-                    {this.errorShow("expertise")}
-                  </CCol>
-                </CFormGroup>
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel htmlFor="fields">Fields</CLabel>
-                  </CCol>
-                  <CCol xs="12" md="9">
-                    <CInput
-                      type="text"
-                      id="fields"
-                      name="fields"
-                      placeholder="Fields"
-                      autoComplete="fields"
-                      onChange={this.inputHandler}
-                      value={fields}
-                    />
-                    {this.errorShow("fields")}
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="last_name">Last Name</CLabel>
+                      <CInput
+                        id="last_name"
+                        name="last_name"
+                        placeholder="Last Name"
+                        onChange={this.inputHandler}
+                        value={last_name}
+                      />
+                      {this.errorShow("last_name")}
+                    </CFormGroup>
                   </CCol>
                 </CFormGroup>
 
-                <CFormGroup row>
-                  <CCol md="3">
-                    <CLabel htmlFor="about">About</CLabel>
+                <CFormGroup row className="my-0">
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="email">Email</CLabel>
+                      <CInput
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        onChange={this.inputHandler}
+                        value={email}
+                      />
+                      {this.errorShow("email")}
+                    </CFormGroup>
                   </CCol>
-                  <CCol xs="12" md="9">
-                    <CTextarea
-                      name="about"
-                      id="about"
-                      rows="9"
-                      onChange={this.inputHandler}
-                      placeholder="Content..."
-                      value={about}
-                    />
-                    {this.errorShow("about")}
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="contact">Contact</CLabel>
+                      <CInput
+                        id="contact"
+                        name="contact"
+                        placeholder="Contact"
+                        onChange={this.inputHandler}
+                        value={contact}
+                      />
+                      {this.errorShow("contact")}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row className="my-0">
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="gender">Gender</CLabel>
+                      <CSelect
+                        custom
+                        name="gender"
+                        id="gender"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </CSelect>
+                      {this.errorShow("gender")}
+                    </CFormGroup>
+                  </CCol>
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="country">Country</CLabel>
+                      <CSelect
+                        custom
+                        name="country"
+                        id="country"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="india">India</option>
+                      </CSelect>
+                      {this.errorShow("country")}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row className="my-0">
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="designation">Designation</CLabel>
+
+                      <CSelect
+                        custom
+                        id="designation"
+                        name="designation"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="founder">Founder</option>
+                      </CSelect>
+                      {this.errorShow("designation")}
+                    </CFormGroup>
+                  </CCol>
+
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="expertise">Expertise</CLabel>
+
+                      <CSelect
+                        custom
+                        id="expertise"
+                        name="expertise"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="hr">HR</option>
+                      </CSelect>
+                      {this.errorShow("expertise")}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row className="my-0">
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="role">Current Role</CLabel>
+
+                      <CSelect
+                        custom
+                        id="role"
+                        name="role"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="dentist">Dentist</option>
+                      </CSelect>
+                      {this.errorShow("role")}
+                    </CFormGroup>
+                  </CCol>
+
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="industry">Current Industry</CLabel>
+
+                      <CSelect
+                        custom
+                        id="industry"
+                        name="industry"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="financial">Financial Services</option>
+                      </CSelect>
+                      {this.errorShow("industry")}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row className="my-0">
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="experience">Work Experience</CLabel>
+
+                      <CSelect
+                        custom
+                        id="experience"
+                        name="experience"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="five">0-5 Years</option>
+                      </CSelect>
+                      {this.errorShow("experience")}
+                    </CFormGroup>
+                  </CCol>
+
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="fields">Fields</CLabel>
+
+                      <CSelect
+                        custom
+                        id="fields"
+                        name="fields"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="hr">HR</option>
+                      </CSelect>
+                      {this.errorShow("fields")}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row className="my-0">
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="service">Service</CLabel>
+
+                      <CSelect
+                        custom
+                        id="service"
+                        name="service"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="thirty">30 Min Call</option>
+                        <option value="fourty">40 Min Call</option>
+                      </CSelect>
+                      {this.errorShow("service")}
+                    </CFormGroup>
+                  </CCol>
+
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="rate">Rate</CLabel>
+
+                      <CSelect
+                        custom
+                        id="rate"
+                        name="rate"
+                        onChange={this.inputHandler}
+                      >
+                        <option value="select">Select</option>
+                        <option value="sevenFifty">INR 750</option>
+                        <option value="sixFifty">INR 650</option>
+                      </CSelect>
+                      {this.errorShow("rate")}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row className="my-0">
+                  <CCol xs="8">
+                    <CFormGroup>
+                      <CLabel htmlFor="about">About</CLabel>
+
+                      <CTextarea
+                        name="about"
+                        id="about"
+                        rows="9"
+                        onChange={this.inputHandler}
+                        placeholder="Content..."
+                        value={about}
+                      />
+                      {this.errorShow("about")}
+                    </CFormGroup>
                   </CCol>
                 </CFormGroup>
               </CForm>
