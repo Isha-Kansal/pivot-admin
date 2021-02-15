@@ -113,7 +113,7 @@ const Users = (props) => {
       }
     });
   };
-
+  console.log("86784857984957", usersDetails);
   return (
     <CRow>
       <CCol xl={12}>
@@ -133,6 +133,7 @@ const Users = (props) => {
       <CCol xl={12}>
         <CCard className="position-relative">
           {loading && <Loader />}
+
           <CCardBody>
             <Table
               className={`table ${

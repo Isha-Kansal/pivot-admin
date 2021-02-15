@@ -1,4 +1,8 @@
 // Here you can add other styles
+
+.card {
+  min-height: 300px;
+}
 .search-input {
   max-width: 500px;
   margin: 0 auto 20px;
@@ -32,4 +36,21 @@ button {
 }
 .tableHeight {
   min-height: 500px;
+}
+.resource-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  button {
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    outline: 0;
+  }
+}
+.breadcrumb-item {
+  a {
+    color: rgb(255, 174, 117);
+  }
 }

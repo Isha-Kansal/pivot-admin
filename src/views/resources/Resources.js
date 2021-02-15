@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Tooltip from "../../common/toolTip";
 import CommonModal from "../../common/commonModal";
+import AddResource from "../../assets/icons/add-resource.svg";
 import {
   CCard,
   CCardBody,
@@ -69,7 +70,7 @@ const Resources = (props) => {
   return (
     <CRow>
       <CCol xl={12}>
-        <form>
+        <form className="position-relative">
           <div className="text-center search-input">
             <input
               type="search"
@@ -79,20 +80,14 @@ const Resources = (props) => {
               onChange={handleSearch}
             />
           </div>
+          <div className="text-right resource-btn">
+            <CButton block color="info" onClick={addResource}>
+              <img src={AddResource} />
+            </CButton>
+          </div>
         </form>
       </CCol>
-      <CCol xl={12}>
-        <div>
-          <CButton
-            style={{ width: 150 }}
-            block
-            color="info"
-            onClick={addResource}
-          >
-            Add Resource
-          </CButton>
-        </div>
-      </CCol>
+      <CCol xl={12}></CCol>
 
       <CCol xl={12}>
         <CCard>
