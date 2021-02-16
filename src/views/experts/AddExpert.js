@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import DateTimePicker from "react-datetime-picker";
+import { PopupWidget } from "react-calendly";
 import BackArrow from "../../assets/icons/left-arrow.svg";
 import {
   CButton,
@@ -16,10 +17,25 @@ import {
   CRow,
   CSelect,
 } from "@coreui/react";
+import { InlineWidget } from "react-calendly";
+import Select from "react-select";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
 import { Input } from "reactstrap";
 import CIcon from "@coreui/icons-react";
 import Avatar from "../../assets/icons/avatar.png";
+import {
+  optionsFields,
+  optionsGender,
+  optionsCountry,
+  optionsDesignation,
+  optionsExpertise,
+  optionsRole,
+  optionsIndustry,
+  optionsExperience,
+  optionsRate,
+  optionsService,
+} from "./ExpertsFieldsData";
+
 class AddExpert extends Component {
   constructor(props) {
     super();
@@ -70,6 +86,58 @@ class AddExpert extends Component {
   inputHandler = (e) => {
     this.clearError();
     this.setState({ [e.target.name]: e.target.value });
+  };
+  handleChange = (e, type, data) => {
+    if (type === "fields") {
+      this.setState({
+        fields: data,
+      });
+    }
+    if (type === "gender") {
+      this.setState({
+        gender: data,
+      });
+    }
+    if (type === "country") {
+      this.setState({
+        country: data,
+      });
+    }
+    if (type === "designation") {
+      this.setState({
+        designation: data,
+      });
+    }
+    if (type === "expertise") {
+      this.setState({
+        expertise: data,
+      });
+    }
+    if (type === "role") {
+      this.setState({
+        role: data,
+      });
+    }
+    if (type === "industry") {
+      this.setState({
+        industry: data,
+      });
+    }
+    if (type === "experience") {
+      this.setState({
+        experience: data,
+      });
+    }
+    if (type === "service") {
+      this.setState({
+        service: data,
+      });
+    }
+    if (type === "rate") {
+      this.setState({
+        rate: data,
+      });
+    }
   };
   validateEmail = (email) => {
     var re = /^(([^<>()\]\\.,;:\s@“]+(\.[^<>()\]\\.,;:\s@“]+)*)|(“.+“))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -382,10 +450,13 @@ class AddExpert extends Component {
     const {
       first_name,
       last_name,
+      experience,
       designation,
+      country,
       expertise,
       about,
       fields,
+      gender,
       expertImage,
       role,
       industry,
@@ -498,31 +569,32 @@ class AddExpert extends Component {
                   <CCol xs="4">
                     <CFormGroup>
                       <CLabel htmlFor="gender">Gender</CLabel>
-                      <CSelect
+                      <Select
                         custom
+                        placeholder="Select gender"
                         name="gender"
                         id="gender"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                      </CSelect>
+                        name="gender"
+                        onChange={(e) => this.handleChange(e, "gender")}
+                        value={gender}
+                        options={optionsGender}
+                      ></Select>
                       {this.errorShow("gender")}
                     </CFormGroup>
                   </CCol>
                   <CCol xs="4">
                     <CFormGroup>
                       <CLabel htmlFor="country">Country</CLabel>
-                      <CSelect
+                      <Select
                         custom
                         name="country"
                         id="country"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="india">India</option>
-                      </CSelect>
+                        name="country"
+                        placeholder="Select Country"
+                        onChange={(e) => this.handleChange(e, "country")}
+                        value={country}
+                        options={optionsCountry}
+                      ></Select>
                       {this.errorShow("country")}
                     </CFormGroup>
                   </CCol>
@@ -533,15 +605,15 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="designation">Designation</CLabel>
 
-                      <CSelect
+                      <Select
                         custom
                         id="designation"
                         name="designation"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="founder">Founder</option>
-                      </CSelect>
+                        placeholder="Select Designation"
+                        onChange={(e) => this.handleChange(e, "designation")}
+                        value={designation}
+                        options={optionsDesignation}
+                      ></Select>
                       {this.errorShow("designation")}
                     </CFormGroup>
                   </CCol>
@@ -550,15 +622,16 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="expertise">Expertise</CLabel>
 
-                      <CSelect
+                      <Select
+                        isMulti
                         custom
                         id="expertise"
+                        placeholder="Select Your expert areas"
                         name="expertise"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="hr">HR</option>
-                      </CSelect>
+                        value={expertise}
+                        options={optionsExpertise}
+                        onChange={(e) => this.handleChange(e, "expertise")}
+                      ></Select>
                       {this.errorShow("expertise")}
                     </CFormGroup>
                   </CCol>
@@ -569,15 +642,15 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="role">Current Role</CLabel>
 
-                      <CSelect
+                      <Select
                         custom
                         id="role"
+                        placeholder="Select Role"
                         name="role"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="dentist">Dentist</option>
-                      </CSelect>
+                        onChange={(e) => this.handleChange(e, "role")}
+                        value={role}
+                        options={optionsRole}
+                      ></Select>
                       {this.errorShow("role")}
                     </CFormGroup>
                   </CCol>
@@ -586,15 +659,15 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="industry">Current Industry</CLabel>
 
-                      <CSelect
+                      <Select
                         custom
                         id="industry"
                         name="industry"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="financial">Financial Services</option>
-                      </CSelect>
+                        placeholder="Select Industry"
+                        onChange={(e) => this.handleChange(e, "industry")}
+                        value={industry}
+                        options={optionsIndustry}
+                      ></Select>
                       {this.errorShow("industry")}
                     </CFormGroup>
                   </CCol>
@@ -605,15 +678,15 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="experience">Work Experience</CLabel>
 
-                      <CSelect
+                      <Select
                         custom
                         id="experience"
                         name="experience"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="five">0-5 Years</option>
-                      </CSelect>
+                        placeholder="Select Experience"
+                        onChange={(e) => this.handleChange(e, "experience")}
+                        value={experience}
+                        options={optionsExperience}
+                      ></Select>
                       {this.errorShow("experience")}
                     </CFormGroup>
                   </CCol>
@@ -622,16 +695,20 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="fields">Fields</CLabel>
 
-                      <CSelect
+                      <Select
+                        isMulti
                         custom
+                        placeholder="Select Fields"
                         id="fields"
                         name="fields"
-                        onChange={this.inputHandler}
+                        onChange={(e) => this.handleChange(e, "fields")}
+                        value={fields}
+                        options={optionsFields}
                       >
                         <option value="select">Select</option>
                         <option value="consulting">Consulting</option>
                         <option value="hr">HR</option>
-                      </CSelect>
+                      </Select>
                       {this.errorShow("fields")}
                     </CFormGroup>
                   </CCol>
@@ -642,16 +719,15 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="service">Service</CLabel>
 
-                      <CSelect
+                      <Select
                         custom
                         id="service"
                         name="service"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="thirty">30 Min Call</option>
-                        <option value="fourty">40 Min Call</option>
-                      </CSelect>
+                        placeholder="Select Service"
+                        onChange={(e) => this.handleChange(e, "service")}
+                        value={service}
+                        options={optionsService}
+                      ></Select>
                       {this.errorShow("service")}
                     </CFormGroup>
                   </CCol>
@@ -660,16 +736,15 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="rate">Rate</CLabel>
 
-                      <CSelect
+                      <Select
                         custom
                         id="rate"
+                        placeholder="Select Rate"
                         name="rate"
-                        onChange={this.inputHandler}
-                      >
-                        <option value="select">Select</option>
-                        <option value="sevenFifty">INR 750</option>
-                        <option value="sixFifty">INR 650</option>
-                      </CSelect>
+                        onChange={(e) => this.handleChange(e, "rate")}
+                        value={rate}
+                        options={optionsRate}
+                      ></Select>
                       {this.errorShow("rate")}
                     </CFormGroup>
                   </CCol>
@@ -677,15 +752,27 @@ class AddExpert extends Component {
 
                 <CFormGroup row className="my-0">
                   <CCol xs="4">
-                    <CFormGroup>
-                      <CLabel htmlFor="dateTime">Select Date & Time</CLabel>
-                      <DateTimePicker
-                        onChange={this.onChange}
-                        value={selectedDate}
-                        format="dd/MM/yyyy hh:mm a"
+                    {/* <CFormGroup>
+                      <CLabel htmlFor="dateTime">Select Availability</CLabel>
+                      <InlineWidget
+                        pageSettings={{
+                          backgroundColor: "ffffff",
+                          hideEventTypeDetails: false,
+                          hideLandingPageDetails: true,
+                          primaryColor: "00a2ff",
+                          textColor: "4d5055",
+                        }}
+                        prefill={{
+                          email: "test@test.com",
+                          firstName: "Jon",
+                          lastName: "Snow",
+                          name: "Jon Snow",
+                        }}
+                        url="https://calendly.com/ikansal"
                       />
+
                       {this.errorShow("dateTime")}
-                    </CFormGroup>
+                    </CFormGroup> */}
                   </CCol>
                   <CCol xs="4">
                     <CFormGroup>
