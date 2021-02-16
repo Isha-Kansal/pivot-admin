@@ -4,9 +4,9 @@ import CIcon from "@coreui/icons-react";
 
 import resourcesData from "./ResourcesData";
 
-const Resource = ({ match }) => {
+const Resource = (props) => {
   const resource = resourcesData.find(
-    (resource) => resource.id.toString() === match.params.id
+    (resource) => resource.id === props && props.match.params.id
   );
 
   return (

@@ -4,9 +4,9 @@ import CIcon from "@coreui/icons-react";
 
 import expertsData from "./ExpertsData";
 
-const Expert = ({ match }) => {
+const Expert = (props) => {
   const expert = expertsData.find(
-    (expert) => expert.id.toString() === match.params.id
+    (expert) => expert.id === props && props.match.params.id
   );
 
   return (

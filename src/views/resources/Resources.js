@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import Tooltip from "../../common/toolTip";
 import CommonModal from "../../common/commonModal";
-
+import { Table } from "reactstrap";
 import {
   CCard,
   CCardBody,
@@ -92,80 +92,93 @@ const Resources = (props) => {
       <CCol xl={12}>
         <CCard>
           <CCardBody>
-            <CCardBody>
-              <CDataTable
-                items={searchRecords}
-                fields={[
-                  { key: "name", _classes: "font-weight-bold" },
-                  "format",
-                  "pricing",
-                  "action",
-                ]}
-                scopedSlots={{
-                  action: (item, index) => (
-                    <td>
-                      <button
-                        id={`edit-${index}`}
-                        className="icon"
-                        onClick={editResource}
-                      >
-                        <img src={EDIT} className="ml-3" />
-                      </button>
-                      <Tooltip placement="left" target={`edit-${index}`}>
-                        Edit
-                      </Tooltip>
-                      <button
-                        className="icon"
-                        onClick={(e) => deleteResource(e, item.id)}
-                        id={`delete-${index}`}
-                      >
-                        <img src={DELETE} className="ml-3" />
-                      </button>
-                      <Tooltip placement="right" target={`delete-${index}`}>
-                        Delete
-                      </Tooltip>
-                    </td>
-                  ),
-                }}
-                itemsPerPage={10}
-                activePage={page}
-                clickableRows
-                onRowClick={(item) => history.push(`/resources/${item.id}`)}
-              />
-              <div className="text-center pagination-input">
-                {resourcesData.length > 10 && (
-                  <Pagination
-                    className="mt-3 mx-auto w-fit-content"
-                    itemClass="page-item"
-                    linkClass="page-link"
-                    activeClass="active"
-                    activePage={page}
-                    itemsCountPerPage={10}
-                    totalItemsCount={resourcesData.length}
-                    pageRangeDisplayed={5}
-                    onChange={pageChange}
-                  />
+            <Table>
+              <thead>
+                <tr>
+                  <th className="text-nowrap ">Name</th>
+
+                  <th>Format</th>
+                  <th>Pricing</th>
+
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {searchRecords && searchRecords.length === 0 && (
+                  <h3 className="text-center no-user-found">
+                    No Resources Found!
+                  </h3>
                 )}
-              </div>
-              {/* <CPagination
-                activePage={page}
-                onActivePageChange={pageChange}
-                pages={5}
-                doubleArrows={false}
-                align="center"
-              /> */}
-              <div>
-                {modalOpen && (
-                  <CommonModal
-                    isOpen={modalOpen}
-                    toggle={(e) => deleteResource(e)}
-                    // blockUser={(e) => blockUser(e, idUser)}
-                    // id={idUser}
-                    // type={type}
-                  />
-                )}
-              </div>
-            </CCardBody>
+                {searchRecords &&
+                  searchRecords.length > 0 &&
+                  searchRecords.map((item, index) => {
+                    return (
+                      <tr
+                        style={{ cursor: "pointer" }}
+                        onClick={() =>
+                          history.push({
+                            pathname: `/resources/${item._id}`,
+                          })
+                        }
+                      >
+                        <td>{item.name}</td>
+                        <td>{item.format}</td>
+                        <td>{item.pricing}</td>
+                        <td>
+                          <button
+                            id={`edit-${index}`}
+                            className="icon"
+                            onClick={editResource}
+                          >
+                            <img src={EDIT} className="ml-3" />
+                          </button>
+                          <Tooltip placement="left" target={`edit-${index}`}>
+                            Edit
+                          </Tooltip>
+                          <button
+                            className="icon"
+                            onClick={(e) => deleteResource(e, item.id)}
+                            id={`delete-${index}`}
+                          >
+                            <img src={DELETE} className="ml-3" />
+                          </button>
+                          <Tooltip placement="right" target={`delete-${index}`}>
+                            Delete
+                          </Tooltip>
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </Table>
+
+            <div className="text-center pagination-input">
+              {resourcesData.length > 10 && (
+                <Pagination
+                  className="mt-3 mx-auto w-fit-content"
+                  itemClass="page-item"
+                  linkClass="page-link"
+                  activeClass="active"
+                  activePage={page}
+                  itemsCountPerPage={10}
+                  totalItemsCount={resourcesData.length}
+                  pageRangeDisplayed={5}
+                  onChange={pageChange}
+                />
+              )}
+            </div>
+
+            <div>
+              {modalOpen && (
+                <CommonModal
+                  isOpen={modalOpen}
+                  toggle={(e) => deleteResource(e)}
+                  // blockUser={(e) => blockUser(e, idUser)}
+                  // id={idUser}
+                  // type={type}
+                />
+              )}
+            </div>
           </CCardBody>
         </CCard>
       </CCol>
