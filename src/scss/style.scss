@@ -112,3 +112,10 @@ button:focus {
   background-color: #f9ae76;
   padding: 8px 15px;
 }
+.expert-card {
+  max-width: 800px;
+  margin: 0 auto 30px;
+  .update-profile-image {
+    text-align: center;
+  }
+}

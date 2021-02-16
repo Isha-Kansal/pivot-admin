@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import DateTimePicker from "react-datetime-picker";
-import { PopupWidget } from "react-calendly";
+// import DateTimePicker from "react-datetime-picker";
+// import { PopupWidget } from "react-calendly";
 import BackArrow from "../../assets/icons/left-arrow.svg";
 import {
   CButton,
@@ -17,7 +17,7 @@ import {
   CRow,
   CSelect,
 } from "@coreui/react";
-import { InlineWidget } from "react-calendly";
+// import { InlineWidget } from "react-calendly";
 import Select from "react-select";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
 import { Input } from "reactstrap";
@@ -470,7 +470,7 @@ class AddExpert extends Component {
     return (
       <CRow>
         <CCol xs="12" sm="12">
-          <CCard>
+          <CCard className="expert-card">
             <CCardHeader>
               <CButton onClick={this.handleBack} className="backBtn">
                 <img src={BackArrow} className="mr-2" /> Back
@@ -507,7 +507,7 @@ class AddExpert extends Component {
                 className="form-horizontal"
               >
                 <CFormGroup row className="my-0">
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="first_name">First Name</CLabel>
                       <CInput
@@ -520,7 +520,7 @@ class AddExpert extends Component {
                       {this.errorShow("first_name")}
                     </CFormGroup>
                   </CCol>
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="last_name">Last Name</CLabel>
                       <CInput
@@ -536,7 +536,7 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="email">Email</CLabel>
                       <CInput
@@ -550,7 +550,7 @@ class AddExpert extends Component {
                       {this.errorShow("email")}
                     </CFormGroup>
                   </CCol>
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="contact">Contact</CLabel>
                       <CInput
@@ -566,7 +566,7 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="gender">Gender</CLabel>
                       <Select
@@ -582,7 +582,7 @@ class AddExpert extends Component {
                       {this.errorShow("gender")}
                     </CFormGroup>
                   </CCol>
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="country">Country</CLabel>
                       <Select
@@ -601,7 +601,7 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="designation">Designation</CLabel>
 
@@ -618,7 +618,7 @@ class AddExpert extends Component {
                     </CFormGroup>
                   </CCol>
 
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="expertise">Expertise</CLabel>
 
@@ -638,7 +638,7 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="role">Current Role</CLabel>
 
@@ -655,7 +655,7 @@ class AddExpert extends Component {
                     </CFormGroup>
                   </CCol>
 
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="industry">Current Industry</CLabel>
 
@@ -674,7 +674,7 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="experience">Work Experience</CLabel>
 
@@ -691,7 +691,7 @@ class AddExpert extends Component {
                     </CFormGroup>
                   </CCol>
 
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="fields">Fields</CLabel>
 
@@ -715,7 +715,7 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="service">Service</CLabel>
 
@@ -732,7 +732,7 @@ class AddExpert extends Component {
                     </CFormGroup>
                   </CCol>
 
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="rate">Rate</CLabel>
 
@@ -751,7 +751,7 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="4">
+                  <CCol xs="6">
                     {/* <CFormGroup>
                       <CLabel htmlFor="dateTime">Select Availability</CLabel>
                       <InlineWidget
@@ -774,7 +774,7 @@ class AddExpert extends Component {
                       {this.errorShow("dateTime")}
                     </CFormGroup> */}
                   </CCol>
-                  <CCol xs="4">
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="about">About</CLabel>
                       <CTextarea
@@ -792,22 +792,25 @@ class AddExpert extends Component {
               </CForm>
             </CCardBody>
             <CCardFooter>
-              <CButton
-                type="submit"
-                size="sm"
-                color="primary"
-                onClick={this.onSubmit}
-              >
-                <CIcon name="cil-scrubber" /> Submit
-              </CButton>
-              <CButton
-                type="reset"
-                size="sm"
-                color="danger"
-                onClick={this.resetState}
-              >
-                <CIcon name="cil-ban" /> Reset
-              </CButton>
+              <div className="text-right">
+                <CButton
+                  type="submit"
+                  size="sm"
+                  color="primary"
+                  onClick={this.onSubmit}
+                >
+                  <CIcon name="cil-scrubber" /> Submit
+                </CButton>
+                <CButton
+                  type="reset"
+                  size="sm"
+                  color="danger"
+                  onClick={this.resetState}
+                  className="ml-2"
+                >
+                  <CIcon name="cil-ban" /> Reset
+                </CButton>
+              </div>
             </CCardFooter>
           </CCard>
         </CCol>

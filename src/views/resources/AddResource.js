@@ -14,6 +14,12 @@ import {
   CRow,
   CSelect,
 } from "@coreui/react";
+import Select from "react-select";
+import {
+  optionsFormat,
+  optionsPricing,
+  optionsCategory,
+} from "./ResourcesFieldsData";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
 import ADD from "../../assets/icons/add.svg";
 import CANCEL from "../../assets/icons/cancel.svg";
@@ -28,7 +34,7 @@ class AddResource extends Component {
       name: "",
       format: "",
       pricing: "",
-
+      category: "",
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
@@ -112,6 +118,7 @@ class AddResource extends Component {
       uniqueSellingProposition,
       pros,
       cons,
+      category,
     } = this.state;
 
     if (name === "") {
@@ -161,6 +168,17 @@ class AddResource extends Component {
         errorText: (
           <span className="text-danger">
             <b>Please enter type of pricing</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (category === "") {
+      this.setState({
+        errorType: "category",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter category</b>
           </span>
         ),
       });
@@ -220,6 +238,7 @@ class AddResource extends Component {
       name: "",
       format: "",
       pricing: "",
+      category: "",
       details: [],
       pros: [],
       cons: [],
@@ -304,13 +323,30 @@ class AddResource extends Component {
       });
     }
   };
+  handleChange = (e, type, data) => {
+    if (type === "format") {
+      this.setState({
+        format: data,
+      });
+    }
+    if (type === "pricing") {
+      this.setState({
+        pricing: data,
+      });
+    }
+    if (type === "category") {
+      this.setState({
+        category: data,
+      });
+    }
+  };
   render() {
     const {
       name,
       format,
       pricing,
       uniqueSellingProposition,
-
+      category,
       expertImage,
       plusBit,
       pros,
@@ -321,7 +357,7 @@ class AddResource extends Component {
     return (
       <CRow>
         <CCol xs="12" sm="12">
-          <CCard>
+          <CCard className="expert-card">
             <CCardHeader>
               <CButton onClick={this.handleBack} className="backBtn">
                 <img src={BackArrow} className="mr-2" /> Back
@@ -378,15 +414,15 @@ class AddResource extends Component {
                     <CLabel htmlFor="format">Format</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CSelect
+                    <Select
                       custom
                       name="format"
+                      placeholder="Select Format"
                       id="format"
-                      onChange={this.inputHandler}
-                    >
-                      <option value="select">Select</option>
-                      <option value="remote">Remote</option>
-                    </CSelect>
+                      value={format}
+                      options={optionsFormat}
+                      onChange={(e) => this.handleChange(e, "format")}
+                    ></Select>
                     {this.errorShow("format")}
                   </CCol>
                 </CFormGroup>
@@ -395,16 +431,33 @@ class AddResource extends Component {
                     <CLabel htmlFor="pricing">Pricing</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CSelect
+                    <Select
                       custom
                       name="pricing"
+                      placeholder="Select Price"
                       id="pricing"
-                      onChange={this.inputHandler}
-                    >
-                      <option value="select">Select</option>
-                      <option value="economical">Economical</option>
-                    </CSelect>
+                      value={pricing}
+                      options={optionsPricing}
+                      onChange={(e) => this.handleChange(e, "pricing")}
+                    ></Select>
                     {this.errorShow("pricing")}
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel htmlFor="category">Category</CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <Select
+                      custom
+                      name="category"
+                      placeholder="Select Category"
+                      id="category"
+                      value={category}
+                      options={optionsCategory}
+                      onChange={(e) => this.handleChange(e, "category")}
+                    ></Select>
+                    {this.errorShow("category")}
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -562,22 +615,25 @@ class AddResource extends Component {
               </CForm>
             </CCardBody>
             <CCardFooter>
-              <CButton
-                type="submit"
-                size="sm"
-                color="primary"
-                onClick={this.onSubmit}
-              >
-                <CIcon name="cil-scrubber" /> Submit
-              </CButton>
-              <CButton
-                type="reset"
-                size="sm"
-                color="danger"
-                onClick={this.resetState}
-              >
-                <CIcon name="cil-ban" /> Reset
-              </CButton>
+              <div className="text-right">
+                <CButton
+                  type="submit"
+                  size="sm"
+                  color="primary"
+                  onClick={this.onSubmit}
+                >
+                  <CIcon name="cil-scrubber" /> Submit
+                </CButton>
+                <CButton
+                  type="reset"
+                  size="sm"
+                  color="danger"
+                  onClick={this.resetState}
+                  className="ml-2"
+                >
+                  <CIcon name="cil-ban" /> Reset
+                </CButton>
+              </div>
             </CCardFooter>
           </CCard>
         </CCol>
