@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import DateTimePicker from "react-datetime-picker";
+import BackArrow from "../../assets/icons/left-arrow.svg";
 import {
   CButton,
   CCard,
@@ -40,6 +42,7 @@ class AddExpert extends Component {
       service: "",
       rate: "",
       expertImage: null,
+      selectedDate: new Date(),
     };
   }
   uploadImage = (event) => {
@@ -347,24 +350,34 @@ class AddExpert extends Component {
     this.setState({
       first_name: "",
       last_name: "",
+      email: "",
+      contact: "",
+      gender: "",
+      country: "",
       designation: "",
       expertise: "",
+      experience: "",
+      role: "",
+      industry: "",
       fields: "",
       about: "",
       errorType: "",
       errorText: "",
-      role: "",
-      industry: "",
-      experience: "",
       service: "",
       rate: "",
+
+      selectedDate: new Date(),
     });
   };
   handleBack = (e) => {
     e.preventDefault();
     this.props.history.push("/experts");
   };
-
+  onChange = (date) => {
+    this.setState({
+      selectedDate: date,
+    });
+  };
   render() {
     const {
       first_name,
@@ -380,6 +393,7 @@ class AddExpert extends Component {
       contact,
       service,
       rate,
+      selectedDate,
     } = this.state;
 
     return (
@@ -388,7 +402,7 @@ class AddExpert extends Component {
           <CCard>
             <CCardHeader>
               <CButton onClick={this.handleBack} className="backBtn">
-                <i className="fas fa-arrow-left"></i>Back
+                <img src={BackArrow} className="mr-2" /> Back
               </CButton>
               <div className="update-profile-image">
                 <img
@@ -662,10 +676,20 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="8">
+                  <CCol xs="4">
+                    <CFormGroup>
+                      <CLabel htmlFor="dateTime">Select Date & Time</CLabel>
+                      <DateTimePicker
+                        onChange={this.onChange}
+                        value={selectedDate}
+                        format="dd/MM/yyyy hh:mm a"
+                      />
+                      {this.errorShow("dateTime")}
+                    </CFormGroup>
+                  </CCol>
+                  <CCol xs="4">
                     <CFormGroup>
                       <CLabel htmlFor="about">About</CLabel>
-
                       <CTextarea
                         name="about"
                         id="about"
