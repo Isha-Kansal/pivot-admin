@@ -11,6 +11,12 @@ const {
   FETCH_ONE_USER_FAILED,
   FETCH_ONE_USER_SUCCESS,
   FETCH_ONE_USER_REQUEST,
+  ADD_RESOURCE_REQUEST,
+  ADD_RESOURCE_SUCCESS,
+  ADD_RESOURCE_FAILED,
+  FETCH_RESOURCES_REQUEST,
+  FETCH_RESOURCES_FAILED,
+  FETCH_RESOURCES_SUCCESS,
 } = require("./types");
 
 const initialState = {
@@ -18,6 +24,8 @@ const initialState = {
   usersData: {},
   userStatus: {},
   oneUserData: {},
+  addResourceData: {},
+  resourcesData: {},
 };
 
 const LoginAndNavigationReducer = (state = initialState, action) => {
@@ -50,6 +58,23 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
     case FETCH_USERS_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case FETCH_RESOURCES_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_RESOURCES_SUCCESS: {
+      return {
+        ...state,
+        resourcesData: action.resourcesData || {},
+      };
+    }
+    case FETCH_RESOURCES_FAILED: {
       return {
         ...state,
       };
@@ -88,7 +113,22 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
         ...state,
       };
     }
-
+    case ADD_RESOURCE_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case ADD_RESOURCE_SUCCESS: {
+      return {
+        ...state,
+        addResourceData: action.addResourceData || {},
+      };
+    }
+    case ADD_RESOURCE_FAILED: {
+      return {
+        ...state,
+      };
+    }
     default: {
       return state;
     }

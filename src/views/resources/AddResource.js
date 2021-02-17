@@ -14,7 +14,13 @@ import {
   CRow,
   CInputFile,
 } from "@coreui/react";
+import { connect } from "react-redux";
+
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 import Select from "react-select";
+import { addResource } from "../store/action";
+
 import {
   optionsFormat,
   optionsPricing,
@@ -35,7 +41,7 @@ class AddResource extends Component {
       name: "",
       format: "",
       pricing: "",
-      category: "",
+      category: [],
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
@@ -192,7 +198,7 @@ class AddResource extends Component {
       });
       return;
     }
-    if (category === "") {
+    if (category.length === 0) {
       this.setState({
         errorType: "category",
         errorText: (
@@ -287,6 +293,39 @@ class AddResource extends Component {
       });
       return;
     }
+    this.callApi();
+  };
+
+  callApi = () => {
+    const {
+      resourceImage,
+      name,
+      format,
+      pricing,
+      websiteLink,
+      category,
+      details,
+      pros,
+      cons,
+      uniqueSellingProposition,
+      pace,
+    } = this.state;
+    let obj = {
+      profile_pic: resourceImage,
+      title: name,
+      format,
+      price: pricing,
+      website: websiteLink,
+      category,
+      pros_cons: [...pros, ...cons],
+      info: details,
+      unique_selling_proposition: uniqueSellingProposition,
+      pace,
+    };
+    this.props.addResource("resource/create", obj, (value) => {
+      console.log("849856798497894879", value);
+      this.props.history.push("/resources");
+    });
   };
   resetState = (e) => {
     e.preventDefault();
@@ -294,7 +333,7 @@ class AddResource extends Component {
       name: "",
       format: "",
       pricing: "",
-      category: "",
+      category: [],
       details: [],
       pros: [],
       cons: [],
@@ -382,26 +421,33 @@ class AddResource extends Component {
       });
     }
   };
-  handleChange = (e, type, data) => {
+
+  handleSelect = (data, type) => {
+    console.log("489567894879", data, type);
     this.clearError();
     if (type === "format") {
       this.setState({
-        format: data,
+        format: data.value,
       });
     }
     if (type === "pricing") {
       this.setState({
-        pricing: data,
+        pricing: data.value,
       });
     }
     if (type === "category") {
+      console.log("98638968939689", data, type);
+      let arr = data.map((el) => {
+        return el.value;
+      });
+
       this.setState({
-        category: data,
+        category: arr,
       });
     }
     if (type === "pace") {
       this.setState({
-        pace: data,
+        pace: data.value,
       });
     }
   };
@@ -420,7 +466,7 @@ class AddResource extends Component {
       pace,
       websiteLink,
     } = this.state;
-    console.log("84597949709504", resourceImage);
+    console.log("84597949709504", category);
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -429,29 +475,6 @@ class AddResource extends Component {
               <CButton onClick={this.handleBack} className="backBtn">
                 <img src={BackArrow} className="mr-2" /> Back
               </CButton>
-              {/* <div className="update-profile-image">
-                <img
-                  id="output"
-                  src={expertImage ? expertImage : Avatar}
-                  alt="profile"
-                  className="profile negative-margin"
-                />
-                <div>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    id="f-upload"
-                    name="myImage"
-                    onChange={this.uploadImage}
-                    className="d-none"
-                  />
-                  <label htmlFor="f-upload" class="custom-file-upload">
-                    <div className="camera-btn" onClick={this.uploadImage}>
-                      <img src={CameraIcon} alt="camera" />
-                    </div>
-                  </label>
-                </div>
-              </div> */}
             </CCardHeader>
             <CCardBody>
               <CForm
@@ -501,16 +524,16 @@ class AddResource extends Component {
                       name="format"
                       placeholder="Select Format"
                       id="format"
-                      value={format}
+                      value={format ? { value: format, label: format } : null}
                       options={optionsFormat}
-                      onChange={(e) => this.handleChange(e, "format")}
+                      onChange={(data) => this.handleSelect(data, "format")}
                     ></Select>
                     {this.errorShow("format")}
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel htmlFor="pricing">Pricing</CLabel>
+                    <CLabel htmlFor="pricing">Price</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <Select
@@ -518,9 +541,11 @@ class AddResource extends Component {
                       name="pricing"
                       placeholder="Select Price"
                       id="pricing"
-                      value={pricing}
+                      value={
+                        pricing ? { value: pricing, label: pricing } : null
+                      }
                       options={optionsPricing}
-                      onChange={(e) => this.handleChange(e, "pricing")}
+                      onChange={(data) => this.handleSelect(data, "pricing")}
                     ></Select>
                     {this.errorShow("pricing")}
                   </CCol>
@@ -531,13 +556,14 @@ class AddResource extends Component {
                   </CCol>
                   <CCol xs="12" md="9">
                     <Select
+                      isMulti
                       custom
                       name="category"
                       placeholder="Select Category"
                       id="category"
-                      value={category}
+                      // value={category}
                       options={optionsCategory}
-                      onChange={(e) => this.handleChange(e, "category")}
+                      onChange={(data) => this.handleSelect(data, "category")}
                     ></Select>
                     {this.errorShow("category")}
                   </CCol>
@@ -553,9 +579,9 @@ class AddResource extends Component {
                       name="pace"
                       placeholder="Select Pace"
                       id="pace"
-                      value={pace}
+                      value={pace ? { value: pace, label: pace } : null}
                       options={optionsPace}
-                      onChange={(e) => this.handleChange(e, "pace")}
+                      onChange={(data) => this.handleSelect(data, "pace")}
                     ></Select>
                     {this.errorShow("pace")}
                   </CCol>
@@ -759,4 +785,17 @@ class AddResource extends Component {
   }
 }
 
-export default AddResource;
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addResource,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AddResource)
+);

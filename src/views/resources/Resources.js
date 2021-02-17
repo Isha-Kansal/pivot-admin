@@ -5,6 +5,10 @@ import Pagination from "react-js-pagination";
 import Tooltip from "../../common/toolTip";
 import CommonModal from "../../common/commonModal";
 import { Table } from "reactstrap";
+import { connect } from "react-redux";
+
+import { bindActionCreators } from "redux";
+
 import {
   CCard,
   CCardBody,
@@ -18,16 +22,31 @@ import {
 import resourcesData from "./ResourcesData";
 import EDIT from "../../assets/icons/edit.svg";
 import DELETE from "../../assets/icons/delete.svg";
+import { fetchResources } from "../store/action";
 const Resources = (props) => {
+  const offsetLimit = 10;
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-
+  const [resourcesDetails, setResourcesDetails] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/resources?page=${newPage}`);
+    let limit = 10;
+    props.fetchResources(
+      `resource/all?offset=${newPage}&limit=${limit}&search=${search}`,
+      (value) => {
+        setLoading(false);
+        setResourcesDetails(value.data.resources);
+        setCount(value.data.count);
+
+        setPage(newPage);
+      }
+    );
   };
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
@@ -48,25 +67,44 @@ const Resources = (props) => {
   };
   const handleSearch = (e) => {
     setSearch(e.target.value);
+    setPage(1);
   };
-  const filterRecords = () => {
-    // const search = search.trim().replace(/ +/g, " ");
-    if (!search) return resourcesData;
+  useEffect(() => {
+    callApiToFetchAllResources();
+  }, [search]);
+  const callApiToFetchAllResources = () => {
+    setLoading(true);
 
-    return (
-      resourcesData &&
-      resourcesData.filter((data) => {
-        let isTrue;
-
-        if (data.name) {
-          isTrue = data.name.toLowerCase().includes(search);
-        }
-
-        return isTrue;
-      })
+    let limit = 10;
+    props.fetchResources(
+      `resource/all?offset=${page}&limit=${limit}&search=${search}`,
+      (value) => {
+        console.log("498679497898497", value);
+        setLoading(false);
+        setResourcesDetails(value.data.resources);
+        setCount(value.data.count);
+      }
     );
   };
-  const searchRecords = filterRecords();
+  // const filterRecords = () => {
+  //   // const search = search.trim().replace(/ +/g, " ");
+  //   if (!search) return resourcesData;
+
+  //   return (
+  //     resourcesData &&
+  //     resourcesData.filter((data) => {
+  //       let isTrue;
+
+  //       if (data.name) {
+  //         isTrue = data.name.toLowerCase().includes(search);
+  //       }
+
+  //       return isTrue;
+  //     })
+  //   );
+  // };
+  // const searchRecords = filterRecords();
+  console.log("4987849879849789", resourcesDetails);
   return (
     <CRow>
       <CCol xl={12}>
@@ -98,20 +136,22 @@ const Resources = (props) => {
                   <th className="text-nowrap ">Name</th>
 
                   <th>Format</th>
-                  <th>Pricing</th>
-
+                  <th>Price</th>
+                  <th>Category</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {searchRecords && searchRecords.length === 0 && (
+                {resourcesDetails && resourcesDetails.length === 0 && (
                   <h3 className="text-center no-user-found">
                     No Resources Found!
                   </h3>
                 )}
-                {searchRecords &&
-                  searchRecords.length > 0 &&
-                  searchRecords.map((item, index) => {
+                {resourcesDetails &&
+                  resourcesDetails.length > 0 &&
+                  resourcesDetails.map((item, index) => {
+                    let category =
+                      item && item.category && item.category.join(", ");
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -121,9 +161,10 @@ const Resources = (props) => {
                           })
                         }
                       >
-                        <td>{item.name}</td>
+                        <td>{item.title}</td>
                         <td>{item.format}</td>
-                        <td>{item.pricing}</td>
+                        <td>{item.price}</td>
+                        <td>{category}</td>
                         <td>
                           <button
                             id={`edit-${index}`}
@@ -153,15 +194,15 @@ const Resources = (props) => {
             </Table>
 
             <div className="text-center pagination-input">
-              {resourcesData.length > 10 && (
+              {count > 10 && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"
                   linkClass="page-link"
                   activeClass="active"
                   activePage={page}
-                  itemsCountPerPage={10}
-                  totalItemsCount={resourcesData.length}
+                  itemsCountPerPage={offsetLimit}
+                  totalItemsCount={count}
                   pageRangeDisplayed={5}
                   onChange={pageChange}
                 />
@@ -186,4 +227,17 @@ const Resources = (props) => {
   );
 };
 
-export default withRouter(Resources);
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchResources,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Resources)
+);
