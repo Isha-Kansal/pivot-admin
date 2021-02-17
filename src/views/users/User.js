@@ -15,7 +15,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { titleCase } from "../../common/stringFunction";
 
-import { fetchUsers, fetchOneUser } from "../store/action";
+import { fetchOneUser } from "../store/action";
 const User = (props) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
@@ -195,7 +195,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
-      fetchUsers,
       fetchOneUser,
     },
     dispatch

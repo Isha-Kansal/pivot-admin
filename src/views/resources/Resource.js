@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import CIcon from "@coreui/icons-react";
-
+import { fetchOneResource } from "../store/action";
 import resourcesData from "./ResourcesData";
-
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 const Resource = (props) => {
-  const resource = resourcesData.find(
-    (resource) => resource.id === props && props.match.params.id
-  );
+  const [resource, setResource] = useState({});
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setLoading(true);
+
+    const resource_id = props && props.match.params.id;
+    dispatch(
+      fetchOneResource(`resource/${resource_id}`, (value) => {
+        console.log("89657890570950697", value);
+        setResource(value.data.resource);
+        setLoading(false);
+      })
+    );
+  }, []);
 
   return (
     <CRow>
@@ -22,15 +37,15 @@ const Resource = (props) => {
                   <tr>
                     <td>RID</td>
                     <td>
-                      <strong>{resource.id}</strong>
+                      <strong>{resource._id}</strong>
                     </td>
                   </tr>
 
-                  {resource.name && (
+                  {resource.title && (
                     <tr>
                       <td>Name</td>
                       <td>
-                        <strong>{resource.name}</strong>
+                        <strong>{resource.title}</strong>
                       </td>
                     </tr>
                   )}
@@ -42,11 +57,11 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
-                  {resource.pricing && (
+                  {resource.price && (
                     <tr>
-                      <td>Pricing</td>
+                      <td>Price</td>
                       <td>
-                        <strong>{resource.pricing}</strong>
+                        <strong>{resource.price}</strong>
                       </td>
                     </tr>
                   )}
@@ -58,19 +73,19 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
-                  {resource.pros_and_cons && (
+                  {resource.pros_cons && (
                     <tr>
                       <td>Pros & Cons</td>
                       <td>
-                        <strong>{resource.pros_and_cons}</strong>
+                        <strong>{resource.pros_cons}</strong>
                       </td>
                     </tr>
                   )}
-                  {resource.details && (
+                  {resource.info && (
                     <tr>
                       <td>Details</td>
                       <td>
-                        <strong>{resource.details}</strong>
+                        <strong>{resource.info}</strong>
                       </td>
                     </tr>
                   )}
@@ -84,4 +99,17 @@ const Resource = (props) => {
   );
 };
 
-export default Resource;
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchOneResource,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Resource)
+);

@@ -4,6 +4,7 @@ import {
   USER_STATUS_REQUEST,
   ADD_RESOURCE_REQUEST,
   FETCH_RESOURCES_REQUEST,
+  FETCH_ONE_RESOURCE_REQUEST,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -45,6 +46,14 @@ export const fetchResources = (body, callback) => {
 export const fetchOneUser = (body, callback) => {
   return {
     type: FETCH_USERS_REQUEST,
+
+    payload: body,
+    callback,
+  };
+};
+export const fetchOneResource = (body, callback) => {
+  return {
+    type: FETCH_ONE_RESOURCE_REQUEST,
 
     payload: body,
     callback,

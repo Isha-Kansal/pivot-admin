@@ -18,6 +18,9 @@ import {
   FETCH_RESOURCES_REQUEST,
   FETCH_RESOURCES_FAILED,
   FETCH_RESOURCES_SUCCESS,
+  FETCH_ONE_RESOURCE_REQUEST,
+  FETCH_ONE_RESOURCE_FAILED,
+  FETCH_ONE_RESOURCE_SUCCESS,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -46,6 +49,12 @@ async function callFetchOneUser(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
+
+async function callFetchOneResource(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+
 async function callUserStatus(data) {
   const res = await apiCallPost(data.url, data.payload);
   return res;
@@ -114,6 +123,22 @@ function* fetchOneUser(action) {
   }
 }
 
+function* fetchOneResource(action) {
+  const response = yield call(callFetchOneResource, action);
+  console.log("84697849784780", response);
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: FETCH_ONE_RESOURCE_SUCCESS,
+        oneResourceData: response.data,
+      });
+    } else {
+      yield put({ type: FETCH_ONE_RESOURCE_FAILED });
+    }
+  }
+}
+
 function* userStatus(action) {
   const response = yield call(callUserStatus, action);
 
@@ -153,4 +178,5 @@ export default function* LoginByAdminWatcher() {
   yield takeLatest(USER_STATUS_REQUEST, userStatus);
   yield takeLatest(ADD_RESOURCE_REQUEST, addResource);
   yield takeLatest(FETCH_RESOURCES_REQUEST, fetchResources);
+  yield takeLatest(FETCH_ONE_RESOURCE_REQUEST, fetchOneResource);
 }
