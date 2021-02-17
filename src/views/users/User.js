@@ -116,7 +116,9 @@ const User = (props) => {
                     <tr>
                       <td>Contact</td>
                       <td>
-                        <strong>{user.contact_no.value}</strong>
+                        <strong>
+                          {user.contact_no.value || user.contact_no}
+                        </strong>
                       </td>
                     </tr>
                   )}

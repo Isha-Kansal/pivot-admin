@@ -2,12 +2,21 @@ import {
   LOGIN_BY_ADMIN_REQUEST,
   FETCH_USERS_REQUEST,
   USER_STATUS_REQUEST,
-  FETCH_ONE_USER_REQUEST,
+  ADD_RESOURCE_REQUEST,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
   return {
     type: LOGIN_BY_ADMIN_REQUEST,
+    url,
+    payload: body,
+    callback,
+  };
+};
+
+export const addResource = (url, body, callback) => {
+  return {
+    type: ADD_RESOURCE_REQUEST,
     url,
     payload: body,
     callback,

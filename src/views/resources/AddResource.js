@@ -12,13 +12,14 @@ import {
   CInput,
   CLabel,
   CRow,
-  CSelect,
+  CInputFile,
 } from "@coreui/react";
 import Select from "react-select";
 import {
   optionsFormat,
   optionsPricing,
   optionsCategory,
+  optionsPace,
 } from "./ResourcesFieldsData";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
 import ADD from "../../assets/icons/add.svg";
@@ -38,25 +39,29 @@ class AddResource extends Component {
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
-      expertImage: null,
+      resourceImage: null,
       plusBit: false,
       pros: [],
       cons: [],
       details: [],
+      pace: "",
+      websiteLink: "",
     };
   }
-  // uploadImage = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     var reader = new FileReader();
-  //     reader.onloadend = function () {
-  //       // props.setImage(reader.result);
-  //       this.setState({
-  //         expertImage: reader.result,
-  //       });
-  //     }.bind(this);
-  //     reader.readAsDataURL(event.target.files[0]);
-  //   }
-  // };
+  uploadImage = (event) => {
+    this.clearError();
+    console.log("845897495879", event);
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        // props.setImage(reader.result);
+        this.setState({
+          resourceImage: reader.result,
+        });
+      }.bind(this);
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
   errorShow = (type) => {
     const { errorType, errorText } = this.state;
     return errorType === type ? <p>{errorText}</p> : null;
@@ -119,6 +124,9 @@ class AddResource extends Component {
       pros,
       cons,
       category,
+      pace,
+      websiteLink,
+      resourceImage,
     } = this.state;
 
     if (name === "") {
@@ -150,6 +158,17 @@ class AddResource extends Component {
         });
         return;
       }
+    }
+    if (resourceImage === null) {
+      this.setState({
+        errorType: "file-input",
+        errorText: (
+          <span className="text-danger">
+            <b>Please select an image</b>
+          </span>
+        ),
+      });
+      return;
     }
     if (format === "") {
       this.setState({
@@ -184,6 +203,45 @@ class AddResource extends Component {
       });
       return;
     }
+    if (pace === "") {
+      this.setState({
+        errorType: "pace",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter pace</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (websiteLink === "") {
+      this.setState({
+        errorType: "websiteLink",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter website link</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
+    if (websiteLink !== "") {
+      let filter = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+
+      if (!filter.test(websiteLink)) {
+        this.setState({
+          errorType: "websiteLink",
+          errorText: (
+            <span className="text-danger">
+              <b> Please enter valid website link</b>
+            </span>
+          ),
+        });
+        return;
+      }
+    }
+
     if (pros.length === 0) {
       this.setState({
         errorType: "pros",
@@ -231,8 +289,6 @@ class AddResource extends Component {
     }
   };
   resetState = (e) => {
-    const { name, format } = this.state;
-
     e.preventDefault();
     this.setState({
       name: "",
@@ -242,9 +298,12 @@ class AddResource extends Component {
       details: [],
       pros: [],
       cons: [],
+      resourceImage: null,
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
+      pace: "",
+      websiteLink: "",
     });
   };
   handleBack = (e) => {
@@ -324,6 +383,7 @@ class AddResource extends Component {
     }
   };
   handleChange = (e, type, data) => {
+    this.clearError();
     if (type === "format") {
       this.setState({
         format: data,
@@ -339,6 +399,11 @@ class AddResource extends Component {
         category: data,
       });
     }
+    if (type === "pace") {
+      this.setState({
+        pace: data,
+      });
+    }
   };
   render() {
     const {
@@ -347,13 +412,15 @@ class AddResource extends Component {
       pricing,
       uniqueSellingProposition,
       category,
-      expertImage,
+      resourceImage,
       plusBit,
       pros,
       cons,
       details,
+      pace,
+      websiteLink,
     } = this.state;
-
+    console.log("84597949709504", resourceImage);
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -410,6 +477,21 @@ class AddResource extends Component {
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
+                  <CLabel col md="3" htmlFor="file-input">
+                    Image
+                  </CLabel>
+                  <CCol xs="12" md="9">
+                    <CInputFile
+                      type="file"
+                      accept="image/*"
+                      id="file-input"
+                      name="file-input"
+                      onChange={this.uploadImage}
+                    />
+                    {this.errorShow("file-input")}
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="format">Format</CLabel>
                   </CCol>
@@ -460,6 +542,41 @@ class AddResource extends Component {
                     {this.errorShow("category")}
                   </CCol>
                 </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel htmlFor="pace">Pace</CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <Select
+                      custom
+                      name="pace"
+                      placeholder="Select Pace"
+                      id="pace"
+                      value={pace}
+                      options={optionsPace}
+                      onChange={(e) => this.handleChange(e, "pace")}
+                    ></Select>
+                    {this.errorShow("pace")}
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel htmlFor="websiteLink">Website Link</CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <CInput
+                      id="websiteLink"
+                      name="websiteLink"
+                      placeholder="Website Link"
+                      onChange={this.inputHandler}
+                      value={websiteLink}
+                    />
+                    {this.errorShow("websiteLink")}
+                  </CCol>
+                </CFormGroup>
+
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="prosCons">Pros & Cons</CLabel>
