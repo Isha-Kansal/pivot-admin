@@ -45,6 +45,7 @@ class AddResource extends Component {
 
     this.state = {
       name: "",
+      addPrice: "",
       format: "",
       pricing: "",
       category: [],
@@ -156,6 +157,7 @@ class AddResource extends Component {
       category,
       pace,
       websiteLink,
+      addPrice,
       resourceImage,
     } = this.state;
 
@@ -217,6 +219,17 @@ class AddResource extends Component {
         errorText: (
           <span className="text-danger">
             <b>Please enter type of pricing</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (addPrice === "") {
+      this.setState({
+        errorType: "addPrice",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter price</b>
           </span>
         ),
       });
@@ -501,6 +514,7 @@ class AddResource extends Component {
       details,
       pace,
       websiteLink,
+      addPrice,
       resourceData,
     } = this.state;
     console.log(
@@ -626,6 +640,26 @@ class AddResource extends Component {
                     {this.errorShow("pricing")}
                   </CCol>
                 </CFormGroup>
+
+                {pricing === "Others" && (
+                  <CFormGroup row>
+                    <CCol md="3">
+                      <CLabel htmlFor="addPrice">Add Price</CLabel>
+                    </CCol>
+                    <CCol xs="12" md="9">
+                      <CInput
+                        type="number"
+                        id="addPrice"
+                        name="addPrice"
+                        placeholder="Add Price"
+                        onChange={this.inputHandler}
+                        value={addPrice}
+                      />
+                      {this.errorShow("addPrice")}
+                    </CCol>
+                  </CFormGroup>
+                )}
+
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="category">Category</CLabel>
