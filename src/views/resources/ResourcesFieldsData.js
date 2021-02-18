@@ -14,6 +14,7 @@ export const optionsPricing = [
     value: "Premium (>USD 500 or >INR10,000)",
     label: "Premium (>USD 500 or >INR10,000)",
   },
+  { value: "Others", label: "Others" },
 ];
 
 export const optionsCategory = [
