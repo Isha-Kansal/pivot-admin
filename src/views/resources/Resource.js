@@ -7,6 +7,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
+import Avatar from "../../assets/icons/avatar.png";
 const Resource = (props) => {
   const [resource, setResource] = useState({});
   const [loading, setLoading] = useState(false);
@@ -23,7 +24,28 @@ const Resource = (props) => {
       })
     );
   }, []);
-  let category = resource && resource.category && resource.category.join(", ");
+  console.log("84967894897894897", props && props.saveImage);
+  let category =
+    resource &&
+    resource.category &&
+    resource.category.length > 0 &&
+    resource.category.join(", ");
+
+  let pros =
+    resource &&
+    resource.pros &&
+    resource.pros.length > 0 &&
+    resource.pros.join(", ");
+  let cons =
+    resource &&
+    resource.cons &&
+    resource.cons.length > 0 &&
+    resource.cons.join(", ");
+  let details =
+    resource &&
+    resource.info &&
+    resource.info.length > 0 &&
+    resource.info.join(", ");
   return (
     <CRow>
       <CCol lg={12}>
@@ -49,6 +71,19 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
+                  {resource.profile_pic && (
+                    <tr>
+                      <td>Image</td>
+                      <td>
+                        <img
+                          src={
+                            props && props.saveImage ? props.saveImage : Avatar
+                          }
+                          alt="profile"
+                        />
+                      </td>
+                    </tr>
+                  )}
                   {resource.format && (
                     <tr>
                       <td>Format</td>
@@ -65,6 +100,7 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
+
                   {resource.category && (
                     <tr>
                       <td>Category</td>
@@ -97,20 +133,52 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
-                  {resource.pros_cons && (
+                  {resource.pros && resource.pros.length > 0 && (
                     <tr>
-                      <td>Pros & Cons</td>
+                      <td>Pros</td>
                       <td>
-                        <strong>{resource.pros_cons}</strong>
+                        <strong>{pros}</strong>
                       </td>
+                      {/* {resource.pros.map((item, index) => {
+                        return (
+                          <td>
+                            <strong>{`${index + 1}.  `}</strong>
+                            <strong>{item}</strong>
+                          </td>
+                        );
+                      })} */}
+                    </tr>
+                  )}
+                  {resource.cons && resource.cons.length > 0 && (
+                    <tr>
+                      <td>Cons</td>
+                      <td>
+                        <strong>{cons}</strong>
+                      </td>
+                      {/* {resource.cons.map((item, index) => {
+                        return (
+                          <td>
+                            <strong>{`${index + 1}.  `}</strong>
+                            <strong>{item}</strong>
+                          </td>
+                        );
+                      })} */}
                     </tr>
                   )}
                   {resource.info && (
                     <tr>
                       <td>Details</td>
                       <td>
-                        <strong>{resource.info}</strong>
+                        <strong>{details}</strong>
                       </td>
+                      {/* {resource.info.map((item, index) => {
+                        return (
+                          <td>
+                            <strong>{`${index + 1}.  `}</strong>
+                            <strong>{item}</strong>
+                          </td>
+                        );
+                      })} */}
                     </tr>
                   )}
                 </tbody>
@@ -124,7 +192,9 @@ const Resource = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    saveImage: state.LoginAndNavigationReducer.saveImage,
+  };
 };
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(

@@ -24,6 +24,14 @@ const {
   ADD_RESOURCE_IMAGE_REQUEST,
   ADD_RESOURCE_IMAGE_FAILED,
   ADD_RESOURCE_IMAGE_SUCCESS,
+  SET_IMAGE,
+  DELETE_RESOURCE_REQUEST,
+  DELETE_RESOURCE_SUCCESS,
+  DELETE_RESOURCE_FAILED,
+  EDIT_RESOURCE_REQUEST,
+  EDIT_RESOURCE_FAILED,
+  EDIT_RESOURCE_SUCCESS,
+  SET_RESOURCE_DATA,
 } = require("./types");
 
 const initialState = {
@@ -35,6 +43,10 @@ const initialState = {
   resourcesData: {},
   oneResourceData: {},
   addResourceImage: {},
+  saveImage: "",
+  deleteResourceData: {},
+  editResourceData: {},
+  saveResourceData: {},
 };
 
 const LoginAndNavigationReducer = (state = initialState, action) => {
@@ -170,6 +182,54 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
     case ADD_RESOURCE_IMAGE_FAILED: {
       return {
         ...state,
+      };
+    }
+
+    case DELETE_RESOURCE_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_RESOURCE_SUCCESS: {
+      return {
+        ...state,
+        deleteResourceData: action.deleteResourceData || {},
+      };
+    }
+    case DELETE_RESOURCE_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case EDIT_RESOURCE_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case EDIT_RESOURCE_SUCCESS: {
+      return {
+        ...state,
+        editResourceData: action.editResourceData || {},
+      };
+    }
+    case EDIT_RESOURCE_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case SET_IMAGE: {
+      return {
+        ...state,
+        saveImage: action.payload || "",
+      };
+    }
+
+    case SET_RESOURCE_DATA: {
+      return {
+        ...state,
+        saveResourceData: action.saveResourceData || {},
       };
     }
 

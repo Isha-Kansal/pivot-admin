@@ -24,6 +24,12 @@ import {
   ADD_RESOURCE_IMAGE_REQUEST,
   ADD_RESOURCE_IMAGE_FAILED,
   ADD_RESOURCE_IMAGE_SUCCESS,
+  DELETE_RESOURCE_REQUEST,
+  DELETE_RESOURCE_SUCCESS,
+  DELETE_RESOURCE_FAILED,
+  EDIT_RESOURCE_REQUEST,
+  EDIT_RESOURCE_FAILED,
+  EDIT_RESOURCE_SUCCESS,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -38,6 +44,10 @@ async function callAddResource(data) {
   const res = await apiCallPost(data.url, data.payload);
   return res;
 }
+async function callEditResource(data) {
+  const res = await apiCallPost(data.url, data.payload);
+  return res;
+}
 
 async function callAddResourceImage(data) {
   const res = await apiCallPost(data.url, data.payload);
@@ -45,6 +55,11 @@ async function callAddResourceImage(data) {
 }
 
 async function callFetchUsers(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+
+async function callDeleteResource(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
@@ -178,6 +193,21 @@ function* addResource(action) {
     }
   }
 }
+function* editResource(action) {
+  const response = yield call(callEditResource, action);
+  console.log("u597949656785677894897u8", response);
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: EDIT_RESOURCE_SUCCESS,
+        editResourceData: response.data.data,
+      });
+    } else {
+      yield put({ type: EDIT_RESOURCE_FAILED });
+    }
+  }
+}
 
 function* addResourceImage(action) {
   const response = yield call(callAddResourceImage, action);
@@ -195,6 +225,22 @@ function* addResourceImage(action) {
   // }
 }
 
+function* deleteResource(action) {
+  const response = yield call(callDeleteResource, action);
+  console.log("deleteResourcedeleteResource", response);
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: DELETE_RESOURCE_SUCCESS,
+        deleteResourceData: response.data,
+      });
+    } else {
+      yield put({ type: DELETE_RESOURCE_FAILED });
+    }
+  }
+}
+
 export default function* LoginByAdminWatcher() {
   yield takeLatest(LOGIN_BY_ADMIN_REQUEST, loginByAdmin);
   yield takeLatest(FETCH_USERS_REQUEST, fetchUsers);
@@ -205,4 +251,6 @@ export default function* LoginByAdminWatcher() {
   yield takeLatest(FETCH_ONE_RESOURCE_REQUEST, fetchOneResource);
 
   yield takeLatest(ADD_RESOURCE_IMAGE_REQUEST, addResourceImage);
+  yield takeLatest(DELETE_RESOURCE_REQUEST, deleteResource);
+  yield takeLatest(EDIT_RESOURCE_REQUEST, editResource);
 }

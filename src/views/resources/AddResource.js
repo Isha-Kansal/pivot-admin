@@ -15,11 +15,11 @@ import {
   CInputFile,
 } from "@coreui/react";
 import { connect } from "react-redux";
-
+import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import Select from "react-select";
-import { addResource, addResourceImage } from "../store/action";
+import { addResource, addResourceImage, setImage } from "../store/action";
 
 import {
   optionsFormat,
@@ -65,6 +65,7 @@ class AddResource extends Component {
           resourceImage: reader.result,
         });
       }.bind(this);
+      this.props.setImage(reader.result);
       reader.readAsDataURL(event.target.files[0]);
     }
   };
@@ -86,10 +87,11 @@ class AddResource extends Component {
     if (type === "prosAdd") {
       let prosToUpdate = this.state.pros[index];
       const newArray = [...this.state.pros];
-      prosToUpdate = {
-        ...prosToUpdate,
-        value: e.target.value,
-      };
+      // prosToUpdate = {
+      //   ...prosToUpdate,
+      //   value: e.target.value,
+      // };
+      prosToUpdate = e.target.value;
       newArray[index] = prosToUpdate;
 
       this.clearError();
@@ -98,10 +100,11 @@ class AddResource extends Component {
     if (type === "consAdd") {
       let consToUpdate = this.state.cons[index];
       const newArray = [...this.state.cons];
-      consToUpdate = {
-        ...consToUpdate,
-        value: e.target.value,
-      };
+      // consToUpdate = {
+      //   ...consToUpdate,
+      //   value: e.target.value,
+      // };
+      consToUpdate = e.target.value;
       newArray[index] = consToUpdate;
 
       this.clearError();
@@ -110,10 +113,11 @@ class AddResource extends Component {
     if (type === "detailsAdd") {
       let detailsToUpdate = this.state.details[index];
       const newArray = [...this.state.details];
-      detailsToUpdate = {
-        ...detailsToUpdate,
-        value: e.target.value,
-      };
+      // detailsToUpdate = {
+      //   ...detailsToUpdate,
+      //   value: e.target.value,
+      // };
+      detailsToUpdate = e.target.value;
       newArray[index] = detailsToUpdate;
 
       this.clearError();
@@ -302,7 +306,6 @@ class AddResource extends Component {
       profile_pic: resourceImage,
     };
     this.props.addResourceImage("resource/create", obj, (value) => {
-      console.log("849856798497894879", value);
       // this.callApiAddResource();
     });
   };
@@ -325,15 +328,19 @@ class AddResource extends Component {
       price: pricing,
       website: websiteLink,
       category,
-      pros_cons: [...pros, ...cons],
+      pros,
+      cons,
       info: details,
       unique_selling_proposition: uniqueSellingProposition,
       pace,
     };
-    debugger;
+
     this.props.addResource("resource/create", obj, (value) => {
       console.log("849856798497894879", value);
-      this.props.history.push("/resources");
+      if (value.status === 200) {
+        NotificationManager.success("Resource added successfully", "", 1000);
+        this.props.history.push("/resources");
+      }
     });
   };
   resetState = (e) => {
@@ -475,7 +482,11 @@ class AddResource extends Component {
       pace,
       websiteLink,
     } = this.state;
-    console.log("84597949709504", category);
+    console.log(
+      "45898497894474748798",
+      this.props && this.props.saveResourceData
+    );
+    console.log("pricingpricingpricingpricingpricing", pricing);
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -617,12 +628,12 @@ class AddResource extends Component {
                     <CLabel htmlFor="prosCons">Pros & Cons</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <div class="d-flex justify-content-between add-list">
-                      <CLabel htmlFor="pros">Pros</CLabel>
-                      <button
-                        className="icon"
-                        onClick={(e) => this.handlePlusButton(e, "prosAdd")}
-                      >
+                    <div
+                      onClick={(e) => this.handlePlusButton(e, "prosAdd")}
+                      class="d-flex justify-content-between add-list"
+                    >
+                      <CLabel htmlFor="pros">Add Pros</CLabel>
+                      <button className="icon">
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
@@ -657,12 +668,12 @@ class AddResource extends Component {
                       })}
 
                     {/* {this.errorShow("fields")} */}
-                    <div class="d-flex justify-content-between add-list">
-                      <CLabel htmlFor="cons">Cons</CLabel>
-                      <button
-                        className="icon"
-                        onClick={(e) => this.handlePlusButton(e, "consAdd")}
-                      >
+                    <div
+                      onClick={(e) => this.handlePlusButton(e, "consAdd")}
+                      class="d-flex justify-content-between add-list"
+                    >
+                      <CLabel htmlFor="cons">Add Cons</CLabel>
+                      <button className="icon">
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
@@ -703,12 +714,12 @@ class AddResource extends Component {
                     <CLabel htmlFor="details">Details</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <div class="d-flex justify-content-between add-list">
-                      <CLabel htmlFor="addDetails">Add</CLabel>
-                      <button
-                        className="icon"
-                        onClick={(e) => this.handlePlusButton(e, "detailsAdd")}
-                      >
+                    <div
+                      class="d-flex justify-content-between add-list"
+                      onClick={(e) => this.handlePlusButton(e, "detailsAdd")}
+                    >
+                      <CLabel htmlFor="addDetails">Add Details</CLabel>
+                      <button className="icon">
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
@@ -795,13 +806,16 @@ class AddResource extends Component {
 }
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    saveResourceData: state.LoginAndNavigationReducer.saveResourceData,
+  };
 };
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       addResource,
       addResourceImage,
+      setImage,
     },
     dispatch
   );

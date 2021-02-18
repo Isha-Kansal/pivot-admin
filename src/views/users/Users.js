@@ -246,7 +246,7 @@ const Users = (props) => {
                 <CommonModal
                   isOpen={modalOpen}
                   toggle={(e) => onBlock(e, type, idUser)}
-                  blockUser={(e) => blockUser(e, idUser)}
+                  block_delete={(e) => blockUser(e, idUser)}
                   id={idUser}
                   type={type}
                 />

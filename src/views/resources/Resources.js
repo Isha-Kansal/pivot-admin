@@ -6,7 +6,7 @@ import Tooltip from "../../common/toolTip";
 import CommonModal from "../../common/commonModal";
 import { Table } from "reactstrap";
 import { connect } from "react-redux";
-
+import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
 
 import {
@@ -22,7 +22,12 @@ import {
 import resourcesData from "./ResourcesData";
 import EDIT from "../../assets/icons/edit.svg";
 import DELETE from "../../assets/icons/delete.svg";
-import { fetchResources } from "../store/action";
+import {
+  fetchResources,
+  deleteResource,
+  editResource,
+  setResourceData,
+} from "../store/action";
 const Resources = (props) => {
   const offsetLimit = 10;
   const history = useHistory();
@@ -33,6 +38,7 @@ const Resources = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [resourcesDetails, setResourcesDetails] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [idResource, setIdResource] = useState("");
   const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/resources?page=${newPage}`);
@@ -54,16 +60,61 @@ const Resources = (props) => {
   const addResource = () => {
     props.history.push("/addResource");
   };
-  const editResource = (e) => {
+  const editResource = (e, item) => {
+    setIdResource(item._id);
     e.preventDefault();
     e.stopPropagation();
-    props.history.push("/editResource");
+    console.log("856789956890589", item);
+    props.setResourceData(item);
+    // const {
+    //   title,
+    //   format,
+    //   price,
+    //   website,
+    //   category,
+    //   pros,
+    //   cons,
+    //   info,
+    //   unique_selling_proposition,
+    //   pace,
+    //   _id,
+    // } = item;
+    // let obj = {
+    //   id: _id,
+    //   title,
+    //   format,
+    //   price,
+    //   website,
+    //   category,
+    //   pros,
+    //   cons,
+    //   info,
+    //   unique_selling_proposition,
+    //   pace,
+    // };
+    // props.editResource("resource/update", obj, (value) => {
+    //   console.log("48567476745valuevaluevaluevalue", value);
+    // });
+    props.history.push({
+      state: item,
+      pathname: "/editResource",
+    });
   };
-  const deleteResource = (e, item) => {
+  const onDelete = (e, id) => {
+    setIdResource(id);
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
-    // alert("deleted");
+    console.log("89356893967893", id);
+  };
+  const deleteResource = (id) => {
+    if (idResource === id) setModalOpen(false);
+    props.deleteResource(`resource/delete/${id}`, (value) => {
+      if (value.status === 200) {
+        NotificationManager.success("Resource deleted successfully", "", 1000);
+        callApiToFetchAllResources();
+      }
+    });
   };
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -79,10 +130,17 @@ const Resources = (props) => {
     props.fetchResources(
       `resource/all?offset=${page}&limit=${limit}&search=${search}`,
       (value) => {
-        console.log("498679497898497", value);
-        setLoading(false);
-        setResourcesDetails(value.data.resources);
-        setCount(value.data.count);
+        if (value.status === 200) {
+          // NotificationManager.success(
+          //   "Resources fetched successfully",
+          //   "",
+          //   1000
+          // );
+          console.log("498679497898497", value);
+          setLoading(false);
+          setResourcesDetails(value.data.resources);
+          setCount(value.data.count);
+        }
       }
     );
   };
@@ -133,8 +191,12 @@ const Resources = (props) => {
                 {resourcesDetails &&
                   resourcesDetails.length > 0 &&
                   resourcesDetails.map((item, index) => {
+                    console.log("758738567838678", item);
                     let category =
-                      item && item.category && item.category.join(", ");
+                      item &&
+                      item.category &&
+                      item.category.length > 0 &&
+                      item.category.join(", ");
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -152,7 +214,7 @@ const Resources = (props) => {
                           <button
                             id={`edit-${index}`}
                             className="icon"
-                            onClick={editResource}
+                            onClick={(e) => editResource(e, item)}
                           >
                             <img src={EDIT} className="ml-3" />
                           </button>
@@ -161,7 +223,7 @@ const Resources = (props) => {
                           </Tooltip>
                           <button
                             className="icon"
-                            onClick={(e) => deleteResource(e, item.id)}
+                            onClick={(e) => onDelete(e, item._id)}
                             id={`delete-${index}`}
                           >
                             <img src={DELETE} className="ml-3" />
@@ -196,10 +258,10 @@ const Resources = (props) => {
               {modalOpen && (
                 <CommonModal
                   isOpen={modalOpen}
-                  toggle={(e) => deleteResource(e)}
-                  // blockUser={(e) => blockUser(e, idUser)}
-                  // id={idUser}
-                  // type={type}
+                  toggle={(e) => onDelete(e)}
+                  block_delete={(e) => deleteResource(e, idResource)}
+                  id={idResource}
+                  type="deleteResource"
                 />
               )}
             </div>
@@ -217,6 +279,9 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchResources,
+      deleteResource,
+      editResource,
+      setResourceData,
     },
     dispatch
   );
