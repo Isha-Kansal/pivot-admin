@@ -5,6 +5,7 @@ import {
   ADD_RESOURCE_REQUEST,
   FETCH_RESOURCES_REQUEST,
   FETCH_ONE_RESOURCE_REQUEST,
+  ADD_RESOURCE_IMAGE_REQUEST,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -19,6 +20,15 @@ export const loginByAdmin = (url, body, callback) => {
 export const addResource = (url, body, callback) => {
   return {
     type: ADD_RESOURCE_REQUEST,
+    url,
+    payload: body,
+    callback,
+  };
+};
+
+export const addResourceImage = (url, body, callback) => {
+  return {
+    type: ADD_RESOURCE_IMAGE_REQUEST,
     url,
     payload: body,
     callback,

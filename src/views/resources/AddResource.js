@@ -19,7 +19,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import Select from "react-select";
-import { addResource } from "../store/action";
+import { addResource, addResourceImage } from "../store/action";
 
 import {
   optionsFormat,
@@ -165,17 +165,17 @@ class AddResource extends Component {
         return;
       }
     }
-    if (resourceImage === null) {
-      this.setState({
-        errorType: "file-input",
-        errorText: (
-          <span className="text-danger">
-            <b>Please select an image</b>
-          </span>
-        ),
-      });
-      return;
-    }
+    // if (resourceImage === null) {
+    //   this.setState({
+    //     errorType: "file-input",
+    //     errorText: (
+    //       <span className="text-danger">
+    //         <b>Please select an image</b>
+    //       </span>
+    //     ),
+    //   });
+    //   return;
+    // }
     if (format === "") {
       this.setState({
         errorType: "format",
@@ -293,12 +293,21 @@ class AddResource extends Component {
       });
       return;
     }
-    this.callApi();
+    // this.callApiAddImage()
+    this.callApiAddResource();
   };
-
-  callApi = () => {
+  callApiAddImage = () => {
+    const { resourceImage } = this.state;
+    let obj = {
+      profile_pic: resourceImage,
+    };
+    this.props.addResourceImage("resource/create", obj, (value) => {
+      console.log("849856798497894879", value);
+      // this.callApiAddResource();
+    });
+  };
+  callApiAddResource = () => {
     const {
-      resourceImage,
       name,
       format,
       pricing,
@@ -311,7 +320,6 @@ class AddResource extends Component {
       pace,
     } = this.state;
     let obj = {
-      profile_pic: resourceImage,
       title: name,
       format,
       price: pricing,
@@ -322,6 +330,7 @@ class AddResource extends Component {
       unique_selling_proposition: uniqueSellingProposition,
       pace,
     };
+    debugger;
     this.props.addResource("resource/create", obj, (value) => {
       console.log("849856798497894879", value);
       this.props.history.push("/resources");
@@ -792,6 +801,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       addResource,
+      addResourceImage,
     },
     dispatch
   );

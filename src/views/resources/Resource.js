@@ -23,7 +23,7 @@ const Resource = (props) => {
       })
     );
   }, []);
-
+  let category = resource && resource.category && resource.category.join(", ");
   return (
     <CRow>
       <CCol lg={12}>
@@ -62,6 +62,30 @@ const Resource = (props) => {
                       <td>Price</td>
                       <td>
                         <strong>{resource.price}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {resource.category && (
+                    <tr>
+                      <td>Category</td>
+                      <td>
+                        <strong>{category}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {resource.pace && (
+                    <tr>
+                      <td>Pace</td>
+                      <td>
+                        <strong>{resource.pace}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {resource.website && (
+                    <tr>
+                      <td>Website Link</td>
+                      <td>
+                        <strong>{resource.website}</strong>
                       </td>
                     </tr>
                   )}

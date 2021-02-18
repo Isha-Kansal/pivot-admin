@@ -21,6 +21,9 @@ import {
   FETCH_ONE_RESOURCE_REQUEST,
   FETCH_ONE_RESOURCE_FAILED,
   FETCH_ONE_RESOURCE_SUCCESS,
+  ADD_RESOURCE_IMAGE_REQUEST,
+  ADD_RESOURCE_IMAGE_FAILED,
+  ADD_RESOURCE_IMAGE_SUCCESS,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -32,6 +35,11 @@ async function callLoginByAdmin(data) {
 }
 
 async function callAddResource(data) {
+  const res = await apiCallPost(data.url, data.payload);
+  return res;
+}
+
+async function callAddResourceImage(data) {
   const res = await apiCallPost(data.url, data.payload);
   return res;
 }
@@ -171,6 +179,22 @@ function* addResource(action) {
   }
 }
 
+function* addResourceImage(action) {
+  const response = yield call(callAddResourceImage, action);
+  console.log("responseresponseresponseresponse", response);
+  // if (response && response.data) {
+  //   action.callback(response.data);
+  //   if (response.status === 200) {
+  //     yield put({
+  //       type: ADD_RESOURCE_IMAGE_SUCCESS,
+  //       addResourceImage: response.data,
+  //     });
+  //   } else {
+  //     yield put({ type: ADD_RESOURCE_IMAGE_FAILED });
+  //   }
+  // }
+}
+
 export default function* LoginByAdminWatcher() {
   yield takeLatest(LOGIN_BY_ADMIN_REQUEST, loginByAdmin);
   yield takeLatest(FETCH_USERS_REQUEST, fetchUsers);
@@ -179,4 +203,6 @@ export default function* LoginByAdminWatcher() {
   yield takeLatest(ADD_RESOURCE_REQUEST, addResource);
   yield takeLatest(FETCH_RESOURCES_REQUEST, fetchResources);
   yield takeLatest(FETCH_ONE_RESOURCE_REQUEST, fetchOneResource);
+
+  yield takeLatest(ADD_RESOURCE_IMAGE_REQUEST, addResourceImage);
 }

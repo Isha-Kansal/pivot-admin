@@ -21,6 +21,9 @@ const {
   FETCH_ONE_RESOURCE_REQUEST,
   FETCH_ONE_RESOURCE_FAILED,
   FETCH_ONE_RESOURCE_SUCCESS,
+  ADD_RESOURCE_IMAGE_REQUEST,
+  ADD_RESOURCE_IMAGE_FAILED,
+  ADD_RESOURCE_IMAGE_SUCCESS,
 } = require("./types");
 
 const initialState = {
@@ -31,6 +34,7 @@ const initialState = {
   addResourceData: {},
   resourcesData: {},
   oneResourceData: {},
+  addResourceImage: {},
 };
 
 const LoginAndNavigationReducer = (state = initialState, action) => {
@@ -151,6 +155,24 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
         ...state,
       };
     }
+
+    case ADD_RESOURCE_IMAGE_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case ADD_RESOURCE_IMAGE_SUCCESS: {
+      return {
+        ...state,
+        addResourceImage: action.addResourceImage || {},
+      };
+    }
+    case ADD_RESOURCE_IMAGE_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
     default: {
       return state;
     }

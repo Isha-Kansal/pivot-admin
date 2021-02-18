@@ -86,24 +86,7 @@ const Resources = (props) => {
       }
     );
   };
-  // const filterRecords = () => {
-  //   // const search = search.trim().replace(/ +/g, " ");
-  //   if (!search) return resourcesData;
 
-  //   return (
-  //     resourcesData &&
-  //     resourcesData.filter((data) => {
-  //       let isTrue;
-
-  //       if (data.name) {
-  //         isTrue = data.name.toLowerCase().includes(search);
-  //       }
-
-  //       return isTrue;
-  //     })
-  //   );
-  // };
-  // const searchRecords = filterRecords();
   console.log("4987849879849789", resourcesDetails);
   return (
     <CRow>
