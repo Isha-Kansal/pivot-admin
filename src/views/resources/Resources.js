@@ -97,7 +97,7 @@ const Resources = (props) => {
     // });
     props.history.push({
       state: item,
-      pathname: "/editResource",
+      pathname: `/editResource/${item._id}`,
     });
   };
   const onDelete = (e, id) => {

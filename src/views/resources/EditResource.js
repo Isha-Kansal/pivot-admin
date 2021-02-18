@@ -12,44 +12,81 @@ import {
   CInput,
   CLabel,
   CRow,
-  CSelect,
+  CInputFile,
 } from "@coreui/react";
+import { connect } from "react-redux";
+import { NotificationManager } from "react-notifications";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
+import Select from "react-select";
+import {
+  addResource,
+  addResourceImage,
+  setImage,
+  fetchOneResource,
+} from "../store/action";
+
+import {
+  optionsFormat,
+  optionsPricing,
+  optionsCategory,
+  optionsPace,
+} from "./ResourcesFieldsData";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
 import ADD from "../../assets/icons/add.svg";
 import CANCEL from "../../assets/icons/cancel.svg";
 import { Input } from "reactstrap";
 import CIcon from "@coreui/icons-react";
 import Avatar from "../../assets/icons/avatar.png";
+import BackArrow from "../../assets/icons/left-arrow.svg";
 class EditResource extends Component {
   constructor(props) {
     super();
+
     this.state = {
       name: "",
       format: "",
       pricing: "",
-
+      category: [],
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
-      expertImage: null,
+      resourceImage: null,
       plusBit: false,
       pros: [],
       cons: [],
       details: [],
+      pace: "",
+      websiteLink: "",
+      resourceData: {},
     };
   }
-  // uploadImage = (event) => {
-  //   if (event.target.files && event.target.files[0]) {
-  //     var reader = new FileReader();
-  //     reader.onloadend = function () {
-  //       // props.setImage(reader.result);
-  //       this.setState({
-  //         expertImage: reader.result,
-  //       });
-  //     }.bind(this);
-  //     reader.readAsDataURL(event.target.files[0]);
-  //   }
-  // };
+  // componentDidMount() {
+  //   const resource_id = this.props && this.props.match.params.id;
+  //   this.props.fetchOneResource(`resource/${resource_id}`, (value) => {
+  //     console.log("8965789057dfhgfh0950697", value);
+  //     this.setState({
+  //       resourceData: value.data.resource,
+  //     });
+  //     // setResource(value.data.resource);
+  //     // setLoading(false);
+  //   });
+  // }
+  uploadImage = (event) => {
+    this.clearError();
+    console.log("845897495879", event);
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+      reader.onloadend = function () {
+        // props.setImage(reader.result);
+        this.setState({
+          resourceImage: reader.result,
+        });
+      }.bind(this);
+      this.props.setImage(reader.result);
+      reader.readAsDataURL(event.target.files[0]);
+    }
+  };
   errorShow = (type) => {
     const { errorType, errorText } = this.state;
     return errorType === type ? <p>{errorText}</p> : null;
@@ -68,10 +105,11 @@ class EditResource extends Component {
     if (type === "prosAdd") {
       let prosToUpdate = this.state.pros[index];
       const newArray = [...this.state.pros];
-      prosToUpdate = {
-        ...prosToUpdate,
-        value: e.target.value,
-      };
+      // prosToUpdate = {
+      //   ...prosToUpdate,
+      //   value: e.target.value,
+      // };
+      prosToUpdate = e.target.value;
       newArray[index] = prosToUpdate;
 
       this.clearError();
@@ -80,10 +118,11 @@ class EditResource extends Component {
     if (type === "consAdd") {
       let consToUpdate = this.state.cons[index];
       const newArray = [...this.state.cons];
-      consToUpdate = {
-        ...consToUpdate,
-        value: e.target.value,
-      };
+      // consToUpdate = {
+      //   ...consToUpdate,
+      //   value: e.target.value,
+      // };
+      consToUpdate = e.target.value;
       newArray[index] = consToUpdate;
 
       this.clearError();
@@ -92,10 +131,11 @@ class EditResource extends Component {
     if (type === "detailsAdd") {
       let detailsToUpdate = this.state.details[index];
       const newArray = [...this.state.details];
-      detailsToUpdate = {
-        ...detailsToUpdate,
-        value: e.target.value,
-      };
+      // detailsToUpdate = {
+      //   ...detailsToUpdate,
+      //   value: e.target.value,
+      // };
+      detailsToUpdate = e.target.value;
       newArray[index] = detailsToUpdate;
 
       this.clearError();
@@ -111,6 +151,10 @@ class EditResource extends Component {
       uniqueSellingProposition,
       pros,
       cons,
+      category,
+      pace,
+      websiteLink,
+      resourceImage,
     } = this.state;
 
     if (name === "") {
@@ -143,6 +187,17 @@ class EditResource extends Component {
         return;
       }
     }
+    // if (resourceImage === null) {
+    //   this.setState({
+    //     errorType: "file-input",
+    //     errorText: (
+    //       <span className="text-danger">
+    //         <b>Please select an image</b>
+    //       </span>
+    //     ),
+    //   });
+    //   return;
+    // }
     if (format === "") {
       this.setState({
         errorType: "format",
@@ -165,6 +220,56 @@ class EditResource extends Component {
       });
       return;
     }
+    if (category.length === 0) {
+      this.setState({
+        errorType: "category",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter category</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (pace === "") {
+      this.setState({
+        errorType: "pace",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter pace</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (websiteLink === "") {
+      this.setState({
+        errorType: "websiteLink",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter website link</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
+    if (websiteLink !== "") {
+      let filter = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+
+      if (!filter.test(websiteLink)) {
+        this.setState({
+          errorType: "websiteLink",
+          errorText: (
+            <span className="text-danger">
+              <b> Please enter valid website link</b>
+            </span>
+          ),
+        });
+        return;
+      }
+    }
+
     if (pros.length === 0) {
       this.setState({
         errorType: "pros",
@@ -210,21 +315,68 @@ class EditResource extends Component {
       });
       return;
     }
+    // this.callApiAddImage()
+    this.callApiAddResource();
+  };
+  callApiAddImage = () => {
+    const { resourceImage } = this.state;
+    let obj = {
+      profile_pic: resourceImage,
+    };
+    this.props.addResourceImage("resource/create", obj, (value) => {
+      // this.callApiAddResource();
+    });
+  };
+  callApiAddResource = () => {
+    const {
+      name,
+      format,
+      pricing,
+      websiteLink,
+      category,
+      details,
+      pros,
+      cons,
+      uniqueSellingProposition,
+      pace,
+    } = this.state;
+    let obj = {
+      title: name,
+      format,
+      price: pricing,
+      website: websiteLink,
+      category,
+      pros,
+      cons,
+      info: details,
+      unique_selling_proposition: uniqueSellingProposition,
+      pace,
+    };
+
+    this.props.addResource("resource/create", obj, (value) => {
+      console.log("849856798497894879", value);
+      if (value.status === 200) {
+        NotificationManager.success("Resource added successfully", "", 1000);
+        this.props.history.push("/resources");
+      }
+    });
   };
   resetState = (e) => {
-    const { name, format } = this.state;
-
     e.preventDefault();
     this.setState({
       name: "",
       format: "",
       pricing: "",
+      category: [],
       details: [],
       pros: [],
       cons: [],
+      resourceImage: null,
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
+      pace: "",
+      websiteLink: "",
     });
   };
   handleBack = (e) => {
@@ -303,51 +455,65 @@ class EditResource extends Component {
       });
     }
   };
+
+  handleSelect = (data, type) => {
+    console.log("489567894879", data, type);
+    this.clearError();
+    if (type === "format") {
+      this.setState({
+        format: data.value,
+      });
+    }
+    if (type === "pricing") {
+      this.setState({
+        pricing: data.value,
+      });
+    }
+    if (type === "category") {
+      console.log("98638968939689", data, type);
+      let arr = data.map((el) => {
+        return el.value;
+      });
+
+      this.setState({
+        category: arr,
+      });
+    }
+    if (type === "pace") {
+      this.setState({
+        pace: data.value,
+      });
+    }
+  };
   render() {
     const {
       name,
       format,
       pricing,
       uniqueSellingProposition,
-
-      expertImage,
+      category,
+      resourceImage,
       plusBit,
       pros,
       cons,
       details,
+      pace,
+      websiteLink,
+      resourceData,
     } = this.state;
-
+    console.log(
+      "45898497894474748798",
+      this.props && this.props.saveResourceData
+    );
+    console.log("pricingpricingpricingpricingpricing", pricing);
     return (
       <CRow>
         <CCol xs="12" sm="12">
-          <CCard>
+          <CCard className="expert-card">
             <CCardHeader>
               <CButton onClick={this.handleBack} className="backBtn">
-                <i className="fas fa-arrow-left"></i>Back
+                <img src={BackArrow} className="mr-2" /> Back
               </CButton>
-              {/* <div className="update-profile-image">
-                <img
-                  id="output"
-                  src={expertImage ? expertImage : Avatar}
-                  alt="profile"
-                  className="profile negative-margin"
-                />
-                <div>
-                  <Input
-                    type="file"
-                    accept="image/*"
-                    id="f-upload"
-                    name="myImage"
-                    onChange={this.uploadImage}
-                    className="d-none"
-                  />
-                  <label htmlFor="f-upload" class="custom-file-upload">
-                    <div className="camera-btn" onClick={this.uploadImage}>
-                      <img src={CameraIcon} alt="camera" />
-                    </div>
-                  </label>
-                </div>
-              </div> */}
             </CCardHeader>
             <CCardBody>
               <CForm
@@ -373,50 +539,120 @@ class EditResource extends Component {
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
+                  <CLabel col md="3" htmlFor="file-input">
+                    Image
+                  </CLabel>
+                  <CCol xs="12" md="9">
+                    <CInputFile
+                      type="file"
+                      accept="image/*"
+                      id="file-input"
+                      name="file-input"
+                      onChange={this.uploadImage}
+                    />
+                    {this.errorShow("file-input")}
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="format">Format</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CSelect
+                    <Select
                       custom
                       name="format"
+                      placeholder="Select Format"
                       id="format"
-                      onChange={this.inputHandler}
-                    >
-                      <option value="select">Select</option>
-                      <option value="remote">Remote</option>
-                    </CSelect>
+                      value={format ? { value: format, label: format } : null}
+                      options={optionsFormat}
+                      onChange={(data) => this.handleSelect(data, "format")}
+                    ></Select>
                     {this.errorShow("format")}
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel htmlFor="pricing">Pricing</CLabel>
+                    <CLabel htmlFor="pricing">Price</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CSelect
+                    <Select
                       custom
                       name="pricing"
+                      placeholder="Select Price"
                       id="pricing"
-                      onChange={this.inputHandler}
-                    >
-                      <option value="select">Select</option>
-                      <option value="economical">Economical</option>
-                    </CSelect>
+                      value={
+                        pricing ? { value: pricing, label: pricing } : null
+                      }
+                      options={optionsPricing}
+                      onChange={(data) => this.handleSelect(data, "pricing")}
+                    ></Select>
                     {this.errorShow("pricing")}
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
                   <CCol md="3">
+                    <CLabel htmlFor="category">Category</CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <Select
+                      isMulti
+                      custom
+                      name="category"
+                      placeholder="Select Category"
+                      id="category"
+                      // value={category}
+                      options={optionsCategory}
+                      onChange={(data) => this.handleSelect(data, "category")}
+                    ></Select>
+                    {this.errorShow("category")}
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel htmlFor="pace">Pace</CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <Select
+                      custom
+                      name="pace"
+                      placeholder="Select Pace"
+                      id="pace"
+                      value={pace ? { value: pace, label: pace } : null}
+                      options={optionsPace}
+                      onChange={(data) => this.handleSelect(data, "pace")}
+                    ></Select>
+                    {this.errorShow("pace")}
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel htmlFor="websiteLink">Website Link</CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <CInput
+                      id="websiteLink"
+                      name="websiteLink"
+                      placeholder="Website Link"
+                      onChange={this.inputHandler}
+                      value={websiteLink}
+                    />
+                    {this.errorShow("websiteLink")}
+                  </CCol>
+                </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol md="3">
                     <CLabel htmlFor="prosCons">Pros & Cons</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <div class="d-flex justify-content-between add-list">
-                      <CLabel htmlFor="pros">Pros</CLabel>
-                      <button
-                        className="icon"
-                        onClick={(e) => this.handlePlusButton(e, "prosAdd")}
-                      >
+                    <div
+                      onClick={(e) => this.handlePlusButton(e, "prosAdd")}
+                      class="d-flex justify-content-between add-list"
+                    >
+                      <CLabel htmlFor="pros">Add Pros</CLabel>
+                      <button className="icon">
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
@@ -451,12 +687,12 @@ class EditResource extends Component {
                       })}
 
                     {/* {this.errorShow("fields")} */}
-                    <div class="d-flex justify-content-between add-list">
-                      <CLabel htmlFor="cons">Cons</CLabel>
-                      <button
-                        className="icon"
-                        onClick={(e) => this.handlePlusButton(e, "consAdd")}
-                      >
+                    <div
+                      onClick={(e) => this.handlePlusButton(e, "consAdd")}
+                      class="d-flex justify-content-between add-list"
+                    >
+                      <CLabel htmlFor="cons">Add Cons</CLabel>
+                      <button className="icon">
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
@@ -497,12 +733,12 @@ class EditResource extends Component {
                     <CLabel htmlFor="details">Details</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <div class="d-flex justify-content-between add-list">
-                      <CLabel htmlFor="addDetails">Add</CLabel>
-                      <button
-                        className="icon"
-                        onClick={(e) => this.handlePlusButton(e, "detailsAdd")}
-                      >
+                    <div
+                      class="d-flex justify-content-between add-list"
+                      onClick={(e) => this.handlePlusButton(e, "detailsAdd")}
+                    >
+                      <CLabel htmlFor="addDetails">Add Details</CLabel>
+                      <button className="icon">
                         <img src={ADD} className="ml-3" />
                       </button>
                     </div>
@@ -561,22 +797,25 @@ class EditResource extends Component {
               </CForm>
             </CCardBody>
             <CCardFooter>
-              <CButton
-                type="submit"
-                size="sm"
-                color="primary"
-                onClick={this.onSubmit}
-              >
-                <CIcon name="cil-scrubber" /> Submit
-              </CButton>
-              <CButton
-                type="reset"
-                size="sm"
-                color="danger"
-                onClick={this.resetState}
-              >
-                <CIcon name="cil-ban" /> Reset
-              </CButton>
+              <div className="text-right">
+                <CButton
+                  type="submit"
+                  size="sm"
+                  color="primary"
+                  onClick={this.onSubmit}
+                >
+                  <CIcon name="cil-scrubber" /> Submit
+                </CButton>
+                <CButton
+                  type="reset"
+                  size="sm"
+                  color="danger"
+                  onClick={this.resetState}
+                  className="ml-2"
+                >
+                  <CIcon name="cil-ban" /> Reset
+                </CButton>
+              </div>
             </CCardFooter>
           </CCard>
         </CCol>
@@ -585,4 +824,22 @@ class EditResource extends Component {
   }
 }
 
-export default EditResource;
+const mapStateToProps = (state) => {
+  return {
+    saveResourceData: state.LoginAndNavigationReducer.saveResourceData,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addResource,
+      addResourceImage,
+      fetchOneResource,
+      setImage,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(EditResource)
+);

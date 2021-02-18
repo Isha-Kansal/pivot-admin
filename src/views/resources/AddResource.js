@@ -19,7 +19,12 @@ import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import Select from "react-select";
-import { addResource, addResourceImage, setImage } from "../store/action";
+import {
+  addResource,
+  addResourceImage,
+  setImage,
+  fetchOneResource,
+} from "../store/action";
 
 import {
   optionsFormat,
@@ -37,6 +42,7 @@ import BackArrow from "../../assets/icons/left-arrow.svg";
 class AddResource extends Component {
   constructor(props) {
     super();
+
     this.state = {
       name: "",
       format: "",
@@ -52,7 +58,21 @@ class AddResource extends Component {
       details: [],
       pace: "",
       websiteLink: "",
+      resourceData: {},
     };
+  }
+  componentDidMount() {
+    const resource_id = this.props && this.props.match.params.id;
+    if (resource_id) {
+      this.props.fetchOneResource(`resource/${resource_id}`, (value) => {
+        console.log("8965789057dfhgfh0950697", value);
+        this.setState({
+          resourceData: value.data.resource,
+        });
+        // setResource(value.data.resource);
+        // setLoading(false);
+      });
+    }
   }
   uploadImage = (event) => {
     this.clearError();
@@ -481,12 +501,32 @@ class AddResource extends Component {
       details,
       pace,
       websiteLink,
+      resourceData,
     } = this.state;
     console.log(
       "45898497894474748798",
       this.props && this.props.saveResourceData
     );
-    console.log("pricingpricingpricingpricingpricing", pricing);
+    console.log("pricingpricingpricingpricingpricing", resourceData);
+    // const {
+    //   category,
+    //   cons,
+    //   format,
+    //   info,
+    //   pace,
+    //   price,
+    //   profile_pic,
+    //   pros,
+    //   title,
+    //   unique_selling_proposition,
+    //   website,
+    // } = resourceData;
+    console.log(
+      "pppppp",
+      format && format !== "",
+
+      resourceData
+    );
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -514,7 +554,7 @@ class AddResource extends Component {
                       name="name"
                       placeholder="Name"
                       onChange={this.inputHandler}
-                      value={name}
+                      value={name || (resourceData && resourceData.title)}
                     />
                     {this.errorShow("name")}
                   </CCol>
@@ -544,7 +584,16 @@ class AddResource extends Component {
                       name="format"
                       placeholder="Select Format"
                       id="format"
-                      value={format ? { value: format, label: format } : null}
+                      value={
+                        format && format !== ""
+                          ? { value: format, label: format }
+                          : Object.keys(resourceData).length > 0
+                          ? {
+                              value: resourceData.format,
+                              label: resourceData.format,
+                            }
+                          : null
+                      }
                       options={optionsFormat}
                       onChange={(data) => this.handleSelect(data, "format")}
                     ></Select>
@@ -562,7 +611,14 @@ class AddResource extends Component {
                       placeholder="Select Price"
                       id="pricing"
                       value={
-                        pricing ? { value: pricing, label: pricing } : null
+                        pricing && pricing !== ""
+                          ? { value: pricing, label: pricing }
+                          : Object.keys(resourceData).length > 0
+                          ? {
+                              value: resourceData.price,
+                              label: resourceData.price,
+                            }
+                          : null
                       }
                       options={optionsPricing}
                       onChange={(data) => this.handleSelect(data, "pricing")}
@@ -582,6 +638,15 @@ class AddResource extends Component {
                       placeholder="Select Category"
                       id="category"
                       // value={category}
+                      // value={resourceData && resourceData.category}
+                      value={
+                        Object.keys(resourceData).length > 0
+                          ? {
+                              value: resourceData.category,
+                              label: resourceData.category,
+                            }
+                          : null
+                      }
                       options={optionsCategory}
                       onChange={(data) => this.handleSelect(data, "category")}
                     ></Select>
@@ -599,7 +664,18 @@ class AddResource extends Component {
                       name="pace"
                       placeholder="Select Pace"
                       id="pace"
-                      value={pace ? { value: pace, label: pace } : null}
+                      // value={pace ? { value: pace, label: pace } : null}
+
+                      value={
+                        pace && pace !== ""
+                          ? { value: pace, label: pace }
+                          : Object.keys(resourceData).length > 0
+                          ? {
+                              value: resourceData.pace,
+                              label: resourceData.pace,
+                            }
+                          : null
+                      }
                       options={optionsPace}
                       onChange={(data) => this.handleSelect(data, "pace")}
                     ></Select>
@@ -617,7 +693,9 @@ class AddResource extends Component {
                       name="websiteLink"
                       placeholder="Website Link"
                       onChange={this.inputHandler}
-                      value={websiteLink}
+                      value={
+                        websiteLink || (resourceData && resourceData.website)
+                      }
                     />
                     {this.errorShow("websiteLink")}
                   </CCol>
@@ -770,7 +848,11 @@ class AddResource extends Component {
                       rows="9"
                       onChange={this.inputHandler}
                       placeholder="Content..."
-                      value={uniqueSellingProposition}
+                      value={
+                        uniqueSellingProposition ||
+                        (resourceData &&
+                          resourceData.unique_selling_proposition)
+                      }
                     />
                     {this.errorShow("uniqueSellingProposition")}
                   </CCol>
@@ -815,6 +897,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       addResource,
       addResourceImage,
+      fetchOneResource,
       setImage,
     },
     dispatch
