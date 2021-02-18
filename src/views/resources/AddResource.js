@@ -637,16 +637,6 @@ class AddResource extends Component {
                       name="category"
                       placeholder="Select Category"
                       id="category"
-                      // value={category}
-                      // value={resourceData && resourceData.category}
-                      value={
-                        Object.keys(resourceData).length > 0
-                          ? {
-                              value: resourceData.category,
-                              label: resourceData.category,
-                            }
-                          : null
-                      }
                       options={optionsCategory}
                       onChange={(data) => this.handleSelect(data, "category")}
                     ></Select>
@@ -731,7 +721,7 @@ class AddResource extends Component {
                               onChange={(e) => {
                                 this.inputProsCons(e, index, "prosAdd");
                               }}
-                              // value={`pros${index}`}
+                              value={resourceData && resourceData.pros}
                             />
                             <button
                               className="icon"
@@ -771,7 +761,7 @@ class AddResource extends Component {
                               onChange={(e) => {
                                 this.inputProsCons(e, index, "consAdd");
                               }}
-                              // value={`pros${index}`}
+                              value={resourceData && resourceData.cons}
                             />
                             <button
                               className="icon"
@@ -805,6 +795,7 @@ class AddResource extends Component {
                     {details &&
                       details.length > 0 &&
                       details.map((el, index) => {
+                        console.log("895689348579893457", resourceData.info);
                         return (
                           <div className="d-flex align-items-center mb-2">
                             {/* <input value={el.value} /> */}
@@ -817,7 +808,7 @@ class AddResource extends Component {
                               onChange={(e) => {
                                 this.inputProsCons(e, index, "detailsAdd");
                               }}
-                              // value={`pros${index}`}
+                              value={resourceData && resourceData.info}
                             />
 
                             <button
