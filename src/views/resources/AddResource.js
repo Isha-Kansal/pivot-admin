@@ -341,17 +341,17 @@ class AddResource extends Component {
       });
       return;
     }
-    // if (pros.length !== 0 && pros[0].value === "") {
-    //   this.setState({
-    //     errorType: "pros",
-    //     errorText: (
-    //       <span className="text-danger">
-    //         <b>Please add some pros</b>
-    //       </span>
-    //     ),
-    //   });
-    //   return;
-    // }
+    if (pros.length === 1 && pros[0].value === "") {
+      this.setState({
+        errorType: "pros",
+        errorText: (
+          <span className="text-danger">
+            <b>Please add some pros</b>
+          </span>
+        ),
+      });
+      return;
+    }
     if (cons.length === 0) {
       this.setState({
         errorType: "cons",
@@ -363,7 +363,29 @@ class AddResource extends Component {
       });
       return;
     }
+    if (cons.length === 1 && cons[0].value === "") {
+      this.setState({
+        errorType: "cons",
+        errorText: (
+          <span className="text-danger">
+            <b>Please add some cons</b>
+          </span>
+        ),
+      });
+      return;
+    }
     if (details.length === 0) {
+      this.setState({
+        errorType: "details",
+        errorText: (
+          <span className="text-danger">
+            <b>Please add some details</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (details.length === 1 && details[0].value === "") {
       this.setState({
         errorType: "details",
         errorText: (
