@@ -32,12 +32,12 @@ import {
   optionsCategory,
   optionsPace,
 } from "./ResourcesFieldsData";
-import CameraIcon from "../../assets/icons/photo-camera.svg";
+
 import ADD from "../../assets/icons/add.svg";
 import CANCEL from "../../assets/icons/cancel.svg";
-import { Input } from "reactstrap";
+
 import CIcon from "@coreui/icons-react";
-import Avatar from "../../assets/icons/avatar.png";
+
 import BackArrow from "../../assets/icons/left-arrow.svg";
 class AddResource extends Component {
   constructor(props) {
@@ -52,7 +52,7 @@ class AddResource extends Component {
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
-      resourceImage: null,
+      resourceImage: "",
       plusBit: false,
       pros: [],
       cons: [],
@@ -66,7 +66,6 @@ class AddResource extends Component {
     const resource_id = this.props && this.props.match.params.id;
     if (resource_id) {
       this.props.fetchOneResource(`resource/${resource_id}`, (value) => {
-        console.log("8965789057dfhgfh0950697", value.data.resource);
         const {
           title,
           format,
@@ -75,7 +74,20 @@ class AddResource extends Component {
           pace,
           website,
           unique_selling_proposition,
+          pros,
+          cons,
+          info,
+          profile_pic,
         } = value.data.resource;
+        const detailsData = info.map((el) => {
+          return { value: el };
+        });
+        const prosData = pros.map((el) => {
+          return { value: el };
+        });
+        const consData = cons.map((el) => {
+          return { value: el };
+        });
         this.setState({
           resourceData: value.data.resource,
           name: title,
@@ -85,6 +97,10 @@ class AddResource extends Component {
           pace,
           websiteLink: website,
           uniqueSellingProposition: unique_selling_proposition,
+          pros: prosData,
+          cons: consData,
+          details: detailsData,
+          resourceImage: profile_pic,
         });
         // setResource(value.data.resource);
         // setLoading(false);
@@ -96,11 +112,14 @@ class AddResource extends Component {
 
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
+      console.log("89589834798498eee-fr24r24", reader.result);
       reader.onloadend = function () {
         // props.setImage(reader.result);
-        this.setState({
-          resourceImage: reader.result,
-        });
+        console.log("89589834798498978", reader.result);
+        // this.setState({
+        //   resourceImage: (reader && reader.result) || "",
+        // });
+        this.callApiAddImage((reader && reader.result) || "");
       }.bind(this);
       this.props.setImage(reader.result);
       reader.readAsDataURL(event.target.files[0]);
@@ -121,14 +140,15 @@ class AddResource extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   inputProsCons = (e, index, type) => {
+    console.log("5745754747", e);
     if (type === "prosAdd") {
       let prosToUpdate = this.state.pros[index];
       const newArray = [...this.state.pros];
-      // prosToUpdate = {
-      //   ...prosToUpdate,
-      //   value: e.target.value,
-      // };
-      prosToUpdate = e.target.value;
+      prosToUpdate = {
+        ...prosToUpdate,
+        value: e.target.value,
+      };
+      // prosToUpdate = e.target.value;
       newArray[index] = prosToUpdate;
 
       this.clearError();
@@ -137,11 +157,11 @@ class AddResource extends Component {
     if (type === "consAdd") {
       let consToUpdate = this.state.cons[index];
       const newArray = [...this.state.cons];
-      // consToUpdate = {
-      //   ...consToUpdate,
-      //   value: e.target.value,
-      // };
-      consToUpdate = e.target.value;
+      consToUpdate = {
+        ...consToUpdate,
+        value: e.target.value,
+      };
+      // consToUpdate = e.target.value;
       newArray[index] = consToUpdate;
 
       this.clearError();
@@ -150,11 +170,11 @@ class AddResource extends Component {
     if (type === "detailsAdd") {
       let detailsToUpdate = this.state.details[index];
       const newArray = [...this.state.details];
-      // detailsToUpdate = {
-      //   ...detailsToUpdate,
-      //   value: e.target.value,
-      // };
-      detailsToUpdate = e.target.value;
+      detailsToUpdate = {
+        ...detailsToUpdate,
+        value: e.target.value,
+      };
+      // detailsToUpdate = e.target.value;
       newArray[index] = detailsToUpdate;
 
       this.clearError();
@@ -346,16 +366,23 @@ class AddResource extends Component {
       });
       return;
     }
-    // this.callApiAddImage()
+
     this.callApiAddResource();
   };
-  callApiAddImage = () => {
+  callApiAddImage = (base64) => {
     const { resourceImage } = this.state;
+    console.log("84978948987484", resourceImage);
     let obj = {
-      profile_pic: resourceImage,
+      base64,
     };
-    this.props.addResourceImage("resource/create", obj, (value) => {
-      // this.callApiAddResource();
+    this.props.addResourceImage("upload/profile-picture", obj, (value) => {
+      console.log("905093070", value);
+      if (value.status === 200) {
+        this.setState({
+          resourceImage: value.data.url,
+        });
+        setImage(value.data.url);
+      }
     });
   };
   callApiAddResource = () => {
@@ -370,20 +397,34 @@ class AddResource extends Component {
       cons,
       uniqueSellingProposition,
       pace,
+      addPrice,
+      resourceImage,
     } = this.state;
+    let infodata = details.map((el) => {
+      return el.value;
+    });
+    let prosdata = pros.map((el) => {
+      return el.value;
+    });
+    let consdata = cons.map((el) => {
+      return el.value;
+    });
     let obj = {
       title: name,
       format,
-      price: pricing,
+      price: pricing === "Others" ? addPrice : pricing,
       website: websiteLink,
       category,
-      pros,
-      cons,
-      info: details,
+      pros: prosdata,
+      cons: consdata,
+      info: infodata,
       unique_selling_proposition: uniqueSellingProposition,
       pace,
     };
-
+    if (resourceImage) {
+      obj.profile_pic = resourceImage;
+    }
+    console.log("49879849078489079", obj);
     this.props.addResource("resource/create", obj, (value) => {
       if (value.status === 200) {
         NotificationManager.success("Resource added successfully", "", 1000);
@@ -518,6 +559,7 @@ class AddResource extends Component {
       });
     }
   };
+
   render() {
     const {
       name,
@@ -535,11 +577,15 @@ class AddResource extends Component {
       addPrice,
       resourceData,
     } = this.state;
-
+    console.log("470940978049089080", resourceImage);
     let categoryVal = optionsCategory.filter((reason) => {
       return category.includes(reason.label);
     });
-
+    console.log("84978904807803479040408", pros);
+    let aa = details.map((item) => {
+      return item;
+    });
+    console.log("9560903570905789", this.state.details, aa);
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -756,7 +802,7 @@ class AddResource extends Component {
                               onChange={(e) => {
                                 this.inputProsCons(e, index, "prosAdd");
                               }}
-                              value={resourceData && resourceData.pros}
+                              value={el.value}
                             />
                             <button
                               className="icon"
@@ -796,7 +842,7 @@ class AddResource extends Component {
                               onChange={(e) => {
                                 this.inputProsCons(e, index, "consAdd");
                               }}
-                              value={resourceData && resourceData.cons}
+                              value={el.value}
                             />
                             <button
                               className="icon"
@@ -830,6 +876,7 @@ class AddResource extends Component {
                     {details &&
                       details.length > 0 &&
                       details.map((el, index) => {
+                        console.log("48597047049704898406", el);
                         return (
                           <div className="d-flex align-items-center mb-2">
                             {/* <input value={el.value} /> */}
@@ -842,7 +889,7 @@ class AddResource extends Component {
                               onChange={(e) => {
                                 this.inputProsCons(e, index, "detailsAdd");
                               }}
-                              value={resourceData && resourceData.info}
+                              value={el.value}
                             />
 
                             <button
@@ -911,6 +958,7 @@ class AddResource extends Component {
 const mapStateToProps = (state) => {
   return {
     saveResourceData: state.LoginAndNavigationReducer.saveResourceData,
+    saveImage: state.LoginAndNavigationReducer.saveImage,
   };
 };
 const mapDispatchToProps = (dispatch) => {

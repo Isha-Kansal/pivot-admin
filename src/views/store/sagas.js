@@ -212,17 +212,17 @@ function* editResource(action) {
 function* addResourceImage(action) {
   const response = yield call(callAddResourceImage, action);
   console.log("responseresponseresponseresponse", response);
-  // if (response && response.data) {
-  //   action.callback(response.data);
-  //   if (response.status === 200) {
-  //     yield put({
-  //       type: ADD_RESOURCE_IMAGE_SUCCESS,
-  //       addResourceImage: response.data,
-  //     });
-  //   } else {
-  //     yield put({ type: ADD_RESOURCE_IMAGE_FAILED });
-  //   }
-  // }
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: ADD_RESOURCE_IMAGE_SUCCESS,
+        addResourceImage: response.data,
+      });
+    } else {
+      yield put({ type: ADD_RESOURCE_IMAGE_FAILED });
+    }
+  }
 }
 
 function* deleteResource(action) {

@@ -75,12 +75,7 @@ const Resource = (props) => {
                     <tr>
                       <td>Image</td>
                       <td>
-                        <img
-                          src={
-                            props && props.saveImage ? props.saveImage : Avatar
-                          }
-                          alt="profile"
-                        />
+                        <img src={resource.profile_pic} alt="profile" />
                       </td>
                     </tr>
                   )}
