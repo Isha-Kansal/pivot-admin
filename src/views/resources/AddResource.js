@@ -66,9 +66,14 @@ class AddResource extends Component {
     const resource_id = this.props && this.props.match.params.id;
     if (resource_id) {
       this.props.fetchOneResource(`resource/${resource_id}`, (value) => {
-        console.log("8965789057dfhgfh0950697", value);
+        console.log("8965789057dfhgfh0950697", value.data.resource);
+        const { title, format, price, category } = value.data.resource;
         this.setState({
           resourceData: value.data.resource,
+          name: title,
+          format,
+          pricing: price,
+          category,
         });
         // setResource(value.data.resource);
         // setLoading(false);
@@ -486,10 +491,19 @@ class AddResource extends Component {
     }
     if (type === "category") {
       console.log("98638968939689", data, type);
+      console.log("this.stet ::", this.state.category);
+      const updateCategory = this.state.category.slice();
+
+      console.log("this.stet updateCategory::", updateCategory);
+      console.log("this.stet data::", data);
+
       let arr = data.map((el) => {
         return el.value;
       });
-
+      // if (updateCategory.findIndex((item) => arr.includes(item)) === -1) {
+      //   updateCategory.push(...arr);
+      // }
+      console.log("this.stet updateCategory:: 111", updateCategory);
       this.setState({
         category: arr,
       });
@@ -536,11 +550,16 @@ class AddResource extends Component {
     //   website,
     // } = resourceData;
     console.log(
-      "pppppp",
-      format && format !== "",
+      "pppppdfithidfgthkp",
 
       resourceData
     );
+    console.log("this.statethis.state : ", this.state);
+    let categoryVal = optionsCategory.filter((reason) => {
+      return category.includes(reason.label);
+    });
+    console.log("categoryVal  :", categoryVal);
+
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -568,7 +587,7 @@ class AddResource extends Component {
                       name="name"
                       placeholder="Name"
                       onChange={this.inputHandler}
-                      value={name || (resourceData && resourceData.title)}
+                      value={name}
                     />
                     {this.errorShow("name")}
                   </CCol>
@@ -598,16 +617,17 @@ class AddResource extends Component {
                       name="format"
                       placeholder="Select Format"
                       id="format"
-                      value={
-                        format && format !== ""
-                          ? { value: format, label: format }
-                          : Object.keys(resourceData).length > 0
-                          ? {
-                              value: resourceData.format,
-                              label: resourceData.format,
-                            }
-                          : null
-                      }
+                      // value={
+                      //   format && format !== ""
+                      //     ? { value: format, label: format }
+                      //     : Object.keys(resourceData).length > 0
+                      //     ? {
+                      //         value: resourceData.format,
+                      //         label: resourceData.format,
+                      //       }
+                      //     : null
+                      // }
+                      value={format ? { value: format, label: format } : null}
                       options={optionsFormat}
                       onChange={(data) => this.handleSelect(data, "format")}
                     ></Select>
@@ -624,15 +644,18 @@ class AddResource extends Component {
                       name="pricing"
                       placeholder="Select Price"
                       id="pricing"
+                      // value={
+                      //   pricing && pricing !== ""
+                      //     ? { value: pricing, label: pricing }
+                      //     : Object.keys(resourceData).length > 0
+                      //     ? {
+                      //         value: resourceData.price,
+                      //         label: resourceData.price,
+                      //       }
+                      //     : null
+                      // }
                       value={
-                        pricing && pricing !== ""
-                          ? { value: pricing, label: pricing }
-                          : Object.keys(resourceData).length > 0
-                          ? {
-                              value: resourceData.price,
-                              label: resourceData.price,
-                            }
-                          : null
+                        pricing ? { value: pricing, label: pricing } : null
                       }
                       options={optionsPricing}
                       onChange={(data) => this.handleSelect(data, "pricing")}
@@ -671,6 +694,7 @@ class AddResource extends Component {
                       name="category"
                       placeholder="Select Category"
                       id="category"
+                      value={categoryVal}
                       options={optionsCategory}
                       onChange={(data) => this.handleSelect(data, "category")}
                     ></Select>
