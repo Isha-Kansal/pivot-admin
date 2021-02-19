@@ -1,13 +1,13 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
-import CIcon from "@coreui/icons-react";
+
 import { fetchOneResource } from "../store/action";
-import resourcesData from "./ResourcesData";
+
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import Avatar from "../../assets/icons/avatar.png";
+
 import Loader from "../../loader";
 const Resource = (props) => {
   const [resource, setResource] = useState({});
@@ -145,14 +145,6 @@ const Resource = (props) => {
                       <td>
                         <strong>{pros}</strong>
                       </td>
-                      {/* {resource.pros.map((item, index) => {
-                        return (
-                          <td>
-                            <strong>{`${index + 1}.  `}</strong>
-                            <strong>{item}</strong>
-                          </td>
-                        );
-                      })} */}
                     </tr>
                   )}
                   {resource.cons && resource.cons.length > 0 && (
@@ -161,14 +153,6 @@ const Resource = (props) => {
                       <td>
                         <strong>{cons}</strong>
                       </td>
-                      {/* {resource.cons.map((item, index) => {
-                        return (
-                          <td>
-                            <strong>{`${index + 1}.  `}</strong>
-                            <strong>{item}</strong>
-                          </td>
-                        );
-                      })} */}
                     </tr>
                   )}
                   {resource.info && (
@@ -177,14 +161,6 @@ const Resource = (props) => {
                       <td>
                         <strong>{details}</strong>
                       </td>
-                      {/* {resource.info.map((item, index) => {
-                        return (
-                          <td>
-                            <strong>{`${index + 1}.  `}</strong>
-                            <strong>{item}</strong>
-                          </td>
-                        );
-                      })} */}
                     </tr>
                   )}
                 </tbody>

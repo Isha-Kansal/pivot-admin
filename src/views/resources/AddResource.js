@@ -109,8 +109,6 @@ class AddResource extends Component {
           details: detailsData,
           resourceImage: profile_pic,
         });
-        // setResource(value.data.resource);
-        // setLoading(false);
       });
     }
   }
@@ -175,7 +173,7 @@ class AddResource extends Component {
         ...detailsToUpdate,
         value: e.target.value,
       };
-      // detailsToUpdate = e.target.value;
+
       newArray[index] = detailsToUpdate;
 
       this.clearError();
@@ -197,7 +195,6 @@ class AddResource extends Component {
       pace,
       websiteLink,
       addPrice,
-      resourceImage,
     } = this.state;
 
     if (name === "") {
@@ -230,17 +227,7 @@ class AddResource extends Component {
         return;
       }
     }
-    // if (resourceImage === null) {
-    //   this.setState({
-    //     errorType: "file-input",
-    //     errorText: (
-    //       <span className="text-danger">
-    //         <b>Please select an image</b>
-    //       </span>
-    //     ),
-    //   });
-    //   return;
-    // }
+
     if (format === "") {
       this.setState({
         errorType: "format",
@@ -413,7 +400,6 @@ class AddResource extends Component {
     this.setState({
       loadiing: true,
     });
-    const { resourceImage } = this.state;
 
     let obj = {
       base64,
@@ -644,14 +630,9 @@ class AddResource extends Component {
       });
     }
     if (type === "category") {
-      const updateCategory = this.state.category.slice();
-
       let arr = data.map((el) => {
         return el.value;
       });
-      // if (updateCategory.findIndex((item) => arr.includes(item)) === -1) {
-      //   updateCategory.push(...arr);
-      // }
 
       this.setState({
         category: arr,
@@ -672,14 +653,14 @@ class AddResource extends Component {
       uniqueSellingProposition,
       category,
       resourceImage,
-      plusBit,
+
       pros,
       cons,
       details,
       pace,
       websiteLink,
       addPrice,
-      resourceData,
+
       loadiing,
     } = this.state;
 
@@ -757,16 +738,6 @@ class AddResource extends Component {
                       name="format"
                       placeholder="Select Format"
                       id="format"
-                      // value={
-                      //   format && format !== ""
-                      //     ? { value: format, label: format }
-                      //     : Object.keys(resourceData).length > 0
-                      //     ? {
-                      //         value: resourceData.format,
-                      //         label: resourceData.format,
-                      //       }
-                      //     : null
-                      // }
                       value={format ? { value: format, label: format } : null}
                       options={optionsFormat}
                       onChange={(data) => this.handleSelect(data, "format")}
@@ -784,16 +755,6 @@ class AddResource extends Component {
                       name="pricing"
                       placeholder="Select Price"
                       id="pricing"
-                      // value={
-                      //   pricing && pricing !== ""
-                      //     ? { value: pricing, label: pricing }
-                      //     : Object.keys(resourceData).length > 0
-                      //     ? {
-                      //         value: resourceData.price,
-                      //         label: resourceData.price,
-                      //       }
-                      //     : null
-                      // }
                       value={
                         pricing ? { value: pricing, label: pricing } : null
                       }
@@ -853,16 +814,6 @@ class AddResource extends Component {
                       placeholder="Select Pace"
                       id="pace"
                       value={pace ? { value: pace, label: pace } : null}
-                      // value={
-                      //   pace && pace !== ""
-                      //     ? { value: pace, label: pace }
-                      //     : Object.keys(resourceData).length > 0
-                      //     ? {
-                      //         value: resourceData.pace,
-                      //         label: resourceData.pace,
-                      //       }
-                      //     : null
-                      // }
                       options={optionsPace}
                       onChange={(data) => this.handleSelect(data, "pace")}
                     ></Select>
@@ -906,7 +857,6 @@ class AddResource extends Component {
                       pros.map((el, index) => {
                         return (
                           <div className="d-flex align-items-center mb-2 ">
-                            {/* <input value={el.value} /> */}
                             <CInput
                               type="text"
                               id={`pros${index}`}
@@ -930,7 +880,6 @@ class AddResource extends Component {
                         );
                       })}
 
-                    {/* {this.errorShow("fields")} */}
                     <div
                       onClick={(e) => this.handlePlusButton(e, "consAdd")}
                       class="d-flex justify-content-between add-list"
@@ -946,7 +895,6 @@ class AddResource extends Component {
                       cons.map((el, index) => {
                         return (
                           <div className="d-flex align-items-center mb-2">
-                            {/* <input value={el.value} /> */}
                             <CInput
                               type="text"
                               id={`cons${index}`}
@@ -1012,7 +960,6 @@ class AddResource extends Component {
                             >
                               <img src={CANCEL} className="ml-3" />
                             </button>
-                            {/* {this.errorShow("details")} */}
                           </div>
                         );
                       })}

@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "reactstrap";
-import { Redirect } from "react-router-dom";
 
 const TheHeaderDropdown = (props) => {
   const handleLogout = (e) => {

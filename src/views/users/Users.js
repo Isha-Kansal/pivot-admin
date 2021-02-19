@@ -48,10 +48,6 @@ const Users = (props) => {
     setSearch(e.target.value);
     setPage(1);
   };
-  // useEffect(() => {
-  //   debugger;
-  //   currentPage !== page && setPage(currentPage);
-  // }, [currentPage, page]);
 
   useEffect(() => {
     callApiToFetchAllUsers();
@@ -94,9 +90,6 @@ const Users = (props) => {
     if (idUser === id) {
       setModalOpen(false);
 
-      // let arr = unBlock.slice();
-      // arr.push(id);
-      // setUnblock(arr);
       callApi(type, id);
     }
   };

@@ -9,17 +9,8 @@ import { connect } from "react-redux";
 import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
 import Loader from "../../loader";
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CButton,
-  CDataTable,
-  CPagination,
-} from "@coreui/react";
-import resourcesData from "./ResourcesData";
+import { CCard, CCardBody, CCol, CRow, CButton } from "@coreui/react";
+
 import EDIT from "../../assets/icons/edit.svg";
 import DELETE from "../../assets/icons/delete.svg";
 import {

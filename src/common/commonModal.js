@@ -1,11 +1,9 @@
 import React from "react";
 import { Button, Modal, ModalBody, ModalHeader } from "reactstrap";
-// import DeleteIcon from "../assets/images/dashboard/delete-modal-icon.png";
-// import CloseIcon from "../assets/images/dashboard/closeIcon.png";
 
 class CommonModal extends React.Component {
   render() {
-    const { isOpen, toggle, loading, block_delete, type, id } = this.props;
+    const { isOpen, toggle, block_delete, type, id } = this.props;
 
     return (
       <Modal
@@ -41,11 +39,7 @@ class CommonModal extends React.Component {
             ""
           )}
           <div className="text-center deleteBtn mt-4">
-            <Button
-              color="success"
-              onClick={() => block_delete(id)}
-              // disabled={loading}
-            >
+            <Button color="success" onClick={() => block_delete(id)}>
               Yes, Confirmed
             </Button>
           </div>

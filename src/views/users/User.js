@@ -9,12 +9,11 @@ import {
   CBadge,
 } from "@coreui/react";
 import Loader from "../../loader";
-import CIcon from "@coreui/icons-react";
+
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
-import { titleCase } from "../../common/stringFunction";
 
 import { fetchOneUser } from "../store/action";
 const User = (props) => {
