@@ -224,7 +224,7 @@ class AddResource extends Component {
       });
       return;
     }
-    if (addPrice === "") {
+    if (pricing === "Others" && addPrice === "") {
       this.setState({
         errorType: "addPrice",
         errorText: (
