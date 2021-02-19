@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import moment from "moment";
 import Pagination from "react-js-pagination";
 import CommonModal from "../../common/commonModal";
 import { NotificationManager } from "react-notifications";
@@ -136,6 +137,7 @@ const Users = (props) => {
 
           <CCardBody>
             <Table
+              responsive
               className={`table ${
                 usersDetails.length === 0 ? "tableHeight" : ""
               }`}
@@ -148,6 +150,7 @@ const Users = (props) => {
                   <th>Status</th>
 
                   <th>Country</th>
+                  <th>Created At</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -158,6 +161,12 @@ const Users = (props) => {
                 {usersDetails &&
                   usersDetails.length > 0 &&
                   usersDetails.map((item, index) => {
+                    let istDate = new Date(item.createdAt);
+
+                    let createdAt = moment(istDate).format(
+                      "DD-MM-YYYY, hh:mm a"
+                    );
+                    console.log("3969830868", istDate, createdAt);
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -185,6 +194,9 @@ const Users = (props) => {
                           </CBadge>
                         </td>
                         <td>{item.country ? item.country : "-"}</td>
+                        <td>
+                          {createdAt !== "Invalid date" ? createdAt : "-"}
+                        </td>
                         <td>
                           {item.status === "blocked" ? (
                             <CButton

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
+import moment from "moment";
 import {
   CCard,
   CCardBody,
@@ -54,6 +55,11 @@ const User = (props) => {
     user.reason_for_career_change &&
     user.reason_for_career_change.join(", ");
 
+  let istDate = new Date(user.createdAt);
+
+  let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
+  console.log("3969830868", istDate, createdAt);
+
   return (
     <CRow>
       <CCol lg={12}>
@@ -64,6 +70,14 @@ const User = (props) => {
             {user && (
               <table className="table">
                 <tbody>
+                  {createdAt !== "Invalid date" && (
+                    <tr>
+                      <td>Created At</td>
+                      <td>
+                        <strong> {createdAt}</strong>
+                      </td>
+                    </tr>
+                  )}
                   <tr>
                     <td>Status</td>
 

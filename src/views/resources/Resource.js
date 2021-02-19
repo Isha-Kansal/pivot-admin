@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import Avatar from "../../assets/icons/avatar.png";
+import Loader from "../../loader";
 const Resource = (props) => {
   const [resource, setResource] = useState({});
   const [loading, setLoading] = useState(false);
@@ -50,18 +51,21 @@ const Resource = (props) => {
     <CRow>
       <CCol lg={12}>
         <CCard>
+          {loading && <Loader />}
           <CCardHeader>Resource Details</CCardHeader>
 
           <CCardBody>
             {resource && (
               <table className="table">
                 <tbody>
-                  <tr>
-                    <td>RID</td>
-                    <td>
-                      <strong>{resource._id}</strong>
-                    </td>
-                  </tr>
+                  {!loading && (
+                    <tr>
+                      <td>RID</td>
+                      <td>
+                        <strong>{resource._id}</strong>
+                      </td>
+                    </tr>
+                  )}
 
                   {resource.title && (
                     <tr>

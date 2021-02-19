@@ -8,7 +8,7 @@ import { Table } from "reactstrap";
 import { connect } from "react-redux";
 import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
-
+import Loader from "../../loader";
 import {
   CCard,
   CCardBody,
@@ -43,6 +43,7 @@ const Resources = (props) => {
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/resources?page=${newPage}`);
     let limit = 10;
+    setLoading(true);
     props.fetchResources(
       `resource/all?offset=${newPage}&limit=${limit}&search=${search}`,
       (value) => {
@@ -66,35 +67,7 @@ const Resources = (props) => {
     e.stopPropagation();
     console.log("856789956890589", item);
     props.setResourceData(item);
-    // const {
-    //   title,
-    //   format,
-    //   price,
-    //   website,
-    //   category,
-    //   pros,
-    //   cons,
-    //   info,
-    //   unique_selling_proposition,
-    //   pace,
-    //   _id,
-    // } = item;
-    // let obj = {
-    //   id: _id,
-    //   title,
-    //   format,
-    //   price,
-    //   website,
-    //   category,
-    //   pros,
-    //   cons,
-    //   info,
-    //   unique_selling_proposition,
-    //   pace,
-    // };
-    // props.editResource("resource/update", obj, (value) => {
-    //   console.log("48567476745valuevaluevaluevalue", value);
-    // });
+
     props.history.push({
       state: item,
       pathname: `/editResource/${item._id}`,
@@ -109,9 +82,11 @@ const Resources = (props) => {
   };
   const deleteResource = (id) => {
     if (idResource === id) setModalOpen(false);
+    setLoading(true);
     props.deleteResource(`resource/delete/${id}`, (value) => {
       if (value.status === 200) {
         NotificationManager.success("Resource deleted successfully", "", 1000);
+        setLoading(false);
         callApiToFetchAllResources();
       }
     });
@@ -170,6 +145,7 @@ const Resources = (props) => {
 
       <CCol xl={12}>
         <CCard>
+          {loading && <Loader />}
           <CCardBody>
             <Table responsive>
               <thead>
@@ -183,11 +159,13 @@ const Resources = (props) => {
                 </tr>
               </thead>
               <tbody>
-                {resourcesDetails && resourcesDetails.length === 0 && (
-                  <h3 className="text-center no-user-found">
-                    No Resources Found!
-                  </h3>
-                )}
+                {resourcesDetails &&
+                  resourcesDetails.length === 0 &&
+                  !loading && (
+                    <h3 className="text-center no-user-found">
+                      No Resources Found!
+                    </h3>
+                  )}
                 {resourcesDetails &&
                   resourcesDetails.length > 0 &&
                   resourcesDetails.map((item, index) => {

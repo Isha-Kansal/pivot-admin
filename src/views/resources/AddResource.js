@@ -26,7 +26,7 @@ import {
   editResource,
   fetchOneResource,
 } from "../store/action";
-
+import Loader from "../../loader";
 import {
   optionsFormat,
   optionsPricing,
@@ -61,11 +61,16 @@ class AddResource extends Component {
       pace: "",
       websiteLink: "",
       resourceData: {},
+      loadiing: false,
     };
   }
   componentDidMount() {
     const resource_id = this.props && this.props.match.params.id;
+
     if (resource_id) {
+      this.setState({
+        loadiing: true,
+      });
       this.props.fetchOneResource(`resource/${resource_id}`, (value) => {
         const {
           title,
@@ -90,6 +95,7 @@ class AddResource extends Component {
           return { value: el };
         });
         this.setState({
+          loadiing: false,
           resourceData: value.data.resource,
           name: title,
           format,
@@ -388,6 +394,9 @@ class AddResource extends Component {
     }
   };
   callApiAddImage = (base64) => {
+    this.setState({
+      loadiing: true,
+    });
     const { resourceImage } = this.state;
     console.log("84978948987484", resourceImage);
     let obj = {
@@ -398,6 +407,7 @@ class AddResource extends Component {
       if (value.status === 200) {
         this.setState({
           resourceImage: value.data.url,
+          loadiing: false,
         });
         setImage(value.data.url);
       }
@@ -445,10 +455,16 @@ class AddResource extends Component {
       obj.profile_pic = resourceImage;
     }
     console.log("49879849078489079", obj);
+    this.setState({
+      loadiing: true,
+    });
     this.props.editResource("resource/update", obj, (value) => {
       if (value.status === 200) {
         NotificationManager.success("Resource edit successfully", "", 1000);
         this.props.history.push("/resources");
+        this.setState({
+          loadiing: false,
+        });
       }
     });
   };
@@ -492,10 +508,16 @@ class AddResource extends Component {
       obj.profile_pic = resourceImage;
     }
     console.log("49879849078489079", obj);
+    this.setState({
+      loadiing: true,
+    });
     this.props.addResource("resource/create", obj, (value) => {
       if (value.status === 200) {
         NotificationManager.success("Resource added successfully", "", 1000);
         this.props.history.push("/resources");
+        this.setState({
+          loadiing: false,
+        });
       }
     });
   };
@@ -643,6 +665,7 @@ class AddResource extends Component {
       websiteLink,
       addPrice,
       resourceData,
+      loadiing,
     } = this.state;
     console.log("470940978049089080", pros);
     let categoryVal = optionsCategory.filter((reason) => {
@@ -657,6 +680,7 @@ class AddResource extends Component {
       <CRow>
         <CCol xs="12" sm="12">
           <CCard className="expert-card">
+            {loadiing && <Loader />}
             <CCardHeader>
               <CButton onClick={this.handleBack} className="backBtn">
                 <img src={BackArrow} className="mr-2" /> Back
