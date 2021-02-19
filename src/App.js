@@ -16,7 +16,7 @@ const TheLayout = React.lazy(() => import("./containers/TheLayout"));
 const Login = React.lazy(() => import("./views/login/Login"));
 const AddExpert = React.lazy(() => import("./views/experts/AddExpert"));
 const AddResource = React.lazy(() => import("./views/resources/AddResource"));
-const EditResource = React.lazy(() => import("./views/resources/EditResource"));
+
 // const EditExpert = React.lazy(() => import("./views/resources/EditExpert"));
 class App extends Component {
   render() {

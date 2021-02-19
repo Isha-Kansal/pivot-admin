@@ -116,7 +116,7 @@ function* fetchUsers(action) {
 
 function* fetchResources(action) {
   const response = yield call(callFetchResources, action);
-  console.log("84879498794897", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {
@@ -148,7 +148,7 @@ function* fetchOneUser(action) {
 
 function* fetchOneResource(action) {
   const response = yield call(callFetchOneResource, action);
-  console.log("84697849784780", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {
@@ -180,7 +180,7 @@ function* userStatus(action) {
 
 function* addResource(action) {
   const response = yield call(callAddResource, action);
-  console.log("u59794967894897u8", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {
@@ -195,7 +195,7 @@ function* addResource(action) {
 }
 function* editResource(action) {
   const response = yield call(callEditResource, action);
-  console.log("u597949656785677894897u8", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {
@@ -211,7 +211,7 @@ function* editResource(action) {
 
 function* addResourceImage(action) {
   const response = yield call(callAddResourceImage, action);
-  console.log("responseresponseresponseresponse", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {
@@ -227,7 +227,7 @@ function* addResourceImage(action) {
 
 function* deleteResource(action) {
   const response = yield call(callDeleteResource, action);
-  console.log("deleteResourcedeleteResource", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {

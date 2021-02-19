@@ -114,7 +114,7 @@ const Users = (props) => {
       }
     });
   };
-  console.log("86784857984957", usersDetails);
+
   return (
     <CRow>
       <CCol xl={12}>
@@ -166,7 +166,7 @@ const Users = (props) => {
                     let createdAt = moment(istDate).format(
                       "DD-MM-YYYY, hh:mm a"
                     );
-                    console.log("3969830868", istDate, createdAt);
+
                     return (
                       <tr
                         style={{ cursor: "pointer" }}

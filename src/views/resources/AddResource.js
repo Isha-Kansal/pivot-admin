@@ -119,13 +119,8 @@ class AddResource extends Component {
 
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
-      console.log("89589834798498eee-fr24r24", reader.result);
+
       reader.onloadend = function () {
-        // props.setImage(reader.result);
-        console.log("89589834798498978", reader.result);
-        // this.setState({
-        //   resourceImage: (reader && reader.result) || "",
-        // });
         this.callApiAddImage((reader && reader.result) || "");
       }.bind(this);
       this.props.setImage(reader.result);
@@ -147,7 +142,6 @@ class AddResource extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   inputProsCons = (e, index, type) => {
-    console.log("5745754747", e);
     if (type === "prosAdd") {
       let prosToUpdate = this.state.pros[index];
       const newArray = [...this.state.pros];
@@ -155,7 +149,7 @@ class AddResource extends Component {
         ...prosToUpdate,
         value: e.target.value,
       };
-      // prosToUpdate = e.target.value;
+
       newArray[index] = prosToUpdate;
 
       this.clearError();
@@ -168,7 +162,7 @@ class AddResource extends Component {
         ...consToUpdate,
         value: e.target.value,
       };
-      // consToUpdate = e.target.value;
+
       newArray[index] = consToUpdate;
 
       this.clearError();
@@ -420,12 +414,11 @@ class AddResource extends Component {
       loadiing: true,
     });
     const { resourceImage } = this.state;
-    console.log("84978948987484", resourceImage);
+
     let obj = {
       base64,
     };
     this.props.addResourceImage("upload/profile-picture", obj, (value) => {
-      console.log("905093070", value);
       if (value.status === 200) {
         this.setState({
           resourceImage: value.data.url,
@@ -476,7 +469,7 @@ class AddResource extends Component {
     if (resourceImage) {
       obj.profile_pic = resourceImage;
     }
-    console.log("49879849078489079", obj);
+
     this.setState({
       loadiing: true,
     });
@@ -529,7 +522,7 @@ class AddResource extends Component {
     if (resourceImage) {
       obj.profile_pic = resourceImage;
     }
-    console.log("49879849078489079", obj);
+
     this.setState({
       loadiing: true,
     });
@@ -689,15 +682,15 @@ class AddResource extends Component {
       resourceData,
       loadiing,
     } = this.state;
-    console.log("470940978049089080", pros);
+
     let categoryVal = optionsCategory.filter((reason) => {
       return category.includes(reason.label);
     });
-    console.log("84978904807803479040408", pros);
+
     let aa = details.map((item) => {
       return item;
     });
-    console.log("9560903570905789", resourceImage);
+
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -997,10 +990,8 @@ class AddResource extends Component {
                     {details &&
                       details.length > 0 &&
                       details.map((el, index) => {
-                        console.log("48597047049704898406", el);
                         return (
                           <div className="d-flex align-items-center mb-2">
-                            {/* <input value={el.value} /> */}
                             <CInput
                               type="text"
                               id={`details${index}`}

@@ -58,7 +58,6 @@ const User = (props) => {
   let istDate = new Date(user.createdAt);
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
-  console.log("3969830868", istDate, createdAt);
 
   return (
     <CRow>

@@ -19,13 +19,12 @@ const Resource = (props) => {
     const resource_id = props && props.match.params.id;
     dispatch(
       fetchOneResource(`resource/${resource_id}`, (value) => {
-        console.log("89657890570950697", value);
         setResource(value.data.resource);
         setLoading(false);
       })
     );
   }, []);
-  console.log("84967894897894897", props && props.saveImage);
+
   let category =
     resource &&
     resource.category &&

@@ -65,7 +65,7 @@ const Resources = (props) => {
     setIdResource(item._id);
     e.preventDefault();
     e.stopPropagation();
-    console.log("856789956890589", item);
+
     props.setResourceData(item);
 
     props.history.push({
@@ -78,7 +78,6 @@ const Resources = (props) => {
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
-    console.log("89356893967893", id);
   };
   const deleteResource = (id) => {
     if (idResource === id) setModalOpen(false);
@@ -106,12 +105,6 @@ const Resources = (props) => {
       `resource/all?offset=${page}&limit=${limit}&search=${search}`,
       (value) => {
         if (value.status === 200) {
-          // NotificationManager.success(
-          //   "Resources fetched successfully",
-          //   "",
-          //   1000
-          // );
-          console.log("498679497898497", value);
           setLoading(false);
           setResourcesDetails(value.data.resources);
           setCount(value.data.count);
@@ -120,7 +113,6 @@ const Resources = (props) => {
     );
   };
 
-  console.log("4987849879849789", resourcesDetails);
   return (
     <CRow>
       <CCol xl={12}>
@@ -169,7 +161,6 @@ const Resources = (props) => {
                 {resourcesDetails &&
                   resourcesDetails.length > 0 &&
                   resourcesDetails.map((item, index) => {
-                    console.log("758738567838678", item);
                     let category =
                       item &&
                       item.category &&
