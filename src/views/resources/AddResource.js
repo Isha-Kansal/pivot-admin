@@ -67,13 +67,24 @@ class AddResource extends Component {
     if (resource_id) {
       this.props.fetchOneResource(`resource/${resource_id}`, (value) => {
         console.log("8965789057dfhgfh0950697", value.data.resource);
-        const { title, format, price, category } = value.data.resource;
+        const {
+          title,
+          format,
+          price,
+          category,
+          pace,
+          website,
+          unique_selling_proposition,
+        } = value.data.resource;
         this.setState({
           resourceData: value.data.resource,
           name: title,
           format,
           pricing: price,
           category,
+          pace,
+          websiteLink: website,
+          uniqueSellingProposition: unique_selling_proposition,
         });
         // setResource(value.data.resource);
         // setLoading(false);
@@ -82,7 +93,7 @@ class AddResource extends Component {
   }
   uploadImage = (event) => {
     this.clearError();
-    console.log("845897495879", event);
+
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onloadend = function () {
@@ -374,7 +385,6 @@ class AddResource extends Component {
     };
 
     this.props.addResource("resource/create", obj, (value) => {
-      console.log("849856798497894879", value);
       if (value.status === 200) {
         NotificationManager.success("Resource added successfully", "", 1000);
         this.props.history.push("/resources");
@@ -477,7 +487,6 @@ class AddResource extends Component {
   };
 
   handleSelect = (data, type) => {
-    console.log("489567894879", data, type);
     this.clearError();
     if (type === "format") {
       this.setState({
@@ -490,12 +499,7 @@ class AddResource extends Component {
       });
     }
     if (type === "category") {
-      console.log("98638968939689", data, type);
-      console.log("this.stet ::", this.state.category);
       const updateCategory = this.state.category.slice();
-
-      console.log("this.stet updateCategory::", updateCategory);
-      console.log("this.stet data::", data);
 
       let arr = data.map((el) => {
         return el.value;
@@ -503,7 +507,7 @@ class AddResource extends Component {
       // if (updateCategory.findIndex((item) => arr.includes(item)) === -1) {
       //   updateCategory.push(...arr);
       // }
-      console.log("this.stet updateCategory:: 111", updateCategory);
+
       this.setState({
         category: arr,
       });
@@ -531,34 +535,10 @@ class AddResource extends Component {
       addPrice,
       resourceData,
     } = this.state;
-    console.log(
-      "45898497894474748798",
-      this.props && this.props.saveResourceData
-    );
-    console.log("pricingpricingpricingpricingpricing", resourceData);
-    // const {
-    //   category,
-    //   cons,
-    //   format,
-    //   info,
-    //   pace,
-    //   price,
-    //   profile_pic,
-    //   pros,
-    //   title,
-    //   unique_selling_proposition,
-    //   website,
-    // } = resourceData;
-    console.log(
-      "pppppdfithidfgthkp",
 
-      resourceData
-    );
-    console.log("this.statethis.state : ", this.state);
     let categoryVal = optionsCategory.filter((reason) => {
       return category.includes(reason.label);
     });
-    console.log("categoryVal  :", categoryVal);
 
     return (
       <CRow>
@@ -712,18 +692,17 @@ class AddResource extends Component {
                       name="pace"
                       placeholder="Select Pace"
                       id="pace"
-                      // value={pace ? { value: pace, label: pace } : null}
-
-                      value={
-                        pace && pace !== ""
-                          ? { value: pace, label: pace }
-                          : Object.keys(resourceData).length > 0
-                          ? {
-                              value: resourceData.pace,
-                              label: resourceData.pace,
-                            }
-                          : null
-                      }
+                      value={pace ? { value: pace, label: pace } : null}
+                      // value={
+                      //   pace && pace !== ""
+                      //     ? { value: pace, label: pace }
+                      //     : Object.keys(resourceData).length > 0
+                      //     ? {
+                      //         value: resourceData.pace,
+                      //         label: resourceData.pace,
+                      //       }
+                      //     : null
+                      // }
                       options={optionsPace}
                       onChange={(data) => this.handleSelect(data, "pace")}
                     ></Select>
@@ -741,9 +720,7 @@ class AddResource extends Component {
                       name="websiteLink"
                       placeholder="Website Link"
                       onChange={this.inputHandler}
-                      value={
-                        websiteLink || (resourceData && resourceData.website)
-                      }
+                      value={websiteLink}
                     />
                     {this.errorShow("websiteLink")}
                   </CCol>
@@ -853,7 +830,6 @@ class AddResource extends Component {
                     {details &&
                       details.length > 0 &&
                       details.map((el, index) => {
-                        console.log("895689348579893457", resourceData.info);
                         return (
                           <div className="d-flex align-items-center mb-2">
                             {/* <input value={el.value} /> */}
@@ -897,11 +873,7 @@ class AddResource extends Component {
                       rows="9"
                       onChange={this.inputHandler}
                       placeholder="Content..."
-                      value={
-                        uniqueSellingProposition ||
-                        (resourceData &&
-                          resourceData.unique_selling_proposition)
-                      }
+                      value={uniqueSellingProposition}
                     />
                     {this.errorShow("uniqueSellingProposition")}
                   </CCol>
