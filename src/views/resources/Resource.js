@@ -75,7 +75,15 @@ const Resource = (props) => {
                     <tr>
                       <td>Image</td>
                       <td>
-                        <img src={resource.profile_pic} alt="profile" />
+                        <img
+                          style={{
+                            width: "100px",
+                            height: "100px",
+                            borderRadius: "4px",
+                          }}
+                          src={resource.profile_pic}
+                          alt="profile"
+                        />
                       </td>
                     </tr>
                   )}

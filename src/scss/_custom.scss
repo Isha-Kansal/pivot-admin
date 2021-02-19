@@ -42,6 +42,13 @@ button {
   top: 50%;
   right: 0;
   transform: translateY(-50%);
+  @media (max-width: 991px) {
+    position: relative;
+    max-width: 130px;
+    margin: 13px auto 0;
+    top: 7px;
+    width: 100%;
+  }
   button {
     color: #ffffff;
     font-weight: 800;
@@ -64,4 +71,10 @@ button {
   &:active {
     box-shadow: 0 0 0 0.2rem #fab37e7d !important;
   }
+}
+.image-file {
+  display: flex !important;
+  background: #f2f2f2;
+  align-items: center;
+  padding: 10px;
 }

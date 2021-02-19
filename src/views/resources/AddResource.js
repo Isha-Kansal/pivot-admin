@@ -23,6 +23,7 @@ import {
   addResource,
   addResourceImage,
   setImage,
+  editResource,
   fetchOneResource,
 } from "../store/action";
 
@@ -182,6 +183,8 @@ class AddResource extends Component {
     }
   };
   onSubmit = (e) => {
+    const resource_id = this.props && this.props.match.params.id;
+
     const {
       name,
       format,
@@ -332,6 +335,17 @@ class AddResource extends Component {
       });
       return;
     }
+    // if (pros.length !== 0 && pros[0].value === "") {
+    //   this.setState({
+    //     errorType: "pros",
+    //     errorText: (
+    //       <span className="text-danger">
+    //         <b>Please add some pros</b>
+    //       </span>
+    //     ),
+    //   });
+    //   return;
+    // }
     if (cons.length === 0) {
       this.setState({
         errorType: "cons",
@@ -367,7 +381,11 @@ class AddResource extends Component {
       return;
     }
 
-    this.callApiAddResource();
+    if (!resource_id) {
+      this.callApiAddResource();
+    } else {
+      this.callApiEditResource();
+    }
   };
   callApiAddImage = (base64) => {
     const { resourceImage } = this.state;
@@ -382,6 +400,55 @@ class AddResource extends Component {
           resourceImage: value.data.url,
         });
         setImage(value.data.url);
+      }
+    });
+  };
+  callApiEditResource = () => {
+    const resource_id = this.props && this.props.match.params.id;
+    const {
+      name,
+      format,
+      pricing,
+      websiteLink,
+      category,
+      details,
+      pros,
+      cons,
+      uniqueSellingProposition,
+      pace,
+      addPrice,
+      resourceImage,
+    } = this.state;
+    let infodata = details.map((el) => {
+      return el.value;
+    });
+    let prosdata = pros.map((el) => {
+      return el.value;
+    });
+    let consdata = cons.map((el) => {
+      return el.value;
+    });
+    let obj = {
+      id: resource_id,
+      title: name,
+      format,
+      price: pricing === "Others" ? addPrice : pricing,
+      website: websiteLink,
+      category,
+      pros: prosdata,
+      cons: consdata,
+      info: infodata,
+      unique_selling_proposition: uniqueSellingProposition,
+      pace,
+    };
+    if (resourceImage) {
+      obj.profile_pic = resourceImage;
+    }
+    console.log("49879849078489079", obj);
+    this.props.editResource("resource/update", obj, (value) => {
+      if (value.status === 200) {
+        NotificationManager.success("Resource edit successfully", "", 1000);
+        this.props.history.push("/resources");
       }
     });
   };
@@ -442,7 +509,7 @@ class AddResource extends Component {
       details: [],
       pros: [],
       cons: [],
-      resourceImage: null,
+      resourceImage: "",
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
@@ -577,7 +644,7 @@ class AddResource extends Component {
       addPrice,
       resourceData,
     } = this.state;
-    console.log("470940978049089080", resourceImage);
+    console.log("470940978049089080", pros);
     let categoryVal = optionsCategory.filter((reason) => {
       return category.includes(reason.label);
     });
@@ -585,7 +652,7 @@ class AddResource extends Component {
     let aa = details.map((item) => {
       return item;
     });
-    console.log("9560903570905789", this.state.details, aa);
+    console.log("9560903570905789", resourceImage);
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -623,14 +690,22 @@ class AddResource extends Component {
                     Image
                   </CLabel>
                   <CCol xs="12" md="9">
-                    <CInputFile
-                      type="file"
-                      accept="image/*"
-                      id="file-input"
-                      name="file-input"
-                      onChange={this.uploadImage}
-                    />
-                    {this.errorShow("file-input")}
+                    <div className="d-flex image-file">
+                      <CInputFile
+                        type="file"
+                        accept="image/*"
+                        id="file-input"
+                        name="file-input"
+                        onChange={this.uploadImage}
+                      />
+                      {resourceImage && (
+                        <img
+                          style={{ width: "80px", height: "80px" }}
+                          src={resourceImage}
+                        />
+                      )}
+                      {this.errorShow("file-input")}
+                    </div>
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row>
@@ -968,6 +1043,7 @@ const mapDispatchToProps = (dispatch) => {
       addResourceImage,
       fetchOneResource,
       setImage,
+      editResource,
     },
     dispatch
   );
