@@ -87,55 +87,58 @@ class AddExpert extends Component {
     this.clearError();
     this.setState({ [e.target.name]: e.target.value });
   };
-  handleChange = (e, type, data) => {
+  handleChange = (data, type) => {
     if (type === "fields") {
+      let arr = data.map((el) => {
+        return el.value;
+      });
       this.setState({
-        fields: data,
+        fields: arr,
       });
     }
     if (type === "gender") {
       this.setState({
-        gender: data,
+        gender: data.value,
       });
     }
     if (type === "country") {
       this.setState({
-        country: data,
+        country: data.value,
       });
     }
     if (type === "designation") {
       this.setState({
-        designation: data,
+        designation: data.value,
       });
     }
     if (type === "expertise") {
       this.setState({
-        expertise: data,
+        expertise: data.value,
       });
     }
     if (type === "role") {
       this.setState({
-        role: data,
+        role: data.value,
       });
     }
     if (type === "industry") {
       this.setState({
-        industry: data,
+        industry: data.value,
       });
     }
     if (type === "experience") {
       this.setState({
-        experience: data,
+        experience: data.value,
       });
     }
     if (type === "service") {
       this.setState({
-        service: data,
+        service: data.value,
       });
     }
     if (type === "rate") {
       this.setState({
-        rate: data,
+        rate: data.value,
       });
     }
   };
@@ -466,7 +469,9 @@ class AddExpert extends Component {
       rate,
       selectedDate,
     } = this.state;
-
+    let fieldsVal = optionsFields.filter((item) => {
+      return fields.includes(item.label);
+    });
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -574,9 +579,8 @@ class AddExpert extends Component {
                         placeholder="Select gender"
                         name="gender"
                         id="gender"
-                        name="gender"
-                        onChange={(e) => this.handleChange(e, "gender")}
-                        value={gender}
+                        onChange={(data) => this.handleChange(data, "gender")}
+                        value={gender ? { value: gender, label: gender } : null}
                         options={optionsGender}
                       ></Select>
                       {this.errorShow("gender")}
@@ -591,8 +595,10 @@ class AddExpert extends Component {
                         id="country"
                         name="country"
                         placeholder="Select Country"
-                        onChange={(e) => this.handleChange(e, "country")}
-                        value={country}
+                        onChange={(data) => this.handleChange(data, "country")}
+                        value={
+                          country ? { value: country, label: country } : null
+                        }
                         options={optionsCountry}
                       ></Select>
                       {this.errorShow("country")}
@@ -647,8 +653,8 @@ class AddExpert extends Component {
                         id="role"
                         placeholder="Select Role"
                         name="role"
-                        onChange={(e) => this.handleChange(e, "role")}
-                        value={role}
+                        onChange={(data) => this.handleChange(data, "role")}
+                        value={role ? { value: role, label: role } : null}
                         options={optionsRole}
                       ></Select>
                       {this.errorShow("role")}
@@ -701,14 +707,10 @@ class AddExpert extends Component {
                         placeholder="Select Fields"
                         id="fields"
                         name="fields"
-                        onChange={(e) => this.handleChange(e, "fields")}
-                        value={fields}
+                        onChange={(data) => this.handleChange(data, "fields")}
+                        value={fieldsVal}
                         options={optionsFields}
-                      >
-                        <option value="select">Select</option>
-                        <option value="consulting">Consulting</option>
-                        <option value="hr">HR</option>
-                      </Select>
+                      ></Select>
                       {this.errorShow("fields")}
                     </CFormGroup>
                   </CCol>

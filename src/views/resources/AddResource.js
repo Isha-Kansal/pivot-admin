@@ -664,12 +664,8 @@ class AddResource extends Component {
       loadiing,
     } = this.state;
 
-    let categoryVal = optionsCategory.filter((reason) => {
-      return category.includes(reason.label);
-    });
-
-    let aa = details.map((item) => {
-      return item;
+    let categoryVal = optionsCategory.filter((item) => {
+      return category.includes(item.label);
     });
 
     return (
