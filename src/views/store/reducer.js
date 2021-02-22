@@ -21,9 +21,9 @@ const {
   FETCH_ONE_RESOURCE_REQUEST,
   FETCH_ONE_RESOURCE_FAILED,
   FETCH_ONE_RESOURCE_SUCCESS,
-  ADD_RESOURCE_IMAGE_REQUEST,
-  ADD_RESOURCE_IMAGE_FAILED,
-  ADD_RESOURCE_IMAGE_SUCCESS,
+  ADD_IMAGE_REQUEST,
+  ADD_IMAGE_FAILED,
+  ADD_IMAGE_SUCCESS,
   SET_IMAGE,
   DELETE_RESOURCE_REQUEST,
   DELETE_RESOURCE_SUCCESS,
@@ -32,6 +32,9 @@ const {
   EDIT_RESOURCE_FAILED,
   EDIT_RESOURCE_SUCCESS,
   SET_RESOURCE_DATA,
+  ADD_EXPERT_REQUEST,
+  ADD_EXPERT_FAILED,
+  ADD_EXPERT_SUCCESS,
 } = require("./types");
 
 const initialState = {
@@ -40,9 +43,10 @@ const initialState = {
   userStatus: {},
   oneUserData: {},
   addResourceData: {},
+  addExpertData: {},
   resourcesData: {},
   oneResourceData: {},
-  addResourceImage: {},
+  addImage: {},
   saveImage: "",
   deleteResourceData: {},
   editResourceData: {},
@@ -168,18 +172,35 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
 
-    case ADD_RESOURCE_IMAGE_REQUEST: {
+    case ADD_EXPERT_REQUEST: {
       return {
         ...state,
       };
     }
-    case ADD_RESOURCE_IMAGE_SUCCESS: {
+    case ADD_EXPERT_SUCCESS: {
       return {
         ...state,
-        addResourceImage: action.addResourceImage || {},
+        addExpertData: action.addExpertData || {},
       };
     }
-    case ADD_RESOURCE_IMAGE_FAILED: {
+    case ADD_EXPERT_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case ADD_IMAGE_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case ADD_IMAGE_SUCCESS: {
+      return {
+        ...state,
+        addImage: action.addResourceImage || {},
+      };
+    }
+    case ADD_IMAGE_FAILED: {
       return {
         ...state,
       };

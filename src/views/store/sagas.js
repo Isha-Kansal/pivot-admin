@@ -21,15 +21,18 @@ import {
   FETCH_ONE_RESOURCE_REQUEST,
   FETCH_ONE_RESOURCE_FAILED,
   FETCH_ONE_RESOURCE_SUCCESS,
-  ADD_RESOURCE_IMAGE_REQUEST,
-  ADD_RESOURCE_IMAGE_FAILED,
-  ADD_RESOURCE_IMAGE_SUCCESS,
+  ADD_IMAGE_REQUEST,
+  ADD_IMAGE_FAILED,
+  ADD_IMAGE_SUCCESS,
   DELETE_RESOURCE_REQUEST,
   DELETE_RESOURCE_SUCCESS,
   DELETE_RESOURCE_FAILED,
   EDIT_RESOURCE_REQUEST,
   EDIT_RESOURCE_FAILED,
   EDIT_RESOURCE_SUCCESS,
+  ADD_EXPERT_FAILED,
+  ADD_EXPERT_SUCCESS,
+  ADD_EXPERT_REQUEST,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -44,12 +47,17 @@ async function callAddResource(data) {
   const res = await apiCallPost(data.url, data.payload);
   return res;
 }
+
+async function callAddExpert(data) {
+  const res = await apiCallPost(data.url, data.payload);
+  return res;
+}
 async function callEditResource(data) {
   const res = await apiCallPost(data.url, data.payload);
   return res;
 }
 
-async function callAddResourceImage(data) {
+async function callAddImage(data) {
   const res = await apiCallPost(data.url, data.payload);
   return res;
 }
@@ -193,6 +201,23 @@ function* addResource(action) {
     }
   }
 }
+
+function* addExpert(action) {
+  const response = yield call(callAddExpert, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: ADD_EXPERT_SUCCESS,
+        addResourceData: response.data,
+      });
+    } else {
+      yield put({ type: ADD_EXPERT_FAILED });
+    }
+  }
+}
+
 function* editResource(action) {
   const response = yield call(callEditResource, action);
 
@@ -209,18 +234,18 @@ function* editResource(action) {
   }
 }
 
-function* addResourceImage(action) {
-  const response = yield call(callAddResourceImage, action);
+function* addImage(action) {
+  const response = yield call(callAddImage, action);
 
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {
       yield put({
-        type: ADD_RESOURCE_IMAGE_SUCCESS,
-        addResourceImage: response.data,
+        type: ADD_IMAGE_SUCCESS,
+        addImage: response.data,
       });
     } else {
-      yield put({ type: ADD_RESOURCE_IMAGE_FAILED });
+      yield put({ type: ADD_IMAGE_FAILED });
     }
   }
 }
@@ -249,8 +274,8 @@ export default function* LoginByAdminWatcher() {
   yield takeLatest(ADD_RESOURCE_REQUEST, addResource);
   yield takeLatest(FETCH_RESOURCES_REQUEST, fetchResources);
   yield takeLatest(FETCH_ONE_RESOURCE_REQUEST, fetchOneResource);
-
-  yield takeLatest(ADD_RESOURCE_IMAGE_REQUEST, addResourceImage);
+  yield takeLatest(ADD_EXPERT_REQUEST, addExpert);
+  yield takeLatest(ADD_IMAGE_REQUEST, addImage);
   yield takeLatest(DELETE_RESOURCE_REQUEST, deleteResource);
   yield takeLatest(EDIT_RESOURCE_REQUEST, editResource);
 }

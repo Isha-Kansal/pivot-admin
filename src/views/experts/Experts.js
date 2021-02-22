@@ -23,6 +23,7 @@ const Experts = (props) => {
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
+  const [idExpert, setIdExpert] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/experts?page=${newPage}`);
@@ -37,10 +38,12 @@ const Experts = (props) => {
     setSearch(e.target.value);
   };
 
-  const editExpert = (e) => {
+  const editExpert = (e, item) => {
+    console.log("8956786905897", item);
+    setIdExpert(item.id);
     e.preventDefault();
     e.stopPropagation();
-    props.history.push("/editExpert");
+    props.history.push(`/editExpert/${item.id}`);
   };
   const deleteExpert = (e, item) => {
     e.preventDefault();
@@ -106,7 +109,7 @@ const Experts = (props) => {
                           <button
                             id={`edit-${index}`}
                             className="icon"
-                            onClick={editExpert}
+                            onClick={(e) => editExpert(e, item)}
                           >
                             <img src={EDIT} className="ml-3" />
                           </button>

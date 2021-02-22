@@ -5,11 +5,12 @@ import {
   ADD_RESOURCE_REQUEST,
   FETCH_RESOURCES_REQUEST,
   FETCH_ONE_RESOURCE_REQUEST,
-  ADD_RESOURCE_IMAGE_REQUEST,
+  ADD_IMAGE_REQUEST,
   SET_IMAGE,
   DELETE_RESOURCE_REQUEST,
   EDIT_RESOURCE_REQUEST,
   SET_RESOURCE_DATA,
+  ADD_EXPERT_REQUEST,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -29,6 +30,16 @@ export const addResource = (url, body, callback) => {
     callback,
   };
 };
+
+export const addExpert = (url, body, callback) => {
+  return {
+    type: ADD_EXPERT_REQUEST,
+    url,
+    payload: body,
+    callback,
+  };
+};
+
 export const editResource = (url, body, callback) => {
   return {
     type: EDIT_RESOURCE_REQUEST,
@@ -49,9 +60,9 @@ export const setResourceData = (data) => {
     payload: data,
   };
 };
-export const addResourceImage = (url, body, callback) => {
+export const addImage = (url, body, callback) => {
   return {
-    type: ADD_RESOURCE_IMAGE_REQUEST,
+    type: ADD_IMAGE_REQUEST,
     url,
     payload: body,
     callback,

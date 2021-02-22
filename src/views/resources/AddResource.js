@@ -21,7 +21,7 @@ import { withRouter } from "react-router-dom";
 import Select from "react-select";
 import {
   addResource,
-  addResourceImage,
+  addImage,
   setImage,
   editResource,
   fetchOneResource,
@@ -404,7 +404,7 @@ class AddResource extends Component {
     let obj = {
       base64,
     };
-    this.props.addResourceImage("upload/profile-picture", obj, (value) => {
+    this.props.addImage("upload/profile-picture", obj, (value) => {
       if (value.status === 200) {
         this.setState({
           resourceImage: value.data.url,
@@ -1020,7 +1020,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       addResource,
-      addResourceImage,
+      addImage,
       fetchOneResource,
       setImage,
       editResource,

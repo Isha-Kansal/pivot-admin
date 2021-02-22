@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 // import DateTimePicker from "react-datetime-picker";
 // import { PopupWidget } from "react-calendly";
+import { addExpert, addImage } from "../store/action";
+import moment from "moment-timezone";
+import { connect } from "react-redux";
+import { NotificationManager } from "react-notifications";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 import BackArrow from "../../assets/icons/left-arrow.svg";
 import {
   CButton,
@@ -32,6 +38,7 @@ import {
   optionsRole,
   optionsIndustry,
   optionsExperience,
+  optionsSkill,
   optionsRate,
   optionsService,
 } from "./ExpertsFieldsData";
@@ -47,11 +54,11 @@ class AddExpert extends Component {
       gender: "",
       country: "",
       designation: "",
-      expertise: "",
-      experience: "",
+      expertise: [],
+
       role: "",
       industry: "",
-      fields: "",
+      fields: [],
       about: "",
       errorType: "",
       errorText: "",
@@ -59,6 +66,7 @@ class AddExpert extends Component {
       rate: "",
       expertImage: null,
       selectedDate: new Date(),
+      linkedIn: "",
     };
   }
   uploadImage = (event) => {
@@ -88,6 +96,7 @@ class AddExpert extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
   handleChange = (data, type) => {
+    this.clearError();
     if (type === "fields") {
       let arr = data.map((el) => {
         return el.value;
@@ -112,8 +121,11 @@ class AddExpert extends Component {
       });
     }
     if (type === "expertise") {
+      let arr = data.map((el) => {
+        return el.value;
+      });
       this.setState({
-        expertise: data.value,
+        expertise: arr,
       });
     }
     if (type === "role") {
@@ -126,14 +138,15 @@ class AddExpert extends Component {
         industry: data.value,
       });
     }
-    if (type === "experience") {
-      this.setState({
-        experience: data.value,
-      });
-    }
+
     if (type === "service") {
       this.setState({
         service: data.value,
+      });
+    }
+    if (type === "skill") {
+      this.setState({
+        skill: data.value,
       });
     }
     if (type === "rate") {
@@ -148,6 +161,7 @@ class AddExpert extends Component {
     return re.test(String(email).toLowerCase());
   };
   onSubmit = (e) => {
+    const expert_id = this.props && this.props.match.params.id;
     const {
       first_name,
       last_name,
@@ -156,7 +170,7 @@ class AddExpert extends Component {
       gender,
       country,
       designation,
-      experience,
+
       role,
       industry,
       expertise,
@@ -164,6 +178,8 @@ class AddExpert extends Component {
       about,
       service,
       rate,
+      linkedIn,
+      skill,
     } = this.state;
 
     if (first_name === "") {
@@ -324,17 +340,19 @@ class AddExpert extends Component {
       });
       return;
     }
-    if (expertise === "") {
+
+    if (fields.length === 0) {
       this.setState({
-        errorType: "expertise",
+        errorType: "fields",
         errorText: (
           <span className="text-danger">
-            <b>Please enter your expert areas</b>
+            <b>Select your fields</b>
           </span>
         ),
       });
       return;
     }
+
     if (role === "") {
       this.setState({
         errorType: "role",
@@ -358,29 +376,30 @@ class AddExpert extends Component {
       return;
     }
 
-    if (experience === "") {
+    if (skill === undefined) {
       this.setState({
-        errorType: "experience",
+        errorType: "skill",
         errorText: (
           <span className="text-danger">
-            <b>Select your experience</b>
+            <b>Select your skill</b>
           </span>
         ),
       });
       return;
     }
 
-    if (fields === "") {
+    if (expertise.length === 0) {
       this.setState({
-        errorType: "fields",
+        errorType: "expertise",
         errorText: (
           <span className="text-danger">
-            <b>Select your fields</b>
+            <b>Please enter your expert areas</b>
           </span>
         ),
       });
       return;
     }
+
     if (service === "") {
       this.setState({
         errorType: "service",
@@ -397,11 +416,37 @@ class AddExpert extends Component {
         errorType: "rate",
         errorText: (
           <span className="text-danger">
-            <b>Select your rate</b>
+            <b>Please enter the rate</b>
           </span>
         ),
       });
       return;
+    }
+    if (linkedIn === "") {
+      this.setState({
+        errorType: "linkedIn",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter linkedIn link</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (linkedIn !== "") {
+      let filter = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+
+      if (!filter.test(linkedIn)) {
+        this.setState({
+          errorType: "linkedIn",
+          errorText: (
+            <span className="text-danger">
+              <b> Please enter valid linkedIn link</b>
+            </span>
+          ),
+        });
+        return;
+      }
     }
 
     if (about === "") {
@@ -415,6 +460,69 @@ class AddExpert extends Component {
       });
       return;
     }
+    if (!expert_id) {
+      this.callApiAddExpert();
+    } else {
+      // this.callApiEditExpert();
+    }
+  };
+
+  callApiAddExpert = () => {
+    const {
+      first_name,
+      last_name,
+      email,
+      contact,
+      gender,
+      country,
+      designation,
+      fields,
+      role,
+      industry,
+      skill,
+      expertise,
+      service,
+      rate,
+      linkedIn,
+      about,
+      expertImage,
+    } = this.state;
+    const timeZone = moment.tz.guess(true);
+    let skillObj = [{ label: skill, values: expertise }];
+    console.log("8458967049704079", skillObj);
+    let obj = {
+      // profile_pic:expertImage,
+      first_name,
+      last_name,
+      gender,
+      country,
+      role,
+      industry,
+      skills: skillObj,
+      fields,
+      info: about,
+      linkedIn,
+      designation,
+      price: rate,
+      service,
+      time_zone: timeZone,
+    };
+    // if (resourceImage) {
+    //   obj.profile_pic = resourceImage;
+    // }
+
+    this.setState({
+      loadiing: true,
+    });
+    this.props.addExpert("expert/create", obj, (value) => {
+      if (value.status === 200) {
+        NotificationManager.success("Expert added successfully", "", 1000);
+        this.props.history.push("/experts");
+        this.setState({
+          loadiing: false,
+        });
+      }
+    });
   };
   resetState = (e) => {
     e.preventDefault();
@@ -426,17 +534,17 @@ class AddExpert extends Component {
       gender: "",
       country: "",
       designation: "",
-      expertise: "",
-      experience: "",
+      expertise: [],
+      skill: "",
       role: "",
       industry: "",
-      fields: "",
+      fields: [],
       about: "",
       errorType: "",
       errorText: "",
       service: "",
       rate: "",
-
+      linkedIn: "",
       selectedDate: new Date(),
     });
   };
@@ -453,7 +561,7 @@ class AddExpert extends Component {
     const {
       first_name,
       last_name,
-      experience,
+
       designation,
       country,
       expertise,
@@ -468,9 +576,14 @@ class AddExpert extends Component {
       service,
       rate,
       selectedDate,
+      linkedIn,
+      skill,
     } = this.state;
     let fieldsVal = optionsFields.filter((item) => {
       return fields.includes(item.label);
+    });
+    let expertiseVal = optionsExpertise.filter((item) => {
+      return expertise.includes(item.label);
     });
     return (
       <CRow>
@@ -483,6 +596,7 @@ class AddExpert extends Component {
               <div className="update-profile-image">
                 <img
                   id="output"
+                  style={{ width: "50px", height: "50px" }}
                   src={expertImage ? expertImage : Avatar}
                   alt="profile"
                   className="profile negative-margin"
@@ -611,34 +725,32 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="designation">Designation</CLabel>
 
-                      <Select
-                        custom
+                      <CInput
                         id="designation"
                         name="designation"
-                        placeholder="Select Designation"
-                        onChange={(e) => this.handleChange(e, "designation")}
+                        placeholder="Designation"
+                        onChange={this.inputHandler}
                         value={designation}
-                        options={optionsDesignation}
-                      ></Select>
+                      />
                       {this.errorShow("designation")}
                     </CFormGroup>
                   </CCol>
 
                   <CCol xs="6">
                     <CFormGroup>
-                      <CLabel htmlFor="expertise">Expertise</CLabel>
+                      <CLabel htmlFor="fields">Fields</CLabel>
 
                       <Select
                         isMulti
                         custom
-                        id="expertise"
-                        placeholder="Select Your expert areas"
-                        name="expertise"
-                        value={expertise}
-                        options={optionsExpertise}
-                        onChange={(e) => this.handleChange(e, "expertise")}
+                        placeholder="Select Fields"
+                        id="fields"
+                        name="fields"
+                        onChange={(data) => this.handleChange(data, "fields")}
+                        value={fieldsVal}
+                        options={optionsFields}
                       ></Select>
-                      {this.errorShow("expertise")}
+                      {this.errorShow("fields")}
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>
@@ -670,8 +782,10 @@ class AddExpert extends Component {
                         id="industry"
                         name="industry"
                         placeholder="Select Industry"
-                        onChange={(e) => this.handleChange(e, "industry")}
-                        value={industry}
+                        onChange={(data) => this.handleChange(data, "industry")}
+                        value={
+                          industry ? { value: industry, label: industry } : null
+                        }
                         options={optionsIndustry}
                       ></Select>
                       {this.errorShow("industry")}
@@ -682,38 +796,40 @@ class AddExpert extends Component {
                 <CFormGroup row className="my-0">
                   <CCol xs="6">
                     <CFormGroup>
-                      <CLabel htmlFor="experience">Work Experience</CLabel>
+                      <CLabel htmlFor="skill">Skill</CLabel>
 
                       <Select
                         custom
-                        id="experience"
-                        name="experience"
-                        placeholder="Select Experience"
-                        onChange={(e) => this.handleChange(e, "experience")}
-                        value={experience}
-                        options={optionsExperience}
+                        id="skill"
+                        placeholder="Select Skill"
+                        name="skill"
+                        onChange={(data) => this.handleChange(data, "skill")}
+                        value={skill ? { value: skill, label: skill } : null}
+                        options={optionsSkill}
                       ></Select>
-                      {this.errorShow("experience")}
+                      {this.errorShow("skill")}
                     </CFormGroup>
                   </CCol>
 
-                  <CCol xs="6">
-                    <CFormGroup>
-                      <CLabel htmlFor="fields">Fields</CLabel>
+                  {skill && (
+                    <CCol xs="6">
+                      <CFormGroup>
+                        <CLabel htmlFor="expertise">{skill}</CLabel>
 
-                      <Select
-                        isMulti
-                        custom
-                        placeholder="Select Fields"
-                        id="fields"
-                        name="fields"
-                        onChange={(data) => this.handleChange(data, "fields")}
-                        value={fieldsVal}
-                        options={optionsFields}
-                      ></Select>
-                      {this.errorShow("fields")}
-                    </CFormGroup>
-                  </CCol>
+                        <Select
+                          isMulti
+                          custom
+                          id="expertise"
+                          placeholder="Select areas of your expertise/specialities"
+                          name="expertise"
+                          value={expertiseVal}
+                          options={optionsExpertise}
+                          onChange={(e) => this.handleChange(e, "expertise")}
+                        ></Select>
+                        {this.errorShow("expertise")}
+                      </CFormGroup>
+                    </CCol>
+                  )}
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
@@ -726,8 +842,10 @@ class AddExpert extends Component {
                         id="service"
                         name="service"
                         placeholder="Select Service"
-                        onChange={(e) => this.handleChange(e, "service")}
-                        value={service}
+                        onChange={(data) => this.handleChange(data, "service")}
+                        value={
+                          service ? { value: service, label: service } : null
+                        }
                         options={optionsService}
                       ></Select>
                       {this.errorShow("service")}
@@ -738,15 +856,13 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="rate">Rate</CLabel>
 
-                      <Select
-                        custom
+                      <CInput
                         id="rate"
-                        placeholder="Select Rate"
+                        placeholder="Rate"
                         name="rate"
-                        onChange={(e) => this.handleChange(e, "rate")}
+                        onChange={this.inputHandler}
                         value={rate}
-                        options={optionsRate}
-                      ></Select>
+                      />
                       {this.errorShow("rate")}
                     </CFormGroup>
                   </CCol>
@@ -775,6 +891,18 @@ class AddExpert extends Component {
 
                       {this.errorShow("dateTime")}
                     </CFormGroup> */}
+
+                    <CFormGroup>
+                      <CLabel htmlFor="linkedIn">LinkedIn Link</CLabel>
+                      <CInput
+                        name="linkedIn"
+                        id="linkedIn"
+                        onChange={this.inputHandler}
+                        placeholder="LinkedIn LInk"
+                        value={linkedIn}
+                      />
+                      {this.errorShow("linkedIn")}
+                    </CFormGroup>
                   </CCol>
                   <CCol xs="6">
                     <CFormGroup>
@@ -821,4 +949,18 @@ class AddExpert extends Component {
   }
 }
 
-export default AddExpert;
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      addExpert,
+      addImage,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(AddExpert)
+);

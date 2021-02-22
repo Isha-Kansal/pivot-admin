@@ -54,7 +54,7 @@ class App extends Component {
               />
               <Route
                 exact
-                path="/editExpert"
+                path="/editExpert/:id"
                 name="Edit Expert"
                 render={(props) => <AddExpert {...props} />}
               />

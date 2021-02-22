@@ -42,7 +42,7 @@ const routes = [
     component: AddResource,
   },
   {
-    path: "/editExpert",
+    path: "/editExpert/:id",
     exact: true,
     name: "Edit Expert",
     component: AddExpert,
