@@ -33,6 +33,12 @@ import {
   ADD_EXPERT_FAILED,
   ADD_EXPERT_SUCCESS,
   ADD_EXPERT_REQUEST,
+  FETCH_EXPERTS_FAILED,
+  FETCH_EXPERTS_REQUEST,
+  FETCH_EXPERTS_SUCCESS,
+  FETCH_ONE_EXPERT_REQUEST,
+  FETCH_ONE_EXPERT_FAILED,
+  FETCH_ONE_EXPERT_SUCCESS,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -76,12 +82,21 @@ async function callFetchResources(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
+async function callFetchExperts(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
 async function callFetchOneUser(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
 
 async function callFetchOneResource(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+
+async function callFetchOneExpert(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
@@ -138,6 +153,22 @@ function* fetchResources(action) {
   }
 }
 
+function* fetchExperts(action) {
+  const response = yield call(callFetchExperts, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: FETCH_EXPERTS_SUCCESS,
+        expertsData: response.data,
+      });
+    } else {
+      yield put({ type: FETCH_EXPERTS_FAILED });
+    }
+  }
+}
+
 function* fetchOneUser(action) {
   const response = yield call(callFetchOneUser, action);
 
@@ -166,6 +197,22 @@ function* fetchOneResource(action) {
       });
     } else {
       yield put({ type: FETCH_ONE_RESOURCE_FAILED });
+    }
+  }
+}
+
+function* fetchOneExpert(action) {
+  const response = yield call(callFetchOneExpert, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: FETCH_ONE_EXPERT_SUCCESS,
+        oneExpertData: response.data,
+      });
+    } else {
+      yield put({ type: FETCH_ONE_EXPERT_FAILED });
     }
   }
 }
@@ -278,4 +325,7 @@ export default function* LoginByAdminWatcher() {
   yield takeLatest(ADD_IMAGE_REQUEST, addImage);
   yield takeLatest(DELETE_RESOURCE_REQUEST, deleteResource);
   yield takeLatest(EDIT_RESOURCE_REQUEST, editResource);
+
+  yield takeLatest(FETCH_EXPERTS_REQUEST, fetchExperts);
+  yield takeLatest(FETCH_ONE_EXPERT_REQUEST, fetchOneExpert);
 }

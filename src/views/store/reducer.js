@@ -35,6 +35,12 @@ const {
   ADD_EXPERT_REQUEST,
   ADD_EXPERT_FAILED,
   ADD_EXPERT_SUCCESS,
+  FETCH_EXPERTS_FAILED,
+  FETCH_EXPERTS_REQUEST,
+  FETCH_EXPERTS_SUCCESS,
+  FETCH_ONE_EXPERT_REQUEST,
+  FETCH_ONE_EXPERT_FAILED,
+  FETCH_ONE_EXPERT_SUCCESS,
 } = require("./types");
 
 const initialState = {
@@ -42,9 +48,11 @@ const initialState = {
   usersData: {},
   userStatus: {},
   oneUserData: {},
+  oneExpertData: {},
   addResourceData: {},
   addExpertData: {},
   resourcesData: {},
+  expertsData: {},
   oneResourceData: {},
   addImage: {},
   saveImage: "",
@@ -105,6 +113,23 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
 
+    case FETCH_EXPERTS_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_EXPERTS_SUCCESS: {
+      return {
+        ...state,
+        expertsData: action.expertsData || {},
+      };
+    }
+    case FETCH_EXPERTS_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
     case FETCH_ONE_USER_REQUEST: {
       return {
         ...state,
@@ -117,6 +142,23 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
     case FETCH_ONE_USER_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case FETCH_ONE_EXPERT_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_ONE_EXPERT_SUCCESS: {
+      return {
+        ...state,
+        oneExpertData: action.oneExpertData || {},
+      };
+    }
+    case FETCH_ONE_EXPERT_FAILED: {
       return {
         ...state,
       };

@@ -70,9 +70,11 @@ class AddExpert extends Component {
     };
   }
   uploadImage = (event) => {
+    this.clearError();
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onloadend = function () {
+        this.callApiAddImage((reader && reader.result) || "");
         // props.setImage(reader.result);
         this.setState({
           expertImage: reader.result,
@@ -506,10 +508,12 @@ class AddExpert extends Component {
       price: rate,
       service,
       time_zone: timeZone,
+      // email,
+      // contact_no: contact,
     };
-    // if (resourceImage) {
-    //   obj.profile_pic = resourceImage;
-    // }
+    if (expertImage) {
+      obj.profile_pic = expertImage;
+    }
 
     this.setState({
       loadiing: true,
@@ -519,6 +523,24 @@ class AddExpert extends Component {
         NotificationManager.success("Expert added successfully", "", 1000);
         this.props.history.push("/experts");
         this.setState({
+          loadiing: false,
+        });
+      }
+    });
+  };
+
+  callApiAddImage = (base64) => {
+    this.setState({
+      loadiing: true,
+    });
+
+    let obj = {
+      base64,
+    };
+    this.props.addImage("upload/profile-picture", obj, (value) => {
+      if (value.status === 200) {
+        this.setState({
+          expertImage: value.data.url,
           loadiing: false,
         });
       }

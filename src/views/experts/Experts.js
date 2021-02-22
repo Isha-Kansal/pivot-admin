@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import expertsData from "./ExpertsData";
+
 import Pagination from "react-js-pagination";
+import moment from "moment-timezone";
 import {
   CCard,
   CCardBody,
@@ -12,21 +13,42 @@ import {
   CButton,
   CDataTable,
 } from "@coreui/react";
+import { fetchExperts } from "../store/action";
+import { connect } from "react-redux";
+import { NotificationManager } from "react-notifications";
+import { bindActionCreators } from "redux";
+import Loader from "../../loader";
 import CommonModal from "../../common/commonModal";
 import Tooltip from "../../common/toolTip";
 import EDIT from "../../assets/icons/edit.svg";
 import DELETE from "../../assets/icons/delete.svg";
 import { Table } from "reactstrap";
 const Experts = (props) => {
+  const offsetLimit = 10;
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
   const [page, setPage] = useState(currentPage);
   const [search, setSearch] = useState("");
   const [idExpert, setIdExpert] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [expertsDetails, setExpertsDetails] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/experts?page=${newPage}`);
+    let limit = 10;
+    setLoading(true);
+    props.fetchExperts(
+      `expert/all?offset=${newPage}&limit=${limit}&search=${search}`,
+      (value) => {
+        setLoading(false);
+        setExpertsDetails(value.data.experts);
+        setCount(value.data.count);
+
+        setPage(newPage);
+      }
+    );
   };
   useEffect(() => {
     currentPage !== page && setPage(currentPage);
@@ -36,6 +58,7 @@ const Experts = (props) => {
   };
   const handleSearch = (e) => {
     setSearch(e.target.value);
+    setPage(1);
   };
 
   const editExpert = (e, item) => {
@@ -50,6 +73,24 @@ const Experts = (props) => {
     e.stopPropagation();
     setModalOpen(!modalOpen);
     // alert("deleted");
+  };
+  useEffect(() => {
+    callApiToFetchAllExperts();
+  }, [search]);
+  const callApiToFetchAllExperts = () => {
+    setLoading(true);
+
+    let limit = 10;
+    props.fetchExperts(
+      `expert/all?offset=${page}&limit=${limit}&search=${search}`,
+      (value) => {
+        if (value.status === 200) {
+          setLoading(false);
+          setExpertsDetails(value.data.experts);
+          setCount(value.data.count);
+        }
+      }
+    );
   };
 
   return (
@@ -72,27 +113,36 @@ const Experts = (props) => {
           </div>
         </form>
         <CCard>
+          {loading && <Loader />}
           <CCardBody>
-            <Table>
+            <Table responsive>
               <thead>
                 <tr>
                   <th className="text-nowrap ">Name</th>
 
+                  <th>Email</th>
                   <th>Designation</th>
-                  <th>Expertise</th>
 
-                  <th>Fields</th>
+                  <th>Country</th>
+                  <th>Role</th>
+                  <th>Created At</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>
-                {expertsData && expertsData.length === 0 && (
+                {expertsDetails && expertsDetails.length === 0 && !loading && (
                   <h3 className="text-center no-user-found">
                     No Experts Found!
                   </h3>
                 )}
-                {expertsData &&
-                  expertsData.length > 0 &&
-                  expertsData.map((item, index) => {
+                {expertsDetails &&
+                  expertsDetails.length > 0 &&
+                  expertsDetails.map((item, index) => {
+                    let istDate = new Date(item.createdAt);
+
+                    let createdAt = moment(istDate).format(
+                      "DD-MM-YYYY, hh:mm a"
+                    );
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -102,9 +152,20 @@ const Experts = (props) => {
                           })
                         }
                       >
+                        <td>
+                          {" "}
+                          {item.first_name && item.last_name
+                            ? item.first_name + " " + item.last_name
+                            : "-"}
+                        </td>
+                        <td>{/* {item.email ? item.email : "-"} */}</td>
                         <td>{item.designation}</td>
-                        <td>{item.expertise}</td>
-                        <td>{item.fields}</td>
+                        <td>{item.country}</td>
+                        <td>{item.role}</td>
+                        <td>
+                          {" "}
+                          {createdAt !== "Invalid date" ? createdAt : "-"}
+                        </td>
                         <td>
                           <button
                             id={`edit-${index}`}
@@ -132,29 +193,17 @@ const Experts = (props) => {
                   })}
               </tbody>
             </Table>
-            {/* <CDataTable
-              items={expertsData}
-              fields={[
-                { key: "name", _classes: "font-weight-bold" },
-                "designation",
-                "expertise",
-                "fields",
-              ]}
-              itemsPerPage={10}
-              activePage={page}
-              clickableRows
-              onRowClick={(item) => history.push(`/experts/${item.id}`)}
-            /> */}
+
             <div className="text-center pagination-input">
-              {expertsData.length > 10 && (
+              {count > 10 && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"
                   linkClass="page-link"
                   activeClass="active"
                   activePage={page}
-                  itemsCountPerPage={10}
-                  totalItemsCount={expertsData.length}
+                  itemsCountPerPage={offsetLimit}
+                  totalItemsCount={count}
                   pageRangeDisplayed={5}
                   onChange={pageChange}
                 />
@@ -178,4 +227,17 @@ const Experts = (props) => {
   );
 };
 
-export default withRouter(Experts);
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchExperts,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(Experts)
+);

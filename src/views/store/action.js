@@ -11,6 +11,8 @@ import {
   EDIT_RESOURCE_REQUEST,
   SET_RESOURCE_DATA,
   ADD_EXPERT_REQUEST,
+  FETCH_EXPERTS_REQUEST,
+  FETCH_ONE_EXPERT_REQUEST,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -96,6 +98,15 @@ export const fetchResources = (body, callback) => {
   };
 };
 
+export const fetchExperts = (body, callback) => {
+  return {
+    type: FETCH_EXPERTS_REQUEST,
+
+    payload: body,
+    callback,
+  };
+};
+
 export const fetchOneUser = (body, callback) => {
   return {
     type: FETCH_USERS_REQUEST,
@@ -107,6 +118,15 @@ export const fetchOneUser = (body, callback) => {
 export const fetchOneResource = (body, callback) => {
   return {
     type: FETCH_ONE_RESOURCE_REQUEST,
+
+    payload: body,
+    callback,
+  };
+};
+
+export const fetchOneExpert = (body, callback) => {
+  return {
+    type: FETCH_ONE_EXPERT_REQUEST,
 
     payload: body,
     callback,
