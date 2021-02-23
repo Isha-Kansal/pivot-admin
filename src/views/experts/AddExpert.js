@@ -1007,6 +1007,37 @@ class AddExpert extends Component {
                       />
                       {this.errorShow("linkedIn")}
                     </CFormGroup>
+                    <CFormGroup>
+                      <CLabel htmlFor="skill">Skill</CLabel>
+
+                      <Select
+                        custom
+                        id="skill"
+                        placeholder="Select Skill"
+                        name="skill"
+                        onChange={(data) => this.handleChange(data, "skill")}
+                        value={skill ? { value: skill, label: skill } : null}
+                        options={optionsSkill}
+                      ></Select>
+                      {this.errorShow("skill")}
+                    </CFormGroup>
+                    {skill && (
+                      <CFormGroup>
+                        <CLabel htmlFor="expertise">{skill}</CLabel>
+
+                        <Select
+                          isMulti
+                          custom
+                          id="expertise"
+                          placeholder="Select areas of your expertise/specialities"
+                          name="expertise"
+                          value={expertiseVal}
+                          options={optionsExpertise}
+                          onChange={(e) => this.handleChange(e, "expertise")}
+                        ></Select>
+                        {this.errorShow("expertise")}
+                      </CFormGroup>
+                    )}
                   </CCol>
                   <CCol xs="6">
                     <CFormGroup>
@@ -1025,7 +1056,7 @@ class AddExpert extends Component {
                 </CFormGroup>
                 <CFormGroup row className="my-0">
                   <CCol xs="6">
-                    <CFormGroup>
+                    {/* <CFormGroup>
                       <CLabel htmlFor="skill">Skill</CLabel>
 
                       <Select
@@ -1038,12 +1069,12 @@ class AddExpert extends Component {
                         options={optionsSkill}
                       ></Select>
                       {this.errorShow("skill")}
-                    </CFormGroup>
+                    </CFormGroup> */}
                   </CCol>
 
                   {skill && (
                     <CCol xs="6">
-                      <CFormGroup>
+                      {/* <CFormGroup>
                         <CLabel htmlFor="expertise">{skill}</CLabel>
 
                         <Select
@@ -1057,7 +1088,7 @@ class AddExpert extends Component {
                           onChange={(e) => this.handleChange(e, "expertise")}
                         ></Select>
                         {this.errorShow("expertise")}
-                      </CFormGroup>
+                      </CFormGroup> */}
                     </CCol>
                   )}
                 </CFormGroup>
