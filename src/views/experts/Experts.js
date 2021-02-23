@@ -171,7 +171,7 @@ const Experts = (props) => {
                             ? item.first_name + " " + item.last_name
                             : "-"}
                         </td>
-                        <td></td>
+                        <td>{item.email ? item.email : "-"}</td>
                         <td>{item.designation}</td>
                         <td>{item.country}</td>
                         <td>{item.role}</td>

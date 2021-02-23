@@ -94,6 +94,22 @@ const Expert = (props) => {
                       </td>
                     </tr>
                   )}
+                  {expert.email && (
+                    <tr>
+                      <td>Email</td>
+                      <td>
+                        <strong>{expert.email}</strong>
+                      </td>
+                    </tr>
+                  )}
+                  {expert.contact_no && (
+                    <tr>
+                      <td>Contact</td>
+                      <td>
+                        <strong>{expert.contact_no}</strong>
+                      </td>
+                    </tr>
+                  )}
                   {expert.gender && (
                     <tr>
                       <td>Gender</td>

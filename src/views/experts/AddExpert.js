@@ -94,7 +94,8 @@ class AddExpert extends Component {
           industry,
           skills,
           service,
-
+          email,
+          contact_no,
           linkedIn,
 
           price,
@@ -111,7 +112,8 @@ class AddExpert extends Component {
           fields,
           role,
           industry,
-
+          email,
+          contact: contact_no,
           service,
           rate: price,
           linkedIn,
@@ -334,28 +336,34 @@ class AddExpert extends Component {
       return;
     }
 
-    if (contact === "") {
-      this.setState({
-        errorType: "contact",
-        errorText: <span className="text-danger">Mobile number is empty</span>,
-        loading: false,
-      });
+    // if (contact === "") {
+    //   this.setState({
+    //     errorType: "contact",
+    //     errorText: <span className="text-danger">Mobile number is empty</span>,
+    //     loading: false,
+    //   });
 
-      return;
-    } else if (contact.length < 10 || contact.length > 10) {
-      this.setState({
-        errorType: "contact",
-        errorText: (
-          <span className="text-danger">
-            {" "}
-            <b>Phone number should be of length 10</b>
-          </span>
-        ),
-        loading: false,
-      });
+    //   return;
+    // }
 
-      return;
-    } else if (contact !== "") {
+    if (contact !== "") {
+      if (contact.length < 10 || contact.length > 10) {
+        this.setState({
+          errorType: "contact",
+          errorText: (
+            <span className="text-danger">
+              {" "}
+              <b>Phone number should be of length 10</b>
+            </span>
+          ),
+          loading: false,
+        });
+
+        return;
+      }
+    }
+
+    if (contact !== "") {
       let filter = /^\d{10}$/;
       if (!filter.test(contact)) {
         this.setState({
@@ -553,6 +561,8 @@ class AddExpert extends Component {
       skill,
       expertise,
       expertImage,
+      email,
+      contact,
     } = this.state;
     let skillObj = [{ label: skill, values: expertise }];
     const timeZone = moment.tz.guess(true);
@@ -569,7 +579,8 @@ class AddExpert extends Component {
       industry,
       skills: skillObj,
       service,
-
+      email,
+      contact_no: contact ? contact : "",
       linkedIn,
 
       price: rate,
@@ -633,8 +644,8 @@ class AddExpert extends Component {
       price: rate,
       service,
       time_zone: timeZone,
-      // email,
-      // contact_no: contact,
+      email,
+      contact_no: contact ? contact : "",
     };
     if (expertImage) {
       obj.profile_pic = expertImage;
@@ -705,6 +716,7 @@ class AddExpert extends Component {
     });
   };
   render() {
+    const expert_id = this.props && this.props.match.params.id;
     const {
       first_name,
       last_name,
@@ -817,6 +829,7 @@ class AddExpert extends Component {
                         placeholder="Email"
                         onChange={this.inputHandler}
                         value={email}
+                        disabled={expert_id}
                       />
                       {this.errorShow("email")}
                     </CFormGroup>
