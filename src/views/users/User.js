@@ -196,21 +196,23 @@ const User = (props) => {
             )}
           </CCardBody>
         </CCard>
-        <CCard>
-          <CCardHeader>Usage of expert and resource features</CCardHeader>
-          <CCardBody>
-            <table className="table">
-              <tbody>
-                <tr>
-                  <td>Experts List</td>
-                </tr>
-                <tr>
-                  <td>Resources List</td>
-                </tr>
-              </tbody>
-            </table>
-          </CCardBody>
-        </CCard>
+        {!loading && (
+          <CCard>
+            <CCardHeader>Usage of expert and resource features</CCardHeader>
+            <CCardBody>
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <td>Experts List</td>
+                  </tr>
+                  <tr>
+                    <td>Resources List</td>
+                  </tr>
+                </tbody>
+              </table>
+            </CCardBody>
+          </CCard>
+        )}
       </CCol>
     </CRow>
   );
