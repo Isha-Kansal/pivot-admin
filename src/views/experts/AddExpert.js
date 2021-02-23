@@ -996,28 +996,6 @@ class AddExpert extends Component {
 
                 <CFormGroup row className="my-0">
                   <CCol xs="6">
-                    {/* <CFormGroup>
-                      <CLabel htmlFor="dateTime">Select Availability</CLabel>
-                      <InlineWidget
-                        pageSettings={{
-                          backgroundColor: "ffffff",
-                          hideEventTypeDetails: false,
-                          hideLandingPageDetails: true,
-                          primaryColor: "00a2ff",
-                          textColor: "4d5055",
-                        }}
-                        prefill={{
-                          email: "test@test.com",
-                          firstName: "Jon",
-                          lastName: "Snow",
-                          name: "Jon Snow",
-                        }}
-                        url="https://calendly.com/ikansal"
-                      />
-
-                      {this.errorShow("dateTime")}
-                    </CFormGroup> */}
-
                     <CFormGroup>
                       <CLabel htmlFor="linkedIn">LinkedIn Link</CLabel>
                       <CInput
