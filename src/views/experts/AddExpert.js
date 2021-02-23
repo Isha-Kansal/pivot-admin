@@ -566,7 +566,7 @@ class AddExpert extends Component {
     } = this.state;
     let skillObj = [{ label: skill, values: expertise }];
     const timeZone = moment.tz.guess(true);
-    console.log("9450690407909470904", timeZone);
+
     let obj = {
       id: expert_id,
       first_name,

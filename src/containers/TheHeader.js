@@ -13,7 +13,6 @@ import routes from "../routes";
 import { TheHeaderDropdown, TheSidebar } from "./index";
 
 const TheHeader = (props) => {
-  console.log("0569305909079307903", props);
   const toggleSidebar = () => {
     props.toggleSideBar();
   };

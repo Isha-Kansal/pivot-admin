@@ -630,7 +630,6 @@ class AddResource extends Component {
       });
     }
     if (type === "category") {
-      console.log("84568954899084", data);
       let arr;
       if (data.length <= 3) {
         arr = data.map((el) => {

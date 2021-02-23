@@ -204,6 +204,20 @@ const Expert = (props) => {
             )}
           </CCardBody>
         </CCard>
+        <CCard>
+          <CCardHeader>
+            List of Users that the expert has had calls with
+          </CCardHeader>
+          <CCardBody>
+            <table className="table">
+              <tbody>
+                <tr>
+                  <td>Users List</td>
+                </tr>
+              </tbody>
+            </table>
+          </CCardBody>
+        </CCard>
       </CCol>
     </CRow>
   );
