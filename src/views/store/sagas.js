@@ -39,6 +39,12 @@ import {
   FETCH_ONE_EXPERT_REQUEST,
   FETCH_ONE_EXPERT_FAILED,
   FETCH_ONE_EXPERT_SUCCESS,
+  DELETE_EXPERT_REQUEST,
+  DELETE_EXPERT_SUCCESS,
+  DELETE_EXPERT_FAILED,
+  EDIT_EXPERT_REQUEST,
+  EDIT_EXPERT_SUCCESS,
+  EDIT_EXPERT_FAILED,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -62,6 +68,10 @@ async function callEditResource(data) {
   const res = await apiCallPost(data.url, data.payload);
   return res;
 }
+async function callEditExpert(data) {
+  const res = await apiCallPost(data.url, data.payload);
+  return res;
+}
 
 async function callAddImage(data) {
   const res = await apiCallPost(data.url, data.payload);
@@ -74,6 +84,10 @@ async function callFetchUsers(data) {
 }
 
 async function callDeleteResource(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+async function callDeleteExpert(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
@@ -281,6 +295,22 @@ function* editResource(action) {
   }
 }
 
+function* editExpert(action) {
+  const response = yield call(callEditExpert, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: EDIT_EXPERT_SUCCESS,
+        editExpertData: response.data.data,
+      });
+    } else {
+      yield put({ type: EDIT_EXPERT_FAILED });
+    }
+  }
+}
+
 function* addImage(action) {
   const response = yield call(callAddImage, action);
 
@@ -313,6 +343,22 @@ function* deleteResource(action) {
   }
 }
 
+function* deleteExpert(action) {
+  const response = yield call(callDeleteExpert, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: DELETE_EXPERT_SUCCESS,
+        deleteExpertData: response.data,
+      });
+    } else {
+      yield put({ type: DELETE_EXPERT_FAILED });
+    }
+  }
+}
+
 export default function* LoginByAdminWatcher() {
   yield takeLatest(LOGIN_BY_ADMIN_REQUEST, loginByAdmin);
   yield takeLatest(FETCH_USERS_REQUEST, fetchUsers);
@@ -325,7 +371,8 @@ export default function* LoginByAdminWatcher() {
   yield takeLatest(ADD_IMAGE_REQUEST, addImage);
   yield takeLatest(DELETE_RESOURCE_REQUEST, deleteResource);
   yield takeLatest(EDIT_RESOURCE_REQUEST, editResource);
-
+  yield takeLatest(EDIT_EXPERT_REQUEST, editExpert);
+  yield takeLatest(DELETE_EXPERT_REQUEST, deleteExpert);
   yield takeLatest(FETCH_EXPERTS_REQUEST, fetchExperts);
   yield takeLatest(FETCH_ONE_EXPERT_REQUEST, fetchOneExpert);
 }

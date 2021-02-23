@@ -13,6 +13,8 @@ import {
   ADD_EXPERT_REQUEST,
   FETCH_EXPERTS_REQUEST,
   FETCH_ONE_EXPERT_REQUEST,
+  DELETE_EXPERT_REQUEST,
+  EDIT_EXPERT_REQUEST,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -45,6 +47,15 @@ export const addExpert = (url, body, callback) => {
 export const editResource = (url, body, callback) => {
   return {
     type: EDIT_RESOURCE_REQUEST,
+    url,
+    payload: body,
+    callback,
+  };
+};
+
+export const editExpert = (url, body, callback) => {
+  return {
+    type: EDIT_EXPERT_REQUEST,
     url,
     payload: body,
     callback,
@@ -83,6 +94,15 @@ export const fetchUsers = (body, callback) => {
 export const deleteResource = (body, callback) => {
   return {
     type: DELETE_RESOURCE_REQUEST,
+
+    payload: body,
+    callback,
+  };
+};
+
+export const deleteExpert = (body, callback) => {
+  return {
+    type: DELETE_EXPERT_REQUEST,
 
     payload: body,
     callback,

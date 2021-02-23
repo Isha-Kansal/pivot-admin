@@ -41,6 +41,13 @@ const {
   FETCH_ONE_EXPERT_REQUEST,
   FETCH_ONE_EXPERT_FAILED,
   FETCH_ONE_EXPERT_SUCCESS,
+  DELETE_EXPERT_REQUEST,
+  DELETE_EXPERT_SUCCESS,
+  DELETE_EXPERT_FAILED,
+
+  EDIT_EXPERT_REQUEST,
+  EDIT_EXPERT_SUCCESS,
+  EDIT_EXPERT_FAILED,
 } = require("./types");
 
 const initialState = {
@@ -57,7 +64,9 @@ const initialState = {
   addImage: {},
   saveImage: "",
   deleteResourceData: {},
+  deleteExpertData: {},
   editResourceData: {},
+  editExpertData: {},
   saveResourceData: {},
 };
 
@@ -265,6 +274,23 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
 
+    case DELETE_EXPERT_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_EXPERT_SUCCESS: {
+      return {
+        ...state,
+        deleteExpertData: action.deleteExpertData || {},
+      };
+    }
+    case DELETE_EXPERT_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
     case EDIT_RESOURCE_REQUEST: {
       return {
         ...state,
@@ -277,6 +303,23 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
     case EDIT_RESOURCE_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case EDIT_EXPERT_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case EDIT_EXPERT_SUCCESS: {
+      return {
+        ...state,
+        editExpertData: action.editExpertData || {},
+      };
+    }
+    case EDIT_EXPERT_FAILED: {
       return {
         ...state,
       };

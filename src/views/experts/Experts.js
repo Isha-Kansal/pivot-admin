@@ -13,7 +13,7 @@ import {
   CButton,
   CDataTable,
 } from "@coreui/react";
-import { fetchExperts } from "../store/action";
+import { fetchExperts, deleteExpert } from "../store/action";
 import { connect } from "react-redux";
 import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
@@ -68,11 +68,24 @@ const Experts = (props) => {
     e.stopPropagation();
     props.history.push(`/editExpert/${item.id}`);
   };
-  const deleteExpert = (e, item) => {
+
+  const onDelete = (e, id) => {
+    setIdExpert(id);
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
-    // alert("deleted");
+  };
+
+  const deleteExpert = (id) => {
+    if (idExpert === id) setModalOpen(false);
+    setLoading(true);
+    props.deleteExpert(`expert/delete/${id}`, (value) => {
+      if (value.status === 200) {
+        NotificationManager.success("Expert deleted successfully", "", 1000);
+        setLoading(false);
+        callApiToFetchAllExperts();
+      }
+    });
   };
   useEffect(() => {
     callApiToFetchAllExperts();
@@ -179,7 +192,7 @@ const Experts = (props) => {
                           </Tooltip>
                           <button
                             className="icon"
-                            onClick={(e) => deleteExpert(e, item.id)}
+                            onClick={(e) => onDelete(e, item._id)}
                             id={`delete-${index}`}
                           >
                             <img src={DELETE} className="ml-3" />
@@ -213,10 +226,10 @@ const Experts = (props) => {
               {modalOpen && (
                 <CommonModal
                   isOpen={modalOpen}
-                  toggle={(e) => deleteExpert(e)}
-                  // blockUser={(e) => blockUser(e, idUser)}
-                  // id={idUser}
-                  // type={type}
+                  toggle={(e) => onDelete(e)}
+                  block_delete={(e) => deleteExpert(e, idExpert)}
+                  id={idExpert}
+                  type="deleteExpert"
                 />
               )}
             </div>
@@ -234,6 +247,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchExperts,
+      deleteExpert,
     },
     dispatch
   );
