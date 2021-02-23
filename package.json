@@ -22,6 +22,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "core-js": "^3.8.1",
+    "countries-and-timezones": "^2.3.1",
     "enzyme": "^3.11.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.33",

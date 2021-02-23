@@ -630,13 +630,18 @@ class AddResource extends Component {
       });
     }
     if (type === "category") {
-      let arr = data.map((el) => {
-        return el.value;
-      });
-
-      this.setState({
-        category: arr,
-      });
+      console.log("84568954899084", data);
+      let arr;
+      if (data.length <= 3) {
+        arr = data.map((el) => {
+          return el.value;
+        });
+        this.setState({
+          category: arr,
+        });
+      } else {
+        NotificationManager.info("You can select upto 3 only", "", 1000);
+      }
     }
     if (type === "pace") {
       this.setState({

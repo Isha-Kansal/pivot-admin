@@ -179,26 +179,31 @@ const Experts = (props) => {
                           {createdAt !== "Invalid date" ? createdAt : "-"}
                         </td>
                         <td>
-                          <button
-                            id={`edit-${index}`}
-                            className="icon"
-                            onClick={(e) => editExpert(e, item)}
-                          >
-                            <img src={EDIT} className="ml-3" />
-                          </button>
-                          <Tooltip placement="left" target={`edit-${index}`}>
-                            Edit
-                          </Tooltip>
-                          <button
-                            className="icon"
-                            onClick={(e) => onDelete(e, item._id)}
-                            id={`delete-${index}`}
-                          >
-                            <img src={DELETE} className="ml-3" />
-                          </button>
-                          <Tooltip placement="right" target={`delete-${index}`}>
-                            Delete
-                          </Tooltip>
+                          <div className="d-flex align-items-center">
+                            <button
+                              id={`edit-${index}`}
+                              className="icon"
+                              onClick={(e) => editExpert(e, item)}
+                            >
+                              <img src={EDIT} className="ml-3" />
+                            </button>
+                            <Tooltip placement="left" target={`edit-${index}`}>
+                              Edit
+                            </Tooltip>
+                            <button
+                              className="icon"
+                              onClick={(e) => onDelete(e, item._id)}
+                              id={`delete-${index}`}
+                            >
+                              <img src={DELETE} className="ml-3" />
+                            </button>
+                            <Tooltip
+                              placement="right"
+                              target={`delete-${index}`}
+                            >
+                              Delete
+                            </Tooltip>
+                          </div>
                         </td>
                       </tr>
                     );

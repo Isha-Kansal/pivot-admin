@@ -152,13 +152,19 @@ class AddExpert extends Component {
   };
   handleChange = (data, type) => {
     this.clearError();
+
     if (type === "fields") {
-      let arr = data.map((el) => {
-        return el.value;
-      });
-      this.setState({
-        fields: arr,
-      });
+      let arr;
+      if (data.length <= 3) {
+        arr = data.map((el) => {
+          return el.value;
+        });
+        this.setState({
+          fields: arr,
+        });
+      } else {
+        NotificationManager.info("You can select upto 3 only", "", 1000);
+      }
     }
     if (type === "gender") {
       this.setState({
@@ -176,12 +182,17 @@ class AddExpert extends Component {
       });
     }
     if (type === "expertise") {
-      let arr = data.map((el) => {
-        return el.value;
-      });
-      this.setState({
-        expertise: arr,
-      });
+      let arr;
+      if (data.length <= 3) {
+        arr = data.map((el) => {
+          return el.value;
+        });
+        this.setState({
+          expertise: arr,
+        });
+      } else {
+        NotificationManager.info("You can select upto 3 only", "", 1000);
+      }
     }
     if (type === "role") {
       this.setState({
@@ -432,30 +443,6 @@ class AddExpert extends Component {
       return;
     }
 
-    if (skill === undefined) {
-      this.setState({
-        errorType: "skill",
-        errorText: (
-          <span className="text-danger">
-            <b>Select your skill</b>
-          </span>
-        ),
-      });
-      return;
-    }
-
-    if (expertise.length === 0) {
-      this.setState({
-        errorType: "expertise",
-        errorText: (
-          <span className="text-danger">
-            <b>Please enter your expert areas</b>
-          </span>
-        ),
-      });
-      return;
-    }
-
     if (service === "") {
       this.setState({
         errorType: "service",
@@ -516,7 +503,30 @@ class AddExpert extends Component {
       });
       return;
     }
-    debugger;
+    if (skill === undefined) {
+      this.setState({
+        errorType: "skill",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your skill</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
+    if (expertise.length === 0) {
+      this.setState({
+        errorType: "expertise",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter your expert areas</b>
+          </span>
+        ),
+      });
+      return;
+    }
+
     if (!expert_id) {
       this.callApiAddExpert();
     } else {
@@ -546,6 +556,7 @@ class AddExpert extends Component {
     } = this.state;
     let skillObj = [{ label: skill, values: expertise }];
     const timeZone = moment.tz.guess(true);
+    console.log("9450690407909470904", timeZone);
     let obj = {
       id: expert_id,
       first_name,
@@ -721,6 +732,7 @@ class AddExpert extends Component {
     let expertiseVal = optionsExpertise.filter((item) => {
       return expertise.includes(item.label);
     });
+
     return (
       <CRow>
         <CCol xs="12" sm="12">
@@ -733,7 +745,10 @@ class AddExpert extends Component {
               <div className="update-profile-image">
                 <img
                   id="output"
-                  style={{ width: "50px", height: "50px" }}
+                  style={{
+                    minWidth: "50px",
+                    height: "50px",
+                  }}
                   src={expertImage ? expertImage : Avatar}
                   alt="profile"
                   className="profile negative-margin"
@@ -933,45 +948,6 @@ class AddExpert extends Component {
                 <CFormGroup row className="my-0">
                   <CCol xs="6">
                     <CFormGroup>
-                      <CLabel htmlFor="skill">Skill</CLabel>
-
-                      <Select
-                        custom
-                        id="skill"
-                        placeholder="Select Skill"
-                        name="skill"
-                        onChange={(data) => this.handleChange(data, "skill")}
-                        value={skill ? { value: skill, label: skill } : null}
-                        options={optionsSkill}
-                      ></Select>
-                      {this.errorShow("skill")}
-                    </CFormGroup>
-                  </CCol>
-
-                  {skill && (
-                    <CCol xs="6">
-                      <CFormGroup>
-                        <CLabel htmlFor="expertise">{skill}</CLabel>
-
-                        <Select
-                          isMulti
-                          custom
-                          id="expertise"
-                          placeholder="Select areas of your expertise/specialities"
-                          name="expertise"
-                          value={expertiseVal}
-                          options={optionsExpertise}
-                          onChange={(e) => this.handleChange(e, "expertise")}
-                        ></Select>
-                        {this.errorShow("expertise")}
-                      </CFormGroup>
-                    </CCol>
-                  )}
-                </CFormGroup>
-
-                <CFormGroup row className="my-0">
-                  <CCol xs="6">
-                    <CFormGroup>
                       <CLabel htmlFor="service">Service</CLabel>
 
                       <Select
@@ -1055,6 +1031,44 @@ class AddExpert extends Component {
                       {this.errorShow("about")}
                     </CFormGroup>
                   </CCol>
+                </CFormGroup>
+                <CFormGroup row className="my-0">
+                  <CCol xs="6">
+                    <CFormGroup>
+                      <CLabel htmlFor="skill">Skill</CLabel>
+
+                      <Select
+                        custom
+                        id="skill"
+                        placeholder="Select Skill"
+                        name="skill"
+                        onChange={(data) => this.handleChange(data, "skill")}
+                        value={skill ? { value: skill, label: skill } : null}
+                        options={optionsSkill}
+                      ></Select>
+                      {this.errorShow("skill")}
+                    </CFormGroup>
+                  </CCol>
+
+                  {skill && (
+                    <CCol xs="6">
+                      <CFormGroup>
+                        <CLabel htmlFor="expertise">{skill}</CLabel>
+
+                        <Select
+                          isMulti
+                          custom
+                          id="expertise"
+                          placeholder="Select areas of your expertise/specialities"
+                          name="expertise"
+                          value={expertiseVal}
+                          options={optionsExpertise}
+                          onChange={(e) => this.handleChange(e, "expertise")}
+                        ></Select>
+                        {this.errorShow("expertise")}
+                      </CFormGroup>
+                    </CCol>
+                  )}
                 </CFormGroup>
               </CForm>
             </CCardBody>
