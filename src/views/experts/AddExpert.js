@@ -1,13 +1,19 @@
 import React, { Component } from "react";
 // import DateTimePicker from "react-datetime-picker";
 // import { PopupWidget } from "react-calendly";
-import { addExpert, addImage } from "../store/action";
+import {
+  addExpert,
+  addImage,
+  fetchOneExpert,
+  editExpert,
+} from "../store/action";
 import moment from "moment-timezone";
 import { connect } from "react-redux";
 import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import BackArrow from "../../assets/icons/left-arrow.svg";
+import Loader from "../../loader";
 import {
   CButton,
   CCard,
@@ -55,7 +61,7 @@ class AddExpert extends Component {
       country: "",
       designation: "",
       expertise: [],
-
+      loadiing: false,
       role: "",
       industry: "",
       fields: [],
@@ -68,6 +74,53 @@ class AddExpert extends Component {
       selectedDate: new Date(),
       linkedIn: "",
     };
+  }
+  componentDidMount() {
+    const expert_id = this.props && this.props.match.params.id;
+
+    if (expert_id) {
+      this.setState({
+        loadiing: true,
+      });
+      this.props.fetchOneExpert(`expert/${expert_id}`, (value) => {
+        const {
+          first_name,
+          last_name,
+          gender,
+          country,
+          designation,
+          fields,
+          role,
+          industry,
+          skills,
+          service,
+
+          linkedIn,
+
+          price,
+          info,
+        } = value.data.expert;
+
+        this.setState({
+          loadiing: false,
+          first_name,
+          last_name,
+          gender,
+          country,
+          designation,
+          fields,
+          role,
+          industry,
+
+          service,
+          rate: price,
+          linkedIn,
+          about: info,
+          skill: skills && skills[0] && skills[0].label,
+          expertise: skills && skills[0] && skills[0].values,
+        });
+      });
+    }
   }
   uploadImage = (event) => {
     this.clearError();
@@ -164,6 +217,7 @@ class AddExpert extends Component {
   };
   onSubmit = (e) => {
     const expert_id = this.props && this.props.match.params.id;
+
     const {
       first_name,
       last_name,
@@ -462,11 +516,71 @@ class AddExpert extends Component {
       });
       return;
     }
+    debugger;
     if (!expert_id) {
       this.callApiAddExpert();
     } else {
-      // this.callApiEditExpert();
+      this.callApiEditExpert();
     }
+  };
+
+  callApiEditExpert = () => {
+    const expert_id = this.props && this.props.match.params.id;
+    const {
+      first_name,
+      last_name,
+      gender,
+      country,
+      designation,
+      fields,
+      role,
+      industry,
+
+      service,
+      rate,
+      linkedIn,
+      about,
+      skill,
+      expertise,
+      expertImage,
+    } = this.state;
+    let skillObj = [{ label: skill, values: expertise }];
+    const timeZone = moment.tz.guess(true);
+    let obj = {
+      id: expert_id,
+      first_name,
+      last_name,
+      gender,
+      country,
+      designation,
+      fields,
+      role,
+      industry,
+      skills: skillObj,
+      service,
+
+      linkedIn,
+
+      price: rate,
+      info: about,
+      time_zone: timeZone,
+    };
+    if (expertImage) {
+      obj.profile_pic = expertImage;
+    }
+
+    this.setState({
+      loadiing: true,
+    });
+    this.props.editExpert("expert/update-profile", obj, (value) => {
+      if (value.status === 200) {
+        NotificationManager.success("Expert edit successfully", "", 1000);
+        this.props.history.push("/experts");
+        this.setState({
+          loadiing: false,
+        });
+      }
+    });
   };
 
   callApiAddExpert = () => {
@@ -491,7 +605,7 @@ class AddExpert extends Component {
     } = this.state;
     const timeZone = moment.tz.guess(true);
     let skillObj = [{ label: skill, values: expertise }];
-    console.log("8458967049704079", skillObj);
+
     let obj = {
       // profile_pic:expertImage,
       first_name,
@@ -583,7 +697,7 @@ class AddExpert extends Component {
     const {
       first_name,
       last_name,
-
+      loadiing,
       designation,
       country,
       expertise,
@@ -611,6 +725,7 @@ class AddExpert extends Component {
       <CRow>
         <CCol xs="12" sm="12">
           <CCard className="expert-card">
+            {loadiing && <Loader />}
             <CCardHeader>
               <CButton onClick={this.handleBack} className="backBtn">
                 <img src={BackArrow} className="mr-2" /> Back
@@ -979,6 +1094,8 @@ const mapDispatchToProps = (dispatch) => {
     {
       addExpert,
       addImage,
+      fetchOneExpert,
+      editExpert,
     },
     dispatch
   );

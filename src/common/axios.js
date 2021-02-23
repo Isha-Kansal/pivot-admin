@@ -21,6 +21,7 @@ export const apiCallPost = async (url, data) => {
         localStorage.setItem("isLoggedIn", false);
         NotificationManager.info(res.data.message, "", 1000);
       }
+
       return res;
     });
 };

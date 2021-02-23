@@ -62,11 +62,10 @@ const Experts = (props) => {
   };
 
   const editExpert = (e, item) => {
-    console.log("8956786905897", item);
     setIdExpert(item.id);
     e.preventDefault();
     e.stopPropagation();
-    props.history.push(`/editExpert/${item.id}`);
+    props.history.push(`/editExpert/${item._id}`);
   };
 
   const onDelete = (e, id) => {
