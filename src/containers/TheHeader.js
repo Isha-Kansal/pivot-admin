@@ -1,5 +1,5 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useState } from "react";
+
 import { withRouter } from "react-router-dom";
 import {
   CHeader,
@@ -10,22 +10,15 @@ import {
 } from "@coreui/react";
 
 import routes from "../routes";
-import { TheHeaderDropdown } from "./index";
+import { TheHeaderDropdown, TheSidebar } from "./index";
 
 const TheHeader = (props) => {
-  const dispatch = useDispatch();
-  const sidebarShow = useSelector((state) => state.sidebarShow);
+  console.log("0569305909079307903", props);
   const toggleSidebar = () => {
-    const val = [true, "responsive"].includes(sidebarShow)
-      ? false
-      : "responsive";
-    dispatch({ type: "set", sidebarShow: val });
+    props.toggleSideBar();
   };
   const toggleSidebarMobile = () => {
-    const val = [false, "responsive"].includes(sidebarShow)
-      ? true
-      : "responsive";
-    dispatch({ type: "set", sidebarShow: val });
+    props.toggleSideBar();
   };
   return (
     <CHeader withSubheader>
@@ -43,6 +36,7 @@ const TheHeader = (props) => {
 
       <CHeaderNav className="px-3">
         <TheHeaderDropdown history={props.history} />
+        <TheSidebar sidebarOpen={props.sidebarOpen} />
       </CHeaderNav>
       <CSubheader className="px-3 justify-content-between">
         <CBreadcrumbRouter
