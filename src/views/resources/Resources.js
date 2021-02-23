@@ -204,7 +204,7 @@ const Resources = (props) => {
             </Table>
 
             <div className="text-center pagination-input">
-              {count > 10 && (
+              {count > 10 && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"
