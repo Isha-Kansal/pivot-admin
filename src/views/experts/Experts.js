@@ -133,6 +133,7 @@ const Experts = (props) => {
                   <th className="text-nowrap ">Name</th>
 
                   <th>Email</th>
+
                   <th>Designation</th>
 
                   <th>Country</th>
@@ -170,7 +171,7 @@ const Experts = (props) => {
                             ? item.first_name + " " + item.last_name
                             : "-"}
                         </td>
-                        <td>{/* {item.email ? item.email : "-"} */}</td>
+                        <td></td>
                         <td>{item.designation}</td>
                         <td>{item.country}</td>
                         <td>{item.role}</td>
