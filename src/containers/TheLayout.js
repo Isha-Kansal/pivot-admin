@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { TheContent, TheSidebar, TheHeader } from "./index";
 
 const TheLayout = () => {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const toggleSideBar = () => {
     setSidebarOpen(!sidebarOpen);
   };

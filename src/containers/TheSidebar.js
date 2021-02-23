@@ -29,7 +29,7 @@ const TheSidebar = (props) => {
         onShowChange={props.setSidebarOpen}
         hideOnMobileClick={true}
       >
-        <CSidebarBrand className="d-md-down-none" to="/users">
+        <CSidebarBrand className="" to="/users">
           <LogoFull className="c-sidebar-brand-full" height={35} />
           <LogoMinimized className="c-sidebar-brand-minimized" height={35} />
         </CSidebarBrand>
@@ -45,7 +45,7 @@ const TheSidebar = (props) => {
             }}
           />
         </CSidebarNav>
-        <CSidebarMinimizer className="c-d-md-down-none" />
+        {/* <CSidebarMinimizer className="c-d-md-down-none" /> */}
       </CSidebar>
     </>
   );
