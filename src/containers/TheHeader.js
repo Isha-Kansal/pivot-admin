@@ -17,6 +17,7 @@ const TheHeader = (props) => {
     props.toggleSideBar();
   };
   const toggleSidebarMobile = () => {
+    console.log("toggleSidebarMobile");
     props.toggleSideBar();
   };
   return (
@@ -35,7 +36,6 @@ const TheHeader = (props) => {
 
       <CHeaderNav className="px-3">
         <TheHeaderDropdown history={props.history} />
-        <TheSidebar sidebarOpen={props.sidebarOpen} />
       </CHeaderNav>
       <CSubheader className="px-3 justify-content-between">
         <CBreadcrumbRouter

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import DateTimePicker from "react-datetime-picker";
 // import { PopupWidget } from "react-calendly";
+import ADD from "../../assets/icons/add.svg";
 import {
   addExpert,
   addImage,
@@ -14,6 +15,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import BackArrow from "../../assets/icons/left-arrow.svg";
 import Loader from "../../loader";
+import CANCEL from "../../assets/icons/cancel.svg";
 import {
   CButton,
   CCard,
@@ -65,7 +67,7 @@ class AddExpert extends Component {
       role: "",
       industry: "",
       fields: [],
-      about: "",
+      about: [],
       errorType: "",
       errorText: "",
       service: "",
@@ -101,7 +103,9 @@ class AddExpert extends Component {
           price,
           info,
         } = value.data.expert;
-
+        const infoData = info.map((el) => {
+          return { value: el };
+        });
         this.setState({
           loadiing: false,
           first_name,
@@ -117,7 +121,7 @@ class AddExpert extends Component {
           service,
           rate: price,
           linkedIn,
-          about: info,
+          about: infoData,
           skill: skills && skills[0] && skills[0].label,
           expertise: skills && skills[0] && skills[0].values,
         });
@@ -523,12 +527,23 @@ class AddExpert extends Component {
       });
       return;
     }
-    if (about === "") {
+    if (about.length === 0) {
       this.setState({
         errorType: "about",
         errorText: (
           <span className="text-danger">
-            <b>Please enter some information about you</b>
+            <b>Please add some information</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (about.length === 1 && about[0].value === "") {
+      this.setState({
+        errorType: "about",
+        errorText: (
+          <span className="text-danger">
+            <b>Please add some information</b>
           </span>
         ),
       });
@@ -564,6 +579,9 @@ class AddExpert extends Component {
       email,
       contact,
     } = this.state;
+    let aboutData = about.map((el) => {
+      return el.value;
+    });
     let skillObj = [{ label: skill, values: expertise }];
     const timeZone = moment.tz.guess(true);
 
@@ -584,7 +602,7 @@ class AddExpert extends Component {
       linkedIn,
 
       price: rate,
-      info: about,
+      info: aboutData,
       time_zone: timeZone,
     };
     if (expertImage) {
@@ -625,6 +643,9 @@ class AddExpert extends Component {
       about,
       expertImage,
     } = this.state;
+    let aboutData = about.map((el) => {
+      return el.value;
+    });
     const timeZone = moment.tz.guess(true);
     let skillObj = [{ label: skill, values: expertise }];
 
@@ -638,7 +659,7 @@ class AddExpert extends Component {
       industry,
       skills: skillObj,
       fields,
-      info: about,
+      info: aboutData,
       linkedIn,
       designation,
       price: rate,
@@ -697,7 +718,7 @@ class AddExpert extends Component {
       role: "",
       industry: "",
       fields: [],
-      about: "",
+      about: [],
       errorType: "",
       errorText: "",
       service: "",
@@ -713,6 +734,43 @@ class AddExpert extends Component {
   onChange = (date) => {
     this.setState({
       selectedDate: date,
+    });
+  };
+  handlePlusButton = (e) => {
+    const { about } = this.state;
+    const newArr = [...about];
+    e.preventDefault();
+    e.stopPropagation();
+    let newAbout = {
+      value: "",
+    };
+    newArr.push(newAbout);
+    this.setState({
+      about: newArr,
+    });
+  };
+  inputAbout = (e, index) => {
+    let aboutToUpdate = this.state.about[index];
+    const newArray = [...this.state.about];
+    aboutToUpdate = {
+      ...aboutToUpdate,
+      value: e.target.value,
+    };
+
+    newArray[index] = aboutToUpdate;
+
+    this.clearError();
+    this.setState({ [e.target.name]: e.target.value, about: newArray });
+  };
+  handleCancel = (e, index) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const { about } = this.state;
+
+    const newArr = [...about];
+    newArr.splice(index, 1);
+    this.setState({
+      about: newArr,
     });
   };
   render() {
@@ -1046,7 +1104,42 @@ class AddExpert extends Component {
                   <CCol xs="12">
                     <CFormGroup>
                       <CLabel htmlFor="about">About</CLabel>
-                      <CTextarea
+                      <div
+                        onClick={this.handlePlusButton}
+                        class="d-flex justify-content-between add-list"
+                      >
+                        <CLabel htmlFor="pros">Add Information</CLabel>
+                        <button className="icon">
+                          <img src={ADD} className="ml-3" />
+                        </button>
+                      </div>
+                      {this.errorShow("about")}
+                      {about &&
+                        about.length > 0 &&
+                        about.map((el, index) => {
+                          return (
+                            <div className="d-flex align-items-center mb-2 ">
+                              <CTextarea
+                                rows="6"
+                                id={`about${index}`}
+                                name={`about${index}`}
+                                placeholder={`${index + 1}.`}
+                                autoComplete={`about${index}`}
+                                onChange={(e) => {
+                                  this.inputAbout(e, index);
+                                }}
+                                value={el.value}
+                              />
+                              <button
+                                className="icon"
+                                onClick={(e) => this.handleCancel(e, index)}
+                              >
+                                <img src={CANCEL} className="ml-3" />
+                              </button>
+                            </div>
+                          );
+                        })}
+                      {/* <CTextarea
                         name="about"
                         id="about"
                         rows="6"
@@ -1054,7 +1147,7 @@ class AddExpert extends Component {
                         placeholder="Content..."
                         value={about}
                       />
-                      {this.errorShow("about")}
+                      {this.errorShow("about")} */}
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>

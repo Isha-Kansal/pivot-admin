@@ -4,13 +4,23 @@ import { TheContent, TheSidebar, TheHeader } from "./index";
 const TheLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const toggleSideBar = () => {
-    setSidebarOpen(!sidebarOpen);
+    setSidebarOpen((prevState) => {
+      if (prevState === "responsive") {
+        return true;
+      }
+
+      return !prevState;
+    });
   };
-  console.log("485695478948798", sidebarOpen);
+
+  const opneSideBar = (val) => {
+    setSidebarOpen(val);
+  };
+
   return (
     <div className="c-app c-default-layout">
       {sidebarOpen && (
-        <TheSidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+        <TheSidebar sidebarOpen={sidebarOpen} setSidebarOpen={opneSideBar} />
       )}
       <div className="c-wrapper">
         <TheHeader sidebarOpen={sidebarOpen} toggleSideBar={toggleSideBar} />

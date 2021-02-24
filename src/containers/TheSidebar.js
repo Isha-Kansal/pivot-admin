@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+
 import {
   CCreateElement,
   CSidebar,
@@ -7,26 +7,21 @@ import {
   CSidebarNav,
   CSidebarNavDivider,
   CSidebarNavTitle,
-  CSidebarMinimizer,
   CSidebarNavDropdown,
   CSidebarNavItem,
 } from "@coreui/react";
 
 import { LogoFull, LogoMinimized } from "../containers/logo";
 
-// sidebar nav config
 import navigation from "./_nav";
 
 const TheSidebar = (props) => {
-  const dispatch = useDispatch();
-  const show = useSelector((state) => state.sidebarShow);
-
+  console.log("setSidebarOpen : ", props);
   return (
     <>
       <CSidebar
         show={props.sidebarOpen}
-        // onShowChange={(val) => dispatch({ type: "set", sidebarShow: val })}
-        onShowChange={props.setSidebarOpen}
+        onShowChange={(val) => props.setSidebarOpen(val)}
         hideOnMobileClick={true}
       >
         <CSidebarBrand className="" to="/users">
@@ -45,10 +40,9 @@ const TheSidebar = (props) => {
             }}
           />
         </CSidebarNav>
-        {/* <CSidebarMinimizer className="c-d-md-down-none" /> */}
       </CSidebar>
     </>
   );
 };
 
-export default React.memo(TheSidebar);
+export default TheSidebar;

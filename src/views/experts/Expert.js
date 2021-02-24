@@ -29,12 +29,14 @@ const Expert = (props) => {
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
   let fields = expert && expert.fields && expert.fields.join(", ");
+  let info = expert && expert.info && expert.info.join(", ");
 
   let skills =
     expert.skills &&
     expert.skills[0] &&
     expert.skills[0].values &&
     expert.skills[0].values.join(", ");
+
   return (
     <CRow>
       <CCol lg={12}>
@@ -126,14 +128,15 @@ const Expert = (props) => {
                       </td>
                     </tr>
                   )}
-                  {expert.info && (
+                  {info && (
                     <tr>
                       <td>About</td>
                       <td>
-                        <strong>{expert.info}</strong>
+                        <strong>{info}</strong>
                       </td>
                     </tr>
                   )}
+
                   {expert.role && (
                     <tr>
                       <td>Current Role</td>
