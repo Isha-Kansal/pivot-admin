@@ -16,7 +16,6 @@ import { LogoFull, LogoMinimized } from "../containers/logo";
 import navigation from "./_nav";
 
 const TheSidebar = (props) => {
-  console.log("setSidebarOpen : ", props);
   return (
     <>
       <CSidebar

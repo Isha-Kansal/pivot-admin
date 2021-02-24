@@ -17,7 +17,6 @@ const TheHeader = (props) => {
     props.toggleSideBar();
   };
   const toggleSidebarMobile = () => {
-    console.log("toggleSidebarMobile");
     props.toggleSideBar();
   };
   return (
