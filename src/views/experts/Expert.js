@@ -170,6 +170,14 @@ const Expert = (props) => {
                       </td>
                     </tr>
                   )}
+                  {expert.calendly && (
+                    <tr>
+                      <td>Calendly Link</td>
+                      <td>
+                        <strong>{expert.calendly}</strong>
+                      </td>
+                    </tr>
+                  )}
                   {expert.price && (
                     <tr>
                       <td>Rate</td>

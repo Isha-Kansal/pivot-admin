@@ -100,7 +100,7 @@ class AddExpert extends Component {
           email,
           contact_no,
           linkedIn,
-
+          calendly,
           price,
           info,
         } = value.data.expert;
@@ -125,6 +125,7 @@ class AddExpert extends Component {
           about: infoData,
           skill: skills && skills[0] && skills[0].label,
           expertise: skills && skills[0] && skills[0].values,
+          calendlyLink: calendly,
         });
       });
     }
@@ -580,7 +581,7 @@ class AddExpert extends Component {
       fields,
       role,
       industry,
-
+      calendlyLink,
       service,
       rate,
       linkedIn,
@@ -612,7 +613,7 @@ class AddExpert extends Component {
       email,
       contact_no: contact ? contact : "",
       linkedIn,
-
+      calendly: calendlyLink,
       price: rate,
       info: aboutData,
       time_zone: timeZone,
@@ -654,6 +655,7 @@ class AddExpert extends Component {
       linkedIn,
       about,
       expertImage,
+      calendlyLink,
     } = this.state;
     let aboutData = about.map((el) => {
       return el.value;
@@ -679,6 +681,7 @@ class AddExpert extends Component {
       time_zone: timeZone,
       email,
       contact_no: contact ? contact : "",
+      calendly: calendlyLink,
     };
     if (expertImage) {
       obj.profile_pic = expertImage;
