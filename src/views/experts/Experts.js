@@ -13,6 +13,7 @@ import {
   CButton,
   CDataTable,
 } from "@coreui/react";
+
 import { fetchExperts, deleteExpert } from "../store/action";
 import { connect } from "react-redux";
 import { NotificationManager } from "react-notifications";
@@ -35,6 +36,7 @@ const Experts = (props) => {
   const [expertsDetails, setExpertsDetails] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const [count, setCount] = useState(0);
+  const [type, setType] = useState("");
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/experts?page=${newPage}`);
     let limit = 10;
@@ -68,8 +70,9 @@ const Experts = (props) => {
     props.history.push(`/editExpert/${item._id}`);
   };
 
-  const onDelete = (e, id) => {
+  const onDelete = (e, type, id) => {
     setIdExpert(id);
+    setType(type);
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
@@ -103,6 +106,13 @@ const Experts = (props) => {
         }
       }
     );
+  };
+  const onBlock = (e, type, item) => {
+    setIdExpert(item._id);
+    setType(type);
+    e.preventDefault();
+    e.stopPropagation();
+    setModalOpen(!modalOpen);
   };
 
   return (
@@ -193,7 +203,9 @@ const Experts = (props) => {
                             </Tooltip>
                             <button
                               className="icon"
-                              onClick={(e) => onDelete(e, item._id)}
+                              onClick={(e) =>
+                                onDelete(e, "deleteExpert", item._id)
+                              }
                               id={`delete-${index}`}
                             >
                               <img src={DELETE} className="ml-3" />
@@ -204,6 +216,14 @@ const Experts = (props) => {
                             >
                               Delete
                             </Tooltip>
+                            <CButton
+                              onClick={(e) =>
+                                onBlock(e, "deactivateExpert", item)
+                              }
+                              className="block-btn block-btn"
+                            >
+                              Deactivate
+                            </CButton>
                           </div>
                         </td>
                       </tr>
@@ -234,7 +254,7 @@ const Experts = (props) => {
                   toggle={(e) => onDelete(e)}
                   block_delete={(e) => deleteExpert(e, idExpert)}
                   id={idExpert}
-                  type="deleteExpert"
+                  type={type}
                 />
               )}
             </div>
