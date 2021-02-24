@@ -6,6 +6,7 @@ const TheLayout = () => {
   const toggleSideBar = () => {
     setSidebarOpen(!sidebarOpen);
   };
+  console.log("485695478948798", sidebarOpen);
   return (
     <div className="c-app c-default-layout">
       {sidebarOpen && (

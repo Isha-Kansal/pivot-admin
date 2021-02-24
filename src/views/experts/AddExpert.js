@@ -500,17 +500,6 @@ class AddExpert extends Component {
       }
     }
 
-    if (about === "") {
-      this.setState({
-        errorType: "about",
-        errorText: (
-          <span className="text-danger">
-            <b>Please enter some information about you</b>
-          </span>
-        ),
-      });
-      return;
-    }
     if (skill === undefined) {
       this.setState({
         errorType: "skill",
@@ -529,6 +518,17 @@ class AddExpert extends Component {
         errorText: (
           <span className="text-danger">
             <b>Please enter your expert areas</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (about === "") {
+      this.setState({
+        errorType: "about",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter some information about you</b>
           </span>
         ),
       });
@@ -1007,6 +1007,8 @@ class AddExpert extends Component {
                       />
                       {this.errorShow("linkedIn")}
                     </CFormGroup>
+                  </CCol>
+                  <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="skill">Skill</CLabel>
 
@@ -1039,13 +1041,15 @@ class AddExpert extends Component {
                       </CFormGroup>
                     )}
                   </CCol>
-                  <CCol xs="6">
+                </CFormGroup>
+                <CFormGroup row className="my-0">
+                  <CCol xs="12">
                     <CFormGroup>
                       <CLabel htmlFor="about">About</CLabel>
                       <CTextarea
                         name="about"
                         id="about"
-                        rows="9"
+                        rows="6"
                         onChange={this.inputHandler}
                         placeholder="Content..."
                         value={about}
@@ -1053,44 +1057,6 @@ class AddExpert extends Component {
                       {this.errorShow("about")}
                     </CFormGroup>
                   </CCol>
-                </CFormGroup>
-                <CFormGroup row className="my-0">
-                  <CCol xs="6">
-                    {/* <CFormGroup>
-                      <CLabel htmlFor="skill">Skill</CLabel>
-
-                      <Select
-                        custom
-                        id="skill"
-                        placeholder="Select Skill"
-                        name="skill"
-                        onChange={(data) => this.handleChange(data, "skill")}
-                        value={skill ? { value: skill, label: skill } : null}
-                        options={optionsSkill}
-                      ></Select>
-                      {this.errorShow("skill")}
-                    </CFormGroup> */}
-                  </CCol>
-
-                  {skill && (
-                    <CCol xs="6">
-                      {/* <CFormGroup>
-                        <CLabel htmlFor="expertise">{skill}</CLabel>
-
-                        <Select
-                          isMulti
-                          custom
-                          id="expertise"
-                          placeholder="Select areas of your expertise/specialities"
-                          name="expertise"
-                          value={expertiseVal}
-                          options={optionsExpertise}
-                          onChange={(e) => this.handleChange(e, "expertise")}
-                        ></Select>
-                        {this.errorShow("expertise")}
-                      </CFormGroup> */}
-                    </CCol>
-                  )}
                 </CFormGroup>
               </CForm>
             </CCardBody>
