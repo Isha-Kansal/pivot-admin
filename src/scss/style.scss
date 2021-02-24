@@ -123,3 +123,27 @@ button:focus {
 #hcsd0p5eefbackdrop {
   display: none !important;
 }
+.update-profile-image {
+  text-align: center;
+  position: relative;
+  width: 100px;
+  margin: 0 auto;
+  .profile {
+    border-radius: 50px;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+  }
+  .upload-box {
+    position: absolute;
+    right: 0px;
+    bottom: 6px;
+    line-height: 0;
+    width: 27px;
+    height: 27px;
+    box-shadow: 1px 1px 3px #575757;
+    background-color: white;
+    line-height: 23px;
+    border-radius: 50%;
+  }
+}

@@ -75,6 +75,7 @@ class AddExpert extends Component {
       expertImage: null,
       selectedDate: new Date(),
       linkedIn: "",
+      calendlyLink: "",
     };
   }
   componentDidMount() {
@@ -243,7 +244,7 @@ class AddExpert extends Component {
       gender,
       country,
       designation,
-
+      calendlyLink,
       role,
       industry,
       expertise,
@@ -503,6 +504,17 @@ class AddExpert extends Component {
         return;
       }
     }
+    if (calendlyLink === "") {
+      this.setState({
+        errorType: "calendlyLink",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter calendly link</b>
+          </span>
+        ),
+      });
+      return;
+    }
 
     if (skill === undefined) {
       this.setState({
@@ -724,6 +736,7 @@ class AddExpert extends Component {
       service: "",
       rate: "",
       linkedIn: "",
+      calendlyLink: "",
       selectedDate: new Date(),
     });
   };
@@ -794,6 +807,7 @@ class AddExpert extends Component {
       rate,
       selectedDate,
       linkedIn,
+      calendlyLink,
       skill,
     } = this.state;
     let fieldsVal = optionsFields.filter((item) => {
@@ -815,15 +829,11 @@ class AddExpert extends Component {
               <div className="update-profile-image">
                 <img
                   id="output"
-                  style={{
-                    minWidth: "50px",
-                    height: "50px",
-                  }}
                   src={expertImage ? expertImage : Avatar}
                   alt="profile"
                   className="profile negative-margin"
                 />
-                <div>
+                <div className="upload-box">
                   <Input
                     type="file"
                     accept="image/*"
@@ -1060,12 +1070,27 @@ class AddExpert extends Component {
                         name="linkedIn"
                         id="linkedIn"
                         onChange={this.inputHandler}
-                        placeholder="LinkedIn LInk"
+                        placeholder="LinkedIn Link"
                         value={linkedIn}
                       />
                       {this.errorShow("linkedIn")}
                     </CFormGroup>
                   </CCol>
+                  <CCol xs="6">
+                    <CFormGroup>
+                      <CLabel htmlFor="linkedIn">Calendly Link</CLabel>
+                      <CInput
+                        name="calendlyLink"
+                        id="calendlyLink"
+                        onChange={this.inputHandler}
+                        placeholder="Calendly Link"
+                        value={calendlyLink}
+                      />
+                      {this.errorShow("calendlyLink")}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row className="my-0">
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="skill">Skill</CLabel>
@@ -1081,6 +1106,8 @@ class AddExpert extends Component {
                       ></Select>
                       {this.errorShow("skill")}
                     </CFormGroup>
+                  </CCol>
+                  <CCol xs="6">
                     {skill && (
                       <CFormGroup>
                         <CLabel htmlFor="expertise">{skill}</CLabel>
@@ -1139,15 +1166,6 @@ class AddExpert extends Component {
                             </div>
                           );
                         })}
-                      {/* <CTextarea
-                        name="about"
-                        id="about"
-                        rows="6"
-                        onChange={this.inputHandler}
-                        placeholder="Content..."
-                        value={about}
-                      />
-                      {this.errorShow("about")} */}
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>
