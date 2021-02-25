@@ -1,5 +1,6 @@
 import React, { useState, useEffect, Fragment } from "react";
 import moment from "moment";
+import UserPlanner from "../users/UserPlanner";
 import {
   CCard,
   CCardBody,
@@ -232,7 +233,9 @@ const User = (props) => {
                     </tbody>
                   </table>
                 </CTabPane>
-                <CTabPane></CTabPane>
+                <CTabPane>
+                  <UserPlanner />
+                </CTabPane>
               </CTabContent>
             </CTabs>
           </CCardBody>
