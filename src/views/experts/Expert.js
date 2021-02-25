@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
+import {
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CRow,
+  CNavLink,
+  CNav,
+  CTabContent,
+  CTabPane,
+  CTabs,
+  CNavItem,
+} from "@coreui/react";
 import moment from "moment";
 import expertsData from "./ExpertsData";
 import Loader from "../../loader";
@@ -42,195 +54,204 @@ const Expert = (props) => {
       <CCol lg={12}>
         <CCard>
           {loading && <Loader />}
-          <CCardHeader>Expert Details</CCardHeader>
+          {/* <CCardHeader>Expert Details</CCardHeader> */}
 
           <CCardBody>
-            {expert && (
-              <table className="table">
-                <tbody>
-                  {createdAt !== "Invalid date" && (
-                    <tr>
-                      <td>Created At</td>
-                      <td>
-                        <strong> {createdAt}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {!loading && (
-                    <tr>
-                      <td>EID</td>
-                      <td>
-                        <strong>{expert._id}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.profile_pic && (
-                    <tr>
-                      <td>Picture</td>
-                      <td>
-                        <img
-                          style={{
-                            width: "100px",
-                            height: "100px",
-                            borderRadius: "4px",
-                          }}
-                          src={expert.profile_pic}
-                          alt="profile"
-                        />
-                      </td>
-                    </tr>
-                  )}
-                  {expert.first_name && (
-                    <tr>
-                      <td>First name</td>
-                      <td>
-                        <strong>{expert.first_name}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.last_name && (
-                    <tr>
-                      <td>Last name</td>
-                      <td>
-                        <strong>{expert.last_name}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.email && (
-                    <tr>
-                      <td>Email</td>
-                      <td>
-                        <strong>{expert.email}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.contact_no && (
-                    <tr>
-                      <td>Contact</td>
-                      <td>
-                        <strong>{expert.contact_no}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.gender && (
-                    <tr>
-                      <td>Gender</td>
-                      <td>
-                        <strong>{expert.gender}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.country && (
-                    <tr>
-                      <td>Country</td>
-                      <td>
-                        <strong>{expert.country}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {info && (
-                    <tr>
-                      <td>About</td>
-                      <td>
-                        <strong>{info}</strong>
-                      </td>
-                    </tr>
-                  )}
+            <CTabs>
+              <CNav variant="tabs">
+                <CNavItem>
+                  <CNavLink>Expert Details</CNavLink>
+                </CNavItem>
+                <CNavItem>
+                  <CNavLink>
+                    List of Users that the expert has had calls with
+                  </CNavLink>
+                </CNavItem>
+              </CNav>
+              <CTabContent>
+                <CTabPane>
+                  {expert && (
+                    <table className="table">
+                      <tbody>
+                        {createdAt !== "Invalid date" && (
+                          <tr>
+                            <td>Created At</td>
+                            <td>
+                              <strong> {createdAt}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {!loading && (
+                          <tr>
+                            <td>EID</td>
+                            <td>
+                              <strong>{expert._id}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.profile_pic && (
+                          <tr>
+                            <td>Picture</td>
+                            <td>
+                              <img
+                                style={{
+                                  width: "100px",
+                                  height: "100px",
+                                  borderRadius: "4px",
+                                }}
+                                src={expert.profile_pic}
+                                alt="profile"
+                              />
+                            </td>
+                          </tr>
+                        )}
+                        {expert.first_name && (
+                          <tr>
+                            <td>First name</td>
+                            <td>
+                              <strong>{expert.first_name}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.last_name && (
+                          <tr>
+                            <td>Last name</td>
+                            <td>
+                              <strong>{expert.last_name}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.email && (
+                          <tr>
+                            <td>Email</td>
+                            <td>
+                              <strong>{expert.email}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.contact_no && (
+                          <tr>
+                            <td>Contact</td>
+                            <td>
+                              <strong>{expert.contact_no}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.gender && (
+                          <tr>
+                            <td>Gender</td>
+                            <td>
+                              <strong>{expert.gender}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.country && (
+                          <tr>
+                            <td>Country</td>
+                            <td>
+                              <strong>{expert.country}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {info && (
+                          <tr>
+                            <td>About</td>
+                            <td>
+                              <strong>{info}</strong>
+                            </td>
+                          </tr>
+                        )}
 
-                  {expert.role && (
-                    <tr>
-                      <td>Current Role</td>
-                      <td>
-                        <strong>{expert.role}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.industry && (
-                    <tr>
-                      <td>Current Industry</td>
-                      <td>
-                        <strong>{expert.industry}</strong>
-                      </td>
-                    </tr>
-                  )}
+                        {expert.role && (
+                          <tr>
+                            <td>Current Role</td>
+                            <td>
+                              <strong>{expert.role}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.industry && (
+                          <tr>
+                            <td>Current Industry</td>
+                            <td>
+                              <strong>{expert.industry}</strong>
+                            </td>
+                          </tr>
+                        )}
 
-                  {expert.designation && (
-                    <tr>
-                      <td>Designation</td>
-                      <td>
-                        <strong>{expert.designation}</strong>
-                      </td>
-                    </tr>
+                        {expert.designation && (
+                          <tr>
+                            <td>Designation</td>
+                            <td>
+                              <strong>{expert.designation}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.linkedIn && (
+                          <tr>
+                            <td>LinkedIn Link</td>
+                            <td>
+                              <strong>{expert.linkedIn}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.calendly && (
+                          <tr>
+                            <td>Calendly Link</td>
+                            <td>
+                              <strong>{expert.calendly}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.price && (
+                          <tr>
+                            <td>Rate</td>
+                            <td>
+                              <strong>{expert.price}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {expert.service && (
+                          <tr>
+                            <td>Service</td>
+                            <td>
+                              <strong>{expert.service}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {fields && (
+                          <tr>
+                            <td>Fields</td>
+                            <td>
+                              <strong>{fields}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {skills && (
+                          <tr>
+                            <td>Skills</td>
+                            <td>
+                              <strong>{skills}</strong>
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
                   )}
-                  {expert.linkedIn && (
-                    <tr>
-                      <td>LinkedIn Link</td>
-                      <td>
-                        <strong>{expert.linkedIn}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.calendly && (
-                    <tr>
-                      <td>Calendly Link</td>
-                      <td>
-                        <strong>{expert.calendly}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.price && (
-                    <tr>
-                      <td>Rate</td>
-                      <td>
-                        <strong>{expert.price}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {expert.service && (
-                    <tr>
-                      <td>Service</td>
-                      <td>
-                        <strong>{expert.service}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {fields && (
-                    <tr>
-                      <td>Fields</td>
-                      <td>
-                        <strong>{fields}</strong>
-                      </td>
-                    </tr>
-                  )}
-                  {skills && (
-                    <tr>
-                      <td>Skills</td>
-                      <td>
-                        <strong>{skills}</strong>
-                      </td>
-                    </tr>
-                  )}
-                </tbody>
-              </table>
-            )}
+                </CTabPane>
+                <CTabPane>
+                  <table className="table">
+                    <tbody>
+                      <tr>
+                        <td>Users List</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </CTabPane>
+              </CTabContent>
+            </CTabs>
           </CCardBody>
         </CCard>
-        {!loading && (
-          <CCard>
-            <CCardHeader>
-              List of Users that the expert has had calls with
-            </CCardHeader>
-            <CCardBody>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <td>Users List</td>
-                  </tr>
-                </tbody>
-              </table>
-            </CCardBody>
-          </CCard>
-        )}
       </CCol>
     </CRow>
   );
