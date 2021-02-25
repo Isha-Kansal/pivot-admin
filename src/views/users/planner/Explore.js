@@ -209,7 +209,7 @@ const Explore = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Career Options</th>
+                <th className="text-nowrap ">Career Option</th>
 
                 <th>Pros</th>
                 <th>Cons</th>

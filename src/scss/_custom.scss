@@ -78,3 +78,32 @@ button {
   align-items: center;
   padding: 10px;
 }
+/*nav tabs*/
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  background-color: #f9ae76;
+  border-color: transparent;
+  color: white;
+}
+.nav-tabs a {
+  color: #000000;
+}
+.nav-tabs .nav-link {
+  border: 1px solid #e7e7e7;
+}
+
+div#accordion .card {
+  min-height: unset;
+}
+.tab-content {
+  .table th,
+  .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-bottom: 1px solid;
+    border-bottom-color: #d8dbe0;
+  }
+  .btn-link {
+    color: #f9ae76;
+  }
+}
