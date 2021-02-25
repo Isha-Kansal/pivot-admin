@@ -23,6 +23,9 @@ import CommonModal from "../../common/commonModal";
 import Tooltip from "../../common/toolTip";
 import EDIT from "../../assets/icons/edit.svg";
 import DELETE from "../../assets/icons/delete.svg";
+
+import ACTIVATE from "../../assets/icons/activate.svg";
+import DEACTIVATE from "../../assets/icons/deactivate.svg";
 import { Table } from "reactstrap";
 const Experts = (props) => {
   const offsetLimit = 10;
@@ -231,27 +234,45 @@ const Experts = (props) => {
                             >
                               <img src={DELETE} className="ml-3" />
                             </button>
-                            <Tooltip
-                              placement="right"
-                              target={`delete-${index}`}
-                            >
+                            <Tooltip placement="top" target={`delete-${index}`}>
                               Delete
                             </Tooltip>
                             {item.status !== "deactivated" && (
-                              <CButton
-                                onClick={(e) => onBlock(e, "deactivate", item)}
-                                className="block-btn block-btn"
-                              >
-                                Deactivate
-                              </CButton>
+                              <>
+                                <button
+                                  onClick={(e) =>
+                                    onBlock(e, "deactivate", item)
+                                  }
+                                  className="icon"
+                                  id={`deactivate-${index}`}
+                                >
+                                  <img src={DEACTIVATE} className="ml-3" />
+                                </button>
+                                <Tooltip
+                                  placement="top"
+                                  target={`deactivate-${index}`}
+                                >
+                                  Deactivate
+                                </Tooltip>
+                              </>
                             )}
+
                             {item.status === "deactivated" && (
-                              <CButton
-                                onClick={(e) => onBlock(e, "activate", item)}
-                                className="Unblock-btn block-btn"
-                              >
-                                Activate
-                              </CButton>
+                              <>
+                                <button
+                                  onClick={(e) => onBlock(e, "activate", item)}
+                                  className="icon"
+                                  id={`activate-${index}`}
+                                >
+                                  <img src={ACTIVATE} className="ml-3" />
+                                </button>
+                                <Tooltip
+                                  placement="top"
+                                  target={`activate-${index}`}
+                                >
+                                  Activate
+                                </Tooltip>
+                              </>
                             )}
                           </div>
                         </td>
