@@ -123,7 +123,31 @@ const Explore = (props) => {
           </CButton>
         </CCardHeader>
         <CCollapse show={accordion === 2}>
-          <CCardBody></CCardBody>
+          <CCardHeader>
+            <table className="table">
+              <tbody>
+                <tr>
+                  <td>Status</td>
+                  <td>Done</td>
+                </tr>
+              </tbody>
+            </table>
+            <form>
+              <div className="text-center search-input">
+                <input
+                  type="search"
+                  className="form-control"
+                  placeholder="Search"
+                  required
+                />
+              </div>
+            </form>
+          </CCardHeader>
+          <CCardBody>
+            <thead>
+              <th className="text-nowrap ">Career Option</th>
+            </thead>
+          </CCardBody>
         </CCollapse>
       </CCard>
 

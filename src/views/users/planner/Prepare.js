@@ -54,17 +54,25 @@ const Prepare = (props) => {
                 </div>
               </form>
             </CCardHeader>
-            {/* <Table responsive>
-              <thead>
-                <th className="text-nowrap ">Career Options</th>
-
-                <th>Family / Relatives</th>
-                <th>Friends</th>
-
-                <th>Professional Network</th>
-                <th>Other</th>
-              </thead>
-            </Table> */}
+            <table className="table">
+              <tbody>
+                <tr>
+                  <td>Resume</td>
+                </tr>
+                <tr>
+                  <td>Cover Letter Template</td>
+                </tr>
+                <tr>
+                  <td>Portfolio / Work Sample</td>
+                </tr>
+                <tr>
+                  <td>Video Profile</td>
+                </tr>
+                <tr>
+                  <td>LinkedIn Profile</td>
+                </tr>
+              </tbody>
+            </table>
           </CCardBody>
         </CCollapse>
       </CCard>
