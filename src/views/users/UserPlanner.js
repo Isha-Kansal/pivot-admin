@@ -13,14 +13,26 @@ import {
   CNav,
   CTabContent,
   CTabPane,
+  CButton,
+  CCollapse,
 } from "@coreui/react";
+import { Table } from "reactstrap";
+import Network from "./planner/Network";
+import Explore from "./planner/Explore";
+import Learn from "./planner/Learn";
+import Prepare from "./planner/Prepare";
+import Apply from "./planner/Apply";
 const UserPlanner = (props) => {
   const [loading, setLoading] = useState(false);
+
   return (
     <CRow>
       <CCol lg={12}>
         {loading && <Loader />}
         <CCard className="position-relative">
+          <CCardHeader>
+            Click on a module below to see the information
+          </CCardHeader>
           <CCardBody>
             <CTabs>
               <CNav variant="tabs">
@@ -41,7 +53,21 @@ const UserPlanner = (props) => {
                 </CNavItem>
               </CNav>
               <CTabContent>
-                <CTabPane></CTabPane>
+                <CTabPane>
+                  <Explore />
+                </CTabPane>
+                <CTabPane>
+                  <Network />
+                </CTabPane>
+                <CTabPane>
+                  <Learn />
+                </CTabPane>
+                <CTabPane>
+                  <Prepare />
+                </CTabPane>
+                <CTabPane>
+                  <Apply />
+                </CTabPane>
               </CTabContent>
             </CTabs>
           </CCardBody>
