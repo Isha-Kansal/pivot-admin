@@ -98,9 +98,10 @@ const Users = (props) => {
     let obj = {
       type: type,
       id: id,
+      user_type: "user",
     };
 
-    props.userStatus("user/change-status", obj, (value) => {
+    props.userStatus("common/change-status", obj, (value) => {
       if (value.status === 200) {
         NotificationManager.success(value.message, "", 1000);
         callApiToFetchAllUsers();

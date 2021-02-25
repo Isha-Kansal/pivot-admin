@@ -14,7 +14,7 @@ import {
   CDataTable,
 } from "@coreui/react";
 
-import { fetchExperts, deleteExpert } from "../store/action";
+import { fetchExperts, deleteExpert, userStatus } from "../store/action";
 import { connect } from "react-redux";
 import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
@@ -79,15 +79,36 @@ const Experts = (props) => {
   };
 
   const deleteExpert = (id) => {
-    if (idExpert === id) setModalOpen(false);
-    setLoading(true);
-    props.deleteExpert(`expert/delete/${id}`, (value) => {
-      if (value.status === 200) {
-        NotificationManager.success("Expert deleted successfully", "", 1000);
-        setLoading(false);
-        callApiToFetchAllExperts();
-      }
-    });
+    console.log("84598948597594789", type);
+    if (type === "deleteExpert") {
+      if (idExpert === id) setModalOpen(false);
+      setLoading(true);
+      props.deleteExpert(`expert/delete/${id}`, (value) => {
+        if (value.status === 200) {
+          NotificationManager.success("Expert deleted successfully", "", 1000);
+          setLoading(false);
+
+          callApiToFetchAllExperts();
+        }
+      });
+    } else {
+      if (idExpert === id) setModalOpen(false);
+      setLoading(true);
+      let obj = {
+        type: type,
+        id: id,
+        user_type: "expert",
+      };
+
+      props.userStatus("common/change-status", obj, (value) => {
+        console.log("89457894879470", value);
+        if (value.status === 200) {
+          NotificationManager.success(value.message, "", 1000);
+
+          callApiToFetchAllExperts();
+        }
+      });
+    }
   };
   useEffect(() => {
     callApiToFetchAllExperts();
@@ -216,14 +237,22 @@ const Experts = (props) => {
                             >
                               Delete
                             </Tooltip>
-                            <CButton
-                              onClick={(e) =>
-                                onBlock(e, "deactivateExpert", item)
-                              }
-                              className="block-btn block-btn"
-                            >
-                              Deactivate
-                            </CButton>
+                            {item.status !== "deactivated" && (
+                              <CButton
+                                onClick={(e) => onBlock(e, "deactivate", item)}
+                                className="block-btn block-btn"
+                              >
+                                Deactivate
+                              </CButton>
+                            )}
+                            {item.status === "deactivated" && (
+                              <CButton
+                                onClick={(e) => onBlock(e, "activate", item)}
+                                className="Unblock-btn block-btn"
+                              >
+                                Activate
+                              </CButton>
+                            )}
                           </div>
                         </td>
                       </tr>
@@ -273,6 +302,7 @@ const mapDispatchToProps = (dispatch) => {
     {
       fetchExperts,
       deleteExpert,
+      userStatus,
     },
     dispatch
   );

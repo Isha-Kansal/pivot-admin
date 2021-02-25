@@ -22,8 +22,8 @@ class CommonModal extends React.Component {
             <h2>Want to Delete</h2>
           ) : type === "deleteExpert" ? (
             <h2>Want to Delete</h2>
-          ) : type === "deactivateExpert" ? (
-            <h2>Want to Deactivate</h2>
+          ) : type === "activate" ? (
+            <h2>Want to Activate</h2>
           ) : (
             ""
           )}
@@ -36,13 +36,13 @@ class CommonModal extends React.Component {
           ) : type === "unblock" ? (
             <p>Do you really want to unblock this user ?</p>
           ) : type === "deactivate" ? (
-            <p>Do you really want to deactivate this user ?</p>
+            <p>Do you really want to deactivate ?</p>
           ) : type === "deleteResource" ? (
             <p>Do you really want to delete this resource ?</p>
           ) : type === "deleteExpert" ? (
             <p>Do you really want to delete this expert ?</p>
-          ) : type === "deactivateExpert" ? (
-            <p>Do you really want to deactivate this expert ?</p>
+          ) : type === "activate" ? (
+            <p>Do you really want to activate ?</p>
           ) : (
             ""
           )}
