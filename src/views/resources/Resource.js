@@ -90,11 +90,11 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
-                  {resource.format && (
+                  {resource.resource_format && (
                     <tr>
                       <td>Format</td>
                       <td>
-                        <strong>{resource.format}</strong>
+                        <strong>{resource.resource_format}</strong>
                       </td>
                     </tr>
                   )}

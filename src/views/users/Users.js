@@ -192,14 +192,14 @@ const Users = (props) => {
                           {createdAt !== "Invalid date" ? createdAt : "-"}
                         </td>
                         <td>
-                          {item.status === "blocked" ? (
+                          {item.user_status === "blocked" ? (
                             <CButton
                               onClick={(e) => onBlock(e, "unblock", item)}
                               className="Unblock-btn block-btn"
                             >
                               UnBlock
                             </CButton>
-                          ) : item.status === "activated" ? (
+                          ) : item.user_status === "activated" ? (
                             <div>
                               <CButton
                                 onClick={(e) => onBlock(e, "block", item)}
@@ -208,7 +208,7 @@ const Users = (props) => {
                                 Block
                               </CButton>{" "}
                             </div>
-                          ) : item.status === "deactivated" ? (
+                          ) : item.user_status === "deactivated" ? (
                             <div>
                               <CButton
                                 onClick={(e) => onBlock(e, "block", item)}

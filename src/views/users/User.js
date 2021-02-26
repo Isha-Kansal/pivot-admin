@@ -98,42 +98,52 @@ const User = (props) => {
                             </td>
                           </tr>
                         )}
-                        <tr>
-                          <td>Status</td>
+                        {!loading && (
+                          <tr>
+                            <td>Status</td>
 
-                          <td>
-                            <CBadge
-                              color={getBadge(
-                                user.status === "blocked"
+                            <td>
+                              <CBadge
+                                color={getBadge(
+                                  user.user_status === "blocked"
+                                    ? "Blocked"
+                                    : "Activated"
+                                )}
+                              >
+                                {user.user_status === "blocked"
                                   ? "Blocked"
-                                  : "Activated"
-                              )}
-                            >
-                              {user.status === "blocked"
-                                ? "Blocked"
-                                : "Activated"}
-                            </CBadge>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>UID</td>
-                          <td>
-                            <strong>{user._id}</strong>
-                          </td>
-                        </tr>
-                        <tr>
-                          <td>Email Verification</td>
+                                  : "Activated"}
+                              </CBadge>
+                            </td>
+                          </tr>
+                        )}
+                        {!loading && (
+                          <tr>
+                            <td>UID</td>
+                            <td>
+                              <strong>{user._id}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {!loading && (
+                          <tr>
+                            <td>Email Verification</td>
 
-                          <td>
-                            <CBadge
-                              color={getBadge(
-                                !user.is_verified ? "Not Verified" : "Verified"
-                              )}
-                            >
-                              {!user.is_verified ? "Not Verified" : "Verified"}
-                            </CBadge>
-                          </td>
-                        </tr>
+                            <td>
+                              <CBadge
+                                color={getBadge(
+                                  !user.is_verified
+                                    ? "Not Verified"
+                                    : "Verified"
+                                )}
+                              >
+                                {!user.is_verified
+                                  ? "Not Verified"
+                                  : "Verified"}
+                              </CBadge>
+                            </td>
+                          </tr>
+                        )}
                         {user.first_name && (
                           <tr>
                             <td>First name</td>

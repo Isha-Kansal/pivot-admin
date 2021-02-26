@@ -167,7 +167,7 @@ const Resources = (props) => {
                         }
                       >
                         <td>{item.title}</td>
-                        <td>{item.format}</td>
+                        <td>{item.resource_format}</td>
                         <td>{item.price}</td>
                         <td>{category}</td>
                         <td>

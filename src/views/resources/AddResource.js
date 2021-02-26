@@ -74,7 +74,7 @@ class AddResource extends Component {
       this.props.fetchOneResource(`resource/${resource_id}`, (value) => {
         const {
           title,
-          format,
+          resource_format,
           price,
           category,
           pace,
@@ -98,7 +98,7 @@ class AddResource extends Component {
           loadiing: false,
           resourceData: value.data.resource,
           name: title,
-          format,
+          format: resource_format,
           pricing: price,
           category,
           pace,

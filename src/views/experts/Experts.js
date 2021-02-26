@@ -198,7 +198,7 @@ const Experts = (props) => {
                         <td>{item.email ? item.email : "-"}</td>
                         <td>{item.designation}</td>
                         <td>{item.country}</td>
-                        <td>{item.role}</td>
+                        <td>{item.current_role}</td>
                         <td>
                           {" "}
                           {createdAt !== "Invalid date" ? createdAt : "-"}
@@ -227,7 +227,7 @@ const Experts = (props) => {
                             <Tooltip placement="top" target={`delete-${index}`}>
                               Delete
                             </Tooltip>
-                            {item.status !== "deactivated" && (
+                            {item.expert_status !== "deactivated" && (
                               <>
                                 <button
                                   onClick={(e) =>
@@ -247,7 +247,7 @@ const Experts = (props) => {
                               </>
                             )}
 
-                            {item.status === "deactivated" && (
+                            {item.expert_status === "deactivated" && (
                               <>
                                 <button
                                   onClick={(e) => onBlock(e, "activate", item)}

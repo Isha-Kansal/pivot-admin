@@ -11,9 +11,10 @@ import {
   CTabPane,
   CTabs,
   CNavItem,
+  CBadge,
 } from "@coreui/react";
 import moment from "moment";
-import expertsData from "./ExpertsData";
+
 import Loader from "../../loader";
 
 import { connect } from "react-redux";
@@ -40,7 +41,8 @@ const Expert = (props) => {
   let istDate = new Date(expert.createdAt);
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
-  let fields = expert && expert.fields && expert.fields.join(", ");
+  let fields =
+    expert && expert.expert_fields && expert.expert_fields.join(", ");
   let info = expert && expert.info && expert.info.join(", ");
 
   let skills =
@@ -48,6 +50,19 @@ const Expert = (props) => {
     expert.skills[0] &&
     expert.skills[0].values &&
     expert.skills[0].values.join(", ");
+
+  const getBadge = (status) => {
+    switch (status) {
+      case "Deactivated":
+        return "danger";
+
+      case "Activated":
+        return "success";
+
+      default:
+        return "primary";
+    }
+  };
 
   return (
     <CRow>
@@ -78,6 +93,25 @@ const Expert = (props) => {
                             <td>Created At</td>
                             <td>
                               <strong> {createdAt}</strong>
+                            </td>
+                          </tr>
+                        )}
+                        {!loading && (
+                          <tr>
+                            <td>Status</td>
+
+                            <td>
+                              <CBadge
+                                color={getBadge(
+                                  expert.expert_status === "deactivated"
+                                    ? "Deactivated"
+                                    : "Activated"
+                                )}
+                              >
+                                {expert.expert_status === "deactivated"
+                                  ? "Deactivated"
+                                  : "Activated"}
+                              </CBadge>
                             </td>
                           </tr>
                         )}
@@ -162,11 +196,11 @@ const Expert = (props) => {
                           </tr>
                         )}
 
-                        {expert.role && (
+                        {expert.current_role && (
                           <tr>
                             <td>Current Role</td>
                             <td>
-                              <strong>{expert.role}</strong>
+                              <strong>{expert.current_role}</strong>
                             </td>
                           </tr>
                         )}
