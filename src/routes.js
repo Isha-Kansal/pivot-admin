@@ -3,7 +3,7 @@ import React from "react";
 const Users = React.lazy(() => import("./views/users/Users"));
 const User = React.lazy(() => import("./views/users/User"));
 const Resource = React.lazy(() => import("./views/resources/Resource"));
-const Planners = React.lazy(() => import("./views/planners/Planners"));
+const Planner = React.lazy(() => import("./views/planner/Planner"));
 const Experts = React.lazy(() => import("./views/experts/Experts"));
 const Expert = React.lazy(() => import("./views/experts/Expert"));
 const AddExpert = React.lazy(() => import("./views/experts/AddExpert"));
@@ -13,7 +13,7 @@ const AddResource = React.lazy(() => import("./views/resources/AddResource"));
 const routes = [
   { path: "/users", exact: true, name: "Users", component: Users },
   { path: "/users/:id", exact: true, name: "User Details", component: User },
-  { path: "/planners", exact: true, name: "Planners", component: Planners },
+  { path: "/planner", exact: true, name: "Planner", component: Planner },
   { path: "/experts", exact: true, name: "Experts", component: Experts },
   {
     path: "/experts/:id",

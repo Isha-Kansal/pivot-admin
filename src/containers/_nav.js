@@ -1,4 +1,4 @@
-import { Planners, Users, Experts, Resources } from "../containers/icons";
+import { Planner, Users, Experts, Resources } from "../containers/icons";
 
 const _nav = [
   {
@@ -10,10 +10,10 @@ const _nav = [
   },
   {
     _tag: "CSidebarNavItem",
-    name: "Planners",
-    to: "/planners",
+    name: "Planner",
+    to: "/planner",
 
-    icon: <Planners customClasses="c-sidebar-nav-icon" />,
+    icon: <Planner customClasses="c-sidebar-nav-icon" />,
   },
   {
     _tag: "CSidebarNavItem",
