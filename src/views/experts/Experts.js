@@ -4,15 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import Pagination from "react-js-pagination";
 import moment from "moment-timezone";
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CButton,
-  CDataTable,
-} from "@coreui/react";
+import { CCard, CCardBody, CCol, CRow, CButton } from "@coreui/react";
 
 import { fetchExperts, deleteExpert, userStatus } from "../store/action";
 import { connect } from "react-redux";
@@ -82,7 +74,6 @@ const Experts = (props) => {
   };
 
   const deleteExpert = (id) => {
-    console.log("84598948597594789", type);
     if (type === "deleteExpert") {
       if (idExpert === id) setModalOpen(false);
       setLoading(true);
@@ -104,7 +95,6 @@ const Experts = (props) => {
       };
 
       props.userStatus("common/change-status", obj, (value) => {
-        console.log("89457894879470", value);
         if (value.status === 200) {
           NotificationManager.success(value.message, "", 1000);
 

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-// import DateTimePicker from "react-datetime-picker";
-// import { PopupWidget } from "react-calendly";
+
 import ADD from "../../assets/icons/add.svg";
 import {
   addExpert,
@@ -29,9 +28,8 @@ import {
   CInput,
   CLabel,
   CRow,
-  CSelect,
 } from "@coreui/react";
-// import { InlineWidget } from "react-calendly";
+
 import Select from "react-select";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
 import { Input } from "reactstrap";
@@ -41,13 +39,10 @@ import {
   optionsFields,
   optionsGender,
   optionsCountry,
-  optionsDesignation,
   optionsExpertise,
   optionsRole,
   optionsIndustry,
-  optionsExperience,
   optionsSkill,
-  optionsRate,
   optionsService,
 } from "./ExpertsFieldsData";
 
