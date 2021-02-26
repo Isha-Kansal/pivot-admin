@@ -3,6 +3,8 @@ import { Button } from "reactstrap";
 
 const TheHeaderDropdown = (props) => {
   const handleLogout = (e) => {
+    localStorage.setItem("isLoggedIn", false);
+    localStorage.clear();
     e.preventDefault();
     props.history.push("/login");
   };

@@ -11,7 +11,27 @@ const loading = (
   </div>
 );
 
+const PrivateRoutes = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={(props) =>
+        rest.isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+            }}
+          />
+        )
+      }
+    />
+  );
+};
+
 const TheContent = () => {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   return (
     <main className="c-main pt-4">
       <CContainer fluid>
@@ -19,19 +39,26 @@ const TheContent = () => {
           <Switch>
             {routes.map((route, idx) => {
               return (
-                route.component && (
-                  <Route
-                    key={idx}
-                    path={route.path}
-                    exact={route.exact}
-                    name={route.name}
-                    render={(props) => (
-                      <CFade>
-                        <route.component {...props} />
-                      </CFade>
-                    )}
-                  />
-                )
+                <PrivateRoutes
+                  key={idx}
+                  exact
+                  path={route.path}
+                  component={route.component}
+                  isAuthenticated={isLoggedIn}
+                />
+                // route.component && (
+                //   <Route
+                //     key={idx}
+                //     path={route.path}
+                //     exact={route.exact}
+                //     name={route.name}
+                //     render={(props) => (
+                //       <CFade>
+                //         <route.component {...props} />
+                //       </CFade>
+                //     )}
+                //   />
+                // )
               );
             })}
             <Redirect to="/login" />
