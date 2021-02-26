@@ -179,7 +179,7 @@ const Resources = (props) => {
                             >
                               <img src={EDIT} className="ml-3" />
                             </button>
-                            <Tooltip placement="left" target={`edit-${index}`}>
+                            <Tooltip placement="top" target={`edit-${index}`}>
                               Edit
                             </Tooltip>
                             <button
@@ -189,10 +189,7 @@ const Resources = (props) => {
                             >
                               <img src={DELETE} className="ml-3" />
                             </button>
-                            <Tooltip
-                              placement="right"
-                              target={`delete-${index}`}
-                            >
+                            <Tooltip placement="top" target={`delete-${index}`}>
                               Delete
                             </Tooltip>
                           </div>
