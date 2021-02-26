@@ -19,6 +19,22 @@ import {
 import { Table } from "reactstrap";
 const Network = (props) => {
   const [accordion, setAccordion] = useState(1);
+  const getBadge = (status) => {
+    switch (status) {
+      case "Done":
+        return "success";
+
+      // case "Not Verified":
+      //   return "danger";
+      // case "Activated":
+      //   return "success";
+
+      // case "Blocked":
+      //   return "danger";
+      default:
+        return "primary";
+    }
+  };
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -39,7 +55,10 @@ const Network = (props) => {
                 <tbody>
                   <tr>
                     <td>Status</td>
-                    <td>Done</td>
+                    <td>
+                      {" "}
+                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -86,7 +105,10 @@ const Network = (props) => {
                 <tbody>
                   <tr>
                     <td>Status</td>
-                    <td>Done</td>
+                    <td>
+                      {" "}
+                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -130,7 +152,10 @@ const Network = (props) => {
                 <tbody>
                   <tr>
                     <td>Status</td>
-                    <td>Done</td>
+                    <td>
+                      {" "}
+                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -174,7 +199,10 @@ const Network = (props) => {
                 <tbody>
                   <tr>
                     <td>Status</td>
-                    <td>Done</td>
+                    <td>
+                      {" "}
+                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                    </td>
                   </tr>
                 </tbody>
               </table>
