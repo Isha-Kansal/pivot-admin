@@ -26,10 +26,11 @@ const Explore = (props) => {
           <CButton
             block
             color="link"
-            className="text-left m-0 p-0"
+            className="text-left m-0 p-0 d-flex justify-content-between"
             onClick={() => setAccordion(accordion === 0 ? null : 0)}
           >
             <h5 className="m-0 p-0">Introspection</h5>
+            {/* <span className="done-txt">Done</span> */}
           </CButton>
         </CCardHeader>
         <CCollapse show={accordion === 0}>

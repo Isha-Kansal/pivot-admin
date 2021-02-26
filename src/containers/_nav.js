@@ -8,13 +8,7 @@ const _nav = [
 
     icon: <Users customClasses="c-sidebar-nav-icon" />,
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Planner",
-    to: "/planner",
 
-    icon: <Planner customClasses="c-sidebar-nav-icon" />,
-  },
   {
     _tag: "CSidebarNavItem",
     name: "Experts",
@@ -28,6 +22,13 @@ const _nav = [
     to: "/resources",
 
     icon: <Resources customClasses="c-sidebar-nav-icon" />,
+  },
+  {
+    _tag: "CSidebarNavItem",
+    name: "Planner",
+    to: "/planner",
+
+    icon: <Planner customClasses="c-sidebar-nav-icon" />,
   },
 ];
 
