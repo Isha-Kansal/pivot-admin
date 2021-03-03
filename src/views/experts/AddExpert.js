@@ -1049,6 +1049,7 @@ class AddExpert extends Component {
                       <CLabel htmlFor="rate">Rate</CLabel>
 
                       <CInput
+                        type="number"
                         id="rate"
                         placeholder="Rate"
                         name="rate"
