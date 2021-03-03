@@ -63,6 +63,10 @@ class AddExpert extends Component {
       industry: "",
       fields: [],
       about: [],
+      pricing: [
+        { service: "30 Min Call", value: "" },
+        { service: "45 Min Call", value: "" },
+      ],
       errorType: "",
       errorText: "",
       // service: "",
@@ -729,6 +733,7 @@ class AddExpert extends Component {
       industry: "",
       fields: [],
       about: [],
+      pricing: [],
       errorType: "",
       errorText: "",
       // service: "",
@@ -747,18 +752,31 @@ class AddExpert extends Component {
       selectedDate: date,
     });
   };
-  handlePlusButton = (e) => {
-    const { about } = this.state;
-    const newArr = [...about];
+  handlePlusButton = (e, type) => {
+    const { about, pricing } = this.state;
+
     e.preventDefault();
     e.stopPropagation();
-    let newAbout = {
-      value: "",
-    };
-    newArr.push(newAbout);
-    this.setState({
-      about: newArr,
-    });
+    if (type === "about") {
+      const newArr = [...about];
+      let newAbout = {
+        value: "",
+      };
+      newArr.push(newAbout);
+      this.setState({
+        about: newArr,
+      });
+    }
+    if (type === "pricing") {
+      const newArr = [...pricing];
+      let newPricing = {
+        value: "",
+      };
+      newArr.push(newPricing);
+      this.setState({
+        pricing: newArr,
+      });
+    }
   };
   inputAbout = (e, index) => {
     let aboutToUpdate = this.state.about[index];
@@ -773,16 +791,37 @@ class AddExpert extends Component {
     this.clearError();
     this.setState({ [e.target.name]: e.target.value, about: newArray });
   };
-  handleCancel = (e, index) => {
+  inputPricing = (e, index) => {
+    let pricingToUpdate = this.state.pricing[index];
+    const newArray = [...this.state.pricing];
+    pricingToUpdate = {
+      ...pricingToUpdate,
+      value: e.target.value,
+    };
+
+    newArray[index] = pricingToUpdate;
+
+    this.clearError();
+    this.setState({ [e.target.name]: e.target.value, pricing: newArray });
+  };
+  handleCancel = (e, index, type) => {
     e.preventDefault();
     e.stopPropagation();
-    const { about } = this.state;
-
-    const newArr = [...about];
-    newArr.splice(index, 1);
-    this.setState({
-      about: newArr,
-    });
+    const { about, pricing } = this.state;
+    if (type === "about") {
+      const newArr = [...about];
+      newArr.splice(index, 1);
+      this.setState({
+        about: newArr,
+      });
+    }
+    if (type === "pricing") {
+      const newArr = [...pricing];
+      newArr.splice(index, 1);
+      this.setState({
+        pricing: newArr,
+      });
+    }
   };
   render() {
     const expert_id = this.props && this.props.match.params.id;
@@ -807,7 +846,9 @@ class AddExpert extends Component {
       linkedIn,
       calendlyLink,
       skill,
+      pricing,
     } = this.state;
+    console.log("4895798408978940790", pricing);
     let fieldsVal = optionsFields.filter((item) => {
       return fields.includes(item.label);
     });
@@ -1091,6 +1132,53 @@ class AddExpert extends Component {
                   </CCol>
                   <CCol xs="6">
                     <CFormGroup>
+                      <CLabel htmlFor="pricing">Pricing</CLabel>
+                      <div
+                        // onClick={(e) => this.handlePlusButton(e, "pricing")}
+                        class="d-flex justify-content-between add-list"
+                      >
+                        <CLabel htmlFor="pricing">
+                          Enter Price of each service
+                        </CLabel>
+                        {/* <button className="icon">
+                          <img src={ADD} className="ml-3" />
+                        </button> */}
+                      </div>
+                      {this.errorShow("pricing")}
+                      {pricing &&
+                        pricing.length > 0 &&
+                        pricing.map((el, index) => {
+                          return (
+                            <div className="d-flex align-items-center mb-2 ">
+                              {el.service}
+                              <CInput
+                                type="number"
+                                id={`pricing${index}`}
+                                name={`pricing${index}`}
+                                placeholder="Price"
+                                autoComplete={`pricing${index}`}
+                                onChange={(e) => {
+                                  this.inputPricing(e, index);
+                                }}
+                                value={el.value}
+                              />
+                              {/* <button
+                                className="icon"
+                                onClick={(e) =>
+                                  this.handleCancel(e, index, "pricing")
+                                }
+                              >
+                                <img src={CANCEL} className="ml-3" />
+                              </button> */}
+                            </div>
+                          );
+                        })}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row className="my-0">
+                  <CCol xs="6">
+                    <CFormGroup>
                       <CLabel htmlFor="skill">Skill</CLabel>
 
                       <Select
@@ -1105,8 +1193,6 @@ class AddExpert extends Component {
                       {this.errorShow("skill")}
                     </CFormGroup>
                   </CCol>
-                </CFormGroup>
-                <CFormGroup row className="my-0">
                   <CCol xs="6">
                     {skill && (
                       <CFormGroup>
@@ -1132,7 +1218,7 @@ class AddExpert extends Component {
                     <CFormGroup>
                       <CLabel htmlFor="about">About</CLabel>
                       <div
-                        onClick={this.handlePlusButton}
+                        onClick={(e) => this.handlePlusButton(e, "about")}
                         class="d-flex justify-content-between add-list"
                       >
                         <CLabel htmlFor="pros">Add Information</CLabel>
@@ -1159,7 +1245,9 @@ class AddExpert extends Component {
                               />
                               <button
                                 className="icon"
-                                onClick={(e) => this.handleCancel(e, index)}
+                                onClick={(e) =>
+                                  this.handleCancel(e, index, "about")
+                                }
                               >
                                 <img src={CANCEL} className="ml-3" />
                               </button>
