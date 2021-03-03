@@ -43,7 +43,7 @@ import {
   optionsRole,
   optionsIndustry,
   optionsSkill,
-  optionsService,
+  // optionsService,
 } from "./ExpertsFieldsData";
 
 class AddExpert extends Component {
@@ -65,7 +65,7 @@ class AddExpert extends Component {
       about: [],
       errorType: "",
       errorText: "",
-      service: "",
+      // service: "",
       rate: "",
       expertImage: null,
       selectedDate: new Date(),
@@ -91,11 +91,11 @@ class AddExpert extends Component {
           current_role,
           industry,
           skills,
-          service,
+          // service,
           email,
           contact_no,
           linkedIn,
-          calendly,
+          calendar_id,
           price,
           info,
         } = value.data.expert;
@@ -114,13 +114,13 @@ class AddExpert extends Component {
           industry,
           email,
           contact: contact_no,
-          service,
+          // service,
           rate: price,
           linkedIn,
           about: infoData,
           skill: skills && skills[0] && skills[0].label,
           expertise: skills && skills[0] && skills[0].values,
-          calendlyLink: calendly,
+          calendlyLink: calendar_id,
         });
       });
     }
@@ -208,11 +208,11 @@ class AddExpert extends Component {
       });
     }
 
-    if (type === "service") {
-      this.setState({
-        service: data.value,
-      });
-    }
+    // if (type === "service") {
+    //   this.setState({
+    //     service: data.value,
+    //   });
+    // }
     if (type === "skill") {
       this.setState({
         skill: data.value,
@@ -246,7 +246,7 @@ class AddExpert extends Component {
       expertise,
       fields,
       about,
-      service,
+      // service,
       rate,
       linkedIn,
       skill,
@@ -452,17 +452,17 @@ class AddExpert extends Component {
       return;
     }
 
-    if (service === "") {
-      this.setState({
-        errorType: "service",
-        errorText: (
-          <span className="text-danger">
-            <b>Select your service</b>
-          </span>
-        ),
-      });
-      return;
-    }
+    // if (service === "") {
+    //   this.setState({
+    //     errorType: "service",
+    //     errorText: (
+    //       <span className="text-danger">
+    //         <b>Select your service</b>
+    //       </span>
+    //     ),
+    //   });
+    //   return;
+    // }
     if (rate === "") {
       this.setState({
         errorType: "rate",
@@ -505,7 +505,7 @@ class AddExpert extends Component {
         errorType: "calendlyLink",
         errorText: (
           <span className="text-danger">
-            <b>Please enter calendly link</b>
+            <b>Please enter calendar Id</b>
           </span>
         ),
       });
@@ -577,7 +577,7 @@ class AddExpert extends Component {
       role,
       industry,
       calendlyLink,
-      service,
+      // service,
       rate,
       linkedIn,
       about,
@@ -604,11 +604,11 @@ class AddExpert extends Component {
       role,
       industry,
       skills: skillObj,
-      service,
+      // service,
       email,
       contact_no: contact ? contact : "",
       linkedIn,
-      calendly: calendlyLink,
+      calendar_id: calendlyLink,
       price: rate,
       info: aboutData,
       time_zone: timeZone,
@@ -645,7 +645,7 @@ class AddExpert extends Component {
       industry,
       skill,
       expertise,
-      service,
+      // service,
       rate,
       linkedIn,
       about,
@@ -672,11 +672,11 @@ class AddExpert extends Component {
       linkedIn,
       designation,
       price: rate,
-      service,
+      // service,
       time_zone: timeZone,
       email,
       contact_no: contact ? contact : "",
-      calendly: calendlyLink,
+      calendar_id: calendlyLink,
     };
     if (expertImage) {
       obj.profile_pic = expertImage;
@@ -731,7 +731,7 @@ class AddExpert extends Component {
       about: [],
       errorType: "",
       errorText: "",
-      service: "",
+      // service: "",
       rate: "",
       linkedIn: "",
       calendlyLink: "",
@@ -801,7 +801,7 @@ class AddExpert extends Component {
       industry,
       email,
       contact,
-      service,
+      // service,
       rate,
       selectedDate,
       linkedIn,
@@ -1025,7 +1025,7 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="6">
+                  {/* <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="service">Service</CLabel>
 
@@ -1042,7 +1042,7 @@ class AddExpert extends Component {
                       ></Select>
                       {this.errorShow("service")}
                     </CFormGroup>
-                  </CCol>
+                  </CCol> */}
 
                   <CCol xs="6">
                     <CFormGroup>
@@ -1058,9 +1058,6 @@ class AddExpert extends Component {
                       {this.errorShow("rate")}
                     </CFormGroup>
                   </CCol>
-                </CFormGroup>
-
-                <CFormGroup row className="my-0">
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="linkedIn">LinkedIn Link</CLabel>
@@ -1074,21 +1071,23 @@ class AddExpert extends Component {
                       {this.errorShow("linkedIn")}
                     </CFormGroup>
                   </CCol>
+                </CFormGroup>
+
+                <CFormGroup row className="my-0">
                   <CCol xs="6">
                     <CFormGroup>
-                      <CLabel htmlFor="linkedIn">Calendly Link</CLabel>
+                      <CLabel htmlFor="linkedIn">Calendar Id</CLabel>
                       <CInput
+                        type="number"
                         name="calendlyLink"
                         id="calendlyLink"
                         onChange={this.inputHandler}
-                        placeholder="Calendly Link"
+                        placeholder="Calendar Id"
                         value={calendlyLink}
                       />
                       {this.errorShow("calendlyLink")}
                     </CFormGroup>
                   </CCol>
-                </CFormGroup>
-                <CFormGroup row className="my-0">
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="skill">Skill</CLabel>
@@ -1105,6 +1104,8 @@ class AddExpert extends Component {
                       {this.errorShow("skill")}
                     </CFormGroup>
                   </CCol>
+                </CFormGroup>
+                <CFormGroup row className="my-0">
                   <CCol xs="6">
                     {skill && (
                       <CFormGroup>

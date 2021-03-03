@@ -229,11 +229,11 @@ const Expert = (props) => {
                             </td>
                           </tr>
                         )}
-                        {expert.calendly && (
+                        {expert.calendar_id && (
                           <tr>
-                            <td>Calendly Link</td>
+                            <td>Calendar Id</td>
                             <td>
-                              <strong>{expert.calendly}</strong>
+                              <strong>{expert.calendar_id}</strong>
                             </td>
                           </tr>
                         )}
