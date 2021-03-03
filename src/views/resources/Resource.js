@@ -18,7 +18,7 @@ const Resource = (props) => {
 
     const resource_id = props && props.match.params.id;
     dispatch(
-      fetchOneResource(`resource/${resource_id}`, (value) => {
+      fetchOneResource(`resource?id=${resource_id}`, (value) => {
         setResource(value.data.resource);
         setLoading(false);
       })

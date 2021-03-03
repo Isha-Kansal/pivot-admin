@@ -15,6 +15,7 @@ import {
   FETCH_ONE_EXPERT_REQUEST,
   DELETE_EXPERT_REQUEST,
   EDIT_EXPERT_REQUEST,
+  SET_TOKEN,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -64,6 +65,12 @@ export const editExpert = (url, body, callback) => {
 export const setImage = (data) => {
   return {
     type: SET_IMAGE,
+    payload: data,
+  };
+};
+export const setToken = (data) => {
+  return {
+    type: SET_TOKEN,
     payload: data,
   };
 };

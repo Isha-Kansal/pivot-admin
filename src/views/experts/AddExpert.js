@@ -80,7 +80,7 @@ class AddExpert extends Component {
       this.setState({
         loadiing: true,
       });
-      this.props.fetchOneExpert(`expert/${expert_id}`, (value) => {
+      this.props.fetchOneExpert(`expert?id=${expert_id}`, (value) => {
         const {
           first_name,
           last_name,
@@ -704,7 +704,7 @@ class AddExpert extends Component {
     let obj = {
       base64,
     };
-    this.props.addImage("upload/profile-picture", obj, (value) => {
+    this.props.addImage("common/upload-image", obj, (value) => {
       if (value.status === 200) {
         this.setState({
           expertImage: value.data.url,

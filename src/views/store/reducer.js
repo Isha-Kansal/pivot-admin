@@ -17,7 +17,7 @@ const {
   FETCH_RESOURCES_REQUEST,
   FETCH_RESOURCES_FAILED,
   FETCH_RESOURCES_SUCCESS,
-
+  SET_TOKEN,
   FETCH_ONE_RESOURCE_REQUEST,
   FETCH_ONE_RESOURCE_FAILED,
   FETCH_ONE_RESOURCE_SUCCESS,
@@ -63,6 +63,7 @@ const initialState = {
   oneResourceData: {},
   addImage: {},
   saveImage: "",
+  saveToken: "",
   deleteResourceData: {},
   deleteExpertData: {},
   editResourceData: {},
@@ -329,6 +330,12 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       return {
         ...state,
         saveImage: action.payload || "",
+      };
+    }
+    case SET_TOKEN: {
+      return {
+        ...state,
+        saveToken: action.payload || "",
       };
     }
 

@@ -33,7 +33,7 @@ const User = (props) => {
 
     const user_id = props && props.match.params.id;
     dispatch(
-      fetchOneUser(`user/${user_id}`, (value) => {
+      fetchOneUser(`user?id=${user_id}`, (value) => {
         setUser(value.data.user);
         setLoading(false);
       })

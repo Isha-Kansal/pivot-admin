@@ -73,7 +73,7 @@ const Resources = (props) => {
   const deleteResource = (id) => {
     if (idResource === id) setModalOpen(false);
     setLoading(true);
-    props.deleteResource(`resource/delete/${id}`, (value) => {
+    props.deleteResource(`resource/delete?id=${id}`, (value) => {
       if (value.status === 200) {
         NotificationManager.success("Resource deleted successfully", "", 1000);
         setLoading(false);

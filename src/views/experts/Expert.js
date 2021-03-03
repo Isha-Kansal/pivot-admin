@@ -31,7 +31,7 @@ const Expert = (props) => {
 
     const expert_id = props && props.match.params.id;
     dispatch(
-      fetchOneExpert(`expert/${expert_id}`, (value) => {
+      fetchOneExpert(`expert?id=${expert_id}`, (value) => {
         setExpert(value.data.expert);
         setLoading(false);
       })

@@ -77,7 +77,7 @@ const Experts = (props) => {
     if (type === "deleteExpert") {
       if (idExpert === id) setModalOpen(false);
       setLoading(true);
-      props.deleteExpert(`expert/delete/${id}`, (value) => {
+      props.deleteExpert(`expert/delete?id=${id}`, (value) => {
         if (value.status === 200) {
           NotificationManager.success("Expert deleted successfully", "", 1000);
           setLoading(false);

@@ -71,7 +71,7 @@ class AddResource extends Component {
       this.setState({
         loadiing: true,
       });
-      this.props.fetchOneResource(`resource/${resource_id}`, (value) => {
+      this.props.fetchOneResource(`resource?id=${resource_id}`, (value) => {
         const {
           title,
           resource_format,
@@ -404,7 +404,7 @@ class AddResource extends Component {
     let obj = {
       base64,
     };
-    this.props.addImage("upload/profile-picture", obj, (value) => {
+    this.props.addImage("common/upload-image", obj, (value) => {
       if (value.status === 200) {
         this.setState({
           resourceImage: value.data.url,
