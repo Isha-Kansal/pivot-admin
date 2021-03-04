@@ -156,12 +156,11 @@ class AddExpert extends Component {
     if (type === "calendarId") {
       this.clearError();
       this.setState({ [e.target.name]: e.target.value });
-      console.log("9u58y84978948978", e.target.value);
+
       this.props.fetchService(
         `expert/services?id=${e.target.value}`,
 
         (value) => {
-          console.log("84967949879849", value);
           if (value.status === 200) {
             const pricingVal = value.data.services.map((item) => {
               return {
@@ -892,7 +891,7 @@ class AddExpert extends Component {
       skill,
       pricing,
     } = this.state;
-    console.log("4895798408978940790", pricing);
+
     let fieldsVal = optionsFields.filter((item) => {
       return fields.includes(item.label);
     });

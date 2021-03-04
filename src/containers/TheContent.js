@@ -32,7 +32,7 @@ const PrivateRoutes = ({ component: Component, ...rest }) => {
 
 const TheContent = () => {
   const isLoggedIn = localStorage.getItem("isLoggedIn");
-  console.log("8947904070490", isLoggedIn);
+
   return (
     <main className="c-main pt-4">
       <CContainer fluid>

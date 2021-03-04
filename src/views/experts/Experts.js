@@ -19,8 +19,10 @@ import DELETE from "../../assets/icons/delete.svg";
 import ACTIVATE from "../../assets/icons/activate.svg";
 import DEACTIVATE from "../../assets/icons/deactivate.svg";
 import { Table } from "reactstrap";
+
+const offsetLimit = 10;
+
 const Experts = (props) => {
-  const offsetLimit = 10;
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
@@ -34,10 +36,14 @@ const Experts = (props) => {
   const [type, setType] = useState("");
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/experts?page=${newPage}`);
-    let limit = 10;
     setLoading(true);
     props.fetchExperts(
-      `expert/all?offset=${newPage}&limit=${limit}&search=${search}`,
+      `expert/all?offset=${
+        (expertsDetails &&
+          expertsDetails.length &&
+          expertsDetails[expertsDetails.length - 1]._id) ||
+        ""
+      }&limit=${offsetLimit}&search=${search}`,
       (value) => {
         setLoading(false);
         setExpertsDetails(value.data.experts);
@@ -109,9 +115,13 @@ const Experts = (props) => {
   const callApiToFetchAllExperts = () => {
     setLoading(true);
 
-    let limit = 10;
     props.fetchExperts(
-      `expert/all?offset=${page}&limit=${limit}&search=${search}`,
+      `expert/all?offset=${
+        (expertsDetails &&
+          expertsDetails.length &&
+          expertsDetails[expertsDetails.length - 1]._id) ||
+        ""
+      }&limit=${offsetLimit}&search=${search}`,
       (value) => {
         if (value.status === 200) {
           setLoading(false);
@@ -273,7 +283,7 @@ const Experts = (props) => {
             </Table>
 
             <div className="text-center pagination-input">
-              {count > 10 && !loading && (
+              {count > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"

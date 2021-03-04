@@ -13,9 +13,8 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 
 import { fetchUsers, userStatus } from "../store/action";
-
+const offsetLimit = 10;
 const Users = (props) => {
-  const offsetLimit = 10;
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
@@ -32,9 +31,13 @@ const Users = (props) => {
     currentPage !== newPage && history.push(`/users?page=${newPage}`);
     setLoading(true);
 
-    let limit = 10;
     props.fetchUsers(
-      `user/all?offset=${newPage}&limit=${limit}&search=${search}`,
+      `user/all?offset=${
+        (usersDetails &&
+          usersDetails.length &&
+          usersDetails[usersDetails.length - 1]._id) ||
+        ""
+      }&limit=${offsetLimit}&search=${search}`,
       (value) => {
         setLoading(false);
         setUsersDetails(value.data.users);
@@ -56,9 +59,13 @@ const Users = (props) => {
   const callApiToFetchAllUsers = () => {
     setLoading(true);
 
-    let limit = 10;
     props.fetchUsers(
-      `user/all?offset=${page}&limit=${limit}&search=${search}`,
+      `user/all?offset=${
+        (usersDetails &&
+          usersDetails.length &&
+          usersDetails[usersDetails.length - 1]._id) ||
+        ""
+      }&limit=${offsetLimit}&search=${search}`,
       (value) => {
         setLoading(false);
         setUsersDetails(value.data.users);
@@ -233,7 +240,7 @@ const Users = (props) => {
             </Table>
 
             <div className="text-center pagination-input">
-              {count > 10 && !loading && (
+              {count > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"

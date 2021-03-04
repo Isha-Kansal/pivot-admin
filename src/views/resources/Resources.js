@@ -19,8 +19,8 @@ import {
   editResource,
   setResourceData,
 } from "../store/action";
+const offsetLimit = 10;
 const Resources = (props) => {
-  const offsetLimit = 10;
   const history = useHistory();
   const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
   const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
@@ -33,10 +33,15 @@ const Resources = (props) => {
   const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
     currentPage !== newPage && history.push(`/resources?page=${newPage}`);
-    let limit = 10;
+
     setLoading(true);
     props.fetchResources(
-      `resource/all?offset=${newPage}&limit=${limit}&search=${search}`,
+      `resource/all?offset=${
+        (resourcesDetails &&
+          resourcesDetails.length &&
+          resourcesDetails[resourcesDetails.length - 1]._id) ||
+        ""
+      }&limit=${offsetLimit}&search=${search}`,
       (value) => {
         setLoading(false);
         setResourcesDetails(value.data.resources);
@@ -91,9 +96,13 @@ const Resources = (props) => {
   const callApiToFetchAllResources = () => {
     setLoading(true);
 
-    let limit = 10;
     props.fetchResources(
-      `resource/all?offset=${page}&limit=${limit}&search=${search}`,
+      `resource/all?offset=${
+        (resourcesDetails &&
+          resourcesDetails.length &&
+          resourcesDetails[resourcesDetails.length - 1]._id) ||
+        ""
+      }&limit=${offsetLimit}&search=${search}`,
       (value) => {
         if (value.status === 200) {
           setLoading(false);
@@ -201,7 +210,7 @@ const Resources = (props) => {
             </Table>
 
             <div className="text-center pagination-input">
-              {count > 10 && !loading && (
+              {count > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"

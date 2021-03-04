@@ -66,13 +66,11 @@ class Login extends Component {
     };
 
     this.props.loginByAdmin("user/login", formData, (value) => {
-      console.log("4897949794057", value);
       this.setState({
         loading: false,
       });
 
       if (value.status === 200) {
-        console.log("4856989485967947", value);
         // this.props.setToken(value.data.user.auth_token);
         localStorage.setItem("auth_token", value.data.user.auth_token);
         NotificationManager.success("Login Successfully", "", 1000);
@@ -98,7 +96,7 @@ class Login extends Component {
   };
   render() {
     const { errorText, errorType, loading, name, password } = this.state;
-    console.log("906709506709560756", this.props.saveToken);
+
     return (
       <div className="c-app c-default-layout flex-row align-items-center">
         <CContainer>

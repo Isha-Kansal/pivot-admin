@@ -30,7 +30,7 @@ export const apiCallPost = async (url, data) => {
 export const apiCallGet = async (url) => {
   const authToken = localStorage.getItem("auth_token");
   let backendUrl = config.apiUrlInnow8;
-  console.log("94789489784978", authToken);
+
   return await axois
     .get(`${backendUrl}/${url}`, {
       headers: {
