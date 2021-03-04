@@ -66,15 +66,12 @@ class AddExpert extends Component {
       pricing: [],
       errorType: "",
       errorText: "",
-
+      selectedCalendar: null,
       expertImage: null,
       selectedDate: new Date(),
       linkedIn: "",
       calendarId: null,
-      calendarOptions: [] || [
-        { value: "5193083", label: "30 min call" },
-        { value: "5193084", label: "50 min call" },
-      ],
+      calendarOptions: [],
       serviceList: [],
     };
   }
@@ -915,7 +912,7 @@ class AddExpert extends Component {
       return expertise.includes(item.label);
     });
 
-    console.log("calendarOptions : ", calendarOptions);
+    console.log("calendarOptions : ", linkedIn);
 
     return (
       <CRow>
