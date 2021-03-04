@@ -44,7 +44,6 @@ import {
   optionsRole,
   optionsIndustry,
   optionsSkill,
-  // optionsService,
 } from "./ExpertsFieldsData";
 
 class AddExpert extends Component {
@@ -67,8 +66,7 @@ class AddExpert extends Component {
       pricing: [],
       errorType: "",
       errorText: "",
-      // service: "",
-      // rate: "",
+
       expertImage: null,
       selectedDate: new Date(),
       linkedIn: "",
@@ -112,63 +110,65 @@ class AddExpert extends Component {
     const expert_id = this.props && this.props.match.params.id;
     this.getCalenderList();
     if (expert_id) {
-      this.setState({
-        loadiing: true,
-      });
-      this.props.fetchOneExpert(`expert?id=${expert_id}`, (value) => {
-        const {
-          first_name,
-          last_name,
-          gender,
-          country,
-          designation,
-          expert_fields,
-          current_role,
-          industry,
-          skills,
-          // service,
-          email,
-          contact_no,
-          linkedIn,
-          calendar_id,
-          price,
-          info,
-        } = value.data.expert;
-        const infoData = info.map((el) => {
-          return { value: el };
-        });
-        this.setState({
-          loadiing: false,
-          first_name,
-          last_name,
-          gender,
-          country,
-          designation,
-          fields: expert_fields,
-          role: current_role,
-          industry,
-          email,
-          contact: contact_no,
-          // service,
-          // rate: price,
-          linkedIn,
-          about: infoData,
-          skill: skills && skills[0] && skills[0].label,
-          expertise: skills && skills[0] && skills[0].values,
-          calendarId: calendar_id,
-          selectedCalendar: { value: calendar_id, label: calendar_id },
-        });
-      });
-    } else {
+      this.callApiToFetchExpertDetails();
     }
   }
+  callApiToFetchExpertDetails = () => {
+    const expert_id = this.props && this.props.match.params.id;
+    this.setState({
+      loadiing: true,
+    });
+    this.props.fetchOneExpert(`expert?id=${expert_id}`, (value) => {
+      const {
+        first_name,
+        last_name,
+        gender,
+        country,
+        designation,
+        expert_fields,
+        current_role,
+        industry,
+        skills,
+
+        email,
+        contact_no,
+        linkedIn,
+        calendar_id,
+        price,
+        info,
+      } = value.data.expert;
+      const infoData = info.map((el) => {
+        return { value: el };
+      });
+      this.setState({
+        loadiing: false,
+        first_name,
+        last_name,
+        gender,
+        country,
+        designation,
+        fields: expert_fields,
+        role: current_role,
+        industry,
+        email,
+        contact: contact_no,
+
+        linkedIn,
+        about: infoData,
+        skill: skills && skills[0] && skills[0].label,
+        expertise: skills && skills[0] && skills[0].values,
+        calendarId: calendar_id,
+        selectedCalendar: { value: calendar_id, label: calendar_id },
+      });
+    });
+  };
   uploadImage = (event) => {
     this.clearError();
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
       reader.onloadend = function () {
         this.callApiAddImage((reader && reader.result) || "");
-        // props.setImage(reader.result);
+
         this.setState({
           expertImage: reader.result,
         });
@@ -292,21 +292,11 @@ class AddExpert extends Component {
       });
     }
 
-    // if (type === "service") {
-    //   this.setState({
-    //     service: data.value,
-    //   });
-    // }
     if (type === "skill") {
       this.setState({
         skill: data.value,
       });
     }
-    // if (type === "rate") {
-    //   this.setState({
-    //     rate: data.value,
-    //   });
-    // }
   };
   validateEmail = (email) => {
     var re = /^(([^<>()\]\\.,;:\s@“]+(\.[^<>()\]\\.,;:\s@“]+)*)|(“.+“))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -331,8 +321,7 @@ class AddExpert extends Component {
       fields,
       about,
       pricing,
-      // service,
-      // rate,
+
       linkedIn,
       skill,
     } = this.state;
@@ -537,28 +526,6 @@ class AddExpert extends Component {
       return;
     }
 
-    // if (service === "") {
-    //   this.setState({
-    //     errorType: "service",
-    //     errorText: (
-    //       <span className="text-danger">
-    //         <b>Select your service</b>
-    //       </span>
-    //     ),
-    //   });
-    //   return;
-    // }
-    // if (rate === "") {
-    //   this.setState({
-    //     errorType: "rate",
-    //     errorText: (
-    //       <span className="text-danger">
-    //         <b>Please enter the rate</b>
-    //       </span>
-    //     ),
-    //   });
-    //   return;
-    // }
     if (linkedIn === "") {
       this.setState({
         errorType: "linkedIn",
@@ -674,8 +641,7 @@ class AddExpert extends Component {
       role,
       industry,
       selectedCalendar,
-      // service,
-      // rate,
+
       linkedIn,
       about,
       pricing,
@@ -707,7 +673,7 @@ class AddExpert extends Component {
       contact_no: contact ? contact : "",
       linkedIn,
       calendar_id: selectedCalendar.value,
-      // price: rate,
+
       info: aboutData,
       time_zone: timeZone,
     };
@@ -743,8 +709,7 @@ class AddExpert extends Component {
       industry,
       skill,
       expertise,
-      // service,
-      // rate,
+
       linkedIn,
       about,
       pricing,
@@ -758,7 +723,6 @@ class AddExpert extends Component {
     let skillObj = [{ label: skill, values: expertise }];
 
     let obj = {
-      // profile_pic:expertImage,
       first_name,
       last_name,
       gender,
@@ -770,8 +734,7 @@ class AddExpert extends Component {
       info: aboutData,
       linkedIn,
       designation,
-      // price: rate,
-      // service,
+
       services: pricing,
       time_zone: timeZone,
       email,
@@ -832,8 +795,7 @@ class AddExpert extends Component {
       pricing: [],
       errorType: "",
       errorText: "",
-      // service: "",
-      // rate: "",
+
       linkedIn: "",
       selectedCalendar: null,
       calendarId: "",
@@ -937,8 +899,7 @@ class AddExpert extends Component {
       industry,
       email,
       contact,
-      // service,
-      // rate,
+
       selectedDate,
       linkedIn,
       selectedCalendar,
