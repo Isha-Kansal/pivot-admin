@@ -65,6 +65,13 @@ const Expert = (props) => {
     }
   };
 
+  const { selected_services } = expert;
+  let serviceName =
+    selected_services &&
+    selected_services.map((item) => {
+      return `${item.serviceName} and INR ${item.value}, \n`;
+    });
+  console.log("4506790470940", serviceName && serviceName.join("\n"));
   return (
     <CRow>
       <CCol lg={12}>
@@ -238,14 +245,14 @@ const Expert = (props) => {
                             </td>
                           </tr>
                         )}
-                        {/* {expert.price && (
+                        {serviceName && (
                           <tr>
-                            <td>Rate</td>
+                            <td>Service and its Rate</td>
                             <td>
-                              <strong>{expert.price}</strong>
+                              <strong>{serviceName}</strong>
                             </td>
                           </tr>
-                        )} */}
+                        )}
                         {expert.service && (
                           <tr>
                             <td>Service</td>

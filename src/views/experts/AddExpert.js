@@ -72,12 +72,45 @@ class AddExpert extends Component {
       expertImage: null,
       selectedDate: new Date(),
       linkedIn: "",
-      calendlyLink: "",
+      calendarId: null,
+      calendarOptions: [] || [
+        { value: "5193083", label: "30 min call" },
+        { value: "5193084", label: "50 min call" },
+      ],
+      serviceList: [],
     };
   }
+
+  getCalenderList = () => {
+    this.props.fetchService(
+      "expert/services",
+
+      (value) => {
+        if (value.status === 200) {
+          const calendarOptions = (value.data.services || []).map(
+            (service) => ({
+              value: service.calendar_id,
+              label: service.name,
+            })
+          );
+
+          const serviceList = value.data.services || [];
+          this.setState({
+            calendarOptions,
+            serviceList,
+            loading: false,
+            selectedCalendar: {
+              value: this.state.calendarId,
+              label: this.state.calendarId,
+            },
+          });
+        }
+      }
+    );
+  };
   componentDidMount() {
     const expert_id = this.props && this.props.match.params.id;
-
+    this.getCalenderList();
     if (expert_id) {
       this.setState({
         loadiing: true,
@@ -122,9 +155,11 @@ class AddExpert extends Component {
           about: infoData,
           skill: skills && skills[0] && skills[0].label,
           expertise: skills && skills[0] && skills[0].values,
-          calendlyLink: calendar_id,
+          calendarId: calendar_id,
+          selectedCalendar: { value: calendar_id, label: calendar_id },
         });
       });
+    } else {
     }
   }
   uploadImage = (event) => {
@@ -152,7 +187,6 @@ class AddExpert extends Component {
     });
   };
   inputHandler = (e, type) => {
-    const { calendlyLink } = this.state;
     if (type === "calendarId") {
       this.clearError();
       this.setState({ [e.target.name]: e.target.value });
@@ -205,6 +239,28 @@ class AddExpert extends Component {
     if (type === "country") {
       this.setState({
         country: data.value,
+      });
+    }
+    if (type === "calendarId") {
+      const { serviceList } = this.state;
+
+      const selectedService = serviceList.find(
+        (item) => item.calendar_id === data.value
+      );
+
+      console.log("selectedService : ", selectedService);
+
+      const pricingVal = (selectedService.services || []).map((data) => ({
+        id: data.id,
+        serviceName: data.name,
+        value: "",
+      }));
+
+      console.log("selectedService pricingVal: ", pricingVal);
+
+      this.setState({
+        selectedCalendar: data,
+        pricing: pricingVal,
       });
     }
     if (type === "designation") {
@@ -268,7 +324,7 @@ class AddExpert extends Component {
       gender,
       country,
       designation,
-      calendlyLink,
+      selectedCalendar,
       role,
       industry,
       expertise,
@@ -529,30 +585,26 @@ class AddExpert extends Component {
         return;
       }
     }
-    if (calendlyLink === "") {
+    if (selectedCalendar === null || !selectedCalendar.value) {
       this.setState({
-        errorType: "calendlyLink",
+        errorType: "selectedCalendar",
         errorText: (
           <span className="text-danger">
-            <b>Please enter calendar Id</b>
+            <b>Please select calendar name</b>
           </span>
         ),
       });
       return;
     }
-    if (pricing.length !== 0) {
-      pricing.map((item) => {
-        if (item.value === "") {
-          this.setState({
-            errorType: "pricing",
-            errorText: (
-              <span className="text-danger">
-                <b>Please add price</b>
-              </span>
-            ),
-          });
-          return;
-        }
+
+    if (pricing && pricing.length !== 0 && pricing.find((i) => i.value == "")) {
+      this.setState({
+        errorType: "pricing",
+        errorText: (
+          <span className="text-danger">
+            <b>Please add price</b>
+          </span>
+        ),
       });
       return;
     }
@@ -621,7 +673,7 @@ class AddExpert extends Component {
       fields,
       role,
       industry,
-      calendlyLink,
+      selectedCalendar,
       // service,
       // rate,
       linkedIn,
@@ -650,11 +702,11 @@ class AddExpert extends Component {
       role,
       industry,
       skills: skillObj,
-      // service,
+      services: pricing,
       email,
       contact_no: contact ? contact : "",
       linkedIn,
-      calendar_id: calendlyLink,
+      calendar_id: selectedCalendar.value,
       // price: rate,
       info: aboutData,
       time_zone: timeZone,
@@ -697,7 +749,7 @@ class AddExpert extends Component {
       about,
       pricing,
       expertImage,
-      calendlyLink,
+      selectedCalendar,
     } = this.state;
     let aboutData = about.map((el) => {
       return el.value;
@@ -720,10 +772,11 @@ class AddExpert extends Component {
       designation,
       // price: rate,
       // service,
+      services: pricing,
       time_zone: timeZone,
       email,
       contact_no: contact ? contact : "",
-      calendar_id: calendlyLink,
+      calendar_id: selectedCalendar.value,
     };
     if (expertImage) {
       obj.profile_pic = expertImage;
@@ -782,7 +835,8 @@ class AddExpert extends Component {
       // service: "",
       // rate: "",
       linkedIn: "",
-      calendlyLink: "",
+      selectedCalendar: null,
+      calendarId: "",
       selectedDate: new Date(),
     });
   };
@@ -887,17 +941,20 @@ class AddExpert extends Component {
       // rate,
       selectedDate,
       linkedIn,
-      calendlyLink,
+      selectedCalendar,
       skill,
       pricing,
+      calendarOptions,
     } = this.state;
-
+    console.log("569078905980950689", pricing);
     let fieldsVal = optionsFields.filter((item) => {
       return fields.includes(item.label);
     });
     let expertiseVal = optionsExpertise.filter((item) => {
       return expertise.includes(item.label);
     });
+
+    console.log("calendarOptions : ", calendarOptions);
 
     return (
       <CRow>
@@ -1109,40 +1166,6 @@ class AddExpert extends Component {
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  {/* <CCol xs="6">
-                    <CFormGroup>
-                      <CLabel htmlFor="service">Service</CLabel>
-
-                      <Select
-                        custom
-                        id="service"
-                        name="service"
-                        placeholder="Select Service"
-                        onChange={(data) => this.handleChange(data, "service")}
-                        value={
-                          service ? { value: service, label: service } : null
-                        }
-                        options={optionsService}
-                      ></Select>
-                      {this.errorShow("service")}
-                    </CFormGroup>
-                  </CCol> */}
-
-                  {/* <CCol xs="6">
-                    <CFormGroup>
-                      <CLabel htmlFor="rate">Rate</CLabel>
-
-                      <CInput
-                        type="number"
-                        id="rate"
-                        placeholder="Rate"
-                        name="rate"
-                        onChange={this.inputHandler}
-                        value={rate}
-                      />
-                      {this.errorShow("rate")}
-                    </CFormGroup>
-                  </CCol> */}
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="linkedIn">LinkedIn Link</CLabel>
@@ -1158,53 +1181,62 @@ class AddExpert extends Component {
                   </CCol>
                   <CCol xs="6">
                     <CFormGroup>
-                      <CLabel htmlFor="calendlyLink">Calendar Id</CLabel>
-                      <CInput
-                        type="number"
-                        name="calendlyLink"
-                        id="calendlyLink"
-                        onChange={(e) => this.inputHandler(e, "calendarId")}
-                        placeholder="Calendar Id"
-                        value={calendlyLink}
-                      />
-                      {this.errorShow("calendlyLink")}
+                      <CLabel htmlFor="selectedCalendar">Calendar Name</CLabel>
+
+                      <Select
+                        custom
+                        name="selectedCalendar"
+                        id="selectedCalendar"
+                        name="selectedCalendar"
+                        placeholder="Select Calendar Name"
+                        onChange={(data) =>
+                          this.handleChange(data, "calendarId")
+                        }
+                        value={selectedCalendar}
+                        options={calendarOptions}
+                      ></Select>
+                      {this.errorShow("selectedCalendar")}
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>
 
                 <CFormGroup row className="my-0">
-                  <CCol xs="12">
-                    <CFormGroup>
-                      <CLabel htmlFor="pricing">Pricing</CLabel>
-                      <div class="d-flex justify-content-between add-list">
-                        <CLabel htmlFor="pricing">
-                          Enter Price of each service
-                        </CLabel>
-                      </div>
+                  {pricing && pricing.length > 0 && (
+                    <CCol xs="12">
+                      <CFormGroup>
+                        <CLabel htmlFor="pricing">Pricing</CLabel>
+                        <div class="d-flex justify-content-between add-list">
+                          <CLabel htmlFor="pricing">
+                            Enter Price of each service
+                          </CLabel>
+                        </div>
 
-                      {pricing &&
-                        pricing.length > 0 &&
-                        pricing.map((el, index) => {
-                          return (
-                            <div className="d-flex align-items-center mb-2 ">
-                              {el.serviceName}
-                              <CInput
-                                type="number"
-                                id={`pricing${el.id}`}
-                                name={`pricing${el.id}`}
-                                placeholder="Price"
-                                autoComplete={`pricing${el.id}`}
-                                onChange={(e) => {
-                                  this.inputPricing(e, index);
-                                }}
-                                value={el.value}
-                              />
-                              {this.errorShow("pricing")}
-                            </div>
-                          );
-                        })}
-                    </CFormGroup>
-                  </CCol>
+                        {pricing &&
+                          pricing.length > 0 &&
+                          pricing.map((el, index) => {
+                            console.log("4895789048794907", el);
+                            return (
+                              <div className="d-flex align-items-center mb-2 ">
+                                {el.serviceName}
+                                <CInput
+                                  type="number"
+                                  id={`pricing${el.id}`}
+                                  name={`pricing${el.id}`}
+                                  placeholder="Price"
+                                  autoComplete={`pricing${el.id}`}
+                                  onChange={(e) => {
+                                    this.inputPricing(e, index);
+                                  }}
+                                  value={el.value}
+                                />
+                                {/* {this.errorShow("pricing")} */}
+                              </div>
+                            );
+                          })}
+                        {this.errorShow("pricing")}
+                      </CFormGroup>
+                    </CCol>
+                  )}
                 </CFormGroup>
                 <CFormGroup row className="my-0">
                   <CCol xs="6">
