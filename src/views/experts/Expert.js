@@ -43,7 +43,8 @@ const Expert = (props) => {
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
   let fields =
     expert && expert.expert_fields && expert.expert_fields.join(", ");
-  let info = expert && expert.info && expert.info.join(", ");
+
+  let info = expert && expert.info && expert.info.join("\r\n");
 
   let skills =
     expert.skills &&
