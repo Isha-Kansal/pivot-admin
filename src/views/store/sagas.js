@@ -45,6 +45,9 @@ import {
   EDIT_EXPERT_REQUEST,
   EDIT_EXPERT_SUCCESS,
   EDIT_EXPERT_FAILED,
+  FETCH_EXPERT_SERVICE_FAILED,
+  FETCH_EXPERT_SERVICE_REQUEST,
+  FETCH_EXPERT_SERVICE_SUCCESS,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -79,6 +82,10 @@ async function callAddImage(data) {
 }
 
 async function callFetchUsers(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+async function callFetchService(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
@@ -359,6 +366,22 @@ function* deleteExpert(action) {
   }
 }
 
+function* fetchService(action) {
+  const response = yield call(callFetchService, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: FETCH_EXPERT_SERVICE_SUCCESS,
+        serviceData: response.data,
+      });
+    } else {
+      yield put({ type: FETCH_EXPERT_SERVICE_FAILED });
+    }
+  }
+}
+
 export default function* LoginByAdminWatcher() {
   yield takeLatest(LOGIN_BY_ADMIN_REQUEST, loginByAdmin);
   yield takeLatest(FETCH_USERS_REQUEST, fetchUsers);
@@ -375,4 +398,5 @@ export default function* LoginByAdminWatcher() {
   yield takeLatest(DELETE_EXPERT_REQUEST, deleteExpert);
   yield takeLatest(FETCH_EXPERTS_REQUEST, fetchExperts);
   yield takeLatest(FETCH_ONE_EXPERT_REQUEST, fetchOneExpert);
+  yield takeLatest(FETCH_EXPERT_SERVICE_REQUEST, fetchService);
 }

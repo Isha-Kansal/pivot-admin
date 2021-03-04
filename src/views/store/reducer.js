@@ -48,6 +48,9 @@ const {
   EDIT_EXPERT_REQUEST,
   EDIT_EXPERT_SUCCESS,
   EDIT_EXPERT_FAILED,
+  FETCH_EXPERT_SERVICE_FAILED,
+  FETCH_EXPERT_SERVICE_REQUEST,
+  FETCH_EXPERT_SERVICE_SUCCESS,
 } = require("./types");
 
 const initialState = {
@@ -69,6 +72,7 @@ const initialState = {
   editResourceData: {},
   editExpertData: {},
   saveResourceData: {},
+  serviceData: {},
 };
 
 const LoginAndNavigationReducer = (state = initialState, action) => {
@@ -101,6 +105,23 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
     case FETCH_USERS_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case FETCH_EXPERT_SERVICE_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_EXPERT_SERVICE_SUCCESS: {
+      return {
+        ...state,
+        serviceData: action.serviceData || {},
+      };
+    }
+    case FETCH_EXPERT_SERVICE_FAILED: {
       return {
         ...state,
       };

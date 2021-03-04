@@ -238,14 +238,14 @@ const Expert = (props) => {
                             </td>
                           </tr>
                         )}
-                        {expert.price && (
+                        {/* {expert.price && (
                           <tr>
                             <td>Rate</td>
                             <td>
                               <strong>{expert.price}</strong>
                             </td>
                           </tr>
-                        )}
+                        )} */}
                         {expert.service && (
                           <tr>
                             <td>Service</td>

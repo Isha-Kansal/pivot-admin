@@ -6,6 +6,7 @@ import {
   addImage,
   fetchOneExpert,
   editExpert,
+  fetchService,
 } from "../store/action";
 import moment from "moment-timezone";
 import { connect } from "react-redux";
@@ -63,14 +64,11 @@ class AddExpert extends Component {
       industry: "",
       fields: [],
       about: [],
-      pricing: [
-        { service: "30 Min Call", value: "" },
-        { service: "45 Min Call", value: "" },
-      ],
+      pricing: [],
       errorType: "",
       errorText: "",
       // service: "",
-      rate: "",
+      // rate: "",
       expertImage: null,
       selectedDate: new Date(),
       linkedIn: "",
@@ -119,7 +117,7 @@ class AddExpert extends Component {
           email,
           contact: contact_no,
           // service,
-          rate: price,
+          // rate: price,
           linkedIn,
           about: infoData,
           skill: skills && skills[0] && skills[0].label,
@@ -153,9 +151,36 @@ class AddExpert extends Component {
       errorText: "",
     });
   };
-  inputHandler = (e) => {
-    this.clearError();
-    this.setState({ [e.target.name]: e.target.value });
+  inputHandler = (e, type) => {
+    const { calendlyLink } = this.state;
+    if (type === "calendarId") {
+      this.clearError();
+      this.setState({ [e.target.name]: e.target.value });
+      console.log("9u58y84978948978", e.target.value);
+      this.props.fetchService(
+        `expert/services?id=${e.target.value}`,
+
+        (value) => {
+          console.log("84967949879849", value);
+          if (value.status === 200) {
+            const pricingVal = value.data.services.map((item) => {
+              return {
+                id: item.id,
+                serviceName: item.name,
+                value: "",
+              };
+            });
+            this.setState({
+              pricing: pricingVal,
+              loadiing: false,
+            });
+          }
+        }
+      );
+    } else {
+      this.clearError();
+      this.setState({ [e.target.name]: e.target.value });
+    }
   };
   handleChange = (data, type) => {
     this.clearError();
@@ -222,11 +247,11 @@ class AddExpert extends Component {
         skill: data.value,
       });
     }
-    if (type === "rate") {
-      this.setState({
-        rate: data.value,
-      });
-    }
+    // if (type === "rate") {
+    //   this.setState({
+    //     rate: data.value,
+    //   });
+    // }
   };
   validateEmail = (email) => {
     var re = /^(([^<>()\]\\.,;:\s@“]+(\.[^<>()\]\\.,;:\s@“]+)*)|(“.+“))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -250,8 +275,9 @@ class AddExpert extends Component {
       expertise,
       fields,
       about,
+      pricing,
       // service,
-      rate,
+      // rate,
       linkedIn,
       skill,
     } = this.state;
@@ -467,17 +493,17 @@ class AddExpert extends Component {
     //   });
     //   return;
     // }
-    if (rate === "") {
-      this.setState({
-        errorType: "rate",
-        errorText: (
-          <span className="text-danger">
-            <b>Please enter the rate</b>
-          </span>
-        ),
-      });
-      return;
-    }
+    // if (rate === "") {
+    //   this.setState({
+    //     errorType: "rate",
+    //     errorText: (
+    //       <span className="text-danger">
+    //         <b>Please enter the rate</b>
+    //       </span>
+    //     ),
+    //   });
+    //   return;
+    // }
     if (linkedIn === "") {
       this.setState({
         errorType: "linkedIn",
@@ -512,6 +538,22 @@ class AddExpert extends Component {
             <b>Please enter calendar Id</b>
           </span>
         ),
+      });
+      return;
+    }
+    if (pricing.length !== 0) {
+      pricing.map((item) => {
+        if (item.value === "") {
+          this.setState({
+            errorType: "pricing",
+            errorText: (
+              <span className="text-danger">
+                <b>Please add price</b>
+              </span>
+            ),
+          });
+          return;
+        }
       });
       return;
     }
@@ -582,9 +624,10 @@ class AddExpert extends Component {
       industry,
       calendlyLink,
       // service,
-      rate,
+      // rate,
       linkedIn,
       about,
+      pricing,
       skill,
       expertise,
       expertImage,
@@ -613,7 +656,7 @@ class AddExpert extends Component {
       contact_no: contact ? contact : "",
       linkedIn,
       calendar_id: calendlyLink,
-      price: rate,
+      // price: rate,
       info: aboutData,
       time_zone: timeZone,
     };
@@ -650,9 +693,10 @@ class AddExpert extends Component {
       skill,
       expertise,
       // service,
-      rate,
+      // rate,
       linkedIn,
       about,
+      pricing,
       expertImage,
       calendlyLink,
     } = this.state;
@@ -675,7 +719,7 @@ class AddExpert extends Component {
       info: aboutData,
       linkedIn,
       designation,
-      price: rate,
+      // price: rate,
       // service,
       time_zone: timeZone,
       email,
@@ -737,7 +781,7 @@ class AddExpert extends Component {
       errorType: "",
       errorText: "",
       // service: "",
-      rate: "",
+      // rate: "",
       linkedIn: "",
       calendlyLink: "",
       selectedDate: new Date(),
@@ -841,7 +885,7 @@ class AddExpert extends Component {
       email,
       contact,
       // service,
-      rate,
+      // rate,
       selectedDate,
       linkedIn,
       calendlyLink,
@@ -1085,7 +1129,7 @@ class AddExpert extends Component {
                     </CFormGroup>
                   </CCol> */}
 
-                  <CCol xs="6">
+                  {/* <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="rate">Rate</CLabel>
 
@@ -1099,7 +1143,7 @@ class AddExpert extends Component {
                       />
                       {this.errorShow("rate")}
                     </CFormGroup>
-                  </CCol>
+                  </CCol> */}
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="linkedIn">LinkedIn Link</CLabel>
@@ -1113,9 +1157,6 @@ class AddExpert extends Component {
                       {this.errorShow("linkedIn")}
                     </CFormGroup>
                   </CCol>
-                </CFormGroup>
-
-                <CFormGroup row className="my-0">
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="linkedIn">Calendar Id</CLabel>
@@ -1123,53 +1164,43 @@ class AddExpert extends Component {
                         type="number"
                         name="calendlyLink"
                         id="calendlyLink"
-                        onChange={this.inputHandler}
+                        onChange={(e) => this.inputHandler(e, "calendarId")}
                         placeholder="Calendar Id"
                         value={calendlyLink}
                       />
                       {this.errorShow("calendlyLink")}
                     </CFormGroup>
                   </CCol>
-                  <CCol xs="6">
+                </CFormGroup>
+
+                <CFormGroup row className="my-0">
+                  <CCol xs="12">
                     <CFormGroup>
                       <CLabel htmlFor="pricing">Pricing</CLabel>
-                      <div
-                        // onClick={(e) => this.handlePlusButton(e, "pricing")}
-                        class="d-flex justify-content-between add-list"
-                      >
+                      <div class="d-flex justify-content-between add-list">
                         <CLabel htmlFor="pricing">
                           Enter Price of each service
                         </CLabel>
-                        {/* <button className="icon">
-                          <img src={ADD} className="ml-3" />
-                        </button> */}
                       </div>
-                      {this.errorShow("pricing")}
+
                       {pricing &&
                         pricing.length > 0 &&
                         pricing.map((el, index) => {
                           return (
                             <div className="d-flex align-items-center mb-2 ">
-                              {el.service}
+                              {el.serviceName}
                               <CInput
                                 type="number"
-                                id={`pricing${index}`}
-                                name={`pricing${index}`}
+                                id={`pricing${el.id}`}
+                                name={`pricing${el.id}`}
                                 placeholder="Price"
-                                autoComplete={`pricing${index}`}
+                                autoComplete={`pricing${el.id}`}
                                 onChange={(e) => {
                                   this.inputPricing(e, index);
                                 }}
                                 value={el.value}
                               />
-                              {/* <button
-                                className="icon"
-                                onClick={(e) =>
-                                  this.handleCancel(e, index, "pricing")
-                                }
-                              >
-                                <img src={CANCEL} className="ml-3" />
-                              </button> */}
+                              {this.errorShow("pricing")}
                             </div>
                           );
                         })}
@@ -1297,6 +1328,7 @@ const mapDispatchToProps = (dispatch) => {
       addImage,
       fetchOneExpert,
       editExpert,
+      fetchService,
     },
     dispatch
   );

@@ -16,6 +16,7 @@ import {
   DELETE_EXPERT_REQUEST,
   EDIT_EXPERT_REQUEST,
   SET_TOKEN,
+  FETCH_EXPERT_SERVICE_REQUEST,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -92,6 +93,14 @@ export const addImage = (url, body, callback) => {
 export const fetchUsers = (body, callback) => {
   return {
     type: FETCH_USERS_REQUEST,
+
+    payload: body,
+    callback,
+  };
+};
+export const fetchService = (body, callback) => {
+  return {
+    type: FETCH_EXPERT_SERVICE_REQUEST,
 
     payload: body,
     callback,
