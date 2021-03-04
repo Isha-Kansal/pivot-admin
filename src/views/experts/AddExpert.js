@@ -1158,7 +1158,7 @@ class AddExpert extends Component {
                   </CCol>
                   <CCol xs="6">
                     <CFormGroup>
-                      <CLabel htmlFor="linkedIn">Calendar Id</CLabel>
+                      <CLabel htmlFor="calendlyLink">Calendar Id</CLabel>
                       <CInput
                         type="number"
                         name="calendlyLink"
