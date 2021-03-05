@@ -33,7 +33,7 @@ import {
 
 import Select from "react-select";
 import CameraIcon from "../../assets/icons/photo-camera.svg";
-import { Input } from "reactstrap";
+import { Input, Row, Col } from "reactstrap";
 import CIcon from "@coreui/icons-react";
 import Avatar from "../../assets/icons/avatar.png";
 import {
@@ -1199,7 +1199,7 @@ class AddExpert extends Component {
                             return (
                               <div className="d-flex align-items-center mb-2 ">
                                 {el.serviceName}
-                                <div>
+                                <div className="d-flex w-100">
                                   <CInput
                                     type="number"
                                     id={`pricing${el.id}`}
@@ -1210,8 +1210,10 @@ class AddExpert extends Component {
                                       this.inputPricing(e, index);
                                     }}
                                     value={el.value}
+                                    className="w-50 mr-4"
                                   />
                                   <Select
+                                    className="w-50"
                                     custom
                                     name={`pricing${el.unit}`}
                                     id={`pricing${el.unit}`}
