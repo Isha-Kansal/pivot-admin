@@ -65,11 +65,11 @@ const Expert = (props) => {
     }
   };
 
-  const { selected_services } = expert;
+  const { rates } = expert;
   let serviceName =
-    selected_services &&
-    selected_services.map((item) => {
-      return `${item.serviceName} and INR ${item.value}, \n`;
+    rates &&
+    rates.map((item) => {
+      return `${item.serviceName} and ${item.value} ${item.unit}, \n`;
     });
   console.log("4506790470940", serviceName && serviceName.join("\n"));
   return (

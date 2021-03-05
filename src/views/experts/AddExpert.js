@@ -143,7 +143,7 @@ class AddExpert extends Component {
         linkedIn,
         calendar_id,
         price,
-        selected_services,
+        rates,
         info,
       } = value.data.expert;
 
@@ -173,10 +173,7 @@ class AddExpert extends Component {
         () => {
           this.getCalenderList(() => {
             const { serviceList, calendarId, calendarOptions } = this.state;
-            console.log(
-              "edit getCalenderList serviceList services : ",
-              selected_services
-            );
+            console.log("edit getCalenderList serviceList services : ", rates);
             console.log("edit getCalenderList serviceList : ", serviceList);
             console.log("edit getCalenderList calendarId : ", calendarId);
             console.log(
@@ -193,7 +190,7 @@ class AddExpert extends Component {
             );
             this.setState({
               selectedCalendar: selectedCalendar,
-              pricing: selected_services || [],
+              pricing: rates || [],
             });
           });
         }
@@ -225,36 +222,23 @@ class AddExpert extends Component {
     });
   };
   inputHandler = (e) => {
-    // if (type === "calendarId") {
-    //   this.clearError();
-    //   this.setState({ [e.target.name]: e.target.value });
-
-    //   this.props.fetchService(
-    //     `expert/services?id=${e.target.value}`,
-
-    //     (value) => {
-    //       if (value.status === 200) {
-    //         const pricingVal = value.data.services.map((item) => {
-    //           return {
-    //             id: item.id,
-    //             serviceName: item.name,
-    //             value: "",
-    //             unit: "",
-    //           };
-    //         });
-    //         this.setState({
-    //           pricing: pricingVal,
-    //           loadiing: false,
-    //         });
-    //       }
-    //     }
-    //   );
-    // } else {
     this.clearError();
     this.setState({ [e.target.name]: e.target.value });
-    // }
   };
+  handleUnit = (data, type, index) => {
+    let pricingToUpdate = this.state.pricing[index];
+    const newArray = [...this.state.pricing];
+    pricingToUpdate = {
+      ...pricingToUpdate,
+      unit: data.value,
+    };
+    newArray[index] = pricingToUpdate;
+    this.clearError();
+    this.setState({ pricing: newArray });
+  };
+
   handleChange = (data, type) => {
+    console.log("8946789409704057", data);
     const { unit } = this.state;
     this.clearError();
 
@@ -274,11 +258,6 @@ class AddExpert extends Component {
     if (type === "gender") {
       this.setState({
         gender: data.value,
-      });
-    }
-    if (type === "unit") {
-      this.setState({
-        unit: data.value,
       });
     }
 
@@ -622,6 +601,17 @@ class AddExpert extends Component {
       });
       return;
     }
+    if (pricing && pricing.length !== 0 && pricing.find((i) => i.unit == "")) {
+      this.setState({
+        errorType: "pricing",
+        errorText: (
+          <span className="text-danger">
+            <b>Please select unit</b>
+          </span>
+        ),
+      });
+      return;
+    }
 
     if (skill === undefined) {
       this.setState({
@@ -898,6 +888,7 @@ class AddExpert extends Component {
     this.setState({ [e.target.name]: e.target.value, about: newArray });
   };
   inputPricing = (e, index) => {
+    console.log("8946789489948784", index);
     let pricingToUpdate = this.state.pricing[index];
     const newArray = [...this.state.pricing];
     pricingToUpdate = {
@@ -953,6 +944,7 @@ class AddExpert extends Component {
       skill,
       pricing,
       calendarOptions,
+      unit,
     } = this.state;
     console.log("569078905980950689", pricing);
     let fieldsVal = optionsFields.filter((item) => {
@@ -1240,13 +1232,17 @@ class AddExpert extends Component {
                                   />
                                   <Select
                                     custom
-                                    // name={`pricing${el.id}`}
-                                    // id={`pricing${el.id}`}
-                                    // placeholder="Select Unit"
+                                    name={`pricing${el.unit}`}
+                                    id={`pricing${el.unit}`}
+                                    placeholder="Select Unit"
                                     onChange={(data) =>
-                                      this.handleChange(data, "unit")
+                                      this.handleUnit(data, "unit", index)
                                     }
-                                    // value={el.unit}
+                                    value={
+                                      el.unit
+                                        ? { value: el.unit, label: el.unit }
+                                        : null
+                                    }
                                     options={optionsUnit}
                                   ></Select>
                                 </div>
