@@ -71,13 +71,12 @@ const Expert = (props) => {
     rates.map((item) => {
       return `${item.serviceName} and ${item.value} ${item.unit}, \n`;
     });
-  console.log("4506790470940", serviceName && serviceName.join("\n"));
+
   return (
     <CRow>
       <CCol lg={12}>
         <CCard>
           {loading && <Loader />}
-          {/* <CCardHeader>Expert Details</CCardHeader> */}
 
           <CCardBody>
             <CTabs>

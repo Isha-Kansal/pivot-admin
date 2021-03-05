@@ -173,21 +173,11 @@ class AddExpert extends Component {
         () => {
           this.getCalenderList(() => {
             const { serviceList, calendarId, calendarOptions } = this.state;
-            console.log("edit getCalenderList serviceList services : ", rates);
-            console.log("edit getCalenderList serviceList : ", serviceList);
-            console.log("edit getCalenderList calendarId : ", calendarId);
-            console.log(
-              "edit getCalenderList calendarOptions : ",
-              calendarOptions
-            );
 
             const selectedCalendar = (calendarOptions || []).find(
               (service) => service.value === calendarId
             );
-            console.log(
-              "edit getCalenderList selectedCalendar",
-              selectedCalendar
-            );
+
             this.setState({
               selectedCalendar: selectedCalendar,
               pricing: rates || [],
@@ -238,7 +228,6 @@ class AddExpert extends Component {
   };
 
   handleChange = (data, type) => {
-    console.log("8946789409704057", data);
     const { unit } = this.state;
     this.clearError();
 
@@ -273,16 +262,12 @@ class AddExpert extends Component {
         (item) => item.calendar_id === data.value
       );
 
-      console.log("selectedService : ", selectedService);
-
       const pricingVal = (selectedService.services || []).map((data) => ({
         id: data.id,
         serviceName: data.name,
         value: "",
         unit: "",
       }));
-
-      console.log("selectedService pricingVal: ", pricingVal);
 
       this.setState({
         selectedCalendar: data,
@@ -888,7 +873,6 @@ class AddExpert extends Component {
     this.setState({ [e.target.name]: e.target.value, about: newArray });
   };
   inputPricing = (e, index) => {
-    console.log("8946789489948784", index);
     let pricingToUpdate = this.state.pricing[index];
     const newArray = [...this.state.pricing];
     pricingToUpdate = {
@@ -946,15 +930,13 @@ class AddExpert extends Component {
       calendarOptions,
       unit,
     } = this.state;
-    console.log("569078905980950689", pricing);
+
     let fieldsVal = optionsFields.filter((item) => {
       return fields.includes(item.label);
     });
     let expertiseVal = optionsExpertise.filter((item) => {
       return expertise.includes(item.label);
     });
-
-    console.log("calendarOptions : ", linkedIn);
 
     return (
       <CRow>
@@ -1214,7 +1196,6 @@ class AddExpert extends Component {
                         {pricing &&
                           pricing.length > 0 &&
                           pricing.map((el, index) => {
-                            console.log("4895789048794907", el);
                             return (
                               <div className="d-flex align-items-center mb-2 ">
                                 {el.serviceName}
