@@ -44,6 +44,7 @@ import {
   optionsRole,
   optionsIndustry,
   optionsSkill,
+  optionsUnit,
 } from "./ExpertsFieldsData";
 
 class AddExpert extends Component {
@@ -73,10 +74,11 @@ class AddExpert extends Component {
       calendarId: null,
       calendarOptions: [],
       serviceList: [],
+      unit: "",
     };
   }
 
-  getCalenderList = () => {
+  getCalenderList = (callback) => {
     this.props.fetchService(
       "expert/services",
 
@@ -90,26 +92,36 @@ class AddExpert extends Component {
           );
 
           const serviceList = value.data.services || [];
-          this.setState({
-            calendarOptions,
-            serviceList,
-            loading: false,
-            selectedCalendar: {
-              value: this.state.calendarId,
-              label: this.state.calendarId,
+          this.setState(
+            {
+              calendarOptions,
+              serviceList,
+              loading: false,
+              // selectedCalendar: {
+              //   value: this.state.calendarId,
+              //   label: this.state.calendarId,
+              // },
             },
-          });
+            () => {
+              if (callback) {
+                callback();
+              }
+            }
+          );
         }
       }
     );
   };
   componentDidMount() {
     const expert_id = this.props && this.props.match.params.id;
-    this.getCalenderList();
+
     if (expert_id) {
       this.callApiToFetchExpertDetails();
+    } else {
+      this.getCalenderList();
     }
   }
+
   callApiToFetchExpertDetails = () => {
     const expert_id = this.props && this.props.match.params.id;
     this.setState({
@@ -126,37 +138,66 @@ class AddExpert extends Component {
         current_role,
         industry,
         skills,
-
         email,
         contact_no,
         linkedIn,
         calendar_id,
         price,
+        selected_services,
         info,
       } = value.data.expert;
+
       const infoData = info.map((el) => {
         return { value: el };
       });
-      this.setState({
-        loadiing: false,
-        first_name,
-        last_name,
-        gender,
-        country,
-        designation,
-        fields: expert_fields,
-        role: current_role,
-        industry,
-        email,
-        contact: contact_no,
 
-        linkedIn,
-        about: infoData,
-        skill: skills && skills[0] && skills[0].label,
-        expertise: skills && skills[0] && skills[0].values,
-        calendarId: calendar_id,
-        selectedCalendar: { value: calendar_id, label: calendar_id },
-      });
+      this.setState(
+        {
+          loadiing: false,
+          first_name,
+          last_name,
+          gender,
+          country,
+          designation,
+          fields: expert_fields,
+          role: current_role,
+          industry,
+          email,
+          contact: contact_no,
+          linkedIn,
+          about: infoData,
+          skill: (skills && skills[0] && skills[0].label) || "",
+          expertise: skills && skills[0] && skills[0].values,
+          calendarId: calendar_id,
+        },
+        () => {
+          this.getCalenderList(() => {
+            const { serviceList, calendarId, calendarOptions } = this.state;
+            console.log(
+              "edit getCalenderList serviceList services : ",
+              selected_services
+            );
+            console.log("edit getCalenderList serviceList : ", serviceList);
+            console.log("edit getCalenderList calendarId : ", calendarId);
+            console.log(
+              "edit getCalenderList calendarOptions : ",
+              calendarOptions
+            );
+
+            const selectedCalendar = (calendarOptions || []).find(
+              (service) => service.value === calendarId
+            );
+            console.log(
+              "edit getCalenderList selectedCalendar",
+              selectedCalendar
+            );
+            this.setState({
+              selectedCalendar: selectedCalendar,
+              pricing: selected_services || [],
+            });
+          });
+        }
+      );
     });
   };
   uploadImage = (event) => {
@@ -183,36 +224,38 @@ class AddExpert extends Component {
       errorText: "",
     });
   };
-  inputHandler = (e, type) => {
-    if (type === "calendarId") {
-      this.clearError();
-      this.setState({ [e.target.name]: e.target.value });
+  inputHandler = (e) => {
+    // if (type === "calendarId") {
+    //   this.clearError();
+    //   this.setState({ [e.target.name]: e.target.value });
 
-      this.props.fetchService(
-        `expert/services?id=${e.target.value}`,
+    //   this.props.fetchService(
+    //     `expert/services?id=${e.target.value}`,
 
-        (value) => {
-          if (value.status === 200) {
-            const pricingVal = value.data.services.map((item) => {
-              return {
-                id: item.id,
-                serviceName: item.name,
-                value: "",
-              };
-            });
-            this.setState({
-              pricing: pricingVal,
-              loadiing: false,
-            });
-          }
-        }
-      );
-    } else {
-      this.clearError();
-      this.setState({ [e.target.name]: e.target.value });
-    }
+    //     (value) => {
+    //       if (value.status === 200) {
+    //         const pricingVal = value.data.services.map((item) => {
+    //           return {
+    //             id: item.id,
+    //             serviceName: item.name,
+    //             value: "",
+    //             unit: "",
+    //           };
+    //         });
+    //         this.setState({
+    //           pricing: pricingVal,
+    //           loadiing: false,
+    //         });
+    //       }
+    //     }
+    //   );
+    // } else {
+    this.clearError();
+    this.setState({ [e.target.name]: e.target.value });
+    // }
   };
   handleChange = (data, type) => {
+    const { unit } = this.state;
     this.clearError();
 
     if (type === "fields") {
@@ -233,6 +276,12 @@ class AddExpert extends Component {
         gender: data.value,
       });
     }
+    if (type === "unit") {
+      this.setState({
+        unit: data.value,
+      });
+    }
+
     if (type === "country") {
       this.setState({
         country: data.value,
@@ -251,6 +300,7 @@ class AddExpert extends Component {
         id: data.id,
         serviceName: data.name,
         value: "",
+        unit: "",
       }));
 
       console.log("selectedService pricingVal: ", pricingVal);
@@ -1176,18 +1226,30 @@ class AddExpert extends Component {
                             return (
                               <div className="d-flex align-items-center mb-2 ">
                                 {el.serviceName}
-                                <CInput
-                                  type="number"
-                                  id={`pricing${el.id}`}
-                                  name={`pricing${el.id}`}
-                                  placeholder="Price"
-                                  autoComplete={`pricing${el.id}`}
-                                  onChange={(e) => {
-                                    this.inputPricing(e, index);
-                                  }}
-                                  value={el.value}
-                                />
-                                {/* {this.errorShow("pricing")} */}
+                                <div>
+                                  <CInput
+                                    type="number"
+                                    id={`pricing${el.id}`}
+                                    name={`pricing${el.id}`}
+                                    placeholder="Price"
+                                    autoComplete={`pricing${el.id}`}
+                                    onChange={(e) => {
+                                      this.inputPricing(e, index);
+                                    }}
+                                    value={el.value}
+                                  />
+                                  <Select
+                                    custom
+                                    // name={`pricing${el.id}`}
+                                    // id={`pricing${el.id}`}
+                                    // placeholder="Select Unit"
+                                    onChange={(data) =>
+                                      this.handleChange(data, "unit")
+                                    }
+                                    // value={el.unit}
+                                    options={optionsUnit}
+                                  ></Select>
+                                </div>
                               </div>
                             );
                           })}

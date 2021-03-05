@@ -5,7 +5,7 @@ export const optionsFields = [
   { value: "Finance", label: "Finance" },
   { value: "Consulting", label: "Consulting" },
   { value: "Coaching", label: "Coaching" },
-  { value: "", label: "Art & Entertainment" },
+  { value: "Art & Entertainment", label: "Art & Entertainment" },
   { value: "Freelance", label: "Freelance" },
   { value: "HR/Recruitment", label: "HR/Recruitment" },
   { value: "Healthcare", label: "Healthcare" },
@@ -41,7 +41,10 @@ export const optionsDesignation = [
   { value: "Founder", label: "Founder" },
   { value: "CTO", label: "CTO" },
 ];
-
+export const optionsUnit = [
+  { value: "INR", label: "INR" },
+  { value: "USD", label: "USD" },
+];
 export const optionsExpertise = [
   { value: "Startups", label: "Startups" },
   { value: "Management Consulting", label: "Management Consulting" },
