@@ -16,33 +16,27 @@ import { fetchUsers, userStatus } from "../store/action";
 const offsetLimit = 10;
 const Users = (props) => {
   const history = useHistory();
-  const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
-  const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
-  const [page, setPage] = useState(currentPage);
+
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [type, setType] = useState("");
-
+  const [offset, setOffset] = useState("");
   const [idUser, setIdUser] = useState("");
   const [usersDetails, setUsersDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
-    currentPage !== newPage && history.push(`/users?page=${newPage}`);
     setLoading(true);
 
     props.fetchUsers(
-      `user/all?offset=${
-        (usersDetails &&
-          usersDetails.length &&
-          usersDetails[usersDetails.length - 1]._id) ||
-        ""
-      }&limit=${offsetLimit}&search=${search}`,
+      `user/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
+        const { users, count } = value.data;
         setLoading(false);
-        setUsersDetails(value.data.users);
-        setCount(value.data.count);
-
+        setUsersDetails(users);
+        setCount(count);
+        setOffset(users.length && users[users.length - 1]._id);
         setPage(newPage);
       }
     );
@@ -50,6 +44,7 @@ const Users = (props) => {
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setPage(1);
+    setOffset("");
   };
 
   useEffect(() => {
@@ -60,16 +55,13 @@ const Users = (props) => {
     setLoading(true);
 
     props.fetchUsers(
-      `user/all?offset=${
-        (usersDetails &&
-          usersDetails.length &&
-          usersDetails[usersDetails.length - 1]._id) ||
-        ""
-      }&limit=${offsetLimit}&search=${search}`,
+      `user/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
+        const { users, count } = value.data;
         setLoading(false);
-        setUsersDetails(value.data.users);
-        setCount(value.data.count);
+        setUsersDetails(users);
+        setCount(count);
+        setOffset(users.length && users[users.length - 1]._id);
       }
     );
   };

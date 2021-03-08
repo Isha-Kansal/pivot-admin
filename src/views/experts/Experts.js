@@ -24,9 +24,8 @@ const offsetLimit = 10;
 
 const Experts = (props) => {
   const history = useHistory();
-  const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
-  const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
-  const [page, setPage] = useState(currentPage);
+
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
   const [idExpert, setIdExpert] = useState("");
   const [loading, setLoading] = useState(false);
@@ -34,34 +33,28 @@ const Experts = (props) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [count, setCount] = useState(0);
   const [type, setType] = useState("");
+  const [offset, setOffset] = useState("");
   const pageChange = (newPage) => {
-    currentPage !== newPage && history.push(`/experts?page=${newPage}`);
     setLoading(true);
     props.fetchExperts(
-      `expert/all?offset=${
-        (!search &&
-          expertsDetails &&
-          expertsDetails.length &&
-          expertsDetails[expertsDetails.length - 1]._id) ||
-        ""
-      }&limit=${offsetLimit}&search=${search}`,
+      `expert/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
+        const { experts, count } = value.data;
         setLoading(false);
-        setExpertsDetails(value.data.experts);
-        setCount(value.data.count);
-
+        setExpertsDetails(experts);
+        setCount(count);
+        setOffset(experts.length && experts[experts.length - 1]._id);
         setPage(newPage);
       }
     );
   };
-  useEffect(() => {
-    currentPage !== page && setPage(currentPage);
-  }, [currentPage, page]);
+
   const addExpert = () => {
     props.history.push("/addExpert");
   };
   const handleSearch = (e) => {
     setSearch(e.target.value);
+    setOffset("");
     setPage(1);
   };
 
@@ -117,18 +110,14 @@ const Experts = (props) => {
     setLoading(true);
 
     props.fetchExperts(
-      `expert/all?offset=${
-        (!search &&
-          expertsDetails &&
-          expertsDetails.length &&
-          expertsDetails[expertsDetails.length - 1]._id) ||
-        ""
-      }&limit=${offsetLimit}&search=${search}`,
+      `expert/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
         if (value.status === 200) {
+          const { experts, count } = value.data;
           setLoading(false);
-          setExpertsDetails(value.data.experts);
-          setCount(value.data.count);
+          setExpertsDetails(experts);
+          setCount(count);
+          setOffset(experts.length && experts[experts.length - 1]._id);
         }
       }
     );
@@ -140,7 +129,7 @@ const Experts = (props) => {
     e.stopPropagation();
     setModalOpen(!modalOpen);
   };
-
+  console.log("experts-page", page);
   return (
     <CRow>
       <CCol xl={12}>

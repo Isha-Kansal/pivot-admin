@@ -22,38 +22,30 @@ import {
 const offsetLimit = 10;
 const Resources = (props) => {
   const history = useHistory();
-  const queryPage = useLocation().search.match(/page=([0-9]+)/, "");
-  const currentPage = Number(queryPage && queryPage[1] ? queryPage[1] : 1);
-  const [page, setPage] = useState(currentPage);
+
+  const [page, setPage] = useState(1);
   const [search, setSearch] = useState("");
+  const [offset, setOffset] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [resourcesDetails, setResourcesDetails] = useState([]);
   const [loading, setLoading] = useState(false);
   const [idResource, setIdResource] = useState("");
   const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
-    currentPage !== newPage && history.push(`/resources?page=${newPage}`);
-
     setLoading(true);
     props.fetchResources(
-      `resource/all?offset=${
-        (resourcesDetails &&
-          resourcesDetails.length &&
-          resourcesDetails[resourcesDetails.length - 1]._id) ||
-        ""
-      }&limit=${offsetLimit}&search=${search}`,
+      `resource/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
+        const { resources, count } = value.data;
         setLoading(false);
-        setResourcesDetails(value.data.resources);
-        setCount(value.data.count);
-
+        setResourcesDetails(resources);
+        setCount(count);
+        setOffset(resources.length && resources[resources.length - 1]._id);
         setPage(newPage);
       }
     );
   };
-  useEffect(() => {
-    currentPage !== page && setPage(currentPage);
-  }, [currentPage, page]);
+
   const addResource = () => {
     props.history.push("/addResource");
   };
@@ -89,6 +81,7 @@ const Resources = (props) => {
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setPage(1);
+    setOffset("");
   };
   useEffect(() => {
     callApiToFetchAllResources();
@@ -97,17 +90,14 @@ const Resources = (props) => {
     setLoading(true);
 
     props.fetchResources(
-      `resource/all?offset=${
-        (resourcesDetails &&
-          resourcesDetails.length &&
-          resourcesDetails[resourcesDetails.length - 1]._id) ||
-        ""
-      }&limit=${offsetLimit}&search=${search}`,
+      `resource/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
+        const { resources, count } = value.data;
         if (value.status === 200) {
           setLoading(false);
-          setResourcesDetails(value.data.resources);
-          setCount(value.data.count);
+          setResourcesDetails(resources);
+          setCount(count);
+          setOffset(resources.length && resources[resources.length - 1]._id);
         }
       }
     );
