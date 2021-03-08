@@ -39,7 +39,8 @@ const Experts = (props) => {
     setLoading(true);
     props.fetchExperts(
       `expert/all?offset=${
-        (expertsDetails &&
+        (!search &&
+          expertsDetails &&
           expertsDetails.length &&
           expertsDetails[expertsDetails.length - 1]._id) ||
         ""
@@ -117,7 +118,8 @@ const Experts = (props) => {
 
     props.fetchExperts(
       `expert/all?offset=${
-        (expertsDetails &&
+        (!search &&
+          expertsDetails &&
           expertsDetails.length &&
           expertsDetails[expertsDetails.length - 1]._id) ||
         ""
