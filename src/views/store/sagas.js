@@ -160,7 +160,7 @@ function* fetchUsers(action) {
 
 function* fetchResources(action) {
   const response = yield call(callFetchResources, action);
-  console.log("84789497894597894", response);
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {

@@ -108,7 +108,6 @@ const Experts = (props) => {
     callApiToFetchAllExperts();
   }, [search]);
   const callApiToFetchAllExperts = (isDelete) => {
-    console.log("84978984596789568978", isDelete);
     if (isDelete) {
       setLoading(true);
 
@@ -148,7 +147,7 @@ const Experts = (props) => {
     e.stopPropagation();
     setModalOpen(!modalOpen);
   };
-  console.log("experts-page", page);
+
   return (
     <CRow>
       <CCol xl={12}>

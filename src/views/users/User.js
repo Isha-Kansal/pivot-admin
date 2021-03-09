@@ -36,7 +36,6 @@ const User = (props) => {
     const user_id = props && props.match.params.id;
     dispatch(
       fetchOneUser(`user?id=${user_id}`, (value) => {
-        console.log("68078468705879340", value);
         setUser(value.data.user);
         setAppointments(value.data.appointments);
         setLoading(false);

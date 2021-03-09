@@ -3,7 +3,6 @@ import { useHistory, useLocation } from "react-router-dom";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table } from "reactstrap";
 const UserExpertUsage = (props) => {
-  console.log("propspropspropsprops", props);
   const { appointments } = props;
   const history = useHistory();
 
@@ -40,7 +39,6 @@ const UserExpertUsage = (props) => {
                 {appointments &&
                   appointments.length > 0 &&
                   appointments.map((item, index) => {
-                    console.log("itemitemitem", item);
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
