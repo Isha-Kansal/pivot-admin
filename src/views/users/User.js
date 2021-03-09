@@ -1,6 +1,8 @@
 import React, { useState, useEffect, Fragment } from "react";
 import moment from "moment";
 import UserPlanner from "../users/UserPlanner";
+import UserExpertUsage from "../users/UserExpertUsage";
+import UserResourceUsage from "../users/UserResourceUsage";
 import {
   CCard,
   CCardBody,
@@ -26,7 +28,7 @@ import { fetchOneUser } from "../store/action";
 const User = (props) => {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
-
+  const [appointments, setAppointments] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
@@ -34,7 +36,9 @@ const User = (props) => {
     const user_id = props && props.match.params.id;
     dispatch(
       fetchOneUser(`user?id=${user_id}`, (value) => {
+        console.log("68078468705879340", value);
         setUser(value.data.user);
+        setAppointments(value.data.appointments);
         setLoading(false);
       })
     );
@@ -79,7 +83,10 @@ const User = (props) => {
                   <CNavLink>Account Details</CNavLink>
                 </CNavItem>
                 <CNavItem>
-                  <CNavLink>Usage of expert and resource features</CNavLink>
+                  <CNavLink>Usage of expert features</CNavLink>
+                </CNavItem>
+                <CNavItem>
+                  <CNavLink>Usage of resource features</CNavLink>
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>Planner Activity</CNavLink>
@@ -232,16 +239,10 @@ const User = (props) => {
                   )}
                 </CTabPane>
                 <CTabPane>
-                  <table className="table">
-                    <tbody>
-                      <tr>
-                        <td>Experts List</td>
-                      </tr>
-                      <tr>
-                        <td>Resources List</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                  <UserExpertUsage appointments={appointments} />
+                </CTabPane>
+                <CTabPane>
+                  <UserResourceUsage />
                 </CTabPane>
                 <CTabPane>
                   <UserPlanner />
