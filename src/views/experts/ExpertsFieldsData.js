@@ -47,6 +47,10 @@ export const optionsUnit = [
 ];
 export const optionsExpertise = [
   { value: "Startups", label: "Startups" },
+  {
+    value: "Starting a Startup (without prior startup experience)",
+    label: "Starting a Startup (without prior startup experience)",
+  },
   { value: "Management Consulting", label: "Management Consulting" },
   { value: "HR", label: "HR" },
   { value: "Compensation & Benefits", label: "Compensation & Benefits" },
@@ -495,6 +499,10 @@ export const optionsIndustry = [
   {
     value: "Plastics",
     label: "Plastics",
+  },
+  {
+    value: "Pivot",
+    label: "Pivot",
   },
   {
     value: "Political Organization",

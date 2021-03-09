@@ -233,16 +233,17 @@ class AddExpert extends Component {
 
     if (type === "fields") {
       let arr;
-      if (data.length <= 3) {
-        arr = data.map((el) => {
-          return el.value;
-        });
-        this.setState({
-          fields: arr,
-        });
-      } else {
-        NotificationManager.info("You can select upto 3 only", "", 1000);
-      }
+      // if (data.length <= 3) {
+      arr = data.map((el) => {
+        return el.value;
+      });
+      this.setState({
+        fields: arr,
+      });
+      // }
+      // else {
+      //   NotificationManager.info("You can select upto 3 only", "", 1000);
+      // }
     }
     if (type === "gender") {
       this.setState({
@@ -281,16 +282,17 @@ class AddExpert extends Component {
     }
     if (type === "expertise") {
       let arr;
-      if (data.length <= 3) {
-        arr = data.map((el) => {
-          return el.value;
-        });
-        this.setState({
-          expertise: arr,
-        });
-      } else {
-        NotificationManager.info("You can select upto 3 only", "", 1000);
-      }
+      // if (data.length <= 3) {
+      arr = data.map((el) => {
+        return el.value;
+      });
+      this.setState({
+        expertise: arr,
+      });
+      // }
+      // else {
+      //   NotificationManager.info("You can select upto 3 only", "", 1000);
+      // }
     }
     if (type === "role") {
       this.setState({
@@ -690,7 +692,7 @@ class AddExpert extends Component {
       role,
       industry,
       skills: skillObj,
-      services: pricing,
+      rates: pricing,
       email,
       contact_no: contact ? contact : "",
       linkedIn,
@@ -757,7 +759,7 @@ class AddExpert extends Component {
       linkedIn,
       designation,
 
-      services: pricing,
+      rates: pricing,
       time_zone: timeZone,
       email,
       contact_no: contact ? contact : "",
