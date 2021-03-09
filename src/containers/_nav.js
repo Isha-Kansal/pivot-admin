@@ -23,13 +23,13 @@ const _nav = [
 
     icon: <Resources customClasses="c-sidebar-nav-icon" />,
   },
-  {
-    _tag: "CSidebarNavItem",
-    name: "Planner",
-    to: "/planner",
+  // {
+  //   _tag: "CSidebarNavItem",
+  //   name: "Planner",
+  //   to: "/planner",
 
-    icon: <Planner customClasses="c-sidebar-nav-icon" />,
-  },
+  //   icon: <Planner customClasses="c-sidebar-nav-icon" />,
+  // },
 ];
 
 export default _nav;
