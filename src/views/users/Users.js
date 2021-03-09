@@ -51,19 +51,34 @@ const Users = (props) => {
     callApiToFetchAllUsers();
   }, [search]);
 
-  const callApiToFetchAllUsers = () => {
-    setLoading(true);
+  const callApiToFetchAllUsers = (isBlock) => {
+    if (isBlock) {
+      setLoading(true);
 
-    props.fetchUsers(
-      `user/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
-      (value) => {
-        const { users, count } = value.data;
-        setLoading(false);
-        setUsersDetails(users);
-        setCount(count);
-        setOffset(users.length && users[users.length - 1]._id);
-      }
-    );
+      props.fetchUsers(
+        `user/all?offset=&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { users, count } = value.data;
+          setLoading(false);
+          setUsersDetails(users);
+          setCount(count);
+          setOffset(users.length && users[users.length - 1]._id);
+        }
+      );
+    } else {
+      setLoading(true);
+
+      props.fetchUsers(
+        `user/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { users, count } = value.data;
+          setLoading(false);
+          setUsersDetails(users);
+          setCount(count);
+          setOffset(users.length && users[users.length - 1]._id);
+        }
+      );
+    }
   };
 
   const getBadge = (status) => {
@@ -103,7 +118,7 @@ const Users = (props) => {
     props.userStatus("common/change-status", obj, (value) => {
       if (value.status === 200) {
         NotificationManager.success(value.message, "", 1000);
-        callApiToFetchAllUsers();
+        callApiToFetchAllUsers(true);
       }
     });
   };

@@ -74,7 +74,7 @@ const Resources = (props) => {
       if (value.status === 200) {
         NotificationManager.success("Resource deleted successfully", "", 1000);
         setLoading(false);
-        callApiToFetchAllResources();
+        callApiToFetchAllResources(true);
       }
     });
   };
@@ -86,21 +86,38 @@ const Resources = (props) => {
   useEffect(() => {
     callApiToFetchAllResources();
   }, [search]);
-  const callApiToFetchAllResources = () => {
-    setLoading(true);
+  const callApiToFetchAllResources = (isDelete) => {
+    if (isDelete) {
+      setLoading(true);
 
-    props.fetchResources(
-      `resource/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
-      (value) => {
-        const { resources, count } = value.data;
-        if (value.status === 200) {
-          setLoading(false);
-          setResourcesDetails(resources);
-          setCount(count);
-          setOffset(resources.length && resources[resources.length - 1]._id);
+      props.fetchResources(
+        `resource/all?offset=&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { resources, count } = value.data;
+          if (value.status === 200) {
+            setLoading(false);
+            setResourcesDetails(resources);
+            setCount(count);
+            setOffset(resources.length && resources[resources.length - 1]._id);
+          }
         }
-      }
-    );
+      );
+    } else {
+      setLoading(true);
+
+      props.fetchResources(
+        `resource/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { resources, count } = value.data;
+          if (value.status === 200) {
+            setLoading(false);
+            setResourcesDetails(resources);
+            setCount(count);
+            setOffset(resources.length && resources[resources.length - 1]._id);
+          }
+        }
+      );
+    }
   };
 
   return (

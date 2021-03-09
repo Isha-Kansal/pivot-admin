@@ -34,6 +34,7 @@ const Experts = (props) => {
   const [count, setCount] = useState(0);
   const [type, setType] = useState("");
   const [offset, setOffset] = useState("");
+
   const pageChange = (newPage) => {
     setLoading(true);
     props.fetchExperts(
@@ -82,7 +83,7 @@ const Experts = (props) => {
           NotificationManager.success("Expert deleted successfully", "", 1000);
           setLoading(false);
 
-          callApiToFetchAllExperts();
+          callApiToFetchAllExperts(true);
         }
       });
     } else {
@@ -98,7 +99,7 @@ const Experts = (props) => {
         if (value.status === 200) {
           NotificationManager.success(value.message, "", 1000);
 
-          callApiToFetchAllExperts();
+          callApiToFetchAllExperts(true);
         }
       });
     }
@@ -106,21 +107,39 @@ const Experts = (props) => {
   useEffect(() => {
     callApiToFetchAllExperts();
   }, [search]);
-  const callApiToFetchAllExperts = () => {
-    setLoading(true);
+  const callApiToFetchAllExperts = (isDelete) => {
+    console.log("84978984596789568978", isDelete);
+    if (isDelete) {
+      setLoading(true);
 
-    props.fetchExperts(
-      `expert/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
-      (value) => {
-        if (value.status === 200) {
-          const { experts, count } = value.data;
-          setLoading(false);
-          setExpertsDetails(experts);
-          setCount(count);
-          setOffset(experts.length && experts[experts.length - 1]._id);
+      props.fetchExperts(
+        `expert/all?offset=&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          if (value.status === 200) {
+            const { experts, count } = value.data;
+            setLoading(false);
+            setExpertsDetails(experts);
+            setCount(count);
+            setOffset(experts.length && experts[experts.length - 1]._id);
+          }
         }
-      }
-    );
+      );
+    } else {
+      setLoading(true);
+
+      props.fetchExperts(
+        `expert/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          if (value.status === 200) {
+            const { experts, count } = value.data;
+            setLoading(false);
+            setExpertsDetails(experts);
+            setCount(count);
+            setOffset(experts.length && experts[experts.length - 1]._id);
+          }
+        }
+      );
+    }
   };
   const onBlock = (e, type, item) => {
     setIdExpert(item._id);
