@@ -4,12 +4,12 @@ import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table } from "reactstrap";
 import Pagination from "react-js-pagination";
 const offsetLimit = 10;
-const UserExpertUsage = (props) => {
+const ExpertUserUsage = (props) => {
   const { appointments } = props;
-  const history = useHistory();
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState("");
   const [page, setPage] = useState(1);
+  const history = useHistory();
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setPage(1);
@@ -17,19 +17,6 @@ const UserExpertUsage = (props) => {
   };
   const pageChange = (newPage) => {
     // setLoading(true);
-
-    props
-      .fetchOneUser
-      // `user/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
-      // (value) => {
-      //   const { users, count } = value.data;
-      //   setLoading(false);
-      //   setUsersDetails(users);
-      //   setCount(count);
-      //   setOffset(users.length && users[users.length - 1]._id);
-      //   setPage(newPage);
-      // }
-      ();
   };
   return (
     <CRow>
@@ -82,14 +69,21 @@ const UserExpertUsage = (props) => {
                         style={{ cursor: "pointer" }}
                         onClick={() =>
                           history.push({
-                            pathname: `/experts/${item.expert_id}`,
+                            pathname: `/users/${item.user_id}`,
                             // state: usersDetails,
                           })
                         }
                       >
-                        <td>{item.expert_id}</td>
-                        <td>{/* {item.meeting.calendar} */}</td>
+                        <td>{item.user_id}</td>
 
+                        <td>
+                          {" "}
+                          {item.meeting.firstName && item.meeting.lastName
+                            ? item.meeting.firstName +
+                              " " +
+                              item.meeting.lastName
+                            : "-"}
+                        </td>
                         <td>{`${item.meeting.date} & ${item.meeting.time}`}</td>
                         <td>{item.appointment_status}</td>
                       </tr>
@@ -97,7 +91,6 @@ const UserExpertUsage = (props) => {
                   })}
               </tbody>
             </Table>
-
             <div className="text-center pagination-input">
               {15 > offsetLimit && (
                 <Pagination
@@ -119,4 +112,4 @@ const UserExpertUsage = (props) => {
     </CRow>
   );
 };
-export default UserExpertUsage;
+export default ExpertUserUsage;

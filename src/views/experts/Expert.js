@@ -14,7 +14,7 @@ import {
   CBadge,
 } from "@coreui/react";
 import moment from "moment";
-
+import ExpertUserUsage from "../experts/ExpertUserUsage";
 import Loader from "../../loader";
 
 import { connect } from "react-redux";
@@ -25,6 +25,7 @@ import { fetchOneExpert } from "../store/action";
 const Expert = (props) => {
   const [expert, setExpert] = useState({});
   const [loading, setLoading] = useState(false);
+  const [appointments, setAppointments] = useState({});
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
@@ -33,12 +34,13 @@ const Expert = (props) => {
     dispatch(
       fetchOneExpert(`expert?id=${expert_id}`, (value) => {
         setExpert(value.data.expert);
+        setAppointments(value.data.appointments);
         setLoading(false);
       })
     );
   }, []);
 
-  let istDate = new Date(expert.createdAt);
+  let istDate = new Date(expert && expert.createdAt);
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
   let fields =
@@ -47,6 +49,7 @@ const Expert = (props) => {
   let info = expert && expert.info && expert.info.join("\r\n");
 
   let skills =
+    expert &&
     expert.skills &&
     expert.skills[0] &&
     expert.skills[0].values &&
@@ -65,10 +68,10 @@ const Expert = (props) => {
     }
   };
 
-  const { rates } = expert;
   let serviceName =
-    rates &&
-    rates.map((item) => {
+    expert &&
+    expert.rates &&
+    expert.rates.map((item) => {
       return `${item.serviceName} and ${item.value} ${item.unit}, \n`;
     });
 
@@ -281,13 +284,14 @@ const Expert = (props) => {
                   )}
                 </CTabPane>
                 <CTabPane>
-                  <table className="table">
+                  {/* <table className="table">
                     <tbody>
                       <tr>
                         <td>Users List</td>
                       </tr>
                     </tbody>
-                  </table>
+                  </table> */}
+                  <ExpertUserUsage appointments={appointments} />
                 </CTabPane>
               </CTabContent>
             </CTabs>

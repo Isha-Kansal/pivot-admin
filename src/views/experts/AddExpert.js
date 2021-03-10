@@ -145,6 +145,7 @@ class AddExpert extends Component {
         price,
         rates,
         info,
+        profile_pic,
       } = value.data.expert;
 
       const infoData = info.map((el) => {
@@ -169,6 +170,7 @@ class AddExpert extends Component {
           skill: (skills && skills[0] && skills[0].label) || "",
           expertise: skills && skills[0] && skills[0].values,
           calendarId: calendar_id,
+          expertImage: profile_pic,
         },
         () => {
           this.getCalenderList(() => {
@@ -665,7 +667,7 @@ class AddExpert extends Component {
       role,
       industry,
       selectedCalendar,
-
+      profile_pic,
       linkedIn,
       about,
       pricing,
@@ -697,7 +699,7 @@ class AddExpert extends Component {
       contact_no: contact ? contact : "",
       linkedIn,
       calendar_id: selectedCalendar.value,
-
+      // profile_pic,
       info: aboutData,
       time_zone: timeZone,
     };
