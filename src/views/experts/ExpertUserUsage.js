@@ -22,20 +22,22 @@ const ExpertUserUsage = (props) => {
     <CRow>
       <CCol lg={12}>
         <CCard className="position-relative">
-          <CCardHeader>
-            {" "}
-            <form>
-              <div className="text-center search-input">
-                <input
-                  type="search"
-                  className="form-control"
-                  placeholder="Search"
-                  required
-                  onChange={handleSearch}
-                />
-              </div>
-            </form>
-          </CCardHeader>
+          {appointments.length > 0 && (
+            <CCardHeader>
+              {" "}
+              <form>
+                <div className="text-center search-input">
+                  <input
+                    type="search"
+                    className="form-control"
+                    placeholder="Search"
+                    required
+                    onChange={handleSearch}
+                  />
+                </div>
+              </form>
+            </CCardHeader>
+          )}
           <CCardBody>
             <Table
               responsive
@@ -91,21 +93,23 @@ const ExpertUserUsage = (props) => {
                   })}
               </tbody>
             </Table>
-            <div className="text-center pagination-input">
-              {15 > offsetLimit && (
-                <Pagination
-                  className="mt-3 mx-auto w-fit-content"
-                  itemClass="page-item"
-                  linkClass="page-link"
-                  activeClass="active"
-                  activePage={page}
-                  itemsCountPerPage={offsetLimit}
-                  totalItemsCount={10}
-                  pageRangeDisplayed={15}
-                  onChange={pageChange}
-                />
-              )}
-            </div>
+            {appointments.length > 0 && (
+              <div className="text-center pagination-input">
+                {15 > offsetLimit && (
+                  <Pagination
+                    className="mt-3 mx-auto w-fit-content"
+                    itemClass="page-item"
+                    linkClass="page-link"
+                    activeClass="active"
+                    activePage={page}
+                    itemsCountPerPage={offsetLimit}
+                    totalItemsCount={10}
+                    pageRangeDisplayed={15}
+                    onChange={pageChange}
+                  />
+                )}
+              </div>
+            )}
           </CCardBody>
         </CCard>
       </CCol>
