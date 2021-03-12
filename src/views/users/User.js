@@ -3,6 +3,8 @@ import moment from "moment";
 import UserPlanner from "../users/UserPlanner";
 import UserExpertUsage from "../users/UserExpertUsage";
 import UserResourceUsage from "../users/UserResourceUsage";
+import { Link } from "react-router-dom";
+import cx from "classnames";
 import {
   CCard,
   CCardBody,
@@ -68,7 +70,9 @@ const User = (props) => {
   let istDate = new Date(user.createdAt);
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
-
+  const matchPath = props && props.match.path;
+  console.log("80r478948704970490", matchPath);
+  const { pathname } = props && props.location;
   return (
     <CRow>
       <CCol lg={12}>
@@ -238,7 +242,10 @@ const User = (props) => {
                   )}
                 </CTabPane>
                 <CTabPane>
-                  <UserExpertUsage appointments={appointments} />
+                  <UserExpertUsage
+                    appointments={appointments}
+                    user_id={user._id}
+                  />
                 </CTabPane>
                 <CTabPane>
                   <UserResourceUsage />

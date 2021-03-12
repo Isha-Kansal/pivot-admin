@@ -3,13 +3,22 @@ import { useHistory, useLocation } from "react-router-dom";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table } from "reactstrap";
 import Pagination from "react-js-pagination";
+import { fetchOneUser } from "../store/action";
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 const offsetLimit = 10;
 const UserExpertUsage = (props) => {
+  console.log("7490568875085608", props);
   const { appointments } = props;
   const history = useHistory();
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState("");
   const [page, setPage] = useState(1);
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [count, setCount] = useState(0);
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setPage(1);
@@ -17,20 +26,25 @@ const UserExpertUsage = (props) => {
   };
   const pageChange = (newPage) => {
     // setLoading(true);
-
-    props
-      .fetchOneUser
-      // `user/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
-      // (value) => {
-      //   const { users, count } = value.data;
-      //   setLoading(false);
-      //   setUsersDetails(users);
-      //   setCount(count);
-      //   setOffset(users.length && users[users.length - 1]._id);
-      //   setPage(newPage);
-      // }
-      ();
+    const user_id = props && props.user_id;
+    const appointments = props && props.appointments;
+    console.log("8456704789847984", props);
+    props.fetchOneUser(
+      `user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      (value) => {
+        const { users, count } = value.data;
+        setUser(value.data.user);
+        // setAppointments(value.data.appointments);
+        setLoading(false);
+        setCount(count);
+        setOffset(
+          appointments.length && appointments[appointments.length - 1]._id
+        );
+        setPage(newPage);
+      }
+    );
   };
+
   return (
     <CRow>
       <CCol lg={12}>
@@ -99,7 +113,7 @@ const UserExpertUsage = (props) => {
             </Table>
 
             <div className="text-center pagination-input">
-              {15 > offsetLimit && (
+              {25 > offsetLimit && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"
@@ -107,8 +121,8 @@ const UserExpertUsage = (props) => {
                   activeClass="active"
                   activePage={page}
                   itemsCountPerPage={offsetLimit}
-                  totalItemsCount={10}
-                  pageRangeDisplayed={15}
+                  totalItemsCount={25}
+                  pageRangeDisplayed={5}
                   onChange={pageChange}
                 />
               )}
@@ -119,4 +133,18 @@ const UserExpertUsage = (props) => {
     </CRow>
   );
 };
-export default UserExpertUsage;
+
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchOneUser,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(UserExpertUsage)
+);
