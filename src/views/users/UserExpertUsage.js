@@ -13,7 +13,7 @@ const offsetLimit = 10;
 const UserExpertUsage = (props) => {
   const dispatch = useDispatch();
   console.log("7490568875085608", props);
-  // const { appointments } = props;
+
   const history = useHistory();
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState("");
@@ -42,23 +42,23 @@ const UserExpertUsage = (props) => {
 
   const pageChange = (newPage) => {
     // setLoading(true);
-    const user_id = props && props.user_id;
-    const appointments = props && props.appointments;
-    console.log("8456704789847984", props);
-    props.fetchOneUser(
-      `user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`,
-      (value) => {
-        const { users, count } = value.data;
-        setUser(value.data.user);
-        // setAppointments(value.data.appointments);
-        setLoading(false);
-        setCount(count);
-        setOffset(
-          appointments.length && appointments[appointments.length - 1]._id
-        );
-        setPage(newPage);
-      }
-    );
+    // const user_id = props && props.user_id;
+    // const appointments = props && props.appointments;
+    // console.log("8456704789847984", props);
+    // props.fetchOneUser(
+    //   `user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`,
+    //   (value) => {
+    //     const { users, count } = value.data;
+    //     setUser(value.data.user);
+    //     // setAppointments(value.data.appointments);
+    //     setLoading(false);
+    //     setCount(count);
+    //     setOffset(
+    //       appointments.length && appointments[appointments.length - 1]._id
+    //     );
+    //     setPage(newPage);
+    //   }
+    // );
   };
 
   return (

@@ -5,6 +5,9 @@ const User = React.lazy(() => import("./views/users/User"));
 const UserExpertUsage = React.lazy(() =>
   import("./views/users/UserExpertUsage")
 );
+const UserResourceUsage = React.lazy(() =>
+  import("./views/users/UserResourceUsage")
+);
 const Resource = React.lazy(() => import("./views/resources/Resource"));
 const Planner = React.lazy(() => import("./views/planner/Planner"));
 const Experts = React.lazy(() => import("./views/experts/Experts"));
@@ -21,6 +24,12 @@ const routes = [
     exact: true,
     name: "Expert Usage",
     component: UserExpertUsage,
+  },
+  {
+    path: "/users/:id/resource-features",
+    exact: true,
+    name: "Resource Usage",
+    component: UserResourceUsage,
   },
   { path: "/planner", exact: true, name: "Planner", component: Planner },
   { path: "/experts", exact: true, name: "Experts", component: Experts },

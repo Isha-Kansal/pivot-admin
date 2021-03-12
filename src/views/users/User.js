@@ -71,9 +71,13 @@ const User = (props) => {
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
 
-  const onClick = () => {
+  const onClickExpert = () => {
     const user_id = props && props.match.params.id;
     props.history.push(`/users/${user_id}/expert-features`);
+  };
+  const onClickResource = () => {
+    const user_id = props && props.match.params.id;
+    props.history.push(`/users/${user_id}/resource-features`);
   };
   return (
     <CRow>
@@ -88,12 +92,14 @@ const User = (props) => {
                   <CNavLink>Account Details</CNavLink>
                 </CNavItem>
                 <CNavItem>
-                  <CNavLink onClick={onClick}>
+                  <CNavLink onClick={onClickExpert}>
                     Usage of expert features
                   </CNavLink>
                 </CNavItem>
                 <CNavItem>
-                  <CNavLink>Usage of resource features</CNavLink>
+                  <CNavLink onClick={onClickResource}>
+                    Usage of resource features
+                  </CNavLink>
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>Planner Activity</CNavLink>

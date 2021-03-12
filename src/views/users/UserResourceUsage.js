@@ -1,20 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Loader from "../../loader";
 import Pagination from "react-js-pagination";
 import { Table } from "reactstrap";
-import {
-  CCard,
-  CCardBody,
-  CCardHeader,
-  CCol,
-  CRow,
-  CTabs,
-  CNavItem,
-  CNavLink,
-  CNav,
-  CTabContent,
-  CTabPane,
-} from "@coreui/react";
+import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 const offsetLimit = 10;
 const UserResourceUsage = () => {
   const [search, setSearch] = useState("");
