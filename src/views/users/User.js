@@ -70,9 +70,11 @@ const User = (props) => {
   let istDate = new Date(user.createdAt);
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
-  const matchPath = props && props.match.path;
-  console.log("80r478948704970490", matchPath);
-  const { pathname } = props && props.location;
+
+  const onClick = () => {
+    const user_id = props && props.match.params.id;
+    props.history.push(`/users/${user_id}/expert-features`);
+  };
   return (
     <CRow>
       <CCol lg={12}>
@@ -86,7 +88,9 @@ const User = (props) => {
                   <CNavLink>Account Details</CNavLink>
                 </CNavItem>
                 <CNavItem>
-                  <CNavLink>Usage of expert features</CNavLink>
+                  <CNavLink onClick={onClick}>
+                    Usage of expert features
+                  </CNavLink>
                 </CNavItem>
                 <CNavItem>
                   <CNavLink>Usage of resource features</CNavLink>
