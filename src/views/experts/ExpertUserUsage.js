@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table } from "reactstrap";
 import Pagination from "react-js-pagination";
+import { fetchOneExpert } from "../store/action";
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
+import Loader from "../../loader";
 const offsetLimit = 10;
 const ExpertUserUsage = (props) => {
-  const { appointments } = props;
+  // const { appointments } = props;
+  const [expert, setExpert] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [appointments, setAppointments] = useState({});
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState("");
   const [page, setPage] = useState(1);
@@ -18,11 +27,25 @@ const ExpertUserUsage = (props) => {
   const pageChange = (newPage) => {
     // setLoading(true);
   };
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setLoading(true);
+
+    const expert_id = props && props.match.params.id;
+    dispatch(
+      fetchOneExpert(`expert?id=${expert_id}`, (value) => {
+        setExpert(value.data.expert);
+        setAppointments(value.data.appointments);
+        setLoading(false);
+      })
+    );
+  }, []);
   return (
     <CRow>
       <CCol lg={12}>
         <CCard className="position-relative">
-          {appointments.length > 0 && (
+          {loading && <Loader />}
+          {appointments && appointments.length > 0 && (
             <CCardHeader>
               {" "}
               <form>
@@ -116,4 +139,18 @@ const ExpertUserUsage = (props) => {
     </CRow>
   );
 };
-export default ExpertUserUsage;
+
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchOneExpert,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(ExpertUserUsage)
+);

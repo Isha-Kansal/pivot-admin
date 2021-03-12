@@ -75,6 +75,11 @@ const Expert = (props) => {
       return `${item.serviceName} and ${item.value} ${item.unit}, \n`;
     });
 
+  const onClick = () => {
+    const expert_id = props && props.match.params.id;
+    props.history.push(`/experts/${expert_id}/calls-with-user`);
+  };
+
   return (
     <CRow>
       <CCol lg={12}>
@@ -88,7 +93,7 @@ const Expert = (props) => {
                   <CNavLink>Expert Details</CNavLink>
                 </CNavItem>
                 <CNavItem>
-                  <CNavLink>
+                  <CNavLink onClick={onClick}>
                     List of Users that the expert has had calls with
                   </CNavLink>
                 </CNavItem>
@@ -284,13 +289,6 @@ const Expert = (props) => {
                   )}
                 </CTabPane>
                 <CTabPane>
-                  {/* <table className="table">
-                    <tbody>
-                      <tr>
-                        <td>Users List</td>
-                      </tr>
-                    </tbody>
-                  </table> */}
                   <ExpertUserUsage appointments={appointments} />
                 </CTabPane>
               </CTabContent>
