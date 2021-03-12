@@ -116,7 +116,7 @@ const ExpertUserUsage = (props) => {
             </Table>
             {appointments.length > 0 && (
               <div className="text-center pagination-input">
-                {15 > offsetLimit && (
+                {25 > offsetLimit && (
                   <Pagination
                     className="mt-3 mx-auto w-fit-content"
                     itemClass="page-item"
@@ -124,8 +124,8 @@ const ExpertUserUsage = (props) => {
                     activeClass="active"
                     activePage={page}
                     itemsCountPerPage={offsetLimit}
-                    totalItemsCount={10}
-                    pageRangeDisplayed={15}
+                    totalItemsCount={25}
+                    pageRangeDisplayed={5}
                     onChange={pageChange}
                   />
                 )}

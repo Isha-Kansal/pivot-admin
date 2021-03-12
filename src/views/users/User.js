@@ -73,11 +73,11 @@ const User = (props) => {
 
   const onClickExpert = () => {
     const user_id = props && props.match.params.id;
-    props.history.push(`/users/${user_id}/expert-features`);
+    props.history.push(`/users/expert-features/${user_id}`);
   };
   const onClickResource = () => {
     const user_id = props && props.match.params.id;
-    props.history.push(`/users/${user_id}/resource-features`);
+    props.history.push(`/users/resource-features/${user_id}`);
   };
   return (
     <CRow>

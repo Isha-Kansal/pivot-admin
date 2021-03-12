@@ -8,6 +8,7 @@ const UserResourceUsage = () => {
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState("");
   const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setPage(1);
@@ -54,7 +55,7 @@ const UserResourceUsage = () => {
               <tbody></tbody>
             </Table>
             <div className="text-center pagination-input">
-              {15 > offsetLimit && (
+              {25 > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"
@@ -62,8 +63,8 @@ const UserResourceUsage = () => {
                   activeClass="active"
                   activePage={page}
                   itemsCountPerPage={offsetLimit}
-                  totalItemsCount={10}
-                  pageRangeDisplayed={15}
+                  totalItemsCount={25}
+                  pageRangeDisplayed={5}
                   onChange={pageChange}
                 />
               )}

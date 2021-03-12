@@ -77,7 +77,7 @@ const Expert = (props) => {
 
   const onClick = () => {
     const expert_id = props && props.match.params.id;
-    props.history.push(`/experts/${expert_id}/calls-with-user`);
+    props.history.push(`/experts/calls-with-users/${expert_id}`);
   };
 
   return (
@@ -93,9 +93,7 @@ const Expert = (props) => {
                   <CNavLink>Expert Details</CNavLink>
                 </CNavItem>
                 <CNavItem>
-                  <CNavLink onClick={onClick}>
-                    List of Users that the expert has had calls with
-                  </CNavLink>
+                  <CNavLink onClick={onClick}>Calls with Users</CNavLink>
                 </CNavItem>
               </CNav>
               <CTabContent>
