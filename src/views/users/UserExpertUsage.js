@@ -1,29 +1,45 @@
-import React, { useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table } from "reactstrap";
 import Pagination from "react-js-pagination";
 import { fetchOneUser } from "../store/action";
 import { connect } from "react-redux";
+import Loader from "../../loader";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 const offsetLimit = 10;
 const UserExpertUsage = (props) => {
+  const dispatch = useDispatch();
   console.log("7490568875085608", props);
-  const { appointments } = props;
+  // const { appointments } = props;
   const history = useHistory();
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState("");
   const [page, setPage] = useState(1);
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
+  const [appointments, setAppointments] = useState({});
   const [count, setCount] = useState(0);
+  useEffect(() => {
+    setLoading(true);
+
+    const user_id = props && props.match.params.id;
+    dispatch(
+      fetchOneUser(`user?id=${user_id}`, (value) => {
+        setUser(value.data.user);
+        setAppointments(value.data.appointments);
+        setLoading(false);
+      })
+    );
+  }, []);
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setPage(1);
     setOffset("");
   };
+
   const pageChange = (newPage) => {
     // setLoading(true);
     const user_id = props && props.user_id;
@@ -49,6 +65,7 @@ const UserExpertUsage = (props) => {
     <CRow>
       <CCol lg={12}>
         <CCard className="position-relative">
+          {loading && <Loader />}
           <CCardHeader>
             {" "}
             <form>
@@ -113,7 +130,7 @@ const UserExpertUsage = (props) => {
             </Table>
 
             <div className="text-center pagination-input">
-              {25 > offsetLimit && (
+              {25 > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"
