@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table } from "reactstrap";
 import Pagination from "react-js-pagination";
@@ -11,7 +11,6 @@ import { withRouter } from "react-router-dom";
 import Loader from "../../loader";
 const offsetLimit = 10;
 const ExpertUserUsage = (props) => {
-  // const { appointments } = props;
   const [expert, setExpert] = useState({});
   const [loading, setLoading] = useState(false);
   const [appointments, setAppointments] = useState({});
@@ -25,7 +24,7 @@ const ExpertUserUsage = (props) => {
     setOffset("");
   };
   const pageChange = (newPage) => {
-    // setLoading(true);
+    setLoading(true);
   };
   const dispatch = useDispatch();
   useEffect(() => {
@@ -95,7 +94,6 @@ const ExpertUserUsage = (props) => {
                         onClick={() =>
                           history.push({
                             pathname: `/users/${item.user_id}`,
-                            // state: usersDetails,
                           })
                         }
                       >
