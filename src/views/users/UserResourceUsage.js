@@ -38,11 +38,12 @@ const UserResourceUsage = (props) => {
       fetchOneUser(
         `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { resources, count, user } = value.data;
+          console.log("8596785698795689", value);
+          const { resources, resourcesCount, user } = value.data;
           setUser(user);
           setResources(resources);
           setLoading(false);
-          setCount(count);
+          setCount(resourcesCount);
           setOffset(resources.length && resources[resources.length - 1]._id);
         }
       )
@@ -60,11 +61,11 @@ const UserResourceUsage = (props) => {
       fetchOneUser(
         `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { resources, count } = value.data;
+          const { resources, resourcesCount } = value.data;
           setUser(value.data.user);
           setResources(value.data.resources);
           setLoading(false);
-          setCount(count);
+          setCount(resourcesCount);
           setOffset(resources.length && resources[resources.length - 1]._id);
           setPage(newPage);
         }
