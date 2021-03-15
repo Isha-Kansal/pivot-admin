@@ -33,6 +33,17 @@ const UserExpertUsage = (props) => {
         setLoading(false);
       })
     );
+
+    // dispatch(
+    //   fetchOneUser(`user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`, (value) => {
+    //     const { appointments, count } = value.data;
+    //     setUser(value.data.user);
+    //     setAppointments(value.data.appointments);
+    //     setLoading(false);
+    //     setCount(count);
+    //     setOffset(appointments.length && appointments[appointments.length - 1]._id);
+    //   })
+    // );
   }, []);
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -41,23 +52,16 @@ const UserExpertUsage = (props) => {
   };
 
   const pageChange = (newPage) => {
-    // setLoading(true);
-    // const user_id = props && props.user_id;
-    // const appointments = props && props.appointments;
-    // console.log("8456704789847984", props);
-    // props.fetchOneUser(
-    //   `user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`,
-    //   (value) => {
-    //     const { users, count } = value.data;
+    // dispatch(
+    //   fetchOneUser(`user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`, (value) => {
+    //     const { appointments, count } = value.data;
     //     setUser(value.data.user);
-    //     // setAppointments(value.data.appointments);
+    //     setAppointments(value.data.appointments);
     //     setLoading(false);
     //     setCount(count);
-    //     setOffset(
-    //       appointments.length && appointments[appointments.length - 1]._id
-    //     );
-    //     setPage(newPage);
-    //   }
+    //     setOffset(appointments.length && appointments[appointments.length - 1]._id);
+    // setPage(newPage);
+    //   })
     // );
   };
 
@@ -143,7 +147,7 @@ const UserExpertUsage = (props) => {
             </Table>
 
             <div className="text-center pagination-input">
-              {25 > offsetLimit && !loading && (
+              {count > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
                   itemClass="page-item"
@@ -151,7 +155,7 @@ const UserExpertUsage = (props) => {
                   activeClass="active"
                   activePage={page}
                   itemsCountPerPage={offsetLimit}
-                  totalItemsCount={25}
+                  totalItemsCount={count}
                   pageRangeDisplayed={5}
                   onChange={pageChange}
                 />
