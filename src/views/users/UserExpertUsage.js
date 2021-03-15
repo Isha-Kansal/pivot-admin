@@ -122,7 +122,11 @@ const UserExpertUsage = (props) => {
                         <td>{/* {item.meeting.calendar} */}</td>
 
                         <td>{`${item.meeting.date} & ${item.meeting.time}`}</td>
-                        <td>{item.appointment_status}</td>
+                        <td>
+                          {item.appointment_status === "paid"
+                            ? "Completed"
+                            : "Pending"}
+                        </td>
                       </tr>
                     );
                   })}
