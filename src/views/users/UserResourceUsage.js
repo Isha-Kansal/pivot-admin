@@ -123,7 +123,7 @@ const UserResourceUsage = (props) => {
                         style={{ cursor: "pointer" }}
                         onClick={() =>
                           history.push({
-                            pathname: `/experts/${item.expert_id}`,
+                            pathname: `/resources/${item._id}`,
                             // state: usersDetails,
                           })
                         }
