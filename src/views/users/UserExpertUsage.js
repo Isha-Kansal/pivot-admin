@@ -42,7 +42,7 @@ const UserExpertUsage = (props) => {
         }
       )
     );
-  }, []);
+  }, [search]);
   const handleSearch = (e) => {
     setSearch(e.target.value);
     setPage(1);

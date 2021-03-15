@@ -72,7 +72,7 @@ const ExpertUserUsage = (props) => {
         }
       )
     );
-  }, []);
+  }, [search]);
   return (
     <CRow>
       <CCol lg={12}>

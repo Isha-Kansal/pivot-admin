@@ -47,7 +47,7 @@ const UserResourceUsage = (props) => {
         }
       )
     );
-  }, []);
+  }, [search]);
 
   const handleSearch = (e) => {
     setSearch(e.target.value);
