@@ -76,24 +76,20 @@ const ExpertUserUsage = (props) => {
   return (
     <CRow>
       <CCol lg={12}>
+        <form>
+          <div className="text-center search-input">
+            <input
+              type="search"
+              className="form-control"
+              placeholder="Search"
+              required
+              onChange={handleSearch}
+            />
+          </div>
+        </form>
         <CCard className="position-relative">
           {loading && <Loader />}
-          {appointments && appointments.length > 0 && (
-            <CCardHeader>
-              {" "}
-              <form>
-                <div className="text-center search-input">
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="Search"
-                    required
-                    onChange={handleSearch}
-                  />
-                </div>
-              </form>
-            </CCardHeader>
-          )}
+
           <CCardBody>
             <Table
               responsive
