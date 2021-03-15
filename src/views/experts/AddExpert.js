@@ -301,6 +301,7 @@ class AddExpert extends Component {
         role: data.value,
       });
     }
+    console.log("data.valuedata.value", data.value);
     if (type === "industry") {
       this.setState({
         industry: data.value,
@@ -529,17 +530,17 @@ class AddExpert extends Component {
       });
       return;
     }
-    if (industry === "") {
-      this.setState({
-        errorType: "industry",
-        errorText: (
-          <span className="text-danger">
-            <b>Select your industry</b>
-          </span>
-        ),
-      });
-      return;
-    }
+    // if (industry === "") {
+    //   this.setState({
+    //     errorType: "industry",
+    //     errorText: (
+    //       <span className="text-danger">
+    //         <b>Select your industry</b>
+    //       </span>
+    //     ),
+    //   });
+    //   return;
+    // }
 
     if (linkedIn === "") {
       this.setState({
@@ -710,6 +711,8 @@ class AddExpert extends Component {
     this.setState({
       loadiing: true,
     });
+
+    console.log("objobj : ", obj.industry);
     this.props.editExpert("expert/update-profile", obj, (value) => {
       if (value.status === 200) {
         NotificationManager.success("Expert edit successfully", "", 1000);

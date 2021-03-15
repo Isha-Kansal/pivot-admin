@@ -26,24 +26,22 @@ const UserExpertUsage = (props) => {
     setLoading(true);
 
     const user_id = props && props.match.params.id;
-    dispatch(
-      fetchOneUser(`user?id=${user_id}`, (value) => {
-        setUser(value.data.user);
-        setAppointments(value.data.appointments);
-        setLoading(false);
-      })
-    );
 
-    // dispatch(
-    //   fetchOneUser(`user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`, (value) => {
-    //     const { appointments, count } = value.data;
-    //     setUser(value.data.user);
-    //     setAppointments(value.data.appointments);
-    //     setLoading(false);
-    //     setCount(count);
-    //     setOffset(appointments.length && appointments[appointments.length - 1]._id);
-    //   })
-    // );
+    dispatch(
+      fetchOneUser(
+        `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { appointments, appointmentsCount, user } = value.data;
+          setUser(user);
+          setAppointments(appointments);
+          setLoading(false);
+          setCount(appointmentsCount);
+          setOffset(
+            appointments.length && appointments[appointments.length - 1]._id
+          );
+        }
+      )
+    );
   }, []);
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -52,17 +50,24 @@ const UserExpertUsage = (props) => {
   };
 
   const pageChange = (newPage) => {
-    // dispatch(
-    //   fetchOneUser(`user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`, (value) => {
-    //     const { appointments, count } = value.data;
-    //     setUser(value.data.user);
-    //     setAppointments(value.data.appointments);
-    //     setLoading(false);
-    //     setCount(count);
-    //     setOffset(appointments.length && appointments[appointments.length - 1]._id);
-    // setPage(newPage);
-    //   })
-    // );
+    setLoading(true);
+    const user_id = props && props.match.params.id;
+    dispatch(
+      fetchOneUser(
+        `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { appointments, appointmentsCount, user } = value.data;
+          setUser(user);
+          setAppointments(appointments);
+          setLoading(false);
+          setCount(appointmentsCount);
+          setOffset(
+            appointments.length && appointments[appointments.length - 1]._id
+          );
+          setPage(newPage);
+        }
+      )
+    );
   };
 
   return (
@@ -77,7 +82,7 @@ const UserExpertUsage = (props) => {
                 <input
                   type="search"
                   className="form-control"
-                  placeholder="Search"
+                  placeholder="Search by ID"
                   required
                   onChange={handleSearch}
                 />

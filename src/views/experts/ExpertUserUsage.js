@@ -17,6 +17,7 @@ const ExpertUserUsage = (props) => {
   const [search, setSearch] = useState("");
   const [offset, setOffset] = useState("");
   const [page, setPage] = useState(1);
+  const [count, setCount] = useState(0);
   const history = useHistory();
   const handleSearch = (e) => {
     setSearch(e.target.value);
@@ -25,18 +26,51 @@ const ExpertUserUsage = (props) => {
   };
   const pageChange = (newPage) => {
     setLoading(true);
+    const expert_id = props && props.match.params.id;
+    dispatch(
+      fetchOneExpert(
+        `expert?id=${expert_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { appointments, count, expert } = value.data;
+          setExpert(expert);
+          setAppointments(appointments);
+          setLoading(false);
+          setCount(count);
+          setOffset(
+            appointments.length && appointments[appointments.length - 1]._id
+          );
+          setPage(newPage);
+        }
+      )
+    );
   };
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
 
     const expert_id = props && props.match.params.id;
+    // dispatch(
+    //   fetchOneExpert(`expert?id=${expert_id}`, (value) => {
+    //     setExpert(value.data.expert);
+    //     setAppointments(value.data.appointments);
+    //     setLoading(false);
+    //   })
+    // );
+
     dispatch(
-      fetchOneExpert(`expert?id=${expert_id}`, (value) => {
-        setExpert(value.data.expert);
-        setAppointments(value.data.appointments);
-        setLoading(false);
-      })
+      fetchOneExpert(
+        `expert?id=${expert_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { appointments, count, expert } = value.data;
+          setExpert(expert);
+          setAppointments(appointments);
+          setLoading(false);
+          setCount(count);
+          setOffset(
+            appointments.length && appointments[appointments.length - 1]._id
+          );
+        }
+      )
     );
   }, []);
   return (
@@ -120,7 +154,7 @@ const ExpertUserUsage = (props) => {
             </Table>
             {appointments && appointments.length > 0 && (
               <div className="text-center pagination-input">
-                {25 > offsetLimit && (
+                {count > offsetLimit && (
                   <Pagination
                     className="mt-3 mx-auto w-fit-content"
                     itemClass="page-item"
@@ -128,7 +162,7 @@ const ExpertUserUsage = (props) => {
                     activeClass="active"
                     activePage={page}
                     itemsCountPerPage={offsetLimit}
-                    totalItemsCount={25}
+                    totalItemsCount={count}
                     pageRangeDisplayed={5}
                     onChange={pageChange}
                   />

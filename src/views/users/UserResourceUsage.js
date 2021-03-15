@@ -26,24 +26,27 @@ const UserResourceUsage = (props) => {
     setLoading(true);
 
     const user_id = props && props.match.params.id;
-    dispatch(
-      fetchOneUser(`user?id=${user_id}`, (value) => {
-        setUser(value.data.user);
-        setResources(value.data.resources);
-        setLoading(false);
-      })
-    );
-
     // dispatch(
-    //   fetchOneUser(`user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`, (value) => {
-    //     const { appointments, count } = value.data;
+    //   fetchOneUser(`user?id=${user_id}`, (value) => {
     //     setUser(value.data.user);
-    //      setResources(value.data.resources);
+    //     setResources(value.data.resources);
     //     setLoading(false);
-    //     setCount(count);
-    //     setOffset(resources.length && resources[resources.length - 1]._id);
     //   })
     // );
+
+    dispatch(
+      fetchOneUser(
+        `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { resources, count, user } = value.data;
+          setUser(user);
+          setResources(resources);
+          setLoading(false);
+          setCount(count);
+          setOffset(resources.length && resources[resources.length - 1]._id);
+        }
+      )
+    );
   }, []);
 
   const handleSearch = (e) => {
@@ -52,17 +55,21 @@ const UserResourceUsage = (props) => {
     setOffset("");
   };
   const pageChange = (newPage) => {
-    // dispatch(
-    //   fetchOneUser(`user?id=${user_id}?offset=${offset}&limit=${offsetLimit}&search=${search}`, (value) => {
-    //     const { resources, count } = value.data;
-    //     setUser(value.data.user);
-    //     setResources(value.data.resources);
-    //     setLoading(false);
-    //     setCount(count);
-    //     setOffset(resources.length && resources[resources.length - 1]._id);
-    // setPage(newPage);
-    //   })
-    // );
+    const user_id = props && props.match.params.id;
+    dispatch(
+      fetchOneUser(
+        `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { resources, count } = value.data;
+          setUser(value.data.user);
+          setResources(value.data.resources);
+          setLoading(false);
+          setCount(count);
+          setOffset(resources.length && resources[resources.length - 1]._id);
+          setPage(newPage);
+        }
+      )
+    );
   };
   return (
     <CRow>

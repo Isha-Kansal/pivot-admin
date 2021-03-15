@@ -65,6 +65,10 @@ export const optionsRole = [
 
 export const optionsIndustry = [
   {
+    value: "Designer",
+    label: "Designer",
+  },
+  {
     value: "Accounting",
     label: "Accounting",
   },
