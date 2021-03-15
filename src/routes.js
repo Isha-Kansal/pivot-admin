@@ -23,13 +23,13 @@ const routes = [
   { path: "/users", exact: true, name: "Users", component: Users },
   { path: "/users/:id", exact: true, name: "User Details", component: User },
   {
-    path: "/users/expert-features/:id",
+    path: "/users/:id/expert-features",
     exact: true,
     name: "Expert Usage",
     component: UserExpertUsage,
   },
   {
-    path: "/users/resource-features/:id",
+    path: "/users/:id/resource-features",
     exact: true,
     name: "Resource Usage",
     component: UserResourceUsage,
@@ -44,7 +44,7 @@ const routes = [
   },
 
   {
-    path: "/experts/calls-with-users/:id",
+    path: "/experts/:id/calls-with-users",
     exact: true,
     name: "Calls with Users",
     component: ExpertUserUsage,

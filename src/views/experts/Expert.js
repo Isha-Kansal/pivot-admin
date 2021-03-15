@@ -77,7 +77,7 @@ const Expert = (props) => {
 
   const onClick = () => {
     const expert_id = props && props.match.params.id;
-    props.history.push(`/experts/calls-with-users/${expert_id}`);
+    props.history.push(`/experts/${expert_id}/calls-with-users`);
   };
 
   return (
