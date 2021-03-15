@@ -64,7 +64,7 @@ const ExpertUserUsage = (props) => {
             <Table
               responsive
               className={`table ${
-                appointments.length === 0 ? "tableHeight" : ""
+                appointments && appointments.length === 0 ? "tableHeight" : ""
               }`}
             >
               {appointments && appointments.length > 0 && (
@@ -118,7 +118,7 @@ const ExpertUserUsage = (props) => {
                   })}
               </tbody>
             </Table>
-            {appointments.length > 0 && (
+            {appointments && appointments.length > 0 && (
               <div className="text-center pagination-input">
                 {25 > offsetLimit && (
                   <Pagination

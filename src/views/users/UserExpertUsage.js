@@ -119,7 +119,16 @@ const UserExpertUsage = (props) => {
                         }
                       >
                         <td>{item.expert_id}</td>
-                        <td>{/* {item.meeting.calendar} */}</td>
+                        <td>
+                          {" "}
+                          {item.expert &&
+                          item.expert.first_name &&
+                          item.expert.last_name
+                            ? item.expert.first_name +
+                              " " +
+                              item.expert.last_name
+                            : "-"}
+                        </td>
 
                         <td>{`${item.meeting.date} & ${item.meeting.time}`}</td>
                         <td>
