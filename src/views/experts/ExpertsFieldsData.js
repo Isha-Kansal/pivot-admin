@@ -64,10 +64,10 @@ export const optionsRole = [
 ];
 
 export const optionsIndustry = [
-  {
-    value: "",
-    label: "Select Industry",
-  },
+  // {
+  //   value: "",
+  //   label: "Select Industry",
+  // },
   {
     value: "Designer",
     label: "Designer",

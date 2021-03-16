@@ -303,9 +303,15 @@ class AddExpert extends Component {
     }
 
     if (type === "industry") {
-      this.setState({
-        industry: data.value,
-      });
+      if (data === null) {
+        this.setState({
+          industry: "",
+        });
+      } else {
+        this.setState({
+          industry: data.value,
+        });
+      }
     }
 
     if (type === "skill") {
@@ -1147,6 +1153,7 @@ class AddExpert extends Component {
                           industry ? { value: industry, label: industry } : null
                         }
                         options={optionsIndustry}
+                        isClearable
                       ></Select>
                       {this.errorShow("industry")}
                     </CFormGroup>
