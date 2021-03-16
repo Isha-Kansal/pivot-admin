@@ -5,7 +5,8 @@
 }
 .search-input {
   max-width: 500px;
-  margin: 10px auto;
+  margin: 0px auto;
+  margin-bottom: 25px;
 }
 
 .pagination-input {
@@ -119,3 +120,15 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+.calls-with-experts {
+  text-align: right;
+  font-size: 10px;
+  background-color: #b8b5b333;
+  padding: 10px 15px;
+ h5 {
+  font-size: 14px;
+  margin: 0;
+  }
+}
+

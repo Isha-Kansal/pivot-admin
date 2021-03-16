@@ -83,8 +83,12 @@ const UserResourceUsage = (props) => {
               required
               onChange={handleSearch}
             />
-            {!loading && <h5>Number of resources used:{count}</h5>}
           </div>
+          {!loading && (
+            <div className="calls-with-experts">
+              {!loading && <h5>Number of resources used:{count}</h5>}
+            </div>
+          )}
         </form>
         <CCard className="position-relative">
           {loading && <Loader />}
