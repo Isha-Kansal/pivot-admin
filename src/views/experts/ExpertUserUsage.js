@@ -81,7 +81,7 @@ const ExpertUserUsage = (props) => {
             <input
               type="search"
               className="form-control"
-              placeholder="Search"
+              placeholder="Search by ID"
               required
               onChange={handleSearch}
             />
@@ -148,7 +148,7 @@ const ExpertUserUsage = (props) => {
                   })}
               </tbody>
             </Table>
-            {appointments && appointments.length > 0 && (
+            {appointments && appointments.length > 0 && !loading && (
               <div className="text-center pagination-input">
                 {count > offsetLimit && (
                   <Pagination
