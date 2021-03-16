@@ -31,6 +31,7 @@ const UserExpertUsage = (props) => {
         `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
           const { appointments, appointmentsCount, user } = value.data;
+          console.log("48956948568945869845", appointmentsCount);
           setUser(user);
           setAppointments(appointments);
           setLoading(false);
@@ -56,6 +57,7 @@ const UserExpertUsage = (props) => {
         `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
           const { appointments, appointmentsCount, user } = value.data;
+
           setUser(user);
           setAppointments(appointments);
           setLoading(false);
@@ -81,6 +83,7 @@ const UserExpertUsage = (props) => {
               required
               onChange={handleSearch}
             />
+            {!loading && <h5>Number of calls with experts:{count}</h5>}
           </div>
         </form>
         <CCard className="position-relative">
