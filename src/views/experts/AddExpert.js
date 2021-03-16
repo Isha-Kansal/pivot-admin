@@ -301,7 +301,7 @@ class AddExpert extends Component {
         role: data.value,
       });
     }
-    console.log("data.valuedata.value", data.value);
+
     if (type === "industry") {
       this.setState({
         industry: data.value,
@@ -712,7 +712,6 @@ class AddExpert extends Component {
       loadiing: true,
     });
 
-    console.log("objobj : ", obj.industry);
     this.props.editExpert("expert/update-profile", obj, (value) => {
       if (value.status === 200) {
         NotificationManager.success("Expert edit successfully", "", 1000);

@@ -38,7 +38,6 @@ const UserResourceUsage = (props) => {
       fetchOneUser(
         `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          console.log("8596785698795689", value);
           const { resources, resourcesCount, user } = value.data;
           setUser(user);
           setResources(resources);

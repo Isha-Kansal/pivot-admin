@@ -31,11 +31,11 @@ const ExpertUserUsage = (props) => {
       fetchOneExpert(
         `expert?id=${expert_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { appointments, count, expert } = value.data;
+          const { appointments, appointmentsCount, expert } = value.data;
           setExpert(expert);
           setAppointments(appointments);
           setLoading(false);
-          setCount(count);
+          setCount(appointmentsCount);
           setOffset(
             appointments.length && appointments[appointments.length - 1]._id
           );
@@ -61,11 +61,11 @@ const ExpertUserUsage = (props) => {
       fetchOneExpert(
         `expert?id=${expert_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { appointments, count, expert } = value.data;
+          const { appointments, appointmentsCount, expert } = value.data;
           setExpert(expert);
           setAppointments(appointments);
           setLoading(false);
-          setCount(count);
+          setCount(appointmentsCount);
           setOffset(
             appointments.length && appointments[appointments.length - 1]._id
           );

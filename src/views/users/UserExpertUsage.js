@@ -12,7 +12,6 @@ import { withRouter } from "react-router-dom";
 const offsetLimit = 10;
 const UserExpertUsage = (props) => {
   const dispatch = useDispatch();
-  console.log("7490568875085608", props);
 
   const history = useHistory();
   const [search, setSearch] = useState("");
