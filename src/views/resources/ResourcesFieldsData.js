@@ -39,3 +39,12 @@ export const optionsPace = [
   { value: "Part-Time", label: "Part-Time" },
   { value: "Self-Paced", label: "Self-Paced" },
 ];
+
+export const optionsFeaturedFormat = [
+  { value: "True", label: "True" },
+  { value: "False", label: "False" },
+];
+export const optionsUnit = [
+  { value: "INR", label: "INR" },
+  { value: "USD", label: "USD" },
+];

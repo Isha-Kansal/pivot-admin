@@ -32,6 +32,8 @@ import {
   optionsPricing,
   optionsCategory,
   optionsPace,
+  optionsFeaturedFormat,
+  optionsUnit,
 } from "./ResourcesFieldsData";
 
 import ADD from "../../assets/icons/add.svg";
@@ -48,6 +50,7 @@ class AddResource extends Component {
       name: "",
       addPrice: "",
       format: "",
+      featuredResource: "",
       pricing: "",
       category: [],
       uniqueSellingProposition: "",
@@ -62,6 +65,7 @@ class AddResource extends Component {
       websiteLink: "",
       resourceData: {},
       loadiing: false,
+      unit: "",
     };
   }
   componentDidMount() {
@@ -84,6 +88,7 @@ class AddResource extends Component {
           cons,
           info,
           profile_pic,
+          isFeatured,
         } = value.data.resource;
         const detailsData = info.map((el) => {
           return { value: el };
@@ -99,6 +104,7 @@ class AddResource extends Component {
           resourceData: value.data.resource,
           name: title,
           format: resource_format,
+          featuredResource: isFeatured,
           pricing: price,
           category,
           pace,
@@ -186,6 +192,7 @@ class AddResource extends Component {
     const {
       name,
       format,
+      featuredResource,
       pricing,
       details,
       uniqueSellingProposition,
@@ -195,6 +202,7 @@ class AddResource extends Component {
       pace,
       websiteLink,
       addPrice,
+      unit,
     } = this.state;
 
     if (name === "") {
@@ -239,6 +247,17 @@ class AddResource extends Component {
       });
       return;
     }
+    if (featuredResource === "") {
+      this.setState({
+        errorType: "featuredResource",
+        errorText: (
+          <span className="text-danger">
+            <b>Select Featured Resource</b>
+          </span>
+        ),
+      });
+      return;
+    }
     if (pricing === "") {
       this.setState({
         errorType: "pricing",
@@ -250,7 +269,7 @@ class AddResource extends Component {
       });
       return;
     }
-    if (pricing === "Others" && addPrice === "") {
+    if (pricing === "Others" && addPrice === "" && unit === "") {
       this.setState({
         errorType: "addPrice",
         errorText: (
@@ -295,21 +314,21 @@ class AddResource extends Component {
       return;
     }
 
-    if (websiteLink !== "") {
-      let filter = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    // if (websiteLink !== "") {
+    //   let filter = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
 
-      if (!filter.test(websiteLink)) {
-        this.setState({
-          errorType: "websiteLink",
-          errorText: (
-            <span className="text-danger">
-              <b> Please enter valid website link</b>
-            </span>
-          ),
-        });
-        return;
-      }
-    }
+    //   if (!filter.test(websiteLink)) {
+    //     this.setState({
+    //       errorType: "websiteLink",
+    //       errorText: (
+    //         <span className="text-danger">
+    //           <b> Please enter valid website link</b>
+    //         </span>
+    //       ),
+    //     });
+    //     return;
+    //   }
+    // }
 
     if (pros.length === 0) {
       this.setState({
@@ -429,6 +448,7 @@ class AddResource extends Component {
       pace,
       addPrice,
       resourceImage,
+      featuredResource,
     } = this.state;
     let infodata = details.map((el) => {
       return el.value;
@@ -443,6 +463,7 @@ class AddResource extends Component {
       id: resource_id,
       title: name,
       format,
+      isFeatured: featuredResource,
       price: pricing === "Others" ? addPrice : pricing,
       website: websiteLink,
       category,
@@ -473,6 +494,7 @@ class AddResource extends Component {
     const {
       name,
       format,
+      featuredResource,
       pricing,
       websiteLink,
       category,
@@ -496,6 +518,7 @@ class AddResource extends Component {
     let obj = {
       title: name,
       format,
+      isFeatured: featuredResource,
       price: pricing === "Others" ? addPrice : pricing,
       website: websiteLink,
       category,
@@ -527,6 +550,8 @@ class AddResource extends Component {
     this.setState({
       name: "",
       format: "",
+      unit: "",
+      featuredResource: "",
       pricing: "",
       category: [],
       details: [],
@@ -624,9 +649,19 @@ class AddResource extends Component {
         format: data.value,
       });
     }
+    if (type === "featuredResource") {
+      this.setState({
+        featuredResource: data.value,
+      });
+    }
     if (type === "pricing") {
       this.setState({
         pricing: data.value,
+      });
+    }
+    if (type === "addPrice") {
+      this.setState({
+        unit: data.value,
       });
     }
     if (type === "category") {
@@ -653,11 +688,12 @@ class AddResource extends Component {
     const {
       name,
       format,
+      featuredResource,
       pricing,
       uniqueSellingProposition,
       category,
       resourceImage,
-
+      unit,
       pros,
       cons,
       details,
@@ -745,6 +781,33 @@ class AddResource extends Component {
                     {this.errorShow("format")}
                   </CCol>
                 </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel htmlFor="featuredResource">
+                      Featured Resource
+                    </CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <Select
+                      custom
+                      name="featuredResource"
+                      placeholder="Select Featured Resource"
+                      id="featuredResource"
+                      value={
+                        featuredResource
+                          ? { value: featuredResource, label: featuredResource }
+                          : null
+                      }
+                      options={optionsFeaturedFormat}
+                      onChange={(data) =>
+                        this.handleSelect(data, "featuredResource")
+                      }
+                    ></Select>
+                    {this.errorShow("featuredResource")}
+                  </CCol>
+                </CFormGroup>
+
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="pricing">Price</CLabel>
@@ -770,7 +833,7 @@ class AddResource extends Component {
                     <CCol md="3">
                       <CLabel htmlFor="addPrice">Add Price</CLabel>
                     </CCol>
-                    <CCol xs="12" md="9">
+                    <CCol xs="6">
                       <CInput
                         type="number"
                         id="addPrice"
@@ -780,6 +843,18 @@ class AddResource extends Component {
                         value={addPrice}
                       />
                       {this.errorShow("addPrice")}
+                    </CCol>
+                    <CCol xs="6" md="3">
+                      <Select
+                        custom
+                        name="addPrice"
+                        placeholder="Add Unit"
+                        id="addPrice"
+                        value={unit ? { value: unit, label: unit } : null}
+                        options={optionsUnit}
+                        onChange={(data) => this.handleSelect(data, "addPrice")}
+                      ></Select>
+                      {/* {this.errorShow("addPrice")} */}
                     </CCol>
                   </CFormGroup>
                 )}
