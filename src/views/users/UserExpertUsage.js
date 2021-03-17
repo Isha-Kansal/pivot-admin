@@ -125,6 +125,7 @@ const UserExpertUsage = (props) => {
                 {appointments &&
                   appointments.length > 0 &&
                   appointments.map((item, index) => {
+                    console.log("85687956879586978", item);
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -147,7 +148,11 @@ const UserExpertUsage = (props) => {
                             : "-"}
                         </td>
 
-                        <td>{`${item.meeting.date} & ${item.meeting.time}`}</td>
+                        <td>
+                          {item.meeting
+                            ? `${item.meeting.date} & ${item.meeting.time}`
+                            : "-"}
+                        </td>
                         <td>
                           {item.appointment_status === "paid"
                             ? "Completed"
