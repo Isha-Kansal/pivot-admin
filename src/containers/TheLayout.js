@@ -13,14 +13,14 @@ const TheLayout = () => {
     });
   };
 
-  const opneSideBar = (val) => {
+  const openSideBar = (val) => {
     setSidebarOpen(val);
   };
 
   return (
     <div className="c-app c-default-layout">
       {sidebarOpen && (
-        <TheSidebar sidebarOpen={sidebarOpen} setSidebarOpen={opneSideBar} />
+        <TheSidebar sidebarOpen={sidebarOpen} setSidebarOpen={openSideBar} />
       )}
       <div className="c-wrapper">
         <TheHeader sidebarOpen={sidebarOpen} toggleSideBar={toggleSideBar} />
