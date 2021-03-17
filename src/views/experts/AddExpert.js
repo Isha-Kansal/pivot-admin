@@ -591,7 +591,7 @@ class AddExpert extends Component {
         errorType: "pricing",
         errorText: (
           <span className="text-danger">
-            <b>Please add price</b>
+            <b>Please add price and unit</b>
           </span>
         ),
       });
@@ -994,6 +994,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="first_name">First Name</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
                       <CInput
                         id="first_name"
                         name="first_name"
@@ -1007,6 +1008,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="last_name">Last Name</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
                       <CInput
                         id="last_name"
                         name="last_name"
@@ -1023,6 +1025,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="email">Email</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
                       <CInput
                         type="email"
                         id="email"
@@ -1054,6 +1057,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="gender">Gender</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
                       <Select
                         custom
                         placeholder="Select gender"
@@ -1069,6 +1073,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="country">Country</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
                       <Select
                         custom
                         name="country"
@@ -1090,6 +1095,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="designation">Designation</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
 
                       <CInput
                         id="designation"
@@ -1105,6 +1111,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="fields">Fields</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
 
                       <Select
                         isMulti
@@ -1125,6 +1132,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="role">Current Role</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
 
                       <Select
                         custom
@@ -1164,6 +1172,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="linkedIn">LinkedIn Link</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
                       <CInput
                         name="linkedIn"
                         id="linkedIn"
@@ -1177,7 +1186,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="selectedCalendar">Calendar Name</CLabel>
-
+                      <CLabel className="text-danger">*</CLabel>
                       <Select
                         custom
                         name="selectedCalendar"
@@ -1200,6 +1209,7 @@ class AddExpert extends Component {
                     <CCol xs="12">
                       <CFormGroup>
                         <CLabel htmlFor="pricing">Pricing</CLabel>
+                        <CLabel className="text-danger">*</CLabel>
                         <div class="d-flex justify-content-between add-list">
                           <CLabel htmlFor="pricing">
                             Enter Price of each service
@@ -1254,7 +1264,7 @@ class AddExpert extends Component {
                   <CCol xs="6">
                     <CFormGroup>
                       <CLabel htmlFor="skill">Skill</CLabel>
-
+                      <CLabel className="text-danger">*</CLabel>
                       <Select
                         custom
                         id="skill"
@@ -1271,7 +1281,7 @@ class AddExpert extends Component {
                     {skill && (
                       <CFormGroup>
                         <CLabel htmlFor="expertise">{skill}</CLabel>
-
+                        <CLabel className="text-danger">*</CLabel>
                         <Select
                           isMulti
                           custom
@@ -1291,6 +1301,7 @@ class AddExpert extends Component {
                   <CCol xs="12">
                     <CFormGroup>
                       <CLabel htmlFor="about">About</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
                       <div
                         onClick={(e) => this.handlePlusButton(e, "about")}
                         class="d-flex justify-content-between add-list"

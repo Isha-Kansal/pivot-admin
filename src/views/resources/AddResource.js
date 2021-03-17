@@ -736,6 +736,7 @@ class AddResource extends Component {
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="name">Name</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <CInput
@@ -774,6 +775,7 @@ class AddResource extends Component {
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="format">Format</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <Select
@@ -794,6 +796,7 @@ class AddResource extends Component {
                     <CLabel htmlFor="featuredResource">
                       Featured Resource
                     </CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <Select
@@ -821,6 +824,7 @@ class AddResource extends Component {
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="pricing">Price</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <Select
@@ -842,6 +846,7 @@ class AddResource extends Component {
                   <CFormGroup row>
                     <CCol md="3">
                       <CLabel htmlFor="addPrice">Add Price</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
                     </CCol>
                     <CCol xs="6">
                       <CInput
@@ -872,6 +877,7 @@ class AddResource extends Component {
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="category">Category</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <Select
@@ -891,6 +897,7 @@ class AddResource extends Component {
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="pace">Pace</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <Select
@@ -909,6 +916,7 @@ class AddResource extends Component {
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="websiteLink">Website Link</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <CInput
@@ -925,6 +933,7 @@ class AddResource extends Component {
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="prosCons">Pros & Cons</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <div
@@ -1008,6 +1017,7 @@ class AddResource extends Component {
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="details">Details</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
                     <div
@@ -1055,6 +1065,7 @@ class AddResource extends Component {
                   <CCol md="3">
                     <CLabel htmlFor="uniqueSellingProposition">
                       Unique Selling Proposition
+                      <CLabel className="text-danger">*</CLabel>
                     </CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
