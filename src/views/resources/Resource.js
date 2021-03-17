@@ -48,10 +48,10 @@ const Resource = (props) => {
     resource.info.join(", ");
 
   let price =
-    resource.price && resource.price.value
+    resource.price && resource.price.value && resource.price.unit
       ? resource.price.value + " " + resource.price.unit
-      : resource.price;
-  console.log("8945968945896845968", resource);
+      : resource.price && (resource.price.value || resource.price);
+  console.log("8945968945896845968", price && price.value);
 
   let featured = resource.is_featured ? "Yes" : "No";
   return (

@@ -168,6 +168,7 @@ const Resources = (props) => {
                 {resourcesDetails &&
                   resourcesDetails.length > 0 &&
                   resourcesDetails.map((item, index) => {
+                    console.log("8965798569879568", item);
                     let category =
                       item &&
                       item.category &&
@@ -186,9 +187,9 @@ const Resources = (props) => {
                         <td>{item.resource_format}</td>
 
                         <td>
-                          {item.price && item.price.value
+                          {item.price && item.price.value && item.price.unit
                             ? `${item.price.value} ${item.price.unit}`
-                            : item.price}
+                            : item.price.value || item.price}
                         </td>
                         <td>{category}</td>
                         <td>

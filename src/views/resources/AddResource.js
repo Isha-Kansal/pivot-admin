@@ -106,7 +106,10 @@ class AddResource extends Component {
           name: title,
           format: resource_format,
           featuredResource: is_featured ? "True" : "False",
-          pricing: price.value ? price.value + " " + price.unit : price,
+          pricing:
+            price.value && price.unit
+              ? price.value + " " + price.unit
+              : price.value,
           category,
           pace,
           websiteLink: website,
@@ -468,7 +471,10 @@ class AddResource extends Component {
       format,
       isFeatured: featuredResource === "True" ? true : false,
       // price: pricing === "Others" ? addPrice : pricing,
-      price: pricing === "Others" ? { value: addPrice, unit } : pricing,
+      price:
+        pricing === "Others"
+          ? { value: addPrice, unit, type: "Others" }
+          : { value: pricing, type: pricing },
       website: websiteLink,
       category,
       pros: prosdata,
@@ -526,7 +532,11 @@ class AddResource extends Component {
       format,
       isFeatured: featuredResource === "True" ? true : false,
       // price: pricing === "Others" ? addPrice : pricing,
-      price: pricing === "Others" ? { value: addPrice, unit } : pricing,
+      // price: pricing === "Others" ? { value: addPrice, unit } : pricing,
+      price:
+        pricing === "Others"
+          ? { value: addPrice, unit, type: "Others" }
+          : { value: pricing, type: pricing },
       website: websiteLink,
       category,
       pros: prosdata,
