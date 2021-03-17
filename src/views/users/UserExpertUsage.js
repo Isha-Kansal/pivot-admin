@@ -31,7 +31,7 @@ const UserExpertUsage = (props) => {
         `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
           const { appointments, appointmentsCount, user } = value.data;
-          console.log("48956948568945869845", appointmentsCount);
+
           setUser(user);
           setAppointments(appointments);
           setLoading(false);
@@ -125,7 +125,6 @@ const UserExpertUsage = (props) => {
                 {appointments &&
                   appointments.length > 0 &&
                   appointments.map((item, index) => {
-                    console.log("85687956879586978", item);
                     return (
                       <tr
                         style={{ cursor: "pointer" }}

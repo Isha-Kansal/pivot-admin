@@ -142,7 +142,11 @@ const ExpertUserUsage = (props) => {
                               item.meeting.lastName
                             : "-"}
                         </td>
-                        <td>{`${item.meeting.date} & ${item.meeting.time}`}</td>
+                        <td>
+                          {item.meeting
+                            ? `${item.meeting.date} & ${item.meeting.time}`
+                            : "-"}
+                        </td>
                         <td>
                           {item.appointment_status === "paid"
                             ? "Completed"
