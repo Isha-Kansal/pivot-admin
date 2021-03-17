@@ -88,8 +88,9 @@ class AddResource extends Component {
           cons,
           info,
           profile_pic,
-          isFeatured,
+          is_featured,
         } = value.data.resource;
+
         const detailsData = info.map((el) => {
           return { value: el };
         });
@@ -104,8 +105,8 @@ class AddResource extends Component {
           resourceData: value.data.resource,
           name: title,
           format: resource_format,
-          featuredResource: isFeatured,
-          pricing: price,
+          featuredResource: is_featured ? "True" : "False",
+          pricing: price.value ? price.value + " " + price.unit : price,
           category,
           pace,
           websiteLink: website,
@@ -269,12 +270,12 @@ class AddResource extends Component {
       });
       return;
     }
-    if (pricing === "Others" && addPrice === "" && unit === "") {
+    if (pricing === "Others" && (addPrice === "" || unit === "")) {
       this.setState({
         errorType: "addPrice",
         errorText: (
           <span className="text-danger">
-            <b>Please enter price</b>
+            <b>Please enter price and unit both</b>
           </span>
         ),
       });
@@ -439,6 +440,7 @@ class AddResource extends Component {
       name,
       format,
       pricing,
+      unit,
       websiteLink,
       category,
       details,
@@ -459,12 +461,14 @@ class AddResource extends Component {
     let consdata = cons.map((el) => {
       return el.value;
     });
+    console.log("950690490579045679856907", featuredResource);
     let obj = {
       id: resource_id,
       title: name,
       format,
-      isFeatured: featuredResource,
-      price: pricing === "Others" ? addPrice : pricing,
+      isFeatured: featuredResource === "True" ? true : false,
+      // price: pricing === "Others" ? addPrice : pricing,
+      price: pricing === "Others" ? { value: addPrice, unit } : pricing,
       website: websiteLink,
       category,
       pros: prosdata,
@@ -503,6 +507,7 @@ class AddResource extends Component {
       cons,
       uniqueSellingProposition,
       pace,
+      unit,
       addPrice,
       resourceImage,
     } = this.state;
@@ -515,11 +520,13 @@ class AddResource extends Component {
     let consdata = cons.map((el) => {
       return el.value;
     });
+
     let obj = {
       title: name,
       format,
-      isFeatured: featuredResource,
-      price: pricing === "Others" ? addPrice : pricing,
+      isFeatured: featuredResource === "True" ? true : false,
+      // price: pricing === "Others" ? addPrice : pricing,
+      price: pricing === "Others" ? { value: addPrice, unit } : pricing,
       website: websiteLink,
       category,
       pros: prosdata,
@@ -796,7 +803,10 @@ class AddResource extends Component {
                       id="featuredResource"
                       value={
                         featuredResource
-                          ? { value: featuredResource, label: featuredResource }
+                          ? {
+                              value: featuredResource,
+                              label: featuredResource,
+                            }
                           : null
                       }
                       options={optionsFeaturedFormat}

@@ -184,7 +184,12 @@ const Resources = (props) => {
                       >
                         <td>{item.title}</td>
                         <td>{item.resource_format}</td>
-                        <td>{item.price}</td>
+
+                        <td>
+                          {item.price && item.price.value
+                            ? `${item.price.value} ${item.price.unit}`
+                            : item.price}
+                        </td>
                         <td>{category}</td>
                         <td>
                           <div className="d-flex align-items-center">

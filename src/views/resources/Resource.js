@@ -46,6 +46,14 @@ const Resource = (props) => {
     resource.info &&
     resource.info.length > 0 &&
     resource.info.join(", ");
+
+  let price =
+    resource.price && resource.price.value
+      ? resource.price.value + " " + resource.price.unit
+      : resource.price;
+  console.log("8945968945896845968", resource);
+
+  let featured = resource.is_featured ? "Yes" : "No";
   return (
     <CRow>
       <CCol lg={12}>
@@ -98,11 +106,21 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
-                  {resource.price && (
+
+                  {featured && !loading && (
+                    <tr>
+                      <td>Featured Resource</td>
+                      <td>
+                        <strong>{featured}</strong>
+                      </td>
+                    </tr>
+                  )}
+
+                  {price && (
                     <tr>
                       <td>Price</td>
                       <td>
-                        <strong>{resource.price}</strong>
+                        <strong>{price}</strong>
                       </td>
                     </tr>
                   )}
