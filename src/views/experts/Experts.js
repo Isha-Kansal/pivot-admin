@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-
+import Search from "../../common/search";
 import Pagination from "react-js-pagination";
 import moment from "moment-timezone";
 import { CCard, CCardBody, CCol, CRow, CButton } from "@coreui/react";
@@ -152,7 +152,7 @@ const Experts = (props) => {
     <CRow>
       <CCol xl={12}>
         <form className="position-relative">
-          <div className="text-center search-input">
+          {/* <div className="text-center search-input">
             <input
               type="search"
               className="form-control"
@@ -160,7 +160,8 @@ const Experts = (props) => {
               required
               onChange={handleSearch}
             />
-          </div>
+          </div> */}
+          <Search handleSearch={handleSearch} />
           <div className="text-right resource-btn">
             <CButton block color="info" onClick={addExpert}>
               Add Expert

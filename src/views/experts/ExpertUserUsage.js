@@ -9,6 +9,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import Loader from "../../loader";
+import Search from "../../common/search";
 const offsetLimit = 10;
 const ExpertUserUsage = (props) => {
   const [expert, setExpert] = useState({});
@@ -78,7 +79,7 @@ const ExpertUserUsage = (props) => {
     <CRow>
       <CCol lg={12}>
         <form>
-          <div className="text-center search-input">
+          {/* <div className="text-center search-input">
             <input
               type="search"
               className="form-control"
@@ -86,7 +87,8 @@ const ExpertUserUsage = (props) => {
               required
               onChange={handleSearch}
             />
-          </div>
+          </div> */}
+          <Search handleSearch={handleSearch} />
           {!loading && appointments !== undefined && (
             <div className="calls-with-experts">
               {!loading && <h5>Number of calls with users:{count}</h5>}

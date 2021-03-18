@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import Search from "../../common/search";
 import Loader from "../../loader";
 import Pagination from "react-js-pagination";
 import { Table } from "reactstrap";
@@ -75,7 +76,7 @@ const UserResourceUsage = (props) => {
     <CRow>
       <CCol lg={12}>
         <form>
-          <div className="text-center search-input">
+          {/* <div className="text-center search-input">
             <input
               type="search"
               className="form-control"
@@ -83,7 +84,8 @@ const UserResourceUsage = (props) => {
               required
               onChange={handleSearch}
             />
-          </div>
+          </div> */}
+          <Search handleSearch={handleSearch} />
           {!loading && resources !== undefined && (
             <div className="calls-with-experts">
               {!loading && <h5>Number of resources used:{count}</h5>}

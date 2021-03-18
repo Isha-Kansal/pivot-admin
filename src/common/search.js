@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams, withRouter } from "react-router-dom";
 
 const Search = (props) => {
   const { handleSearch } = props;
@@ -20,4 +19,4 @@ const Search = (props) => {
   );
 };
 
-export default withRouter(Search);
+export default Search;

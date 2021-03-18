@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
+import Search from "../../common/search";
 import moment from "moment";
 import Pagination from "react-js-pagination";
 import CommonModal from "../../common/commonModal";
@@ -126,7 +127,7 @@ const Users = (props) => {
   return (
     <CRow>
       <CCol xl={12}>
-        <form>
+        {/* <form>
           <div className="text-center search-input">
             <input
               type="search"
@@ -136,7 +137,8 @@ const Users = (props) => {
               onChange={handleSearch}
             />
           </div>
-        </form>
+        </form> */}
+        <Search handleSearch={handleSearch} />
       </CCol>
 
       <CCol xl={12}>

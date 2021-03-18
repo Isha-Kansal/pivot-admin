@@ -10,7 +10,7 @@ import { NotificationManager } from "react-notifications";
 import { bindActionCreators } from "redux";
 import Loader from "../../loader";
 import { CCard, CCardBody, CCol, CRow, CButton } from "@coreui/react";
-
+import Search from "../../common/search";
 import EDIT from "../../assets/icons/edit.svg";
 import DELETE from "../../assets/icons/delete.svg";
 import {
@@ -124,7 +124,7 @@ const Resources = (props) => {
     <CRow>
       <CCol xl={12}>
         <form className="position-relative">
-          <div className="text-center search-input">
+          {/* <div className="text-center search-input">
             <input
               type="search"
               className="form-control"
@@ -132,7 +132,8 @@ const Resources = (props) => {
               required
               onChange={handleSearch}
             />
-          </div>
+          </div> */}
+          <Search handleSearch={handleSearch} />
           <div className="text-right resource-btn">
             <CButton block color="info" onClick={addResource} id="addResource">
               Add Resource

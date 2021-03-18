@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
+import Search from "../../common/search";
 import { Table } from "reactstrap";
 import Pagination from "react-js-pagination";
 import { fetchOneUser } from "../store/action";
@@ -75,7 +76,7 @@ const UserExpertUsage = (props) => {
     <CRow>
       <CCol lg={12}>
         <form>
-          <div className="text-center search-input">
+          {/* <div className="text-center search-input">
             <input
               type="search"
               className="form-control"
@@ -83,7 +84,8 @@ const UserExpertUsage = (props) => {
               required
               onChange={handleSearch}
             />
-          </div>
+          </div> */}
+          <Search handleSearch={handleSearch} />
           {!loading && (
             <div className="calls-with-experts">
               {!loading && appointments !== undefined && (
