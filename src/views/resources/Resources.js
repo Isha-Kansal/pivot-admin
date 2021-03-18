@@ -125,15 +125,6 @@ const Resources = (props) => {
     <CRow>
       <CCol xl={12}>
         <form className="position-relative">
-          {/* <div className="text-center search-input">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search"
-              required
-              onChange={handleSearch}
-            />
-          </div> */}
           <Search handleSearch={handleSearch} />
           <div className="text-right resource-btn">
             <CButton block color="info" onClick={addResource} id="addResource">
@@ -222,22 +213,7 @@ const Resources = (props) => {
                   })}
               </tbody>
             </Table>
-            {/* 
-            <div className="text-center pagination-input">
-              {count > offsetLimit && !loading && (
-                <Pagination
-                  className="mt-3 mx-auto w-fit-content"
-                  itemClass="page-item"
-                  linkClass="page-link"
-                  activeClass="active"
-                  activePage={page}
-                  itemsCountPerPage={offsetLimit}
-                  totalItemsCount={count}
-                  pageRangeDisplayed={5}
-                  onChange={pageChange}
-                />
-              )}
-            </div> */}
+
             <PaginationCommon
               pageChange={pageChange}
               count={count}

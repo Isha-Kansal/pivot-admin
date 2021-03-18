@@ -70,16 +70,7 @@ const Network = (props) => {
                   </tr>
                 </tbody>
               </table>
-              {/* <form>
-                <div className="text-center search-input">
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="Search"
-                    required
-                  />
-                </div>
-              </form> */}
+
               <Search handleSearch={handleSearch} />
             </CCardHeader>
             <Table responsive>
@@ -122,16 +113,7 @@ const Network = (props) => {
                   </tr>
                 </tbody>
               </table>
-              {/* <form>
-                <div className="text-center search-input">
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="Search"
-                    required
-                  />
-                </div>
-              </form> */}
+
               <Search handleSearch={handleSearch} />
             </CCardHeader>
             <Table responsive>
@@ -171,16 +153,7 @@ const Network = (props) => {
                   </tr>
                 </tbody>
               </table>
-              {/* <form>
-                <div className="text-center search-input">
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="Search"
-                    required
-                  />
-                </div>
-              </form> */}
+
               <Search handleSearch={handleSearch} />
             </CCardHeader>
             <Table responsive>
@@ -220,16 +193,7 @@ const Network = (props) => {
                   </tr>
                 </tbody>
               </table>
-              {/* <form>
-                <div className="text-center search-input">
-                  <input
-                    type="search"
-                    className="form-control"
-                    placeholder="Search"
-                    required
-                  />
-                </div>
-              </form> */}
+
               <Search handleSearch={handleSearch} />
             </CCardHeader>
             <Table responsive>

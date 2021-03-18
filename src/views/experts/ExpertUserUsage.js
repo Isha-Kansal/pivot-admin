@@ -80,15 +80,6 @@ const ExpertUserUsage = (props) => {
     <CRow>
       <CCol lg={12}>
         <form>
-          {/* <div className="text-center search-input">
-            <input
-              type="search"
-              className="form-control"
-              placeholder="Search by ID"
-              required
-              onChange={handleSearch}
-            />
-          </div> */}
           <Search handleSearch={handleSearch} />
           {!loading && appointments !== undefined && (
             <div className="calls-with-experts">
@@ -162,21 +153,6 @@ const ExpertUserUsage = (props) => {
               </tbody>
             </Table>
             {appointments && appointments.length > 0 && !loading && (
-              // <div className="text-center pagination-input">
-              //   {count > offsetLimit && (
-              //     <Pagination
-              //       className="mt-3 mx-auto w-fit-content"
-              //       itemClass="page-item"
-              //       linkClass="page-link"
-              //       activeClass="active"
-              //       activePage={page}
-              //       itemsCountPerPage={offsetLimit}
-              //       totalItemsCount={count}
-              //       pageRangeDisplayed={5}
-              //       onChange={pageChange}
-              //     />
-              //   )}
-              // </div>
               <PaginationCommon
                 pageChange={pageChange}
                 count={count}
