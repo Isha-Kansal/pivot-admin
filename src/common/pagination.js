@@ -4,7 +4,6 @@ import Pagination from "react-js-pagination";
 const offsetLimit = 10;
 const count = 15;
 const PaginationCommon = (props) => {
-  console.log("8r6978984967895687", props);
   return (
     <>
       <div className="text-center pagination-input">

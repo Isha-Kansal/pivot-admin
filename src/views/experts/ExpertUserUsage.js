@@ -73,7 +73,7 @@ const ExpertUserUsage = (props) => {
       )
     );
   }, [search]);
-  console.log("8456894589789487", appointments);
+
   return (
     <CRow>
       <CCol lg={12}>

@@ -168,7 +168,6 @@ const Resources = (props) => {
                 {resourcesDetails &&
                   resourcesDetails.length > 0 &&
                   resourcesDetails.map((item, index) => {
-                    console.log("8965798569879568", item);
                     let category =
                       item &&
                       item.category &&

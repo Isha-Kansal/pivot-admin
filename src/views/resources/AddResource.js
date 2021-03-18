@@ -464,7 +464,7 @@ class AddResource extends Component {
     let consdata = cons.map((el) => {
       return el.value;
     });
-    console.log("950690490579045679856907", featuredResource);
+
     let obj = {
       id: resource_id,
       title: name,

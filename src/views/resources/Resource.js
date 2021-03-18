@@ -51,7 +51,6 @@ const Resource = (props) => {
     resource.price && resource.price.value && resource.price.unit
       ? resource.price.value + " " + resource.price.unit
       : resource.price && (resource.price.value || resource.price);
-  console.log("8945968945896845968", price && price.value);
 
   let featured = resource.is_featured ? "Yes" : "No";
   return (
