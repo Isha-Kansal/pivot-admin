@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Loader from "../../../loader";
 import Search from "../../../common/search";
+import PaginationCommon from "../../../common/pagination";
 import {
   CCard,
   CCardBody,
@@ -94,6 +95,7 @@ const Prepare = (props) => {
                 </tr>
               </tbody>
             </table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -143,6 +145,8 @@ const Prepare = (props) => {
                 <th>Talking Points</th>
               </thead>
             </Table>
+
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>

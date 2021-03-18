@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Loader from "../../../loader";
 import Search from "../../../common/search";
+import PaginationCommon from "../../../common/pagination";
 import {
   CCard,
   CCardBody,
@@ -87,6 +88,8 @@ const Explore = (props) => {
                 <th>My Values</th>
               </thead>
             </Table>
+
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -135,6 +138,7 @@ const Explore = (props) => {
                 <th>World Pays For</th>
               </thead>
             </Table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -175,9 +179,12 @@ const Explore = (props) => {
             <Search />
           </CCardHeader>
           <CCardBody>
-            <thead>
-              <th className="text-nowrap ">Career Option</th>
-            </thead>
+            <Table responsive>
+              <thead>
+                <th className="text-nowrap ">Career Option</th>
+              </thead>
+            </Table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -229,6 +236,7 @@ const Explore = (props) => {
                 <th>Notes On</th>
               </thead>
             </Table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -280,6 +288,7 @@ const Explore = (props) => {
                 <th>Decision</th>
               </thead>
             </Table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>

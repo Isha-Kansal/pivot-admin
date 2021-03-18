@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Loader from "../../../loader";
 import Search from "../../../common/search";
+import PaginationCommon from "../../../common/pagination";
 import {
   CCard,
   CCardBody,
@@ -87,6 +88,7 @@ const Apply = (props) => {
                 <th>Job Post URL</th>
               </thead>
             </Table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>

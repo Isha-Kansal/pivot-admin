@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Loader from "../../../loader";
 import Search from "../../../common/search";
+import PaginationCommon from "../../../common/pagination";
 import {
   CCard,
   CCardBody,
@@ -85,6 +86,7 @@ const Learn = (props) => {
                 <th>Required Soft Skills</th>
               </thead>
             </Table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -134,6 +136,7 @@ const Learn = (props) => {
                 <th>Course Type</th>
               </thead>
             </Table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -183,6 +186,7 @@ const Learn = (props) => {
                 <th>Role Type</th>
               </thead>
             </Table>
+            <PaginationCommon />
           </CCardBody>
         </CCollapse>
       </CCard>
