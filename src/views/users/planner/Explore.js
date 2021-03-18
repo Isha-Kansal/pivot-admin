@@ -115,7 +115,7 @@ const Explore = (props) => {
                   </tr>
                 </tbody>
               </table>
-              <form>
+              {/* <form>
                 <div className="text-center search-input">
                   <input
                     type="search"
@@ -124,7 +124,8 @@ const Explore = (props) => {
                     required
                   />
                 </div>
-              </form>
+              </form> */}
+              <Search />
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -161,7 +162,7 @@ const Explore = (props) => {
                 </tr>
               </tbody>
             </table>
-            <form>
+            {/* <form>
               <div className="text-center search-input">
                 <input
                   type="search"
@@ -170,7 +171,8 @@ const Explore = (props) => {
                   required
                 />
               </div>
-            </form>
+            </form> */}
+            <Search />
           </CCardHeader>
           <CCardBody>
             <thead>
@@ -205,7 +207,7 @@ const Explore = (props) => {
                   </tr>
                 </tbody>
               </table>
-              <form>
+              {/* <form>
                 <div className="text-center search-input">
                   <input
                     type="search"
@@ -214,7 +216,8 @@ const Explore = (props) => {
                     required
                   />
                 </div>
-              </form>
+              </form> */}
+              <Search />
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -255,7 +258,7 @@ const Explore = (props) => {
                   </tr>
                 </tbody>
               </table>
-              <form>
+              {/* <form>
                 <div className="text-center search-input">
                   <input
                     type="search"
@@ -264,7 +267,8 @@ const Explore = (props) => {
                     required
                   />
                 </div>
-              </form>
+              </form> */}
+              <Search />
             </CCardHeader>
             <Table responsive>
               <thead>

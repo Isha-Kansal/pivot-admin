@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Loader from "../../../loader";
+import Search from "../../../common/search";
 import {
   CCard,
   CCardBody,
@@ -62,7 +63,7 @@ const Network = (props) => {
                   </tr>
                 </tbody>
               </table>
-              <form>
+              {/* <form>
                 <div className="text-center search-input">
                   <input
                     type="search"
@@ -71,7 +72,8 @@ const Network = (props) => {
                     required
                   />
                 </div>
-              </form>
+              </form> */}
+              <Search />
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -112,7 +114,7 @@ const Network = (props) => {
                   </tr>
                 </tbody>
               </table>
-              <form>
+              {/* <form>
                 <div className="text-center search-input">
                   <input
                     type="search"
@@ -121,7 +123,8 @@ const Network = (props) => {
                     required
                   />
                 </div>
-              </form>
+              </form> */}
+              <Search />
             </CCardHeader>
             <Table responsive>
               {/* <thead>
@@ -159,7 +162,7 @@ const Network = (props) => {
                   </tr>
                 </tbody>
               </table>
-              <form>
+              {/* <form>
                 <div className="text-center search-input">
                   <input
                     type="search"
@@ -168,7 +171,8 @@ const Network = (props) => {
                     required
                   />
                 </div>
-              </form>
+              </form> */}
+              <Search />
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -206,7 +210,7 @@ const Network = (props) => {
                   </tr>
                 </tbody>
               </table>
-              <form>
+              {/* <form>
                 <div className="text-center search-input">
                   <input
                     type="search"
@@ -215,7 +219,8 @@ const Network = (props) => {
                     required
                   />
                 </div>
-              </form>
+              </form> */}
+              <Search />
             </CCardHeader>
             <Table responsive>
               <thead>
