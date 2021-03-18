@@ -37,6 +37,11 @@ const Prepare = (props) => {
         return "primary";
     }
   };
+  const handleSearch = (e) => {
+    // setSearch(e.target.value);
+    // setOffset("");
+    // setPage(1);
+  };
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -74,7 +79,7 @@ const Prepare = (props) => {
                   />
                 </div>
               </form> */}
-              <Search />
+              <Search handleSearch={handleSearch} />
             </CCardHeader>
             <table className="table">
               <tbody>
@@ -134,7 +139,7 @@ const Prepare = (props) => {
                   />
                 </div>
               </form> */}
-              <Search />
+              <Search handleSearch={handleSearch} />
             </CCardHeader>
             <Table responsive>
               <thead>

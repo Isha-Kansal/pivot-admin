@@ -37,6 +37,11 @@ const Learn = (props) => {
         return "primary";
     }
   };
+  const handleSearch = (e) => {
+    // setSearch(e.target.value);
+    // setOffset("");
+    // setPage(1);
+  };
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -74,7 +79,7 @@ const Learn = (props) => {
                   />
                 </div>
               </form> */}
-              <Search />
+              <Search handleSearch={handleSearch} />
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -125,7 +130,7 @@ const Learn = (props) => {
                   />
                 </div>
               </form> */}
-              <Search />
+              <Search handleSearch={handleSearch} />
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -175,7 +180,7 @@ const Learn = (props) => {
                   />
                 </div>
               </form> */}
-              <Search />
+              <Search handleSearch={handleSearch} />
             </CCardHeader>
             <Table responsive>
               <thead>

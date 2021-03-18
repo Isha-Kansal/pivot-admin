@@ -2,6 +2,7 @@ import React from "react";
 import { useParams, withRouter } from "react-router-dom";
 
 const Search = (props) => {
+  const { handleSearch } = props;
   return (
     <>
       <form className="position-relative">
@@ -11,7 +12,7 @@ const Search = (props) => {
             className="form-control"
             placeholder="Search"
             required
-            //   onChange={handleSearch}
+            onChange={handleSearch}
           />
         </div>
       </form>
