@@ -51,6 +51,17 @@ const {
   FETCH_EXPERT_SERVICE_FAILED,
   FETCH_EXPERT_SERVICE_REQUEST,
   FETCH_EXPERT_SERVICE_SUCCESS,
+  FETCH_USER_EXPERT_REQUEST,
+  FETCH_USER_EXPERT_SUCCESS,
+  FETCH_USER_EXPERT_FAILED,
+
+  FETCH_USER_RESOURCE_REQUEST,
+  FETCH_USER_RESOURCE_SUCCESS,
+  FETCH_USER_RESOURCE_FAILED,
+
+  FETCH_EXPERT_USER_REQUEST,
+  FETCH_EXPERT_USER_SUCCESS,
+  FETCH_EXPERT_USER_FAILED,
 } = require("./types");
 
 const initialState = {
@@ -73,6 +84,9 @@ const initialState = {
   editExpertData: {},
   saveResourceData: {},
   serviceData: {},
+  userExpert: [],
+  userResource: [],
+  expertUser: [],
 };
 
 const LoginAndNavigationReducer = (state = initialState, action) => {
@@ -364,6 +378,57 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       return {
         ...state,
         saveResourceData: action.saveResourceData || {},
+      };
+    }
+
+    case FETCH_USER_EXPERT_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_USER_EXPERT_SUCCESS: {
+      return {
+        ...state,
+        userExpert: action.userExpert || [],
+      };
+    }
+    case FETCH_USER_EXPERT_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case FETCH_USER_RESOURCE_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_USER_RESOURCE_SUCCESS: {
+      return {
+        ...state,
+        userResource: action.userResource || [],
+      };
+    }
+    case FETCH_USER_RESOURCE_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+    case FETCH_EXPERT_USER_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_EXPERT_USER_SUCCESS: {
+      return {
+        ...state,
+        expertUser: action.expertUser || [],
+      };
+    }
+    case FETCH_EXPERT_USER_FAILED: {
+      return {
+        ...state,
       };
     }
 

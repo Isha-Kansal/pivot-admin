@@ -48,6 +48,15 @@ import {
   FETCH_EXPERT_SERVICE_FAILED,
   FETCH_EXPERT_SERVICE_REQUEST,
   FETCH_EXPERT_SERVICE_SUCCESS,
+  FETCH_USER_EXPERT_REQUEST,
+  FETCH_USER_EXPERT_SUCCESS,
+  FETCH_USER_EXPERT_FAILED,
+  FETCH_USER_RESOURCE_REQUEST,
+  FETCH_USER_RESOURCE_SUCCESS,
+  FETCH_USER_RESOURCE_FAILED,
+  FETCH_EXPERT_USER_REQUEST,
+  FETCH_EXPERT_USER_SUCCESS,
+  FETCH_EXPERT_USER_FAILED,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -85,6 +94,20 @@ async function callFetchUsers(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
+
+async function callFetchUserExpert(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+async function callFetchUserResource(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+async function callFetchExpertUser(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+
 async function callFetchService(data) {
   const res = await apiCallGet(data.payload);
   return res;
@@ -154,6 +177,53 @@ function* fetchUsers(action) {
       });
     } else {
       yield put({ type: FETCH_USERS_FAILED });
+    }
+  }
+}
+
+function* fetchUserExpert(action) {
+  const response = yield call(callFetchUserExpert, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: FETCH_USER_EXPERT_SUCCESS,
+        userExpert: response.data,
+      });
+    } else {
+      yield put({ type: FETCH_USER_EXPERT_FAILED });
+    }
+  }
+}
+
+function* fetchUserResource(action) {
+  const response = yield call(callFetchUserResource, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: FETCH_USER_RESOURCE_SUCCESS,
+        userResource: response.data,
+      });
+    } else {
+      yield put({ type: FETCH_USER_RESOURCE_FAILED });
+    }
+  }
+}
+function* fetchExpertUser(action) {
+  const response = yield call(callFetchExpertUser, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: FETCH_EXPERT_USER_SUCCESS,
+        expertUser: response.data,
+      });
+    } else {
+      yield put({ type: FETCH_EXPERT_USER_FAILED });
     }
   }
 }
@@ -399,4 +469,8 @@ export default function* LoginByAdminWatcher() {
   yield takeLatest(FETCH_EXPERTS_REQUEST, fetchExperts);
   yield takeLatest(FETCH_ONE_EXPERT_REQUEST, fetchOneExpert);
   yield takeLatest(FETCH_EXPERT_SERVICE_REQUEST, fetchService);
+
+  yield takeLatest(FETCH_USER_EXPERT_REQUEST, fetchUserExpert);
+  yield takeLatest(FETCH_USER_RESOURCE_REQUEST, fetchUserResource);
+  yield takeLatest(FETCH_EXPERT_USER_REQUEST, fetchExpertUser);
 }

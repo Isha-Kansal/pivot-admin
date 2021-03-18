@@ -9,7 +9,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
-import { fetchOneUser } from "../store/action";
+import { fetchOneUser, fetchUserResource } from "../store/action";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 
 const offsetLimit = 10;
@@ -164,6 +164,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchOneUser,
+      fetchUserResource,
     },
     dispatch
   );

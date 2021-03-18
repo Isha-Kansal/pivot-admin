@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table } from "reactstrap";
 
-import { fetchOneExpert } from "../store/action";
+import { fetchOneExpert, fetchUserExpert } from "../store/action";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -29,15 +29,16 @@ const ExpertUserUsage = (props) => {
   const pageChange = (newPage) => {
     setLoading(true);
     const expert_id = props && props.match.params.id;
+
     dispatch(
-      fetchOneExpert(
-        `expert?id=${expert_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      fetchUserExpert(
+        `appointment/all?id=${expert_id}&type=expert&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { appointments, appointmentsCount, expert } = value.data;
-          setExpert(expert);
+          const { appointments, count } = value.data;
+
           setAppointments(appointments);
           setLoading(false);
-          setCount(appointmentsCount);
+          setCount(count);
           setOffset(
             appointments.length && appointments[appointments.length - 1]._id
           );
@@ -53,14 +54,14 @@ const ExpertUserUsage = (props) => {
     const expert_id = props && props.match.params.id;
 
     dispatch(
-      fetchOneExpert(
-        `expert?id=${expert_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      fetchUserExpert(
+        `appointment/all?id=${expert_id}&type=expert&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { appointments, appointmentsCount, expert } = value.data;
-          setExpert(expert);
+          const { appointments, count } = value.data;
+
           setAppointments(appointments);
           setLoading(false);
-          setCount(appointmentsCount);
+          setCount(count);
           setOffset(
             appointments.length && appointments[appointments.length - 1]._id
           );
@@ -124,7 +125,9 @@ const ExpertUserUsage = (props) => {
 
                         <td>
                           {" "}
-                          {item.meeting.firstName && item.meeting.lastName
+                          {item.meeting &&
+                          item.meeting.firstName &&
+                          item.meeting.lastName
                             ? item.meeting.firstName +
                               " " +
                               item.meeting.lastName
@@ -168,6 +171,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchOneExpert,
+      fetchUserExpert,
     },
     dispatch
   );

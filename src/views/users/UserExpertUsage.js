@@ -5,7 +5,7 @@ import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import Search from "../../common/search";
 import { Table } from "reactstrap";
 
-import { fetchOneUser } from "../store/action";
+import { fetchOneUser, fetchUserExpert } from "../store/action";
 import { connect } from "react-redux";
 import Loader from "../../loader";
 import { useDispatch } from "react-redux";
@@ -29,15 +29,14 @@ const UserExpertUsage = (props) => {
     const user_id = props && props.match.params.id;
 
     dispatch(
-      fetchOneUser(
-        `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      fetchUserExpert(
+        `appointment/all?id=${user_id}&type=user&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { appointments, appointmentsCount, user } = value.data;
+          const { appointments, count } = value.data;
 
-          setUser(user);
           setAppointments(appointments);
           setLoading(false);
-          setCount(appointmentsCount);
+          setCount(count);
           setOffset(
             appointments.length && appointments[appointments.length - 1]._id
           );
@@ -55,15 +54,14 @@ const UserExpertUsage = (props) => {
     setLoading(true);
     const user_id = props && props.match.params.id;
     dispatch(
-      fetchOneUser(
-        `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      fetchUserExpert(
+        `appointment/all?id=${user_id}&type=user&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { appointments, appointmentsCount, user } = value.data;
+          const { appointments, count } = value.data;
 
-          setUser(user);
           setAppointments(appointments);
           setLoading(false);
-          setCount(appointmentsCount);
+          setCount(count);
           setOffset(
             appointments.length && appointments[appointments.length - 1]._id
           );
@@ -177,6 +175,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchOneUser,
+      fetchUserExpert,
     },
     dispatch
   );
