@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import PaginationCommon from "../../common/pagination";
 import Search from "../../common/search";
 import Loader from "../../loader";
 import Pagination from "react-js-pagination";
@@ -157,7 +158,7 @@ const UserResourceUsage = (props) => {
                   })}
               </tbody>
             </Table>
-            <div className="text-center pagination-input">
+            {/* <div className="text-center pagination-input">
               {count > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
@@ -171,7 +172,14 @@ const UserResourceUsage = (props) => {
                   onChange={pageChange}
                 />
               )}
-            </div>
+            </div> */}
+            <PaginationCommon
+              pageChange={pageChange}
+              count={count}
+              offsetLimit={offsetLimit}
+              page={page}
+              loading={loading}
+            />
           </CCardBody>
         </CCard>
       </CCol>

@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
+import PaginationCommon from "../../common/pagination";
 import Loader from "../../loader";
 import Search from "../../common/search";
 const offsetLimit = 10;
@@ -161,21 +162,28 @@ const ExpertUserUsage = (props) => {
               </tbody>
             </Table>
             {appointments && appointments.length > 0 && !loading && (
-              <div className="text-center pagination-input">
-                {count > offsetLimit && (
-                  <Pagination
-                    className="mt-3 mx-auto w-fit-content"
-                    itemClass="page-item"
-                    linkClass="page-link"
-                    activeClass="active"
-                    activePage={page}
-                    itemsCountPerPage={offsetLimit}
-                    totalItemsCount={count}
-                    pageRangeDisplayed={5}
-                    onChange={pageChange}
-                  />
-                )}
-              </div>
+              // <div className="text-center pagination-input">
+              //   {count > offsetLimit && (
+              //     <Pagination
+              //       className="mt-3 mx-auto w-fit-content"
+              //       itemClass="page-item"
+              //       linkClass="page-link"
+              //       activeClass="active"
+              //       activePage={page}
+              //       itemsCountPerPage={offsetLimit}
+              //       totalItemsCount={count}
+              //       pageRangeDisplayed={5}
+              //       onChange={pageChange}
+              //     />
+              //   )}
+              // </div>
+              <PaginationCommon
+                pageChange={pageChange}
+                count={count}
+                offsetLimit={offsetLimit}
+                page={page}
+                loading={loading}
+              />
             )}
           </CCardBody>
         </CCard>

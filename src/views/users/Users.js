@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import Search from "../../common/search";
 import moment from "moment";
-import Pagination from "react-js-pagination";
+
+// import Pagination from "react-js-pagination";
 import CommonModal from "../../common/commonModal";
 import { NotificationManager } from "react-notifications";
 import { Table } from "reactstrap";
@@ -14,6 +15,7 @@ import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 
 import { fetchUsers, userStatus } from "../store/action";
+import PaginationCommon from "../../common/pagination";
 const offsetLimit = 10;
 const Users = (props) => {
   const history = useHistory();
@@ -248,7 +250,7 @@ const Users = (props) => {
               </tbody>
             </Table>
 
-            <div className="text-center pagination-input">
+            {/* <div className="text-center pagination-input">
               {count > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
@@ -262,7 +264,14 @@ const Users = (props) => {
                   onChange={pageChange}
                 />
               )}
-            </div>
+            </div> */}
+            <PaginationCommon
+              pageChange={pageChange}
+              count={count}
+              offsetLimit={offsetLimit}
+              page={page}
+              loading={loading}
+            />
             <div>
               {modalOpen && (
                 <CommonModal

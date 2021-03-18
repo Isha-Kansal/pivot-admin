@@ -13,6 +13,7 @@ import { CCard, CCardBody, CCol, CRow, CButton } from "@coreui/react";
 import Search from "../../common/search";
 import EDIT from "../../assets/icons/edit.svg";
 import DELETE from "../../assets/icons/delete.svg";
+import PaginationCommon from "../../common/pagination";
 import {
   fetchResources,
   deleteResource,
@@ -221,7 +222,7 @@ const Resources = (props) => {
                   })}
               </tbody>
             </Table>
-
+            {/* 
             <div className="text-center pagination-input">
               {count > offsetLimit && !loading && (
                 <Pagination
@@ -236,8 +237,14 @@ const Resources = (props) => {
                   onChange={pageChange}
                 />
               )}
-            </div>
-
+            </div> */}
+            <PaginationCommon
+              pageChange={pageChange}
+              count={count}
+              offsetLimit={offsetLimit}
+              page={page}
+              loading={loading}
+            />
             <div>
               {modalOpen && (
                 <CommonModal

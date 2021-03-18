@@ -5,7 +5,7 @@ import Search from "../../common/search";
 import Pagination from "react-js-pagination";
 import moment from "moment-timezone";
 import { CCard, CCardBody, CCol, CRow, CButton } from "@coreui/react";
-
+import PaginationCommon from "../../common/pagination";
 import { fetchExperts, deleteExpert, userStatus } from "../store/action";
 import { connect } from "react-redux";
 import { NotificationManager } from "react-notifications";
@@ -292,7 +292,7 @@ const Experts = (props) => {
               </tbody>
             </Table>
 
-            <div className="text-center pagination-input">
+            {/* <div className="text-center pagination-input">
               {count > offsetLimit && !loading && (
                 <Pagination
                   className="mt-3 mx-auto w-fit-content"
@@ -306,7 +306,14 @@ const Experts = (props) => {
                   onChange={pageChange}
                 />
               )}
-            </div>
+            </div> */}
+            <PaginationCommon
+              pageChange={pageChange}
+              count={count}
+              offsetLimit={offsetLimit}
+              page={page}
+              loading={loading}
+            />
             <div>
               {modalOpen && (
                 <CommonModal
