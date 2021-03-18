@@ -42,6 +42,7 @@ const Apply = (props) => {
     // setOffset("");
     // setPage(1);
   };
+  const pageChange = (newPage) => {};
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -93,7 +94,7 @@ const Apply = (props) => {
                 <th>Job Post URL</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>

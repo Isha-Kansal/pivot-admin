@@ -42,6 +42,7 @@ const Network = (props) => {
     // setOffset("");
     // setPage(1);
   };
+  const pageChange = (newPage) => {};
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -92,7 +93,7 @@ const Network = (props) => {
                 <th>Other</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -141,7 +142,7 @@ const Network = (props) => {
                 <th>World Pays For</th>
               </thead> */}
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -189,7 +190,7 @@ const Network = (props) => {
                 <th>Cold Message</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -248,7 +249,7 @@ const Network = (props) => {
                 <th>Other</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>

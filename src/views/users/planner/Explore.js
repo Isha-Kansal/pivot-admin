@@ -44,6 +44,8 @@ const Explore = (props) => {
     // setPage(1);
   };
 
+  const pageChange = (newPage) => {};
+
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -95,7 +97,7 @@ const Explore = (props) => {
               </thead>
             </Table>
 
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -144,7 +146,7 @@ const Explore = (props) => {
                 <th>World Pays For</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -190,7 +192,7 @@ const Explore = (props) => {
                 <th className="text-nowrap ">Career Option</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -242,7 +244,7 @@ const Explore = (props) => {
                 <th>Notes On</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -294,7 +296,7 @@ const Explore = (props) => {
                 <th>Decision</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>

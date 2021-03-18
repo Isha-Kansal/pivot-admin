@@ -4,6 +4,7 @@ import Pagination from "react-js-pagination";
 const offsetLimit = 10;
 const count = 15;
 const PaginationCommon = (props) => {
+  const { pageChange } = props;
   return (
     <>
       <div className="text-center pagination-input">
@@ -17,7 +18,7 @@ const PaginationCommon = (props) => {
           itemsCountPerPage={offsetLimit}
           totalItemsCount={count}
           pageRangeDisplayed={5}
-          // onChange={pageChange}
+          onChange={pageChange}
         />
         {/* )} */}
       </div>

@@ -42,6 +42,7 @@ const Prepare = (props) => {
     // setOffset("");
     // setPage(1);
   };
+  const pageChange = (newPage) => {};
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -100,7 +101,7 @@ const Prepare = (props) => {
                 </tr>
               </tbody>
             </table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -151,7 +152,7 @@ const Prepare = (props) => {
               </thead>
             </Table>
 
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>

@@ -42,6 +42,7 @@ const Learn = (props) => {
     // setOffset("");
     // setPage(1);
   };
+  const pageChange = (newPage) => {};
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -91,7 +92,7 @@ const Learn = (props) => {
                 <th>Required Soft Skills</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -141,7 +142,7 @@ const Learn = (props) => {
                 <th>Course Type</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -191,7 +192,7 @@ const Learn = (props) => {
                 <th>Role Type</th>
               </thead>
             </Table>
-            <PaginationCommon />
+            <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>
       </CCard>
