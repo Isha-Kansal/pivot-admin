@@ -64,10 +64,6 @@ export const optionsRole = [
 ];
 
 export const optionsIndustry = [
-  // {
-  //   value: "",
-  //   label: "Select Industry",
-  // },
   {
     value: "Designer",
     label: "Designer",
@@ -205,6 +201,10 @@ export const optionsIndustry = [
     label: "Design",
   },
   {
+    value: "Dropbox",
+    label: "Dropbox",
+  },
+  {
     value: "E-Learning",
     label: "E-Learning",
   },
@@ -232,6 +232,11 @@ export const optionsIndustry = [
     value: "Executive Office",
     label: "Executive Office",
   },
+  {
+    value: "Expo",
+    label: "Expo",
+  },
+
   {
     value: "Facilities Services",
     label: "Facilities Services",
