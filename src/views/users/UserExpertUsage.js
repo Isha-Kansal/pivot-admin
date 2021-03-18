@@ -86,7 +86,7 @@ const UserExpertUsage = (props) => {
           </div>
           {!loading && (
             <div className="calls-with-experts">
-              {!loading && (
+              {!loading && appointments !== undefined && (
                 <h5>
                   Number of calls with experts:<span>{count}</span>
                 </h5>

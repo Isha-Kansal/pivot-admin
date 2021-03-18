@@ -73,6 +73,7 @@ const ExpertUserUsage = (props) => {
       )
     );
   }, [search]);
+  console.log("8456894589789487", appointments);
   return (
     <CRow>
       <CCol lg={12}>
@@ -86,7 +87,7 @@ const ExpertUserUsage = (props) => {
               onChange={handleSearch}
             />
           </div>
-          {!loading && (
+          {!loading && appointments !== undefined && (
             <div className="calls-with-experts">
               {!loading && <h5>Number of calls with users:{count}</h5>}
             </div>

@@ -84,7 +84,7 @@ const UserResourceUsage = (props) => {
               onChange={handleSearch}
             />
           </div>
-          {!loading && (
+          {!loading && resources !== undefined && (
             <div className="calls-with-experts">
               {!loading && <h5>Number of resources used:{count}</h5>}
             </div>
