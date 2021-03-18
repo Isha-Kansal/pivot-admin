@@ -79,6 +79,11 @@ const User = (props) => {
     const user_id = props && props.match.params.id;
     props.history.push(`/users/${user_id}/resource-features`);
   };
+
+  const onClickPlanner = () => {
+    const user_id = props && props.match.params.id;
+    props.history.push(`/users/${user_id}/planner-activity`);
+  };
   return (
     <CRow>
       <CCol lg={12}>
@@ -102,7 +107,7 @@ const User = (props) => {
                   </CNavLink>
                 </CNavItem>
                 <CNavItem>
-                  <CNavLink>Planner Activity</CNavLink>
+                  <CNavLink onClick={onClickPlanner}>Planner Activity</CNavLink>
                 </CNavItem>
               </CNav>
               <CTabContent>
