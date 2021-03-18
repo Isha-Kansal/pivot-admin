@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import Pagination from "react-js-pagination";
+
 import Tooltip from "../../common/toolTip";
 import CommonModal from "../../common/commonModal";
 import { Table } from "reactstrap";

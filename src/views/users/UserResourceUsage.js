@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import PaginationCommon from "../../common/pagination";
 import Search from "../../common/search";
 import Loader from "../../loader";
-import Pagination from "react-js-pagination";
+
 import { Table } from "reactstrap";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";

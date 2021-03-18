@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import { Table } from "reactstrap";
-import Pagination from "react-js-pagination";
+
 import { fetchOneExpert } from "../store/action";
 import { connect } from "react-redux";
 import { useDispatch } from "react-redux";

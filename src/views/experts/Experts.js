@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { withRouter } from "react-router-dom";
 import Search from "../../common/search";
-import Pagination from "react-js-pagination";
+
 import moment from "moment-timezone";
 import { CCard, CCardBody, CCol, CRow, CButton } from "@coreui/react";
 import PaginationCommon from "../../common/pagination";

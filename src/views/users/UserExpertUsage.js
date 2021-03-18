@@ -4,7 +4,7 @@ import PaginationCommon from "../../common/pagination";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
 import Search from "../../common/search";
 import { Table } from "reactstrap";
-import Pagination from "react-js-pagination";
+
 import { fetchOneUser } from "../store/action";
 import { connect } from "react-redux";
 import Loader from "../../loader";

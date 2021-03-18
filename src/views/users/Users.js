@@ -3,7 +3,6 @@ import { useHistory, useLocation } from "react-router-dom";
 import Search from "../../common/search";
 import moment from "moment";
 
-// import Pagination from "react-js-pagination";
 import CommonModal from "../../common/commonModal";
 import { NotificationManager } from "react-notifications";
 import { Table } from "reactstrap";
