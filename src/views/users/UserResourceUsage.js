@@ -11,7 +11,7 @@ import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
 import { fetchOneUser } from "../store/action";
 import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
-// import { setResourceData } from "../store/action";
+
 const offsetLimit = 10;
 const UserResourceUsage = (props) => {
   const dispatch = useDispatch();
@@ -28,13 +28,6 @@ const UserResourceUsage = (props) => {
     setLoading(true);
 
     const user_id = props && props.match.params.id;
-    // dispatch(
-    //   fetchOneUser(`user?id=${user_id}`, (value) => {
-    //     setUser(value.data.user);
-    //     setResources(value.data.resources);
-    //     setLoading(false);
-    //   })
-    // );
 
     dispatch(
       fetchOneUser(
@@ -122,7 +115,6 @@ const UserResourceUsage = (props) => {
                         onClick={() =>
                           history.push({
                             pathname: `/resources/${item._id}`,
-                            // state: usersDetails,
                           })
                         }
                       >

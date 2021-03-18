@@ -470,7 +470,7 @@ class AddResource extends Component {
       title: name,
       format,
       isFeatured: featuredResource === "True" ? true : false,
-      // price: pricing === "Others" ? addPrice : pricing,
+
       price:
         pricing === "Others"
           ? { value: addPrice, unit, type: "Others" }
@@ -531,8 +531,7 @@ class AddResource extends Component {
       title: name,
       format,
       isFeatured: featuredResource === "True" ? true : false,
-      // price: pricing === "Others" ? addPrice : pricing,
-      // price: pricing === "Others" ? { value: addPrice, unit } : pricing,
+
       price:
         pricing === "Others"
           ? { value: addPrice, unit, type: "Others" }

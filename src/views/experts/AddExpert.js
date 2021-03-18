@@ -97,10 +97,6 @@ class AddExpert extends Component {
               calendarOptions,
               serviceList,
               loading: false,
-              // selectedCalendar: {
-              //   value: this.state.calendarId,
-              //   label: this.state.calendarId,
-              // },
             },
             () => {
               if (callback) {
@@ -706,7 +702,7 @@ class AddExpert extends Component {
       contact_no: contact ? contact : "",
       linkedIn,
       calendar_id: selectedCalendar.value,
-      // profile_pic,
+
       info: aboutData,
       time_zone: timeZone,
     };

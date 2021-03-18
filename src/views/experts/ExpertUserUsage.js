@@ -51,13 +51,6 @@ const ExpertUserUsage = (props) => {
     setLoading(true);
 
     const expert_id = props && props.match.params.id;
-    // dispatch(
-    //   fetchOneExpert(`expert?id=${expert_id}`, (value) => {
-    //     setExpert(value.data.expert);
-    //     setAppointments(value.data.appointments);
-    //     setLoading(false);
-    //   })
-    // );
 
     dispatch(
       fetchOneExpert(

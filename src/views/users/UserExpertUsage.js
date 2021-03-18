@@ -125,7 +125,6 @@ const UserExpertUsage = (props) => {
                         onClick={() =>
                           history.push({
                             pathname: `/experts/${item.expert_id}`,
-                            // state: usersDetails,
                           })
                         }
                       >

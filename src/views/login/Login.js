@@ -71,7 +71,6 @@ class Login extends Component {
       });
 
       if (value.status === 200) {
-        // this.props.setToken(value.data.user.auth_token);
         localStorage.setItem("auth_token", value.data.user.auth_token);
         NotificationManager.success("Login Successfully", "", 1000);
 
