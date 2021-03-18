@@ -155,8 +155,8 @@ class AddExpert extends Component {
       this.setState(
         {
           loadiing: false,
-          first_name,
-          last_name,
+          first_name: first_name.trim(),
+          last_name: last_name.trim(),
           gender,
           country,
           designation,

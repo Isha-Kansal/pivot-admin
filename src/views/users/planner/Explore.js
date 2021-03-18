@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Loader from "../../../loader";
+import Search from "../../../common/search";
 import {
   CCard,
   CCardBody,
@@ -64,7 +65,7 @@ const Explore = (props) => {
                   </tr>
                 </tbody>
               </table>
-              <form>
+              {/* <form>
                 <div className="text-center search-input">
                   <input
                     type="search"
@@ -73,7 +74,8 @@ const Explore = (props) => {
                     required
                   />
                 </div>
-              </form>
+              </form> */}
+              <Search />
             </CCardHeader>
             <Table responsive>
               <thead>

@@ -103,7 +103,7 @@ class AddResource extends Component {
         this.setState({
           loadiing: false,
           resourceData: value.data.resource,
-          name: title,
+          name: title.trim(),
           format: resource_format,
           featuredResource: is_featured ? "True" : "False",
           pricing:
