@@ -1,14 +1,12 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import moment from "moment";
 import UserPlanner from "../users/UserPlanner";
 import UserExpertUsage from "../users/UserExpertUsage";
 import UserResourceUsage from "../users/UserResourceUsage";
-import { Link } from "react-router-dom";
-import cx from "classnames";
+
 import {
   CCard,
   CCardBody,
-  CCardHeader,
   CCol,
   CRow,
   CBadge,
@@ -89,7 +87,7 @@ const User = (props) => {
       <CCol lg={12}>
         <CCard className="position-relative">
           {loading && <Loader />}
-          {/* <CCardHeader>Account Details</CCardHeader> */}
+
           <CCardBody>
             <CTabs>
               <CNav variant="tabs">

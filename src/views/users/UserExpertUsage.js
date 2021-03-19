@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import PaginationCommon from "../../common/pagination";
-import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
+import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import Search from "../../common/search";
 import { Table } from "reactstrap";
 

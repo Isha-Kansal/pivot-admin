@@ -10,7 +10,7 @@ import { withRouter } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { connect } from "react-redux";
 import { fetchOneUser, fetchUserResource } from "../store/action";
-import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
+import { CCard, CCardBody, CCol, CRow } from "@coreui/react";
 
 const offsetLimit = 10;
 const UserResourceUsage = (props) => {
@@ -55,7 +55,6 @@ const UserResourceUsage = (props) => {
       fetchOneUser(
         `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          console.log("46745785679mncbnmcbm", value);
           const { resources, resourcesCount } = value.data;
           setUser(value.data.user);
           setResources(value.data.resources);

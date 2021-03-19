@@ -11,7 +11,7 @@ import { icons } from "./assets/icons";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-// import store from "./store";
+
 import { store, persistor } from "./store/index";
 
 React.icons = icons;
