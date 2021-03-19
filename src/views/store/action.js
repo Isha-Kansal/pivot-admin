@@ -19,7 +19,6 @@ import {
   FETCH_EXPERT_SERVICE_REQUEST,
   FETCH_USER_EXPERT_REQUEST,
   FETCH_USER_RESOURCE_REQUEST,
-  FETCH_EXPERT_USER_REQUEST,
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -184,15 +183,6 @@ export const fetchUserExpert = (body, callback) => {
 export const fetchUserResource = (body, callback) => {
   return {
     type: FETCH_USER_RESOURCE_REQUEST,
-
-    payload: body,
-    callback,
-  };
-};
-
-export const fetchExpertUser = (body, callback) => {
-  return {
-    type: FETCH_EXPERT_USER_REQUEST,
 
     payload: body,
     callback,

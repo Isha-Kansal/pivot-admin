@@ -58,10 +58,6 @@ const {
   FETCH_USER_RESOURCE_REQUEST,
   FETCH_USER_RESOURCE_SUCCESS,
   FETCH_USER_RESOURCE_FAILED,
-
-  FETCH_EXPERT_USER_REQUEST,
-  FETCH_EXPERT_USER_SUCCESS,
-  FETCH_EXPERT_USER_FAILED,
 } = require("./types");
 
 const initialState = {
@@ -86,7 +82,6 @@ const initialState = {
   serviceData: {},
   userExpert: [],
   userResource: [],
-  expertUser: [],
 };
 
 const LoginAndNavigationReducer = (state = initialState, action) => {
@@ -410,23 +405,6 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
     case FETCH_USER_RESOURCE_FAILED: {
-      return {
-        ...state,
-      };
-    }
-
-    case FETCH_EXPERT_USER_REQUEST: {
-      return {
-        ...state,
-      };
-    }
-    case FETCH_EXPERT_USER_SUCCESS: {
-      return {
-        ...state,
-        expertUser: action.expertUser || [],
-      };
-    }
-    case FETCH_EXPERT_USER_FAILED: {
       return {
         ...state,
       };
