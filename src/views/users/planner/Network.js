@@ -116,13 +116,16 @@ const Network = (props) => {
 
               <Search handleSearch={handleSearch} />
             </CCardHeader>
-            <Table responsive>
-              {/* <thead>
-                <th className="text-nowrap ">My Interests,Skills and Values</th>
 
-                <th>World Needs</th>
-                <th>World Pays For</th>
-              </thead> */}
+            <Table responsive>
+              <thead>
+                <th className="text-nowrap ">Pivot</th>
+
+                <th>Meetup</th>
+                <th>Lunchclub</th>
+                <th>Online Groups</th>
+                <th>Conferences</th>
+              </thead>
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
