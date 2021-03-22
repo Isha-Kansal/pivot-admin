@@ -30,14 +30,14 @@ const UserResourceUsage = (props) => {
     const user_id = props && props.match.params.id;
 
     dispatch(
-      fetchOneUser(
-        `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      fetchUserResource(
+        `user/used-resources?user_id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { resources, resourcesCount, user } = value.data;
+          const { resources, count, user } = value.data;
           setUser(user);
           setResources(resources);
           setLoading(false);
-          setCount(resourcesCount);
+          setCount(count);
           setOffset(resources.length && resources[resources.length - 1]._id);
         }
       )
@@ -51,15 +51,16 @@ const UserResourceUsage = (props) => {
   };
   const pageChange = (newPage) => {
     const user_id = props && props.match.params.id;
+
     dispatch(
-      fetchOneUser(
-        `user?id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      fetchUserResource(
+        `user/used-resources?user_id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
-          const { resources, resourcesCount } = value.data;
-          setUser(value.data.user);
-          setResources(value.data.resources);
+          const { resources, count, user } = value.data;
+          setUser(user);
+          setResources(resources);
           setLoading(false);
-          setCount(resourcesCount);
+          setCount(count);
           setOffset(resources.length && resources[resources.length - 1]._id);
           setPage(newPage);
         }
@@ -100,7 +101,7 @@ const UserResourceUsage = (props) => {
                 </thead>
               )}
               <tbody>
-                {resources && resources.length === 0 && (
+                {resources && resources.length === 0 && !loading && (
                   <h3 className="text-center no-user-found">
                     No Resources Found!
                   </h3>
@@ -118,24 +119,14 @@ const UserResourceUsage = (props) => {
                           })
                         }
                       >
-                        {/* <td>{item.expert_id}</td>
+                        <td>{item._id}</td>
+                        <td> {item.title ? item.title : "-"}</td>
+
                         <td>
                           {" "}
-                          {item.expert &&
-                          item.expert.first_name &&
-                          item.expert.last_name
-                            ? item.expert.first_name +
-                              " " +
-                              item.expert.last_name
-                            : "-"}
+                          {item.resource_format ? item.resource_format : "-"}
                         </td>
-
-                        <td>{`${item.meeting.date} & ${item.meeting.time}`}</td>
-                        <td>
-                          {item.appointment_status === "paid"
-                            ? "Completed"
-                            : "Pending"}
-                        </td> */}
+                        <td>{item.price ? item.price.value : "-"}</td>
                       </tr>
                     );
                   })}
