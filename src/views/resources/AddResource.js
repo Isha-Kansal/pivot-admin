@@ -65,7 +65,7 @@ class AddResource extends Component {
       websiteLink: "",
       resourceData: {},
       loadiing: false,
-      unit: "",
+      // unit: "",
     };
   }
   componentDidMount() {
@@ -107,9 +107,11 @@ class AddResource extends Component {
           format: resource_format,
           featuredResource: is_featured ? "True" : "False",
           pricing:
-            price.value && price.unit
-              ? price.value + " " + price.unit
-              : price.value,
+          // pricing:
+          //   price.value && price.unit
+          //     ? price.value + " " + price.unit
+          //     : price.value,
+          pricing: price,
           category,
           pace,
           websiteLink: website,
@@ -206,7 +208,7 @@ class AddResource extends Component {
       pace,
       websiteLink,
       addPrice,
-      unit,
+      // unit,
     } = this.state;
 
     if (name === "") {
@@ -273,12 +275,12 @@ class AddResource extends Component {
       });
       return;
     }
-    if (pricing === "Others" && (addPrice === "" || unit === "")) {
+    if (pricing === "Others" && addPrice === "") {
       this.setState({
         errorType: "addPrice",
         errorText: (
           <span className="text-danger">
-            <b>Please enter price and unit both</b>
+            <b>Please enter price details</b>
           </span>
         ),
       });
@@ -443,7 +445,7 @@ class AddResource extends Component {
       name,
       format,
       pricing,
-      unit,
+      // unit,
       websiteLink,
       category,
       details,
@@ -471,10 +473,12 @@ class AddResource extends Component {
       format,
       isFeatured: featuredResource === "True" ? true : false,
 
-      price:
-        pricing === "Others"
-          ? { value: addPrice, unit, type: "Others" }
-          : { value: pricing, type: pricing },
+      // price:
+      //   pricing === "Others"
+      //     ? { value: addPrice, unit, type: "Others" }
+      //     : { value: pricing, type: pricing },
+      price: pricing === "Others" ? addPrice : pricing,
+
       website: websiteLink,
       category,
       pros: prosdata,
@@ -513,7 +517,7 @@ class AddResource extends Component {
       cons,
       uniqueSellingProposition,
       pace,
-      unit,
+      // unit,
       addPrice,
       resourceImage,
     } = this.state;
@@ -532,10 +536,12 @@ class AddResource extends Component {
       format,
       isFeatured: featuredResource === "True" ? true : false,
 
-      price:
-        pricing === "Others"
-          ? { value: addPrice, unit, type: "Others" }
-          : { value: pricing, type: pricing },
+      // price:
+      //   pricing === "Others"
+      //     ? { value: addPrice, unit, type: "Others" }
+      //     : { value: pricing, type: pricing },
+
+      price: pricing === "Others" ? addPrice : pricing,
       website: websiteLink,
       category,
       pros: prosdata,
@@ -566,7 +572,7 @@ class AddResource extends Component {
     this.setState({
       name: "",
       format: "",
-      unit: "",
+      // unit: "",
       featuredResource: "",
       pricing: "",
       category: [],
@@ -675,11 +681,11 @@ class AddResource extends Component {
         pricing: data.value,
       });
     }
-    if (type === "addPrice") {
-      this.setState({
-        unit: data.value,
-      });
-    }
+    // if (type === "addPrice") {
+    //   this.setState({
+    //     unit: data.value,
+    //   });
+    // }
     if (type === "category") {
       let arr;
       if (data.length <= 3) {
@@ -709,7 +715,7 @@ class AddResource extends Component {
       uniqueSellingProposition,
       category,
       resourceImage,
-      unit,
+      // unit,
       pros,
       cons,
       details,
@@ -854,21 +860,21 @@ class AddResource extends Component {
                 {pricing === "Others" && (
                   <CFormGroup row>
                     <CCol md="3">
-                      <CLabel htmlFor="addPrice">Add Price</CLabel>
+                      <CLabel htmlFor="addPrice">Price Details</CLabel>
                       <CLabel className="text-danger">*</CLabel>
                     </CCol>
-                    <CCol xs="6">
+                    <CCol xs="12" md="9">
                       <CInput
-                        type="number"
+                        type="text"
                         id="addPrice"
                         name="addPrice"
-                        placeholder="Add Price"
+                        placeholder="Add Price Details"
                         onChange={this.inputHandler}
                         value={addPrice}
                       />
                       {this.errorShow("addPrice")}
                     </CCol>
-                    <CCol xs="6" md="3">
+                    {/* <CCol xs="6" md="3">
                       <Select
                         custom
                         name="addPrice"
@@ -878,8 +884,8 @@ class AddResource extends Component {
                         options={optionsUnit}
                         onChange={(data) => this.handleSelect(data, "addPrice")}
                       ></Select>
-                      {/* {this.errorShow("addPrice")} */}
-                    </CCol>
+                    
+                    </CCol> */}
                   </CFormGroup>
                 )}
 

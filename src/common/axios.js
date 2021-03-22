@@ -1,7 +1,7 @@
 import axois from "axios";
 import { config } from "../config";
 import { NotificationManager } from "react-notifications";
-
+import { Redirect } from "react-router-dom";
 export const apiCallPost = async (url, data) => {
   const authToken = localStorage.getItem("auth_token");
 
@@ -22,6 +22,7 @@ export const apiCallPost = async (url, data) => {
         localStorage.clear();
         localStorage.setItem("isLoggedIn", false);
         NotificationManager.info(res.data.message, "", 1000);
+        window.location = "/#/login";
       }
 
       return res;
@@ -43,7 +44,9 @@ export const apiCallGet = async (url) => {
         localStorage.clear();
         localStorage.setItem("isLoggedIn", false);
         NotificationManager.info(res.data.message, "", 1000);
+        window.location = "/#/login";
       }
+
       return res;
     });
 };
