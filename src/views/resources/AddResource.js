@@ -106,7 +106,6 @@ class AddResource extends Component {
           name: title.trim(),
           format: resource_format,
           featuredResource: is_featured ? "True" : "False",
-          pricing:
           // pricing:
           //   price.value && price.unit
           //     ? price.value + " " + price.unit
