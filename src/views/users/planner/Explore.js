@@ -26,13 +26,14 @@ const Explore = (props) => {
       case "Done":
         return "green";
 
-      // case "Not Verified":
-      //   return "danger";
-      // case "Activated":
-      //   return "success";
-
-      // case "Blocked":
-      //   return "danger";
+      case "To-Do":
+        return "orange";
+      case "Doing":
+        return "yellow";
+      case "Ask an Expert":
+        return "purple";
+      case "Not Applicable":
+        return "gray";
       default:
         return "primary";
     }
@@ -112,7 +113,7 @@ const Explore = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge color={getBadge("To-Do")}>To-Do</CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -151,7 +152,9 @@ const Explore = (props) => {
                   <td>Status</td>
                   <td>
                     {" "}
-                    <CBadge color={getBadge("Done")}>Done</CBadge>
+                    <CBadge color={getBadge("Ask an Expert")}>
+                      Ask an Expert
+                    </CBadge>
                   </td>
                 </tr>
               </tbody>
@@ -190,7 +193,7 @@ const Explore = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge color={getBadge("Doing")}>Doing</CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -233,7 +236,9 @@ const Explore = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge color={getBadge("Not Applicable")}>
+                        Not Applicable
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
