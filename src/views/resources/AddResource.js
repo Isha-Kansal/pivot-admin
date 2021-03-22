@@ -319,21 +319,21 @@ class AddResource extends Component {
       return;
     }
 
-    // if (websiteLink !== "") {
-    //   let filter = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g;
+    if (websiteLink !== "") {
+      let filter = /(http(s)?:\/\/.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}/g;
 
-    //   if (!filter.test(websiteLink)) {
-    //     this.setState({
-    //       errorType: "websiteLink",
-    //       errorText: (
-    //         <span className="text-danger">
-    //           <b> Please enter valid website link</b>
-    //         </span>
-    //       ),
-    //     });
-    //     return;
-    //   }
-    // }
+      if (!filter.test(websiteLink)) {
+        this.setState({
+          errorType: "websiteLink",
+          errorText: (
+            <span className="text-danger">
+              <b> Please enter valid website link</b>
+            </span>
+          ),
+        });
+        return;
+      }
+    }
 
     if (pros.length === 0) {
       this.setState({
