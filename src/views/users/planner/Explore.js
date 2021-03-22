@@ -24,7 +24,7 @@ const Explore = (props) => {
   const getBadge = (status) => {
     switch (status) {
       case "Done":
-        return "success";
+        return "green";
 
       // case "Not Verified":
       //   return "danger";

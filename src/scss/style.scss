@@ -151,3 +151,24 @@ button:focus {
 .done-txt {
   color: black;
 }
+
+.badge {
+  &-yellow {
+    background: #ffd27b;
+  }
+  &-orange {
+    background: #ffae75;
+  }
+  &-green {
+    background: #cee2dd;
+  }
+  &-purple {
+    background: #d9ccf3;
+  }
+  &-gray {
+    background: #b2b2b2;
+  }
+  &-pink {
+    background: #f2cac8;
+  }
+}
