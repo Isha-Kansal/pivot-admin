@@ -110,7 +110,7 @@ class AddResource extends Component {
           //   price.value && price.unit
           //     ? price.value + " " + price.unit
           //     : price.value,
-          pricing: price,
+          pricing: price.value || price,
           category,
           pace,
           websiteLink: website,

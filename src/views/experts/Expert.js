@@ -12,6 +12,7 @@ import {
   CTabs,
   CNavItem,
   CBadge,
+  CButton,
 } from "@coreui/react";
 import moment from "moment";
 import ExpertUserUsage from "../experts/ExpertUserUsage";
@@ -79,7 +80,12 @@ const Expert = (props) => {
     const expert_id = props && props.match.params.id;
     props.history.push(`/experts/${expert_id}/calls-with-users`);
   };
-
+  const editExpert = (e, item) => {
+    // setIdExpert(item.id);
+    e.preventDefault();
+    e.stopPropagation();
+    props.history.push(`/editExpert/${item._id}`);
+  };
   return (
     <CRow>
       <CCol lg={12}>
@@ -88,14 +94,27 @@ const Expert = (props) => {
 
           <CCardBody>
             <CTabs>
-              <CNav variant="tabs">
-                <CNavItem>
-                  <CNavLink>Expert Details</CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink onClick={onClick}>Calls with Users</CNavLink>
-                </CNavItem>
-              </CNav>
+              <div className="d-flex justify-content-between align-items-center">
+                <CNav variant="tabs">
+                  <CNavItem>
+                    <CNavLink>Expert Details</CNavLink>
+                  </CNavItem>
+                  <CNavItem>
+                    <CNavLink onClick={onClick}>Calls with Users</CNavLink>
+                  </CNavItem>
+                </CNav>
+                <div className="text-right">
+                  <CButton
+                    block
+                    color="info"
+                    className="btn-orange"
+                    onClick={(e) => editExpert(e, expert)}
+                  >
+                    Edit Expert Details
+                  </CButton>
+                </div>
+              </div>
+
               <CTabContent>
                 <CTabPane>
                   {expert && (

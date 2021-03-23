@@ -126,9 +126,15 @@ input[type="number"] {
   font-size: 10px;
   background-color: #b8b5b333;
   padding: 10px 15px;
- h5 {
-  font-size: 14px;
-  margin: 0;
+  h5 {
+    font-size: 14px;
+    margin: 0;
   }
 }
-
+.btn-orange {
+  background: #f9ae76 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0;
+  max-width: 175px;
+}

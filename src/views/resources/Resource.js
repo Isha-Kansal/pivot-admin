@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { CCard, CCardBody, CCardHeader, CCol, CRow } from "@coreui/react";
+import {
+  CCard,
+  CCardBody,
+  CCardHeader,
+  CCol,
+  CRow,
+  CButton,
+} from "@coreui/react";
 
 import { fetchOneResource } from "../store/action";
 
@@ -54,12 +61,35 @@ const Resource = (props) => {
   // let price = resource && resource.price;
 
   let featured = resource.is_featured ? "Yes" : "No";
+  const editResource = (e, item) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    props.history.push({
+      pathname: `/editResource/${item._id}`,
+    });
+  };
   return (
     <CRow>
       <CCol lg={12}>
         <CCard>
           {loading && <Loader />}
-          <CCardHeader>Resource Details</CCardHeader>
+          <CCardHeader>
+            <div className="d-flex justify-content-between align-items-center">
+              {" "}
+              Resource Details
+              <div className="text-right">
+                <CButton
+                  block
+                  color="info"
+                  className="btn-orange"
+                  onClick={(e) => editResource(e, resource)}
+                >
+                  Edit Resource Details
+                </CButton>
+              </div>
+            </div>
+          </CCardHeader>
 
           <CCardBody>
             {resource && (

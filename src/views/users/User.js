@@ -95,6 +95,9 @@ const User = (props) => {
                   <CNavLink>Account Details</CNavLink>
                 </CNavItem>
                 <CNavItem>
+                  <CNavLink onClick={onClickPlanner}>Planner Activity</CNavLink>
+                </CNavItem>
+                <CNavItem>
                   <CNavLink onClick={onClickExpert}>
                     Usage of expert features
                   </CNavLink>
@@ -103,9 +106,6 @@ const User = (props) => {
                   <CNavLink onClick={onClickResource}>
                     Usage of resource features
                   </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink onClick={onClickPlanner}>Planner Activity</CNavLink>
                 </CNavItem>
               </CNav>
               <CTabContent>
@@ -255,6 +255,9 @@ const User = (props) => {
                   )}
                 </CTabPane>
                 <CTabPane>
+                  <UserPlanner />
+                </CTabPane>
+                <CTabPane>
                   <UserExpertUsage
                     appointments={appointments}
                     user_id={user._id}
@@ -262,9 +265,6 @@ const User = (props) => {
                 </CTabPane>
                 <CTabPane>
                   <UserResourceUsage />
-                </CTabPane>
-                <CTabPane>
-                  <UserPlanner />
                 </CTabPane>
               </CTabContent>
             </CTabs>
