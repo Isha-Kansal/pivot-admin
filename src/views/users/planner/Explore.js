@@ -34,6 +34,12 @@ const Explore = (props) => {
         return "purple";
       case "Not Applicable":
         return "gray";
+      case "High":
+        return "green";
+      case "Medium":
+        return "yellow";
+      case "Low":
+        return "pink";
       default:
         return "primary";
     }
@@ -87,6 +93,15 @@ const Explore = (props) => {
 
                 <th>My Values</th>
               </thead>
+              <tbody>
+                <td>
+                  {" "}
+                  <CBadge color={getBadge("High")}>High</CBadge>
+                </td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tbody>
             </Table>
 
             <PaginationCommon pageChange={pageChange} />

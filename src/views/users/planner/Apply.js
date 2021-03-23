@@ -24,15 +24,16 @@ const Apply = (props) => {
   const getBadge = (status) => {
     switch (status) {
       case "Done":
-        return "success";
+        return "green";
 
-      // case "Not Verified":
-      //   return "danger";
-      // case "Activated":
-      //   return "success";
-
-      // case "Blocked":
-      //   return "danger";
+      case "To-Do":
+        return "orange";
+      case "Doing":
+        return "yellow";
+      case "Ask an Expert":
+        return "purple";
+      case "Not Applicable":
+        return "gray";
       default:
         return "primary";
     }
