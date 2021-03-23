@@ -72,19 +72,19 @@ const UserPlanner = (props) => {
               </CNav>
               <CTabContent>
                 <CTabPane>
-                  <Explore plannerData={plannerData} />
+                  <Explore explore={plannerData && plannerData.explore} />
                 </CTabPane>
                 <CTabPane>
-                  <Network plannerData={plannerData} />
+                  <Network network={plannerData && plannerData.network} />
                 </CTabPane>
                 <CTabPane>
-                  <Learn plannerData={plannerData} />
+                  <Learn learn={plannerData && plannerData.learn} />
                 </CTabPane>
                 <CTabPane>
-                  <Prepare plannerData={plannerData} />
+                  <Prepare prepare={plannerData && plannerData.prepare} />
                 </CTabPane>
                 <CTabPane>
-                  <Apply plannerData={plannerData} />
+                  <Apply apply={plannerData && plannerData.apply} />
                 </CTabPane>
               </CTabContent>
             </CTabs>
