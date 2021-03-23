@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Loader from "../../../loader";
 import Search from "../../../common/search";
 import PaginationCommon from "../../../common/pagination";
+import exploreData from "../planner/exploreData";
 import {
   CCard,
   CCardBody,
@@ -52,7 +53,7 @@ const Explore = (props) => {
   };
 
   const pageChange = (newPage) => {};
-
+  console.log("8359689458968945869", exploreData);
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -96,11 +97,13 @@ const Explore = (props) => {
               <tbody>
                 <td>
                   {" "}
-                  <CBadge color={getBadge("High")}>High</CBadge>
+                  <CBadge color={getBadge(exploreData.value[0].priorityLevel)}>
+                    {exploreData.value[0].priorityLevel}
+                  </CBadge>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{exploreData.value[0].myInterests}</td>
+                <td>{exploreData.value[0].mySkills}</td>
+                <td>{exploreData.value[0].myValues}</td>
               </tbody>
             </Table>
 
