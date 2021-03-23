@@ -1,5 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Loader from "../../loader";
+import { fetchOneUser } from "../store/action";
+import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
+import { withRouter } from "react-router-dom";
 import {
   CCard,
   CCardBody,
@@ -19,7 +24,25 @@ import Explore from "./planner/Explore";
 import Learn from "./planner/Learn";
 import Prepare from "./planner/Prepare";
 import Apply from "./planner/Apply";
-const UserPlanner = () => {
+const UserPlanner = (props) => {
+  const [user, setUser] = useState({});
+  const [plannerData, setPlannerData] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    setLoading(true);
+
+    const user_id = props && props.match.params.id;
+    dispatch(
+      fetchOneUser(`user?id=${user_id}`, (value) => {
+        setUser(value.data.user);
+        setPlannerData(value.data.planner);
+        setLoading(false);
+      })
+    );
+  }, []);
+  console.log("89546894896790487", plannerData);
   return (
     <CRow>
       <CCol lg={12}>
@@ -27,6 +50,7 @@ const UserPlanner = () => {
           <CCardHeader>
             Click on a module below to see the information
           </CCardHeader>
+          {loading && <Loader />}
           <CCardBody>
             <CTabs>
               <CNav variant="tabs">
@@ -48,19 +72,19 @@ const UserPlanner = () => {
               </CNav>
               <CTabContent>
                 <CTabPane>
-                  <Explore />
+                  <Explore plannerData={plannerData} />
                 </CTabPane>
                 <CTabPane>
-                  <Network />
+                  <Network plannerData={plannerData} />
                 </CTabPane>
                 <CTabPane>
-                  <Learn />
+                  <Learn plannerData={plannerData} />
                 </CTabPane>
                 <CTabPane>
-                  <Prepare />
+                  <Prepare plannerData={plannerData} />
                 </CTabPane>
                 <CTabPane>
-                  <Apply />
+                  <Apply plannerData={plannerData} />
                 </CTabPane>
               </CTabContent>
             </CTabs>
@@ -70,4 +94,18 @@ const UserPlanner = () => {
     </CRow>
   );
 };
-export default UserPlanner;
+
+const mapStateToProps = (state) => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators(
+    {
+      fetchOneUser,
+    },
+    dispatch
+  );
+};
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(UserPlanner)
+);
