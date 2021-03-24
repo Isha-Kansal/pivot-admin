@@ -21,6 +21,7 @@ import {
 import { Table } from "reactstrap";
 const Network = (props) => {
   console.log("8569879589879568", props);
+  const { network } = props;
   const [accordion, setAccordion] = useState(1);
   const getBadge = (status) => {
     switch (status) {
@@ -67,7 +68,17 @@ const Network = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          network &&
+                            network.existing_connections &&
+                            network.existing_connections.status
+                        )}
+                      >
+                        {network &&
+                          network.existing_connections &&
+                          network.existing_connections.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -110,7 +121,17 @@ const Network = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          network &&
+                            network.new_connections &&
+                            network.new_connections.status
+                        )}
+                      >
+                        {network &&
+                          network.new_connections &&
+                          network.new_connections.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -153,7 +174,17 @@ const Network = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          network &&
+                            network.cold_messages &&
+                            network.cold_messages.status
+                        )}
+                      >
+                        {network &&
+                          network.cold_messages &&
+                          network.cold_messages.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -193,7 +224,17 @@ const Network = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          network &&
+                            network.key_takeaways &&
+                            network.key_takeaways.status
+                        )}
+                      >
+                        {network &&
+                          network.key_takeaways &&
+                          network.key_takeaways.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>

@@ -20,6 +20,8 @@ import {
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Learn = (props) => {
+  console.log("89r56784897894", props);
+  const { learn } = props;
   const [accordion, setAccordion] = useState(1);
   const getBadge = (status) => {
     switch (status) {
@@ -65,8 +67,13 @@ const Learn = (props) => {
                   <tr>
                     <td>Status</td>
                     <td>
-                      {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          learn && learn.skills && learn.skills.status
+                        )}
+                      >
+                        {learn && learn.skills && learn.skills.status}
+                      </CBadge>{" "}
                     </td>
                   </tr>
                 </tbody>
@@ -108,7 +115,17 @@ const Learn = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          learn &&
+                            learn.learning_platforms &&
+                            learn.learning_platforms.status
+                        )}
+                      >
+                        {learn &&
+                          learn.learning_platforms &&
+                          learn.learning_platforms.status}
+                      </CBadge>{" "}
                     </td>
                   </tr>
                 </tbody>
@@ -149,7 +166,17 @@ const Learn = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          learn &&
+                            learn.experiential_learning &&
+                            learn.experiential_learning.status
+                        )}
+                      >
+                        {learn &&
+                          learn.experiential_learning &&
+                          learn.experiential_learning.status}
+                      </CBadge>{" "}
                     </td>
                   </tr>
                 </tbody>

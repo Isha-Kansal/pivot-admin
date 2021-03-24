@@ -21,6 +21,9 @@ import {
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Explore = (props) => {
+  console.log("89r56784897894", props);
+  const { explore } = props;
+
   const [accordion, setAccordion] = useState(1);
   const getBadge = (status) => {
     switch (status) {
@@ -53,7 +56,7 @@ const Explore = (props) => {
   };
 
   const pageChange = (newPage) => {};
-  console.log("8359689458968945869", exploreData);
+  // console.log("8359689458968945869", props && props.introspection);
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -77,7 +80,17 @@ const Explore = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          explore &&
+                            explore.introspection &&
+                            explore.introspection.status
+                        )}
+                      >
+                        {explore &&
+                          explore.introspection &&
+                          explore.introspection.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -131,7 +144,17 @@ const Explore = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("To-Do")}>To-Do</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          explore &&
+                            explore.extrospection &&
+                            explore.extrospection.status
+                        )}
+                      >
+                        {explore &&
+                          explore.extrospection &&
+                          explore.extrospection.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -170,8 +193,16 @@ const Explore = (props) => {
                   <td>Status</td>
                   <td>
                     {" "}
-                    <CBadge color={getBadge("Ask an Expert")}>
-                      Ask an Expert
+                    <CBadge
+                      color={getBadge(
+                        explore &&
+                          explore.personality_assessment &&
+                          explore.personality_assessment.status
+                      )}
+                    >
+                      {explore &&
+                        explore.personality_assessment &&
+                        explore.personality_assessment.status}
                     </CBadge>
                   </td>
                 </tr>
@@ -211,7 +242,17 @@ const Explore = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Doing")}>Doing</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          explore &&
+                            explore.practical_understanding &&
+                            explore.practical_understanding.status
+                        )}
+                      >
+                        {explore &&
+                          explore.practical_understanding &&
+                          explore.practical_understanding.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -254,8 +295,16 @@ const Explore = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Not Applicable")}>
-                        Not Applicable
+                      <CBadge
+                        color={getBadge(
+                          explore &&
+                            explore.career_options &&
+                            explore.career_options.status
+                        )}
+                      >
+                        {explore &&
+                          explore.career_options &&
+                          explore.career_options.status}
                       </CBadge>
                     </td>
                   </tr>

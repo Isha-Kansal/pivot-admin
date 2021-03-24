@@ -20,6 +20,8 @@ import {
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Prepare = (props) => {
+  console.log("89r56784897894", props);
+  const { prepare } = props;
   const [accordion, setAccordion] = useState(1);
   const getBadge = (status) => {
     switch (status) {
@@ -66,7 +68,17 @@ const Prepare = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          prepare &&
+                            prepare.job_application_prep &&
+                            prepare.job_application_prep.status
+                        )}
+                      >
+                        {prepare &&
+                          prepare.job_application_prep &&
+                          prepare.job_application_prep.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
@@ -117,7 +129,17 @@ const Prepare = (props) => {
                     <td>Status</td>
                     <td>
                       {" "}
-                      <CBadge color={getBadge("Done")}>Done</CBadge>
+                      <CBadge
+                        color={getBadge(
+                          prepare &&
+                            prepare.interview_prep &&
+                            prepare.interview_prep.status
+                        )}
+                      >
+                        {prepare &&
+                          prepare.interview_prep &&
+                          prepare.interview_prep.status}
+                      </CBadge>
                     </td>
                   </tr>
                 </tbody>
