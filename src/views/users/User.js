@@ -3,7 +3,7 @@ import moment from "moment";
 import UserPlanner from "../users/UserPlanner";
 import UserExpertUsage from "../users/UserExpertUsage";
 import UserResourceUsage from "../users/UserResourceUsage";
-
+import Tabs from "../../common/tabs";
 import {
   CCard,
   CCardBody,
@@ -90,24 +90,7 @@ const User = (props) => {
 
           <CCardBody>
             <CTabs>
-              <CNav variant="tabs">
-                <CNavItem>
-                  <CNavLink>Account Details</CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink onClick={onClickPlanner}>Planner Activity</CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink onClick={onClickExpert}>
-                    Usage of expert features
-                  </CNavLink>
-                </CNavItem>
-                <CNavItem>
-                  <CNavLink onClick={onClickResource}>
-                    Usage of resource features
-                  </CNavLink>
-                </CNavItem>
-              </CNav>
+              <Tabs />
               <CTabContent>
                 <CTabPane>
                   {user && (
