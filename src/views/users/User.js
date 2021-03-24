@@ -258,10 +258,7 @@ const User = (props) => {
                   <UserPlanner />
                 </CTabPane>
                 <CTabPane>
-                  <UserExpertUsage
-                    appointments={appointments}
-                    user_id={user._id}
-                  />
+                  <UserExpertUsage />
                 </CTabPane>
                 <CTabPane>
                   <UserResourceUsage />
