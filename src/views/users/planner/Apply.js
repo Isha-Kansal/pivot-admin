@@ -20,7 +20,6 @@ import {
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Apply = (props) => {
-  console.log("89r56784897894", props);
   const { apply } = props;
   const [accordion, setAccordion] = useState(1);
   const getBadge = (status) => {

@@ -21,7 +21,6 @@ import {
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Explore = (props) => {
-  console.log("89r56784897894", props);
   const { explore } = props;
 
   const [accordion, setAccordion] = useState(1);

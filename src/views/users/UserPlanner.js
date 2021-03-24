@@ -42,7 +42,7 @@ const UserPlanner = (props) => {
       })
     );
   }, []);
-  console.log("89546894896790487", plannerData);
+
   return (
     <CRow>
       <CCol lg={12}>

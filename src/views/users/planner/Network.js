@@ -20,7 +20,6 @@ import {
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Network = (props) => {
-  console.log("8569879589879568", props);
   const { network } = props;
   const [accordion, setAccordion] = useState(1);
   const getBadge = (status) => {
