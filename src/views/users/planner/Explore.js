@@ -188,7 +188,9 @@ const Explore = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">My Interests,Skills and Values</th>
+                <th className="text-nowrap ">
+                  My Interests, Skills and Values
+                </th>
 
                 <th>World Needs</th>
                 <th>World Pays For</th>
