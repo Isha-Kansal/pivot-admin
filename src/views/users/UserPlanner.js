@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
+import moment from "moment";
 import {
   CCard,
   CCardBody,
@@ -42,14 +43,16 @@ const UserPlanner = (props) => {
       })
     );
   }, []);
+  let istDate = new Date(plannerData && plannerData.createdAt);
 
+  let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
   return (
     <CRow>
       <CCol lg={12}>
         <CCard className="position-relative">
-          <CCardHeader>
-            Click on a module below to see the information
-          </CCardHeader>
+          {!loading && (
+            <CCardHeader>Planner created at :{createdAt}</CCardHeader>
+          )}
           {loading && <Loader />}
           <CCardBody>
             <CTabs>
