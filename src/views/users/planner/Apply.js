@@ -46,6 +46,10 @@ const Apply = (props) => {
     // setPage(1);
   };
   const pageChange = (newPage) => {};
+  let job_application_trackerData =
+    apply &&
+    apply.job_application_tracker &&
+    apply.job_application_tracker.data;
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -97,6 +101,17 @@ const Apply = (props) => {
                 <th>Date Applied</th>
                 <th>Job Post URL</th>
               </thead>
+              {job_application_trackerData &&
+                job_application_trackerData.length > 0 &&
+                job_application_trackerData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>

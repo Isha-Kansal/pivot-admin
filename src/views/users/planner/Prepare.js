@@ -46,6 +46,12 @@ const Prepare = (props) => {
     // setPage(1);
   };
   const pageChange = (newPage) => {};
+  let job_application_prepData =
+    prepare &&
+    prepare.job_application_prep &&
+    prepare.job_application_prep.data;
+  let interview_prepData =
+    prepare && prepare.interview_prep && prepare.interview_prep.data;
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -87,6 +93,29 @@ const Prepare = (props) => {
               <Search handleSearch={handleSearch} />
             </CCardHeader>
             <table className="table">
+              {job_application_prepData &&
+                job_application_prepData.length > 0 &&
+                job_application_prepData.map((item) => {
+                  return (
+                    <tbody>
+                      {/* <tr>
+                        <td>Resume</td>
+                      </tr>
+                      <tr>
+                        <td>Cover Letter Template</td>
+                      </tr>
+                      <tr>
+                        <td>Portfolio / Work Sample</td>
+                      </tr>
+                      <tr>
+                        <td>Video Profile</td>
+                      </tr>
+                      <tr>
+                        <td>LinkedIn Profile</td>
+                      </tr> */}
+                    </tbody>
+                  );
+                })}
               <tbody>
                 <tr>
                   <td>Resume</td>
@@ -155,6 +184,17 @@ const Prepare = (props) => {
                 <th>Sample Question</th>
                 <th>Talking Points</th>
               </thead>
+              {interview_prepData &&
+                interview_prepData.length > 0 &&
+                interview_prepData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
 
             <PaginationCommon pageChange={pageChange} />

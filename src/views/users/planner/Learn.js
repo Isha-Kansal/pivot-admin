@@ -46,6 +46,11 @@ const Learn = (props) => {
     // setPage(1);
   };
   const pageChange = (newPage) => {};
+  let skillsData = learn && learn.skills && learn.skills.data;
+  let learning_platformsData =
+    learn && learn.learning_platforms && learn.learning_platforms.data;
+  let experiential_learningData =
+    learn && learn.experiential_learning && learn.experiential_learning.data;
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -90,6 +95,17 @@ const Learn = (props) => {
 
                 <th>Required Soft Skills</th>
               </thead>
+              {skillsData &&
+                skillsData.length > 0 &&
+                skillsData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -141,6 +157,17 @@ const Learn = (props) => {
                 <th>Course Topic</th>
                 <th>Course Type</th>
               </thead>
+              {learning_platformsData &&
+                learning_platformsData.length > 0 &&
+                learning_platformsData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -192,6 +219,17 @@ const Learn = (props) => {
                 <th>Role</th>
                 <th>Role Type</th>
               </thead>
+              {experiential_learningData &&
+                experiential_learningData.length > 0 &&
+                experiential_learningData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>

@@ -46,6 +46,16 @@ const Network = (props) => {
     // setPage(1);
   };
   const pageChange = (newPage) => {};
+  let existing_connectionsData =
+    network &&
+    network.existing_connections &&
+    network.existing_connections.data;
+  let new_connectionsData =
+    network && network.new_connections && network.new_connections.data;
+  let cold_messagesData =
+    network && network.cold_messages && network.cold_messages.data;
+  let key_takeawaysData =
+    network && network.key_takeaways && network.key_takeaways.data;
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -96,6 +106,17 @@ const Network = (props) => {
                 <th>Professional Network</th>
                 <th>Other</th>
               </thead>
+              {existing_connectionsData &&
+                existing_connectionsData.length > 0 &&
+                existing_connectionsData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -149,6 +170,17 @@ const Network = (props) => {
                 <th>Online Groups</th>
                 <th>Conferences</th>
               </thead>
+              {new_connectionsData &&
+                new_connectionsData.length > 0 &&
+                new_connectionsData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -198,6 +230,17 @@ const Network = (props) => {
 
                 <th>Cold Message</th>
               </thead>
+              {cold_messagesData &&
+                cold_messagesData.length > 0 &&
+                cold_messagesData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -258,6 +301,17 @@ const Network = (props) => {
                 <th>Job Referral</th>
                 <th>Other</th>
               </thead>
+              {key_takeawaysData &&
+                key_takeawaysData.length > 0 &&
+                key_takeawaysData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>

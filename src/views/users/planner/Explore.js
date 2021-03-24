@@ -56,7 +56,24 @@ const Explore = (props) => {
   };
 
   const pageChange = (newPage) => {};
-  // console.log("8359689458968945869", props && props.introspection);
+
+  let introspectionData =
+    explore && explore.introspection && explore.introspection.data;
+
+  let extrospectionData =
+    explore && explore.extrospection && explore.extrospection.data;
+  let personality_assessmentData =
+    explore &&
+    explore.personality_assessment &&
+    explore.personality_assessment.data;
+
+  let practical_understandingData =
+    explore &&
+    explore.practical_understanding &&
+    explore.practical_understanding.data;
+  let career_optionsData =
+    explore && explore.career_options && explore.career_options.data;
+
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -107,17 +124,25 @@ const Explore = (props) => {
 
                 <th>My Values</th>
               </thead>
-              <tbody>
-                <td>
-                  {" "}
-                  <CBadge color={getBadge(exploreData.value[0].priorityLevel)}>
-                    {exploreData.value[0].priorityLevel}
-                  </CBadge>
-                </td>
-                <td>{exploreData.value[0].myInterests}</td>
-                <td>{exploreData.value[0].mySkills}</td>
-                <td>{exploreData.value[0].myValues}</td>
-              </tbody>
+              {introspectionData &&
+                introspectionData.length > 0 &&
+                introspectionData.map((item) => {
+                  return (
+                    <tbody>
+                      <td>
+                        {" "}
+                        <CBadge
+                          color={getBadge(exploreData.value[0].priorityLevel)}
+                        >
+                          {exploreData.value[0].priorityLevel}
+                        </CBadge>
+                      </td>
+                      <td>{exploreData.value[0].myInterests}</td>
+                      <td>{exploreData.value[0].mySkills}</td>
+                      <td>{exploreData.value[0].myValues}</td>
+                    </tbody>
+                  );
+                })}
             </Table>
 
             <PaginationCommon pageChange={pageChange} />
@@ -169,6 +194,17 @@ const Explore = (props) => {
                 <th>World Needs</th>
                 <th>World Pays For</th>
               </thead>
+              {extrospectionData &&
+                extrospectionData.length > 0 &&
+                extrospectionData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -216,6 +252,16 @@ const Explore = (props) => {
               <thead>
                 <th className="text-nowrap ">Career Option</th>
               </thead>
+
+              {personality_assessmentData &&
+                personality_assessmentData.length > 0 &&
+                personality_assessmentData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -269,6 +315,15 @@ const Explore = (props) => {
                 <th>Contact Email</th>
                 <th>Notes On</th>
               </thead>
+              {practical_understandingData &&
+                practical_understandingData.length > 0 &&
+                practical_understandingData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -322,6 +377,15 @@ const Explore = (props) => {
                 <th>Net Score</th>
                 <th>Decision</th>
               </thead>
+              {career_optionsData &&
+                career_optionsData.length > 0 &&
+                career_optionsData.map((item) => {
+                  return (
+                    <tbody>
+                      <td></td>
+                    </tbody>
+                  );
+                })}
             </Table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
