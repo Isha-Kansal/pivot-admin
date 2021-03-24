@@ -69,19 +69,6 @@ const User = (props) => {
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
 
-  const onClickExpert = () => {
-    const user_id = props && props.match.params.id;
-    props.history.push(`/users/${user_id}/expert-features`);
-  };
-  const onClickResource = () => {
-    const user_id = props && props.match.params.id;
-    props.history.push(`/users/${user_id}/resource-features`);
-  };
-
-  const onClickPlanner = () => {
-    const user_id = props && props.match.params.id;
-    props.history.push(`/users/${user_id}/planner-activity`);
-  };
   return (
     <CRow>
       <CCol lg={12}>

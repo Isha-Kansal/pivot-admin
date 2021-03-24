@@ -51,7 +51,9 @@ const UserPlanner = (props) => {
       <CCol lg={12}>
         <CCard className="position-relative">
           {!loading && (
-            <CCardHeader>Planner created at :{createdAt}</CCardHeader>
+            <CCardHeader>
+              <h5>Planner created at : {createdAt}</h5>
+            </CCardHeader>
           )}
           {loading && <Loader />}
           <CCardBody>
