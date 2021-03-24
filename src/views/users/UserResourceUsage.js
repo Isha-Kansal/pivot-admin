@@ -126,7 +126,9 @@ const UserResourceUsage = (props) => {
                           {" "}
                           {item.resource_format ? item.resource_format : "-"}
                         </td>
-                        <td>{item.price ? item.price.value : "-"}</td>
+                        <td>
+                          {item.price ? item.price.value || item.price : "-"}
+                        </td>
                       </tr>
                     );
                   })}
