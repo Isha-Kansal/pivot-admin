@@ -46,7 +46,7 @@ const UserPlanner = (props) => {
   let istDate = new Date(plannerData && plannerData.createdAt);
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
-  console.log("9056970590859", createdAt);
+
   return (
     <CRow>
       <CCol lg={12}>
