@@ -51,7 +51,7 @@ const Prepare = (props) => {
     prepare.job_application_prep.data;
   let interview_prepData =
     prepare && prepare.interview_prep && prepare.interview_prep.data;
-  console.log("845869497848794", job_application_prepData);
+
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -93,46 +93,60 @@ const Prepare = (props) => {
               <Search handleSearch={handleSearch} />
             </CCardHeader>
             <table className="table">
-              {job_application_prepData &&
-                job_application_prepData.length > 0 &&
-                job_application_prepData.map((item) => {
-                  return (
-                    <tbody>
-                      {/* <tr>
-                        <td>Resume</td>
-                      </tr>
-                      <tr>
-                        <td>Cover Letter Template</td>
-                      </tr>
-                      <tr>
-                        <td>Portfolio / Work Sample</td>
-                      </tr>
-                      <tr>
-                        <td>Video Profile</td>
-                      </tr>
-                      <tr>
-                        <td>LinkedIn Profile</td>
-                      </tr> */}
-                    </tbody>
-                  );
-                })}
-              <tbody>
-                <tr>
-                  <td>Resume</td>
-                </tr>
-                <tr>
-                  <td>Cover Letter Template</td>
-                </tr>
-                <tr>
-                  <td>Portfolio / Work Sample</td>
-                </tr>
-                <tr>
-                  <td>Video Profile</td>
-                </tr>
-                <tr>
-                  <td>LinkedIn Profile</td>
-                </tr>
-              </tbody>
+              {job_application_prepData && (
+                <tbody>
+                  <tr>
+                    <td>Resume</td>
+                    <td>
+                      <a href={job_application_prepData.resume}>
+                        {job_application_prepData.resume
+                          ? job_application_prepData.resume
+                          : "-"}
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Cover Letter Template</td>
+                    <td>
+                      <a href={job_application_prepData.cover_letter}>
+                        {job_application_prepData.cover_letter
+                          ? job_application_prepData.cover_letter
+                          : "-"}
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Portfolio / Work Sample</td>
+                    <td>
+                      <a href={job_application_prepData.portfolio_work_sample}>
+                        {job_application_prepData.portfolio_work_sample
+                          ? job_application_prepData.portfolio_work_sample
+                          : "-"}
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Video Profile</td>
+                    <td>
+                      <a href={job_application_prepData.video_profile}>
+                        {job_application_prepData.video_profile
+                          ? job_application_prepData.video_profile
+                          : "-"}
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>LinkedIn Profile</td>
+                    <td>
+                      <a href={job_application_prepData.linkedin_profile}>
+                        {job_application_prepData.linkedin_profile
+                          ? job_application_prepData.linkedin_profile
+                          : "-"}
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              )}
             </table>
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
@@ -176,29 +190,125 @@ const Prepare = (props) => {
 
               <Search handleSearch={handleSearch} />
             </CCardHeader>
-            <Table responsive>
-              <thead>
-                <th className="text-nowrap ">ID</th>
-                <th>Topic</th>
+            {interview_prepData && (
+              <Table responsive>
+                <thead>
+                  <th className="text-nowrap ">Topic</th>
 
-                <th>Description</th>
-                <th>Sample Question</th>
-                <th>Talking Points</th>
-              </thead>
-              {interview_prepData &&
-                interview_prepData.length > 0 &&
-                interview_prepData.map((item) => {
-                  console.log("568907905697950970", item);
-                  return (
-                    <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tbody>
-                  );
-                })}
-            </Table>
+                  <th>Description</th>
+                  <th>Sample Question</th>
+                  <th>Talking Points</th>
+                </thead>
 
+                {interview_prepData.personal_background && (
+                  <tbody>
+                    <td>Personal Background</td>
+                    <td>{interview_prepData.personal_background}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.strengths_weaknesses && (
+                  <tbody>
+                    <td>Strengths & Weaknesses</td>
+                    <td>{interview_prepData.strengths_weaknesses}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.work_experience && (
+                  <tbody>
+                    <td>Work Experience</td>
+                    <td>{interview_prepData.work_experience}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.why_career_change && (
+                  <tbody>
+                    <td>Why Career Change</td>
+                    <td>{interview_prepData.why_career_change}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.why_our_organization && (
+                  <tbody>
+                    <td>Why Our Organization</td>
+                    <td>{interview_prepData.why_our_organization}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+
+                {interview_prepData.long_term_goals && (
+                  <tbody>
+                    <td>Long-term Goals</td>
+                    <td>{interview_prepData.long_term_goals}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.behavioral && (
+                  <tbody>
+                    <td>Behavioral</td>
+                    <td>{interview_prepData.behavioral}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.competency && (
+                  <tbody>
+                    <td>Competency</td>
+                    <td>{interview_prepData.competency}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+
+                {interview_prepData.technical && (
+                  <tbody>
+                    <td>Technical</td>
+                    <td>{interview_prepData.technical}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.case_study && (
+                  <tbody>
+                    <td>Case Study</td>
+                    <td>{interview_prepData.case_study}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.general_knowledge && (
+                  <tbody>
+                    <td>General Knowledge</td>
+                    <td>{interview_prepData.general_knowledge}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+
+                {interview_prepData.questions_for_interviewer && (
+                  <tbody>
+                    <td>Qustions for Interviewer</td>
+                    <td>{interview_prepData.questions_for_interviewer}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+                {interview_prepData.other && (
+                  <tbody>
+                    <td>Other</td>
+                    <td>{interview_prepData.other}</td>
+                    <td></td>
+                    <td></td>
+                  </tbody>
+                )}
+              </Table>
+            )}
             <PaginationCommon pageChange={pageChange} />
           </CCardBody>
         </CCollapse>

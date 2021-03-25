@@ -76,8 +76,6 @@ class AddResource extends Component {
         loadiing: true,
       });
       this.props.fetchOneResource(`resource?id=${resource_id}`, (value) => {
-        console.log("89456989485968549879", value);
-
         const {
           title,
           resource_format,

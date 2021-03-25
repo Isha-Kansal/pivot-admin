@@ -91,7 +91,8 @@ const Apply = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Company</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Company</th>
 
                 <th>Position</th>
                 <th>Location</th>
@@ -105,9 +106,17 @@ const Apply = (props) => {
                 job_application_trackerData.map((item) => {
                   return (
                     <tbody>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>{item.company_name ? item.company_name : "-"}</td>
+                      <td>{item.job_title ? item.job_title : "-"}</td>
+                      <td>{item.location ? item.location : "-"}</td>
                       <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{item.applied_date ? item.applied_date : "-"}</td>
+                      <td>
+                        <a href={item.job_post_url ? item.job_post_url : "-"}>
+                          {item.job_post_url ? item.job_post_url : "-"}
+                        </a>
+                      </td>
                     </tbody>
                   );
                 })}

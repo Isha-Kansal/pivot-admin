@@ -55,6 +55,7 @@ const Network = (props) => {
     network && network.cold_messages && network.cold_messages.data;
   let key_takeawaysData =
     network && network.key_takeaways && network.key_takeaways.data;
+
   return (
     <div id="accordion">
       <CCard className="mb-0">

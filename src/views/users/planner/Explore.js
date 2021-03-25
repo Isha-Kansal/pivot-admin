@@ -128,7 +128,7 @@ const Explore = (props) => {
                 introspectionData.map((item) => {
                   return (
                     <tbody>
-                      <td>{item.id}</td>
+                      <td>{item.id ? item.id : "-"}</td>
                       <td>
                         <CBadge color={getBadge(item.fields[0].value)}>
                           {item.fields[0].value}

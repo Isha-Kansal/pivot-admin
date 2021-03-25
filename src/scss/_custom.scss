@@ -138,3 +138,11 @@ input[type="number"] {
   outline: 0;
   max-width: 175px;
 }
+table {
+  a {
+    color: #f9ae76;
+    &:hover {
+      color: #f9ae76;
+    }
+  }
+}
