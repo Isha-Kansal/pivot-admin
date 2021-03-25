@@ -76,6 +76,8 @@ class AddResource extends Component {
         loadiing: true,
       });
       this.props.fetchOneResource(`resource?id=${resource_id}`, (value) => {
+        console.log("89456989485968549879", value);
+
         const {
           title,
           resource_format,
@@ -100,17 +102,21 @@ class AddResource extends Component {
         const consData = cons.map((el) => {
           return { value: el };
         });
+
         this.setState({
           loadiing: false,
           resourceData: value.data.resource,
           name: title.trim(),
           format: resource_format,
           featuredResource: is_featured ? "True" : "False",
-          // pricing:
-          //   price.value && price.unit
-          //     ? price.value + " " + price.unit
-          //     : price.value,
-          pricing: price.value || price,
+
+          pricing:
+            price === "Economical (<USD 500 or <INR10,000)" ||
+            price === "Premium (>USD 500 or >INR10,000)" ||
+            price === "Free"
+              ? price.value || price
+              : "Others",
+          addPrice: price.value || price,
           category,
           pace,
           websiteLink: website,

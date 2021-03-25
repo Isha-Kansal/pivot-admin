@@ -115,7 +115,8 @@ const Explore = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Priority Level</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Priority Level</th>
 
                 <th>My Interests</th>
                 <th>My Skills</th>
@@ -127,17 +128,16 @@ const Explore = (props) => {
                 introspectionData.map((item) => {
                   return (
                     <tbody>
+                      <td>{item.id}</td>
                       <td>
-                        {" "}
-                        <CBadge
-                          color={getBadge(exploreData.value[0].priorityLevel)}
-                        >
-                          {exploreData.value[0].priorityLevel}
+                        <CBadge color={getBadge(item.fields[0].value)}>
+                          {item.fields[0].value}
                         </CBadge>
                       </td>
-                      <td>{exploreData.value[0].myInterests}</td>
-                      <td>{exploreData.value[0].mySkills}</td>
-                      <td>{exploreData.value[0].myValues}</td>
+
+                      <td>{item.fields[1].value}</td>
+                      <td>{item.fields[2].value}</td>
+                      <td>{item.fields[3].value}</td>
                     </tbody>
                   );
                 })}
@@ -187,9 +187,8 @@ const Explore = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">
-                  My Interests, Skills and Values
-                </th>
+                <th className="text-nowrap ">ID</th>
+                <th>My Interests, Skills and Values</th>
 
                 <th>World Needs</th>
                 <th>World Pays For</th>
@@ -199,9 +198,11 @@ const Explore = (props) => {
                 extrospectionData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{item.id}</td>
+                      <td>{item.fields[0].value}</td>
+
+                      <td>{item.fields[1].value}</td>
+                      <td>{item.fields[2].value}</td>
                     </tbody>
                   );
                 })}
@@ -250,15 +251,18 @@ const Explore = (props) => {
           <CCardBody>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Career Option</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Career Option</th>
               </thead>
 
               {personality_assessmentData &&
                 personality_assessmentData.length > 0 &&
                 personality_assessmentData.map((item) => {
+                  console.log("568907905697950970", item);
                   return (
                     <tbody>
-                      <td></td>
+                      <td>{item.id}</td>
+                      <td>{item.value}</td>
                     </tbody>
                   );
                 })}
