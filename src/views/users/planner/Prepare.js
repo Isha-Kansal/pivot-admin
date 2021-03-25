@@ -51,6 +51,7 @@ const Prepare = (props) => {
     prepare.job_application_prep.data;
   let interview_prepData =
     prepare && prepare.interview_prep && prepare.interview_prep.data;
+  console.log("845869497848794", job_application_prepData);
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -177,7 +178,8 @@ const Prepare = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Topic</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Topic</th>
 
                 <th>Description</th>
                 <th>Sample Question</th>
@@ -186,6 +188,7 @@ const Prepare = (props) => {
               {interview_prepData &&
                 interview_prepData.length > 0 &&
                 interview_prepData.map((item) => {
+                  console.log("568907905697950970", item);
                   return (
                     <tbody>
                       <td></td>

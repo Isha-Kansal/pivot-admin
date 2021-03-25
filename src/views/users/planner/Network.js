@@ -97,6 +97,7 @@ const Network = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
+                <th>ID</th>
                 <th className="text-nowrap ">Career Options</th>
 
                 <th>Family / Relatives</th>
@@ -110,9 +111,22 @@ const Network = (props) => {
                 existing_connectionsData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>
+                        {item.fields[0].value ? item.fields[0].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[1].value ? item.fields[1].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[2].value ? item.fields[2].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[3].value ? item.fields[3].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[4].value ? item.fields[4].value : "-"}
+                      </td>
                     </tbody>
                   );
                 })}
@@ -162,7 +176,8 @@ const Network = (props) => {
 
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Pivot</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Pivot</th>
 
                 <th>Meetup</th>
                 <th>Lunchclub</th>
@@ -225,7 +240,8 @@ const Network = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Title</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Title</th>
 
                 <th>Cold Message</th>
               </thead>
@@ -234,9 +250,9 @@ const Network = (props) => {
                 cold_messagesData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>{item.title ? item.title : "-"}</td>
+                      <td>{item.message ? item.message : "-"}</td>
                     </tbody>
                   );
                 })}
@@ -286,7 +302,8 @@ const Network = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Name</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Name</th>
 
                 <th>Organization</th>
                 <th>Current Role</th>
@@ -305,9 +322,41 @@ const Network = (props) => {
                 key_takeawaysData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>
+                        {" "}
+                        {item && item.first_name && item.last_name
+                          ? item.first_name + " " + item.last_name
+                          : "-"}
+                      </td>
+                      <td>{item.orgnisation ? item.orgnisation : "-"}</td>
+                      <td>{item.current_role ? item.current_role : "-"}</td>
+                      <td>{item.relationship ? item.relationship : "-"}</td>
+                      <td>
+                        {item.role_industry_insights
+                          ? item.role_industry_insights
+                          : "-"}
+                      </td>
+                      <td>
+                        {item.company_insights ? item.company_insights : "-"}
+                      </td>
+
+                      <td>
+                        {item.relative_connections
+                          ? item.relative_connections
+                          : "-"}
+                      </td>
+                      <td>
+                        {item.relative_groups ? item.relative_groups : "-"}
+                      </td>
+                      <td>
+                        {item.learning_development
+                          ? item.learning_development
+                          : "-"}
+                      </td>
+                      <td>{item.job_search ? item.job_search : "-"}</td>
+                      <td>{item.job_referral ? item.job_referral : "-"}</td>
+                      <td>{item.other ? item.other : "-"}</td>
                     </tbody>
                   );
                 })}

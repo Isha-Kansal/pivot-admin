@@ -87,7 +87,8 @@ const Learn = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">My Hard Skills</th>
+                <th className="text-nowrap ">ID</th>
+                <th>My Hard Skills</th>
 
                 <th>My Soft Skills</th>
                 <th>Required Hard Skills</th>
@@ -99,9 +100,19 @@ const Learn = (props) => {
                 skillsData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>
+                        {item.fields[0].value ? item.fields[0].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[1].value ? item.fields[1].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[2].value ? item.fields[2].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[3].value ? item.fields[3].value : "-"}
+                      </td>
                     </tbody>
                   );
                 })}
@@ -150,7 +161,8 @@ const Learn = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Skills</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Skills</th>
 
                 <th>Platform Name</th>
                 <th>Course Topic</th>
@@ -161,9 +173,19 @@ const Learn = (props) => {
                 learning_platformsData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>
+                        {item.fields[0].value ? item.fields[0].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[1].value ? item.fields[1].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[2].value ? item.fields[2].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[3].value ? item.fields[3].value : "-"}
+                      </td>
                     </tbody>
                   );
                 })}
@@ -212,7 +234,8 @@ const Learn = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Skills</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Skills</th>
 
                 <th>Organization</th>
                 <th>Role</th>
@@ -223,9 +246,19 @@ const Learn = (props) => {
                 experiential_learningData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
-                      <td></td>
-                      <td></td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>
+                        {item.fields[0].value ? item.fields[0].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[1].value ? item.fields[1].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[2].value ? item.fields[2].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[3].value ? item.fields[3].value : "-"}
+                      </td>
                     </tbody>
                   );
                 })}

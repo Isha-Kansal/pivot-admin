@@ -135,9 +135,15 @@ const Explore = (props) => {
                         </CBadge>
                       </td>
 
-                      <td>{item.fields[1].value}</td>
-                      <td>{item.fields[2].value}</td>
-                      <td>{item.fields[3].value}</td>
+                      <td>
+                        {item.fields[1].value ? item.fields[1].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[2].value ? item.fields[2].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[3].value ? item.fields[3].value : "-"}
+                      </td>
                     </tbody>
                   );
                 })}
@@ -198,11 +204,17 @@ const Explore = (props) => {
                 extrospectionData.map((item) => {
                   return (
                     <tbody>
-                      <td>{item.id}</td>
-                      <td>{item.fields[0].value}</td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>
+                        {item.fields[0].value ? item.fields[0].value : "-"}
+                      </td>
 
-                      <td>{item.fields[1].value}</td>
-                      <td>{item.fields[2].value}</td>
+                      <td>
+                        {item.fields[1].value ? item.fields[1].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[2].value ? item.fields[2].value : "-"}
+                      </td>
                     </tbody>
                   );
                 })}
@@ -258,11 +270,10 @@ const Explore = (props) => {
               {personality_assessmentData &&
                 personality_assessmentData.length > 0 &&
                 personality_assessmentData.map((item) => {
-                  console.log("568907905697950970", item);
                   return (
                     <tbody>
-                      <td>{item.id}</td>
-                      <td>{item.value}</td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>{item.value ? item.value : "-"}</td>
                     </tbody>
                   );
                 })}
@@ -312,7 +323,8 @@ const Explore = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Career Option</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Career Option</th>
 
                 <th>Practical Understanding Via</th>
                 <th>Contact Person</th>
@@ -324,7 +336,16 @@ const Explore = (props) => {
                 practical_understandingData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>{item.career_option ? item.career_option : "-"}</td>
+                      <td>
+                        {item.practical_understanding_via
+                          ? item.practical_understanding_via
+                          : "-"}
+                      </td>
+                      <td>{item.contact_person ? item.contact_person : "-"}</td>
+                      <td>{item.contact_email ? item.contact_email : "-"}</td>
+                      <td>{item.notes ? item.notes : "-"}</td>
                     </tbody>
                   );
                 })}
@@ -374,7 +395,8 @@ const Explore = (props) => {
             </CCardHeader>
             <Table responsive>
               <thead>
-                <th className="text-nowrap ">Career Option</th>
+                <th className="text-nowrap ">ID</th>
+                <th>Career Option</th>
 
                 <th>Pros</th>
                 <th>Cons</th>
@@ -386,7 +408,22 @@ const Explore = (props) => {
                 career_optionsData.map((item) => {
                   return (
                     <tbody>
-                      <td></td>
+                      <td>{item.id ? item.id : "-"}</td>
+                      <td>
+                        {item.fields[0].value ? item.fields[0].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[1].value ? item.fields[1].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[2].value ? item.fields[2].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[3].value ? item.fields[3].value : "-"}
+                      </td>
+                      <td>
+                        {item.fields[4].value ? item.fields[4].value : "-"}
+                      </td>
                     </tbody>
                   );
                 })}
