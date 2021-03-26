@@ -146,7 +146,7 @@ const Explore = (props) => {
   let filteredPracticalUnderstanding =
     filterRecordsPracticalUnderstanding() || [];
   let filteredCareerOptions = filterRecordsCareerOptions() || [];
-  console.log("4878940897894879", filteredCareerOptions);
+
   return (
     <div id="accordion">
       <CCard className="mb-0">
