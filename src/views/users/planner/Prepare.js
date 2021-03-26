@@ -203,108 +203,183 @@ const Prepare = (props) => {
                 {interview_prepData.personal_background && (
                   <tbody>
                     <td>Personal Background</td>
+                    <td>
+                      Highlights from your non-work life like your upbringing,
+                      education, hobbies, family, etc.
+                    </td>
+                    <td>Tell me a bit about yourself</td>
                     <td>{interview_prepData.personal_background}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.strengths_weaknesses && (
                   <tbody>
                     <td>Strengths & Weaknesses</td>
+                    <td>
+                      2-3 of your key strengths and 1-2 weaknesses from a
+                      professional standpoint along with examples
+                    </td>
+                    <td>
+                      Share your key strengths and weaknesses along with
+                      examples
+                    </td>
                     <td>{interview_prepData.strengths_weaknesses}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.work_experience && (
                   <tbody>
                     <td>Work Experience</td>
+                    <td>
+                      Key highlights from your resume focusing on your
+                      individual contributions, achievements and career
+                      trajectory
+                    </td>
+                    <td>Walk me through your resume</td>
                     <td>{interview_prepData.work_experience}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.why_career_change && (
                   <tbody>
                     <td>Why Career Change</td>
+                    <td>
+                      Primary factors that drove you to consider a career change
+                      and key aspects about your desired role/industry that drew
+                      you in
+                    </td>
+                    <td>
+                      Why do you want to change your role/industry at this stage
+                    </td>
                     <td>{interview_prepData.why_career_change}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.why_our_organization && (
                   <tbody>
                     <td>Why Our Organization</td>
+                    <td>
+                      Things that excite you most about working with the
+                      organization - e.g., people, mission, values, exposure,
+                      etc.
+                    </td>
+                    <td>What interests you most about working with us</td>
                     <td>{interview_prepData.why_our_organization}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
 
                 {interview_prepData.long_term_goals && (
                   <tbody>
                     <td>Long-term Goals</td>
+
+                    <td>
+                      Scope and nature of impact you aspire to make in your
+                      industry and community over the next 5 years
+                    </td>
+                    <td>
+                      What kind of impact do you want to make in your career
+                      over the next five years
+                    </td>
                     <td>{interview_prepData.long_term_goals}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.behavioral && (
                   <tbody>
                     <td>Behavioral</td>
+                    <td>
+                      Impactful anecdotes from prior work or educational
+                      experience that demonstrate your expertise, values or
+                      other professional qualities to help assess cultural fit.
+                      Using the STAR approach here may be helpful
+                    </td>
+                    <td>
+                      Tell me about a time when you resolved stakeholder
+                      conflict at work
+                    </td>
                     <td>{interview_prepData.behavioral}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.competency && (
                   <tbody>
                     <td>Competency</td>
+                    <td>
+                      Key indicators generally based on prior experience that
+                      exhibit your ability to tackle challenging situations and
+                      achieve aspirational goals
+                    </td>
+                    <td>
+                      Tell us about the specific steps you took in your previous
+                      role to improve your knowledge about advancements in your
+                      area of biological science
+                    </td>
                     <td>{interview_prepData.competency}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
 
                 {interview_prepData.technical && (
                   <tbody>
                     <td>Technical</td>
+                    <td>
+                      Key indicators that demonstrate a strong understanding of
+                      the concepts laid out in the technical question
+                    </td>
+                    <td>
+                      If humans evolved from apes, why are there still apes
+                    </td>
                     <td>{interview_prepData.technical}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.case_study && (
                   <tbody>
                     <td>Case Study</td>
+                    <td>
+                      Key indicators that exhibit your thought-process for
+                      solving complex problems, achieving work-related goals,
+                      and your ability to articulate the same
+                    </td>
+                    <td>
+                      Let's say that Tyrannosaurus Rex got into a fight with
+                      Utahraptor, who would win and why
+                    </td>
                     <td>{interview_prepData.case_study}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.general_knowledge && (
                   <tbody>
                     <td>General Knowledge</td>
+                    <td>
+                      Awareness and understanding of the trending topics in
+                      politics, economy, sports, culture and industry-specific
+                      issues in your region or globally
+                    </td>
+                    <td>
+                      What are your thoughts on NASA's recent discovery of water
+                      on the sunlit surface of the moon
+                    </td>
                     <td>{interview_prepData.general_knowledge}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
 
                 {interview_prepData.questions_for_interviewer && (
                   <tbody>
                     <td>Qustions for Interviewer</td>
+                    <td>
+                      Gather information on (i) the organization’s culture, core
+                      values and policies (ii) interviewer’s views on relevant
+                      work topics (iii) the job application process
+                    </td>
+                    <td>
+                      What are the core values and behaviors that this
+                      organization wants its employees to espouse
+                    </td>
                     <td>{interview_prepData.questions_for_interviewer}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
                 {interview_prepData.other && (
                   <tbody>
                     <td>Other</td>
+                    <td>
+                      Anything else you would like to discuss during your
+                      interview
+                    </td>
+                    <td>-</td>
                     <td>{interview_prepData.other}</td>
-                    <td></td>
-                    <td></td>
                   </tbody>
                 )}
               </Table>
