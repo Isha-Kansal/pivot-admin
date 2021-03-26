@@ -110,7 +110,7 @@ const Apply = (props) => {
                 <th>Company Feedback</th>
                 <th>Interview Notes</th>
                 <th>Status</th>
-                <th>Thank You Notes</th>
+                <th>Thank You Note</th>
                 <th>Notes</th>
               </thead>
               {job_application_trackerData &&
