@@ -132,7 +132,7 @@ const Network = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -197,7 +197,7 @@ const Network = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -258,7 +258,7 @@ const Network = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -362,7 +362,7 @@ const Network = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>

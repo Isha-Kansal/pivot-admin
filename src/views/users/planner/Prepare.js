@@ -148,7 +148,7 @@ const Prepare = (props) => {
                 </tbody>
               )}
             </table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -309,7 +309,7 @@ const Prepare = (props) => {
                 )}
               </Table>
             )}
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>

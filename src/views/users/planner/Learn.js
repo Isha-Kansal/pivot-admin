@@ -117,7 +117,7 @@ const Learn = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -190,7 +190,7 @@ const Learn = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -263,7 +263,7 @@ const Learn = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>

@@ -149,7 +149,7 @@ const Explore = (props) => {
                 })}
             </Table>
 
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -219,7 +219,7 @@ const Explore = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -278,7 +278,7 @@ const Explore = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -350,7 +350,7 @@ const Explore = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
@@ -428,7 +428,7 @@ const Explore = (props) => {
                   );
                 })}
             </Table>
-            <PaginationCommon pageChange={pageChange} />
+            {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>
       </CCard>
