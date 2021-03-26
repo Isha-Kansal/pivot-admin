@@ -185,7 +185,7 @@ const Explore = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -268,7 +268,7 @@ const Explore = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -344,7 +344,7 @@ const Explore = (props) => {
               </tbody>
             </table>
 
-            <Search handleSearch={handleSearch} />
+            {/* <Search handleSearch={handleSearch} /> */}
           </CCardHeader>
           <CCardBody>
             <Table responsive>
@@ -413,7 +413,7 @@ const Explore = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -493,7 +493,7 @@ const Explore = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>

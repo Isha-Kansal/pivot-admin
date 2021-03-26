@@ -90,7 +90,7 @@ const Prepare = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <table className="table">
               {job_application_prepData && (
@@ -188,7 +188,7 @@ const Prepare = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             {interview_prepData && (
               <Table responsive>

@@ -94,7 +94,7 @@ const Network = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -172,7 +172,7 @@ const Network = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
 
             <Table responsive>
@@ -237,7 +237,7 @@ const Network = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -299,7 +299,7 @@ const Network = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>

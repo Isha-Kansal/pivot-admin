@@ -83,7 +83,7 @@ const Learn = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -157,7 +157,7 @@ const Learn = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>
@@ -230,7 +230,7 @@ const Learn = (props) => {
                 </tbody>
               </table>
 
-              <Search handleSearch={handleSearch} />
+              {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
             <Table responsive>
               <thead>
