@@ -172,3 +172,25 @@ button:focus {
     background: #f2cac8;
   }
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 7px;
+  border-radius: 50px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #f9ae76;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #f9ae76;
+}

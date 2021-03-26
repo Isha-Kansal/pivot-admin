@@ -97,9 +97,21 @@ const Apply = (props) => {
                 <th>Position</th>
                 <th>Location</th>
 
-                <th>Application Deadline</th>
+                {/* <th>Application Deadline</th> */}
                 <th>Date Applied</th>
                 <th>Job Post URL</th>
+                <th>Pros</th>
+                <th>Cons</th>
+                <th>Contact's Name</th>
+                <th>Contact's Position</th>
+                <th>Contact Information</th>
+                <th>Referral (Y/N)</th>
+                <th>Compensation</th>
+                <th>Company Feedback</th>
+                <th>Interview Notes</th>
+                <th>Status</th>
+                <th>Thank You Notes</th>
+                <th>Notes</th>
               </thead>
               {job_application_trackerData &&
                 job_application_trackerData.length > 0 &&
@@ -110,13 +122,54 @@ const Apply = (props) => {
                       <td>{item.company_name ? item.company_name : "-"}</td>
                       <td>{item.job_title ? item.job_title : "-"}</td>
                       <td>{item.location ? item.location : "-"}</td>
-                      <td></td>
+                      {/* <td></td> */}
                       <td>{item.applied_date ? item.applied_date : "-"}</td>
                       <td>
                         <a href={item.job_post_url ? item.job_post_url : "-"}>
                           {item.job_post_url ? item.job_post_url : "-"}
                         </a>
                       </td>
+                      <td>{item.pros ? item.pros : "-"}</td>
+                      <td>{item.cons ? item.cons : "-"}</td>
+
+                      <td>
+                        {item.contact_person_name
+                          ? item.contact_person_name
+                          : "-"}
+                      </td>
+                      <td>
+                        {item.contact_persons_position
+                          ? item.contact_persons_position
+                          : "-"}
+                      </td>
+                      <td>{item.contact_email ? item.contact_email : "-"}</td>
+                      <td>{item.referral ? "Y" : "N"}</td>
+
+                      <td>
+                        {item.offer_log &&
+                          `Bonus: ${item.offer_log.bonus}, Commission: ${item.offer_log.bonus}, Equity: ${item.offer_log.equity}, Salary: 
+                          ${item.offer_log.salary}, Benefits: ${item.offer_log.benefits}`}
+                      </td>
+                      <td>
+                        {item.interview_log &&
+                        item.interview_log.company_feedback
+                          ? item.interview_log.company_feedback
+                          : "-"}
+                      </td>
+
+                      <td>
+                        {item.interview_log &&
+                        item.interview_log.interview_notes
+                          ? item.interview_log.interview_notes
+                          : "-"}
+                      </td>
+                      <td>{item.status ? item.status : "-"}</td>
+                      <td>
+                        {item.interview_log && item.interview_log.thank_you_note
+                          ? item.interview_log.thank_you_note
+                          : "-"}
+                      </td>
+                      <td>{item.notes ? item.notes : "-"}</td>
                     </tbody>
                   );
                 })}
