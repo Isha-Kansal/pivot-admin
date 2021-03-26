@@ -24,6 +24,7 @@ const Explore = (props) => {
   const { explore } = props;
 
   const [accordion, setAccordion] = useState(1);
+  const [search, setSearch] = useState("");
   const getBadge = (status) => {
     switch (status) {
       case "Done":
@@ -49,12 +50,10 @@ const Explore = (props) => {
   };
 
   const handleSearch = (e) => {
-    // setSearch(e.target.value);
-    // setOffset("");
-    // setPage(1);
+    setSearch(e.target.value);
   };
 
-  const pageChange = (newPage) => {};
+  // const pageChange = (newPage) => {};
 
   let introspectionData =
     explore && explore.introspection && explore.introspection.data;
@@ -72,7 +71,82 @@ const Explore = (props) => {
     explore.practical_understanding.data;
   let career_optionsData =
     explore && explore.career_options && explore.career_options.data;
+  const filterRecordsIntrospection = () => {
+    if (!search) return introspectionData;
+    return (
+      introspectionData &&
+      introspectionData.filter((data) => {
+        let isTrue =
+          data.fields[0].value.toLowerCase().includes(search) ||
+          data.fields[1].value.toLowerCase().includes(search) ||
+          data.fields[2].value.toLowerCase().includes(search) ||
+          data.fields[3].value.toLowerCase().includes(search);
+        return isTrue;
+      })
+    );
+  };
+  const filterRecordsExtrospection = () => {
+    if (!search) return extrospectionData;
+    return (
+      extrospectionData &&
+      extrospectionData.filter((data) => {
+        let isTrue =
+          data.fields[0].value.toLowerCase().includes(search) ||
+          data.fields[1].value.toLowerCase().includes(search) ||
+          data.fields[2].value.toLowerCase().includes(search);
+        return isTrue;
+      })
+    );
+  };
+  const filterRecordsPersonalityAssessment = () => {
+    if (!search) return personality_assessmentData;
+    return (
+      personality_assessmentData &&
+      personality_assessmentData.filter((data) => {
+        let isTrue = data.value.toLowerCase().includes(search);
+        return isTrue;
+      })
+    );
+  };
+  const filterRecordsPracticalUnderstanding = () => {
+    if (!search) return practical_understandingData;
+    return (
+      practical_understandingData &&
+      practical_understandingData.filter((data) => {
+        let isTrue =
+          data.career_option.toLowerCase().includes(search) ||
+          data.practical_understanding_via.toLowerCase().includes(search) ||
+          data.contact_person.toLowerCase().includes(search) ||
+          data.contact_email.toLowerCase().includes(search) ||
+          data.notes.toLowerCase().includes(search);
+        return isTrue;
+      })
+    );
+  };
+  const filterRecordsCareerOptions = () => {
+    if (!search) return career_optionsData;
+    return (
+      career_optionsData &&
+      career_optionsData.filter((data) => {
+        let isTrue =
+          data.fields[0].value.toLowerCase().includes(search) ||
+          data.fields[1].value.toLowerCase().includes(search) ||
+          data.fields[2].value.toLowerCase().includes(search) ||
+          data.fields[3].value.toLowerCase().includes(search) ||
+          data.fields[4].value.toLowerCase().includes(search);
+        return isTrue;
+      })
+    );
+  };
 
+  let filteredIntrospection = filterRecordsIntrospection() || [];
+  let filteredExtrospection = filterRecordsExtrospection() || [];
+  let filteredPersonalityAssessment =
+    filterRecordsPersonalityAssessment() || [];
+  let filteredPracticalUnderstanding =
+    filterRecordsPracticalUnderstanding() || [];
+  let filteredCareerOptions = filterRecordsCareerOptions() || [];
+  console.log("4878940897894879", filteredCareerOptions);
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -123,9 +197,9 @@ const Explore = (props) => {
 
                 <th>My Values</th>
               </thead>
-              {introspectionData &&
-                introspectionData.length > 0 &&
-                introspectionData.map((item) => {
+              {filteredIntrospection &&
+                filteredIntrospection.length > 0 &&
+                filteredIntrospection.map((item) => {
                   return (
                     <tbody>
                       <td>{item.id ? item.id : "-"}</td>
@@ -147,6 +221,11 @@ const Explore = (props) => {
                     </tbody>
                   );
                 })}
+              {filteredIntrospection && filteredIntrospection.length === 0 && (
+                <h5 className="text-center mt-4">
+                  <i>No Records Found</i>
+                </h5>
+              )}
             </Table>
 
             {/* <PaginationCommon pageChange={pageChange} /> */}
@@ -199,9 +278,9 @@ const Explore = (props) => {
                 <th>World Needs</th>
                 <th>World Pays For</th>
               </thead>
-              {extrospectionData &&
-                extrospectionData.length > 0 &&
-                extrospectionData.map((item) => {
+              {filteredExtrospection &&
+                filteredExtrospection.length > 0 &&
+                filteredExtrospection.map((item) => {
                   return (
                     <tbody>
                       <td>{item.id ? item.id : "-"}</td>
@@ -218,6 +297,13 @@ const Explore = (props) => {
                     </tbody>
                   );
                 })}
+              {filteredExtrospection && filteredExtrospection.length === 0 && (
+                <div className="no-records">
+                  <h5 className="mb-0">
+                    <i>No Records Found</i>
+                  </h5>
+                </div>
+              )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
@@ -267,9 +353,9 @@ const Explore = (props) => {
                 <th>Career Option</th>
               </thead>
 
-              {personality_assessmentData &&
-                personality_assessmentData.length > 0 &&
-                personality_assessmentData.map((item) => {
+              {filteredPersonalityAssessment &&
+                filteredPersonalityAssessment.length > 0 &&
+                filteredPersonalityAssessment.map((item) => {
                   return (
                     <tbody>
                       <td>{item.id ? item.id : "-"}</td>
@@ -277,6 +363,14 @@ const Explore = (props) => {
                     </tbody>
                   );
                 })}
+              {filteredPersonalityAssessment &&
+                filteredPersonalityAssessment.length === 0 && (
+                  <div className="no-records">
+                    <h5 className="mb-0">
+                      <i>No Records Found</i>
+                    </h5>
+                  </div>
+                )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
@@ -331,9 +425,9 @@ const Explore = (props) => {
                 <th>Contact Email</th>
                 <th>Notes On</th>
               </thead>
-              {practical_understandingData &&
-                practical_understandingData.length > 0 &&
-                practical_understandingData.map((item) => {
+              {filteredPracticalUnderstanding &&
+                filteredPracticalUnderstanding.length > 0 &&
+                filteredPracticalUnderstanding.map((item) => {
                   return (
                     <tbody>
                       <td>{item.id ? item.id : "-"}</td>
@@ -349,6 +443,14 @@ const Explore = (props) => {
                     </tbody>
                   );
                 })}
+              {filteredPracticalUnderstanding &&
+                filteredPracticalUnderstanding.length === 0 && (
+                  <div className="no-records">
+                    <h5 className="mb-0">
+                      <i>No Records Found</i>
+                    </h5>
+                  </div>
+                )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
@@ -403,9 +505,9 @@ const Explore = (props) => {
                 <th>Net Score</th>
                 <th>Decision</th>
               </thead>
-              {career_optionsData &&
-                career_optionsData.length > 0 &&
-                career_optionsData.map((item) => {
+              {filteredCareerOptions &&
+                filteredCareerOptions.length > 0 &&
+                filteredCareerOptions.map((item) => {
                   return (
                     <tbody>
                       <td>{item.id ? item.id : "-"}</td>
@@ -427,6 +529,13 @@ const Explore = (props) => {
                     </tbody>
                   );
                 })}
+              {filteredCareerOptions && filteredCareerOptions.length === 0 && (
+                <div className="no-records">
+                  <h5 className="mb-0">
+                    <i>No Records Found</i>
+                  </h5>
+                </div>
+              )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
