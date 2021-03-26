@@ -136,21 +136,21 @@ const Network = (props) => {
           </CCardBody>
         </CCollapse>
       </CCard>
-      <CCard className="mb-0">
-        <CCardHeader id="headingTwo">
-          <CButton
+      {/* <CCard className="mb-0"> */}
+      {/* <CCardHeader id="headingTwo"> */}
+      {/* <CButton
             block
             color="link"
             className="text-left m-0 p-0"
             onClick={() => setAccordion(accordion === 1 ? null : 1)}
           >
             <h5 className="m-0 p-0">New Connections</h5>
-          </CButton>
-        </CCardHeader>
-        <CCollapse show={accordion === 1}>
+          </CButton> */}
+      {/* </CCardHeader> */}
+      {/* <CCollapse show={accordion === 1}>
           <CCardBody>
-            <CCardHeader>
-              <table className="table">
+            <CCardHeader> */}
+      {/* <table className="table">
                 <tbody>
                   <tr>
                     <td>Status</td>
@@ -170,12 +170,12 @@ const Network = (props) => {
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </table> */}
 
-              {/* <Search handleSearch={handleSearch} /> */}
-            </CCardHeader>
+      {/* <Search handleSearch={handleSearch} /> */}
+      {/* </CCardHeader> */}
 
-            <Table responsive>
+      {/* <Table responsive>
               <thead>
                 <th className="text-nowrap ">ID</th>
                 <th>Pivot</th>
@@ -196,11 +196,11 @@ const Network = (props) => {
                     </tbody>
                   );
                 })}
-            </Table>
-            {/* <PaginationCommon pageChange={pageChange} /> */}
-          </CCardBody>
-        </CCollapse>
-      </CCard>
+            </Table> */}
+      {/* <PaginationCommon pageChange={pageChange} /> */}
+      {/* </CCardBody> */}
+      {/* </CCollapse> */}
+      {/* </CCard> */}
       <CCard className="mb-0">
         <CCardHeader id="headingThree">
           <CButton
