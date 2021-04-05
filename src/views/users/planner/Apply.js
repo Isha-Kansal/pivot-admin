@@ -173,6 +173,13 @@ const Apply = (props) => {
                     </tbody>
                   );
                 })}
+                    {job_application_trackerData && job_application_trackerData.length === 0 && (
+              <div className="no-records">
+                <h5 className="mb-0">
+                  <i>No Records Found</i>
+                </h5>
+              </div>
+            )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>

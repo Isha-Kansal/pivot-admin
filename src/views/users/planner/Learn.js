@@ -116,6 +116,13 @@ const Learn = (props) => {
                     </tbody>
                   );
                 })}
+                  {skillsData && skillsData.length === 0 && (
+                <div className="no-records">
+                  <h5 className="mb-0">
+                    <i>No Records Found</i>
+                  </h5>
+                </div>
+              )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
@@ -189,6 +196,13 @@ const Learn = (props) => {
                     </tbody>
                   );
                 })}
+                  {learning_platformsData && learning_platformsData.length === 0 && (
+                <div className="no-records">
+                  <h5 className="mb-0">
+                    <i>No Records Found</i>
+                  </h5>
+                </div>
+              )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
@@ -262,6 +276,13 @@ const Learn = (props) => {
                     </tbody>
                   );
                 })}
+                     {experiential_learningData && experiential_learningData.length === 0 && (
+                <div className="no-records">
+                  <h5 className="mb-0">
+                    <i>No Records Found</i>
+                  </h5>
+                </div>
+              )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>

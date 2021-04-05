@@ -131,6 +131,15 @@ const Network = (props) => {
                     </tbody>
                   );
                 })}
+
+
+{existing_connectionsData && existing_connectionsData.length === 0 && (
+                <div className="no-records">
+                  <h5 className="mb-0">
+                    <i>No Records Found</i>
+                  </h5>
+                </div>
+              )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
@@ -257,6 +266,13 @@ const Network = (props) => {
                     </tbody>
                   );
                 })}
+                {cold_messagesData && cold_messagesData.length === 0 && (
+                <div className="no-records">
+                  <h5 className="mb-0">
+                    <i>No Records Found</i>
+                  </h5>
+                </div>
+              )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
@@ -361,6 +377,13 @@ const Network = (props) => {
                     </tbody>
                   );
                 })}
+                  {key_takeawaysData && key_takeawaysData.length === 0 && (
+                <div className="no-records">
+                  <h5 className="mb-0">
+                    <i>No Records Found</i>
+                  </h5>
+                </div>
+              )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>

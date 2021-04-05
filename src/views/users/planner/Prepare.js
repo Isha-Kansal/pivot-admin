@@ -44,7 +44,7 @@ const Prepare = (props) => {
     // setOffset("");
     // setPage(1);
   };
-  const pageChange = (newPage) => {};
+  const pageChange = (newPage) => { };
   let job_application_prepData =
     prepare &&
     prepare.job_application_prep &&
@@ -77,8 +77,8 @@ const Prepare = (props) => {
                       <CBadge
                         color={getBadge(
                           prepare &&
-                            prepare.job_application_prep &&
-                            prepare.job_application_prep.status
+                          prepare.job_application_prep &&
+                          prepare.job_application_prep.status
                         )}
                       >
                         {prepare &&
@@ -92,6 +92,7 @@ const Prepare = (props) => {
 
               {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
+            {console.log("495dfhgdfh845879", job_application_prepData)}
             <table className="table">
               {job_application_prepData && (
                 <tbody>
@@ -175,8 +176,8 @@ const Prepare = (props) => {
                       <CBadge
                         color={getBadge(
                           prepare &&
-                            prepare.interview_prep &&
-                            prepare.interview_prep.status
+                          prepare.interview_prep &&
+                          prepare.interview_prep.status
                         )}
                       >
                         {prepare &&
@@ -199,8 +200,18 @@ const Prepare = (props) => {
                   <th>Sample Question</th>
                   <th>Talking Points</th>
                 </thead>
-
-                {interview_prepData.personal_background && (
+                {console.log("478648789487984", interview_prepData)}
+                {interview_prepData && interview_prepData.length > 0 && interview_prepData.map((data) => {
+                  return (
+                    <tbody>
+                      <td>{data.label ? data.label : "-"}</td>
+                      <td>{data.description ? data.description : "-"}</td>
+                      <td></td>
+                      <td>{data.value ? data.value : "-"}</td>
+                    </tbody>
+                  )
+                })}
+                {/* {interview_prepData.personal_background && (
                   <tbody>
                     <td>Personal Background</td>
                     <td>
@@ -381,8 +392,15 @@ const Prepare = (props) => {
                     <td>-</td>
                     <td>{interview_prepData.other}</td>
                   </tbody>
-                )}
+                )} */}
               </Table>
+            )}
+            {interview_prepData && interview_prepData.length === 0 && (
+              <div className="no-records">
+                <h5 className="mb-0">
+                  <i>No Records Found</i>
+                </h5>
+              </div>
             )}
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
