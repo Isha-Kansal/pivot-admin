@@ -184,7 +184,8 @@ const Network = (props) => {
       {/* <Search handleSearch={handleSearch} /> */}
       </CCardHeader>
 
-      {/* <Table responsive>
+      {new_connectionsData &&
+                new_connectionsData.length > 0 &&<Table responsive>
               <thead>
                 <th className="text-nowrap ">ID</th>
                 <th>Pivot</th>
@@ -205,7 +206,7 @@ const Network = (props) => {
                     </tbody>
                   );
                 })}
-            </Table> */}
+            </Table>}
       {/* <PaginationCommon pageChange={pageChange} /> */}
       </CCardBody>
       </CCollapse>
