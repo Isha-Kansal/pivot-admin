@@ -84,9 +84,8 @@ const UserResourceUsage = (props) => {
           <CCardBody>
             <Table
               responsive
-              className={`table ${
-                resources && resources.length === 0 ? "tableHeight" : ""
-              }`}
+              className={`table ${resources && resources.length === 0 ? "tableHeight" : ""
+                }`}
             >
               {resources && resources.length > 0 && (
                 <thead>
@@ -111,7 +110,7 @@ const UserResourceUsage = (props) => {
                 {resources &&
                   resources.length > 0 &&
                   resources.map((item, index) => {
-                 
+
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -131,13 +130,13 @@ const UserResourceUsage = (props) => {
                         <td>
                           {item.price ? item.price.value || item.price : "-"}
                         </td>
-                      
+
 
                         <td>
-                        <a href={item.website ? item.website : "-"}>
-                          {item.website ? item.website : "-"}
-                        </a>
-                      </td>
+                          <a href={item.website ? item.website : "-"}>
+                            {item.website ? item.website : "-"}
+                          </a>
+                        </td>
 
                       </tr>
                     );

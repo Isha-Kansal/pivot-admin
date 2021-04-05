@@ -123,7 +123,7 @@ const ExpertUserUsage = (props) => {
                       >
                         <td>{item.user_id}</td>
 
-                        <td>
+                        {/* <td>
                           {" "}
                           {item.meeting &&
                           item.meeting.firstName &&
@@ -132,7 +132,20 @@ const ExpertUserUsage = (props) => {
                               " " +
                               item.meeting.lastName
                             : "-"}
+                        </td> */}
+
+                        <td>
+                          {" "}
+                          {item.user &&
+                          item.user.first_name &&
+                          item.user.last_name
+                            ? item.user.first_name +
+                              " " +
+                              item.user.last_name
+                            : "-"}
                         </td>
+
+
                         <td>
                           {item.meeting
                             ? `${item.meeting.date} & ${item.meeting.time}`
