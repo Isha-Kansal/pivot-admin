@@ -256,9 +256,12 @@ const Expert = (props) => {
                         {expert.linkedIn && (
                           <tr>
                             <td>Social Media URL</td>
+                           
                             <td>
-                              <strong>{expert.linkedIn}</strong>
-                            </td>
+                          <a href={expert.linkedIn ? expert.linkedIn : "-"}>
+                            {expert.linkedIn ? expert.linkedIn : "-"}
+                          </a>
+                        </td>
                           </tr>
                         )}
                         {expert.calendar_id && (

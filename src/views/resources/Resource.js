@@ -174,9 +174,14 @@ const Resource = (props) => {
                   {resource.website && (
                     <tr>
                       <td>Website Link</td>
-                      <td>
+                      {/* <td>
                         <strong>{resource.website}</strong>
-                      </td>
+                      </td> */}
+                      <td>
+                          <a href={resource.website ? resource.website : "-"}>
+                            {resource.website ? resource.website : "-"}
+                          </a>
+                        </td>
                     </tr>
                   )}
                   {resource.unique_selling_proposition && (
