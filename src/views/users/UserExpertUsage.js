@@ -105,6 +105,8 @@ const UserExpertUsage = (props) => {
 
                     <th>Date & Time</th>
                     <th>Payment Status</th>
+                    <th>Service</th>
+                    <th>Topics</th>
                   </tr>
                 </thead>
               )}
@@ -149,6 +151,8 @@ const UserExpertUsage = (props) => {
                             ? "Completed"
                             : "Pending"}
                         </td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     );
                   })}
