@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Loader from "../../../loader";
+import moment from "moment";
 import Search from "../../../common/search";
 import PaginationCommon from "../../../common/pagination";
 import {
@@ -49,6 +50,12 @@ const Apply = (props) => {
     apply &&
     apply.job_application_tracker &&
     apply.job_application_tracker.data;
+   
+
+
+  
+
+  
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -116,6 +123,10 @@ const Apply = (props) => {
               {job_application_trackerData &&
                 job_application_trackerData.length > 0 &&
                 job_application_trackerData.map((item) => {
+                  let istDate = new Date(item && item.applied_date);
+
+                  let appliedDate = moment(istDate).format("DD-MM-YYYY, hh:mm a");
+                  console.log("89456984598945879849",appliedDate)
                   return (
                     <tbody>
                       <td>{item.id ? item.id : "-"}</td>
@@ -123,7 +134,7 @@ const Apply = (props) => {
                       <td>{item.job_title ? item.job_title : "-"}</td>
                       <td>{item.location ? item.location : "-"}</td>
                       {/* <td></td> */}
-                      <td>{item.applied_date ? item.applied_date : "-"}</td>
+                      <td>{appliedDate!=="Invalid date" ? appliedDate : "-"}</td>
                       <td>
                         <a href={item.job_post_url ? item.job_post_url : "-"}>
                           {item.job_post_url ? item.job_post_url : "-"}
