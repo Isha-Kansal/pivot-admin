@@ -317,7 +317,7 @@ const Network = (props) => {
 
               {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
-            <Table responsive>
+            <Table responsive style={{minHeight: '110px'}}>
               <thead>
                 <th className="text-nowrap ">ID</th>
                 <th>Name</th>

@@ -96,7 +96,7 @@ console.log("48670450790459670",apply)
 
               {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
-            <Table responsive>
+            <Table responsive style={{minHeight: '110px'}}>
               <thead>
                 <th className="text-nowrap ">ID</th>
                 <th>Company</th>
