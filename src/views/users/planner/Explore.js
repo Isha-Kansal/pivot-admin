@@ -222,9 +222,11 @@ const Explore = (props) => {
                   );
                 })}
               {filteredIntrospection && filteredIntrospection.length === 0 && (
-                <h5 className="text-center mt-4">
-                  <i>No Records Found</i>
-                </h5>
+                 <div className="no-records">
+                 <h5 className="mb-0">
+                   <i>No Records Found</i>
+                 </h5>
+               </div>
               )}
             </Table>
 
