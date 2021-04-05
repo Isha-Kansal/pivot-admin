@@ -238,7 +238,7 @@ const Expert = (props) => {
                         )}
                         {expert.industry && (
                           <tr>
-                            <td>Current Industry</td>
+                            <td>Organization</td>
                             <td>
                               <strong>{expert.industry}</strong>
                             </td>
@@ -255,7 +255,7 @@ const Expert = (props) => {
                         )}
                         {expert.linkedIn && (
                           <tr>
-                            <td>LinkedIn Link</td>
+                            <td>Social Media URL</td>
                             <td>
                               <strong>{expert.linkedIn}</strong>
                             </td>
@@ -295,7 +295,7 @@ const Expert = (props) => {
                         )}
                         {skills && (
                           <tr>
-                            <td>Skills</td>
+                            <td>Expertise</td>
                             <td>
                               <strong>{skills}</strong>
                             </td>

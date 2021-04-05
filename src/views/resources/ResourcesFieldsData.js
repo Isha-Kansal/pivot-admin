@@ -1,5 +1,5 @@
 export const optionsFormat = [
-  { value: "Remote", label: "Remote" },
+  { value: "Online", label: "Online" },
   { value: "In Person", label: "In Person" },
   { value: "Hybrid", label: "Hybrid" },
 ];

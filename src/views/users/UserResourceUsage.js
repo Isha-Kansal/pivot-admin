@@ -97,6 +97,7 @@ const UserResourceUsage = (props) => {
 
                     <th>Format</th>
                     <th>Price</th>
+                    <th>Website Link</th>
                   </tr>
                 </thead>
               )}
@@ -110,6 +111,7 @@ const UserResourceUsage = (props) => {
                 {resources &&
                   resources.length > 0 &&
                   resources.map((item, index) => {
+                 
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -129,6 +131,14 @@ const UserResourceUsage = (props) => {
                         <td>
                           {item.price ? item.price.value || item.price : "-"}
                         </td>
+                      
+
+                        <td>
+                        <a href={item.website ? item.website : "-"}>
+                          {item.website ? item.website : "-"}
+                        </a>
+                      </td>
+
                       </tr>
                     );
                   })}

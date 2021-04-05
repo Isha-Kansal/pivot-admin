@@ -155,7 +155,7 @@ const User = (props) => {
                         )}
                         {user.contact_no && (
                           <tr>
-                            <td>Contact</td>
+                            <td>Mobile</td>
                             <td>
                               <strong>
                                 {user.contact_no.value || user.contact_no}
@@ -179,11 +179,11 @@ const User = (props) => {
                             </td>
                           </tr>
                         )}
-                        {user.role && (
+                        {user.current_role && (
                           <tr>
                             <td>Role</td>
                             <td>
-                              <strong>{user.role}</strong>
+                              <strong>{user.current_role}</strong>
                             </td>
                           </tr>
                         )}

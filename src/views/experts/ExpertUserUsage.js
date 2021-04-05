@@ -139,7 +139,7 @@ const ExpertUserUsage = (props) => {
                             : "-"}
                         </td>
                         <td>
-                          {item.appointment_status === "paid"
+                          {item.payment_status === "paid"
                             ? "Completed"
                             : "Pending"}
                         </td>

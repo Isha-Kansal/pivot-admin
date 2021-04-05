@@ -197,7 +197,7 @@ const Prepare = (props) => {
                   <th className="text-nowrap ">Topic</th>
 
                   <th>Description</th>
-                  <th>Sample Question</th>
+                  {/* <th>Sample Question</th> */}
                   <th>Talking Points</th>
                 </thead>
                 {console.log("478648789487984", interview_prepData)}
@@ -206,7 +206,7 @@ const Prepare = (props) => {
                     <tbody>
                       <td>{data.label ? data.label : "-"}</td>
                       <td>{data.description ? data.description : "-"}</td>
-                      <td></td>
+                      {/* <td></td> */}
                       <td>{data.value ? data.value : "-"}</td>
                     </tbody>
                   )

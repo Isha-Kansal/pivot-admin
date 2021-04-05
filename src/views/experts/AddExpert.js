@@ -549,7 +549,7 @@ class AddExpert extends Component {
         errorType: "linkedIn",
         errorText: (
           <span className="text-danger">
-            <b>Please enter linkedIn link</b>
+            <b>Please enter social media url</b>
           </span>
         ),
       });
@@ -563,7 +563,7 @@ class AddExpert extends Component {
           errorType: "linkedIn",
           errorText: (
             <span className="text-danger">
-              <b> Please enter valid linkedIn link</b>
+              <b> Please enter valid social media url</b>
             </span>
           ),
         });
@@ -1145,13 +1145,13 @@ class AddExpert extends Component {
 
                   <CCol xs="6">
                     <CFormGroup>
-                      <CLabel htmlFor="industry">Current Industry</CLabel>
+                      <CLabel htmlFor="industry">Organization</CLabel>
 
                       <Select
                         custom
                         id="industry"
                         name="industry"
-                        placeholder="Select Industry"
+                        placeholder="Select Organization"
                         onChange={(data) => this.handleChange(data, "industry")}
                         value={
                           industry ? { value: industry, label: industry } : null
@@ -1167,13 +1167,13 @@ class AddExpert extends Component {
                 <CFormGroup row className="my-0">
                   <CCol xs="6">
                     <CFormGroup>
-                      <CLabel htmlFor="linkedIn">LinkedIn Link</CLabel>
+                      <CLabel htmlFor="linkedIn">Social Media URL</CLabel>
                       <CLabel className="text-danger">*</CLabel>
                       <CInput
                         name="linkedIn"
                         id="linkedIn"
                         onChange={this.inputHandler}
-                        placeholder="LinkedIn Link"
+                        placeholder="Social Media URL"
                         value={linkedIn}
                       />
                       {this.errorShow("linkedIn")}
