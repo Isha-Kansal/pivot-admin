@@ -44,7 +44,7 @@ const Network = (props) => {
     // setOffset("");
     // setPage(1);
   };
-  const pageChange = (newPage) => {};
+  const pageChange = (newPage) => { };
   let existing_connectionsData =
     network &&
     network.existing_connections &&
@@ -81,8 +81,8 @@ const Network = (props) => {
                       <CBadge
                         color={getBadge(
                           network &&
-                            network.existing_connections &&
-                            network.existing_connections.status
+                          network.existing_connections &&
+                          network.existing_connections.status
                         )}
                       >
                         {network &&
@@ -133,7 +133,7 @@ const Network = (props) => {
                 })}
 
 
-{existing_connectionsData && existing_connectionsData.length === 0 && (
+              {existing_connectionsData && existing_connectionsData.length === 0 && (
                 <div className="no-records">
                   <h5 className="mb-0">
                     <i>No Records Found</i>
@@ -233,8 +233,8 @@ const Network = (props) => {
                       <CBadge
                         color={getBadge(
                           network &&
-                            network.cold_messages &&
-                            network.cold_messages.status
+                          network.cold_messages &&
+                          network.cold_messages.status
                         )}
                       >
                         {network &&
@@ -266,7 +266,7 @@ const Network = (props) => {
                     </tbody>
                   );
                 })}
-                {cold_messagesData && cold_messagesData.length === 0 && (
+              {cold_messagesData && cold_messagesData.length === 0 && (
                 <div className="no-records">
                   <h5 className="mb-0">
                     <i>No Records Found</i>
@@ -302,8 +302,8 @@ const Network = (props) => {
                       <CBadge
                         color={getBadge(
                           network &&
-                            network.key_takeaways &&
-                            network.key_takeaways.status
+                          network.key_takeaways &&
+                          network.key_takeaways.status
                         )}
                       >
                         {network &&
@@ -375,16 +375,19 @@ const Network = (props) => {
                       <td>{item.job_referral ? item.job_referral : "-"}</td>
                       <td>{item.other ? item.other : "-"}</td>
                     </tbody>
+                    
                   );
                 })}
-                  {key_takeawaysData && key_takeawaysData.length === 0 && (
+              {key_takeawaysData && key_takeawaysData.length === 0 && (
                 <div className="no-records">
                   <h5 className="mb-0">
                     <i>No Records Found</i>
                   </h5>
+
                 </div>
               )}
             </Table>
+
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>
         </CCollapse>

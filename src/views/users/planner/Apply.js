@@ -155,11 +155,20 @@ const Apply = (props) => {
                       </td>
                       <td>{item.contact_email ? item.contact_email : "-"}</td>
                       <td>{item.referral ? "Y" : "N"}</td>
+{console.log("89e568948596849586",item.offer_log)}
+                      {/* <td>
+                        {item.offer_log &&
+                        `Bonus: ${item.offer_log.bonus}, Commission: ${item.offer_log.commission}, Equity: ${item.offer_log.equity}, Salary: 
+                          ${item.offer_log.salary}, Benefits: ${item.offer_log.benefits}`}
+                      </td> */}
 
                       <td>
-                        {item.offer_log &&
-                          `Bonus: ${item.offer_log.bonus}, Commission: ${item.offer_log.bonus}, Equity: ${item.offer_log.equity}, Salary: 
-                          ${item.offer_log.salary}, Benefits: ${item.offer_log.benefits}`}
+                      {item.offer_log&&!item.offer_log.benefits&&!item.offer_log.bonus&&!item.offer_log.commission&&!item.offer_log.equity&&!item.offer_log.salary&&"-"}
+                        {item.offer_log&&item.offer_log.bonus&& `Bonus: ${item.offer_log.bonus}`}<br/>
+                        {item.offer_log&&item.offer_log.commission&& `Commission: ${item.offer_log.commission}`}
+                        {item.offer_log&&item.offer_log.equity&& `Equity: ${item.offer_log.equity}`}
+                        {item.offer_log&&item.offer_log.salary&& `Salary: ${item.offer_log.salary}`}
+                        {item.offer_log&&item.offer_log.benefits&& `Benefits: ${item.offer_log.benefits}`}
                       </td>
                       <td>
                         {item.interview_log &&
