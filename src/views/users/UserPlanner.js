@@ -37,6 +37,7 @@ const UserPlanner = (props) => {
     const user_id = props && props.match.params.id;
     dispatch(
       fetchOneUser(`user?id=${user_id}`, (value) => {
+      
         setUser(value.data.user);
         setPlannerData(value.data.planner);
         setLoading(false);
@@ -78,7 +79,7 @@ const UserPlanner = (props) => {
               </CNav>
               <CTabContent>
                 <CTabPane>
-                  <Explore explore={plannerData && plannerData.explore} />
+                  <Explore explore={plannerData && plannerData.explore} loading={loading}/>
                 </CTabPane>
                 <CTabPane>
                   <Network network={plannerData && plannerData.network} />

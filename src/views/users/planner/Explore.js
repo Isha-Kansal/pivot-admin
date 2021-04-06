@@ -21,7 +21,7 @@ import {
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Explore = (props) => {
-  const { explore } = props;
+  const { explore,loading } = props;
 
   const [accordion, setAccordion] = useState(1);
   const [search, setSearch] = useState("");
@@ -147,6 +147,18 @@ const Explore = (props) => {
     filterRecordsPracticalUnderstanding() || [];
   let filteredCareerOptions = filterRecordsCareerOptions() || [];
 
+  if(!explore&&!loading)
+  {
+    
+  return(<div className="no-records-planner">
+  <h5 className="mb-0">
+    <i>No Records Found</i>
+  </h5>
+  
+  </div>)
+    
+  }
+else{
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -545,5 +557,8 @@ const Explore = (props) => {
       </CCard>
     </div>
   );
+}
+
+ 
 };
 export default Explore;

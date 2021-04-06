@@ -55,7 +55,18 @@ const Network = (props) => {
     network && network.cold_messages && network.cold_messages.data;
   let key_takeawaysData =
     network && network.key_takeaways && network.key_takeaways.data;
+if(!network)
+{
+  
+return(<div className="no-records-planner">
+<h5 className="mb-0">
+  <i>No Records Found</i>
+</h5>
 
+</div>)
+  
+}
+else{
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -395,5 +406,7 @@ const Network = (props) => {
       </CCard>
     </div>
   );
+}
+
 };
 export default Network;

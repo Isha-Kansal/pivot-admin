@@ -51,7 +51,16 @@ const Prepare = (props) => {
     prepare.job_application_prep.data;
   let interview_prepData =
     prepare && prepare.interview_prep && prepare.interview_prep.data;
+    if (!prepare) {
 
+      return (<div className="no-records-planner">
+        <h5 className="mb-0">
+          <i>No Records Found</i>
+        </h5>
+  
+      </div>)
+  
+    }
   return (
     <div id="accordion">
       <CCard className="mb-0">

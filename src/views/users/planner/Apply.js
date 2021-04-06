@@ -52,7 +52,16 @@ const Apply = (props) => {
     apply.job_application_tracker.data;
    
 
+    if (!apply) {
 
+      return (<div className="no-records-planner">
+        <h5 className="mb-0">
+          <i>No Records Found</i>
+        </h5>
+  
+      </div>)
+  
+    }
   
 
   
