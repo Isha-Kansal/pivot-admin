@@ -228,14 +228,14 @@ const Expert = (props) => {
                           </tr>
                         )}
 
-                        {expert.current_role && (
+                        {/* {expert.current_role && (
                           <tr>
                             <td>Current Role</td>
                             <td>
                               <strong>{expert.current_role}</strong>
                             </td>
                           </tr>
-                        )}
+                        )} */}
                         {expert.industry && (
                           <tr>
                             <td>Organization</td>

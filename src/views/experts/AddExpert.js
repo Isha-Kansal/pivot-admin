@@ -521,17 +521,7 @@ class AddExpert extends Component {
       return;
     }
 
-    if (role === "") {
-      this.setState({
-        errorType: "role",
-        errorText: (
-          <span className="text-danger">
-            <b>Select your current role</b>
-          </span>
-        ),
-      });
-      return;
-    }
+  
     // if (industry === "") {
     //   this.setState({
     //     errorType: "industry",
@@ -623,6 +613,17 @@ class AddExpert extends Component {
         errorText: (
           <span className="text-danger">
             <b>Please enter your expert areas</b>
+          </span>
+        ),
+      });
+      return;
+    }
+    if (role === "") {
+      this.setState({
+        errorType: "role",
+        errorText: (
+          <span className="text-danger">
+            <b>Select your current role</b>
           </span>
         ),
       });
@@ -1124,45 +1125,7 @@ class AddExpert extends Component {
                   </CCol>
                 </CFormGroup>
 
-                <CFormGroup row className="my-0">
-                  <CCol xs="6">
-                    <CFormGroup>
-                      <CLabel htmlFor="role">Current Role</CLabel>
-                      <CLabel className="text-danger">*</CLabel>
-
-                      <Select
-                        custom
-                        id="role"
-                        placeholder="Select Role"
-                        name="role"
-                        onChange={(data) => this.handleChange(data, "role")}
-                        value={role ? { value: role, label: role } : null}
-                        options={optionsRole}
-                      ></Select>
-                      {this.errorShow("role")}
-                    </CFormGroup>
-                  </CCol>
-
-                  <CCol xs="6">
-                    <CFormGroup>
-                      <CLabel htmlFor="industry">Organization</CLabel>
-
-                      <Select
-                        custom
-                        id="industry"
-                        name="industry"
-                        placeholder="Select Organization"
-                        onChange={(data) => this.handleChange(data, "industry")}
-                        value={
-                          industry ? { value: industry, label: industry } : null
-                        }
-                        options={optionsIndustry}
-                        isClearable
-                      ></Select>
-                      {this.errorShow("industry")}
-                    </CFormGroup>
-                  </CCol>
-                </CFormGroup>
+              
 
                 <CFormGroup row className="my-0">
                   <CCol xs="6">
@@ -1294,6 +1257,45 @@ class AddExpert extends Component {
                   </CCol>
                 </CFormGroup>
                 <CFormGroup row className="my-0">
+                  <CCol xs="6">
+                    {/* <CFormGroup>
+                      <CLabel htmlFor="role">Current Role</CLabel>
+                      <CLabel className="text-danger">*</CLabel>
+
+                      <Select
+                        custom
+                        id="role"
+                        placeholder="Select Role"
+                        name="role"
+                        onChange={(data) => this.handleChange(data, "role")}
+                        value={role ? { value: role, label: role } : null}
+                        options={optionsRole}
+                      ></Select>
+                      {this.errorShow("role")}
+                    </CFormGroup> */}
+                  </CCol>
+
+                  <CCol xs="12">
+                    <CFormGroup>
+                      <CLabel htmlFor="industry">Organization</CLabel>
+
+                      <Select
+                        custom
+                        id="industry"
+                        name="industry"
+                        placeholder="Select Organization"
+                        onChange={(data) => this.handleChange(data, "industry")}
+                        value={
+                          industry ? { value: industry, label: industry } : null
+                        }
+                        options={optionsIndustry}
+                        isClearable
+                      ></Select>
+                      {this.errorShow("industry")}
+                    </CFormGroup>
+                  </CCol>
+                </CFormGroup>
+                <CFormGroup row className="my-0">
                   <CCol xs="12">
                     <CFormGroup>
                       <CLabel htmlFor="about">About</CLabel>
@@ -1338,6 +1340,7 @@ class AddExpert extends Component {
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>
+              
               </CForm>
             </CCardBody>
             <CCardFooter>

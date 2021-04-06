@@ -172,7 +172,7 @@ const Experts = (props) => {
                   <th>Designation</th>
 
                   <th>Country</th>
-                  <th>Role</th>
+                  {/* <th>Role</th> */}
                   <th>Created At</th>
                   <th>Action</th>
                 </tr>
@@ -209,7 +209,7 @@ const Experts = (props) => {
                         <td>{item.email ? item.email : "-"}</td>
                         <td>{item.designation}</td>
                         <td>{item.country}</td>
-                        <td>{item.current_role}</td>
+                        {/* <td>{item.current_role}</td> */}
                         <td>
                           {" "}
                           {createdAt !== "Invalid date" ? createdAt : "-"}
