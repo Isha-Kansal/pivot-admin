@@ -5,15 +5,16 @@ export const optionsFields = [
   { value: "Finance", label: "Finance" },
   { value: "Consulting", label: "Consulting" },
   { value: "Coaching", label: "Coaching" },
-  { value: "Art & Entertainment", label: "Art & Entertainment" },
+  { value: "Arts & Entertainment", label: "Arts & Entertainment" },
+  { value: "Entrepreneurship", label: "Entrepreneurship" },
   { value: "Freelance", label: "Freelance" },
   { value: "HR/Recruitment", label: "HR/Recruitment" },
   { value: "Healthcare", label: "Healthcare" },
   { value: "Education", label: "Education" },
-  { value: "Entrepreneurship", label: "Entrepreneurship" },
+ 
   { value: "Sustainability", label: "Sustainability" },
   { value: "Consumer Goods", label: "Consumer Goods" },
-  { value: "Logistics", label: "Logistics" },
+  { value: "Ecommerce", label: "Ecommerce" },
   { value: "Other", label: "Other" },
 ];
 

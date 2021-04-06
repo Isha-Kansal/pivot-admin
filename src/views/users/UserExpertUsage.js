@@ -151,7 +151,11 @@ const UserExpertUsage = (props) => {
                             ? "Completed"
                             : "Pending"}
                         </td>
-                        <td></td>
+                        <td>
+                          {item.meeting
+                            ? item.meeting.type
+                            : "-"}
+                        </td>
                         <td></td>
                       </tr>
                     );
