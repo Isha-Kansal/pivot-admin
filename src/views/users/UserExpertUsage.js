@@ -147,7 +147,7 @@ const UserExpertUsage = (props) => {
                             ? `${item.meeting.date} & ${item.meeting.time}`
                             : "-"}
                         </td>
-                        {console.log("9487894587985978",)}
+                     
                         <td>
                           {item.payment_status === "paid"
                             ? "Completed"

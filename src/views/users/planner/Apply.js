@@ -54,7 +54,7 @@ const Apply = (props) => {
 
 
   
-console.log("48670450790459670",apply)
+
   
   return (
     <div id="accordion">
@@ -126,7 +126,7 @@ console.log("48670450790459670",apply)
                   let istDate = new Date(item && item.applied_date);
 
                   let appliedDate = moment(istDate).format("DD-MM-YYYY, hh:mm a");
-                  console.log("89456984598945879849",appliedDate)
+               
                   return (
                     <tbody>
                       <td>{item.id ? item.id : "-"}</td>
@@ -155,7 +155,7 @@ console.log("48670450790459670",apply)
                       </td>
                       <td>{item.contact_email ? item.contact_email : "-"}</td>
                       <td>{item.referral ? "Y" : "N"}</td>
-{console.log("89e568948596849586",item.offer_log)}
+
                       {/* <td>
                         {item.offer_log &&
                         `Bonus: ${item.offer_log.bonus}, Commission: ${item.offer_log.commission}, Equity: ${item.offer_log.equity}, Salary: 

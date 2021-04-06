@@ -92,7 +92,7 @@ const Prepare = (props) => {
 
               {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
-            {console.log("495dfhgdfh845879", job_application_prepData)}
+          
             <table className="table">
               {job_application_prepData && (
                 <tbody>
@@ -200,7 +200,7 @@ const Prepare = (props) => {
                   {/* <th>Sample Question</th> */}
                   <th>Talking Points</th>
                 </thead>
-                {console.log("478648789487984", interview_prepData)}
+              
                 {interview_prepData && interview_prepData.length > 0 && interview_prepData.map((data) => {
                   return (
                     <tbody>

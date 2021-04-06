@@ -18,17 +18,17 @@ const sagaMiddleware = createSagaMiddleware();
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-export const store = createStore(
-  persistedReducer,
-  compose(applyMiddleware(sagaMiddleware, logger))
-);
+// export const store = createStore(
+//   persistedReducer,
+//   compose(applyMiddleware(sagaMiddleware, logger))
+// );
 
-// export const store = isProduction
-//   ? createStore(persistedReducer, compose(applyMiddleware(sagaMiddleware)))
-//   : createStore(
-//       persistedReducer,
-//       compose(applyMiddleware(sagaMiddleware, logger))
-//     );
+export const store = isProduction
+  ? createStore(persistedReducer, compose(applyMiddleware(sagaMiddleware)))
+  : createStore(
+      persistedReducer,
+      compose(applyMiddleware(sagaMiddleware, logger))
+    );
 
 export const persistor = persistStore(store);
 
