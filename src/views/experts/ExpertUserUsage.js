@@ -114,6 +114,7 @@ const ExpertUserUsage = (props) => {
                 {appointments &&
                   appointments.length > 0 &&
                   appointments.map((item, index) => {
+                    let topics=item&&item.topics&&item.topics.join(", ")
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -125,16 +126,7 @@ const ExpertUserUsage = (props) => {
                       >
                         <td>{item.user_id}</td>
 
-                        {/* <td>
-                          {" "}
-                          {item.meeting &&
-                          item.meeting.firstName &&
-                          item.meeting.lastName
-                            ? item.meeting.firstName +
-                              " " +
-                              item.meeting.lastName
-                            : "-"}
-                        </td> */}
+                     
 
                         <td>
                           {" "}
@@ -163,7 +155,9 @@ const ExpertUserUsage = (props) => {
                             ? item.meeting.type
                             : "-"}
                         </td>
-                        <td></td>
+                        <td>
+                        {topics?topics:"-"}
+                        </td>
                       </tr>
                     );
                   })}

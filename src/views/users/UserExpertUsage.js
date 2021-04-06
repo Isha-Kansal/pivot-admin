@@ -32,6 +32,7 @@ const UserExpertUsage = (props) => {
       fetchUserExpert(
         `appointment/all?id=${user_id}&type=user&offset=${offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
+          
           const { appointments, count } = value.data;
 
           setAppointments(appointments);
@@ -92,9 +93,8 @@ const UserExpertUsage = (props) => {
           <CCardBody>
             <Table
               responsive
-              className={`table ${
-                appointments.length === 0 ? "tableHeight" : ""
-              }`}
+              className={`table ${appointments.length === 0 ? "tableHeight" : ""
+                }`}
             >
               {appointments && appointments.length > 0 && (
                 <thead>
@@ -119,6 +119,8 @@ const UserExpertUsage = (props) => {
                 {appointments &&
                   appointments.length > 0 &&
                   appointments.map((item, index) => {
+               
+                  let topics=item&&item.topics&&item.topics.join(", ")
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -132,11 +134,11 @@ const UserExpertUsage = (props) => {
                         <td>
                           {" "}
                           {item.expert &&
-                          item.expert.first_name &&
-                          item.expert.last_name
+                            item.expert.first_name &&
+                            item.expert.last_name
                             ? item.expert.first_name +
-                              " " +
-                              item.expert.last_name
+                            " " +
+                            item.expert.last_name
                             : "-"}
                         </td>
 
@@ -156,7 +158,9 @@ const UserExpertUsage = (props) => {
                             ? item.meeting.type
                             : "-"}
                         </td>
-                        <td></td>
+                        <td>
+                        {topics?topics:"-"}
+                        </td>
                       </tr>
                     );
                   })}
