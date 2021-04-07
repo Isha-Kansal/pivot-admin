@@ -84,6 +84,7 @@ class AddExpert extends Component {
 
       (value) => {
         if (value.status === 200) {
+          console.log("8935698903896030780",value)
           const calendarOptions = (value.data.services || []).map(
             (service) => ({
               value: service.calendar_id,
@@ -142,8 +143,9 @@ class AddExpert extends Component {
         rates,
         info,
         profile_pic,
+        calendar
       } = value.data.expert;
-
+    
       const infoData = info.map((el) => {
         return { value: el };
       });
@@ -167,18 +169,21 @@ class AddExpert extends Component {
           expertise: skills && skills[0] && skills[0].values,
           calendarId: calendar_id,
           expertImage: profile_pic,
+          // selectedCalendar:calendar.name
         },
         () => {
           this.getCalenderList(() => {
             const { serviceList, calendarId, calendarOptions } = this.state;
 
             const selectedCalendar = (calendarOptions || []).find(
+            
               (service) => service.value === calendarId
+              
             );
-
+console.log("selectedCalendarselectedCalendar",calendarOptions,calendarId,calendar)
             this.setState({
               selectedCalendar: selectedCalendar,
-              pricing: rates || [],
+               pricing: rates || [],
             });
           });
         }
@@ -343,7 +348,7 @@ class AddExpert extends Component {
       linkedIn,
       skill,
     } = this.state;
-
+    console.log("456094590490579", selectedCalendar)
     if (first_name === "") {
       this.setState({
         errorType: "first_name",
@@ -521,7 +526,7 @@ class AddExpert extends Component {
       return;
     }
 
-  
+
     // if (industry === "") {
     //   this.setState({
     //     errorType: "industry",
@@ -560,6 +565,7 @@ class AddExpert extends Component {
         return;
       }
     }
+
     if (selectedCalendar === null || !selectedCalendar.value) {
       this.setState({
         errorType: "selectedCalendar",
@@ -618,17 +624,17 @@ class AddExpert extends Component {
       });
       return;
     }
-    if (role === "") {
-      this.setState({
-        errorType: "role",
-        errorText: (
-          <span className="text-danger">
-            <b>Select your current role</b>
-          </span>
-        ),
-      });
-      return;
-    }
+    // if (role === "") {
+    //   this.setState({
+    //     errorType: "role",
+    //     errorText: (
+    //       <span className="text-danger">
+    //         <b>Select your current role</b>
+    //       </span>
+    //     ),
+    //   });
+    //   return;
+    // }
     if (about.length === 0) {
       this.setState({
         errorType: "about",
@@ -727,6 +733,7 @@ class AddExpert extends Component {
   };
 
   callApiAddExpert = () => {
+
     const {
       first_name,
       last_name,
@@ -1125,7 +1132,7 @@ class AddExpert extends Component {
                   </CCol>
                 </CFormGroup>
 
-              
+
 
                 <CFormGroup row className="my-0">
                   <CCol xs="6">
@@ -1156,7 +1163,8 @@ class AddExpert extends Component {
                           this.handleChange(data, "calendarId")
                         }
                         value={selectedCalendar}
-                        options={calendarOptions}
+                        
+                         options={calendarOptions}
                       ></Select>
                       {this.errorShow("selectedCalendar")}
                     </CFormGroup>
@@ -1340,7 +1348,7 @@ class AddExpert extends Component {
                     </CFormGroup>
                   </CCol>
                 </CFormGroup>
-              
+
               </CForm>
             </CCardBody>
             <CCardFooter>

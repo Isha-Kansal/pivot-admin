@@ -153,7 +153,7 @@ const User = (props) => {
                             </td>
                           </tr>
                         )}
-                        {user.contact_no && (
+                        {user.contact_no&&user.contact_no.value && (
                           <tr>
                             <td>Mobile</td>
                             <td>
