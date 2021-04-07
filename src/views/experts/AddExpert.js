@@ -84,7 +84,7 @@ class AddExpert extends Component {
 
       (value) => {
         if (value.status === 200) {
-          console.log("8935698903896030780",value)
+        
           const calendarOptions = (value.data.services || []).map(
             (service) => ({
               value: service.calendar_id,
@@ -145,7 +145,7 @@ class AddExpert extends Component {
         profile_pic,
         calendar
       } = value.data.expert;
-    
+
       const infoData = info.map((el) => {
         return { value: el };
       });
@@ -176,14 +176,14 @@ class AddExpert extends Component {
             const { serviceList, calendarId, calendarOptions } = this.state;
 
             const selectedCalendar = (calendarOptions || []).find(
-            
+
               (service) => service.value === calendarId
-              
+
             );
-console.log("selectedCalendarselectedCalendar",calendarOptions,calendarId,calendar)
+         
             this.setState({
-              selectedCalendar: selectedCalendar,
-               pricing: rates || [],
+              selectedCalendar: selectedCalendar || { value: calendar.id, label: calendar.name },
+              pricing: rates || [],
             });
           });
         }
@@ -348,7 +348,7 @@ console.log("selectedCalendarselectedCalendar",calendarOptions,calendarId,calend
       linkedIn,
       skill,
     } = this.state;
-    console.log("456094590490579", selectedCalendar)
+  
     if (first_name === "") {
       this.setState({
         errorType: "first_name",
@@ -1163,8 +1163,8 @@ console.log("selectedCalendarselectedCalendar",calendarOptions,calendarId,calend
                           this.handleChange(data, "calendarId")
                         }
                         value={selectedCalendar}
-                        
-                         options={calendarOptions}
+
+                        options={calendarOptions}
                       ></Select>
                       {this.errorShow("selectedCalendar")}
                     </CFormGroup>
