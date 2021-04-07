@@ -90,13 +90,14 @@ const UserResourceUsage = (props) => {
               {resources && resources.length > 0 && (
                 <thead>
                   <tr>
-                    <th className="text-nowrap ">Id</th>
+                  <th className="text-nowrap ">ID</th>
+                    <th>Resources</th>
 
-                    <th>Name</th>
+                    {/* <th>Name</th>
 
                     <th>Format</th>
-                    <th>Price</th>
-                    <th>Website Link</th>
+                    <th>Price</th> */}
+                    <th>Website Links</th>
                   </tr>
                 </thead>
               )}
@@ -123,13 +124,13 @@ const UserResourceUsage = (props) => {
                         <td>{item._id}</td>
                         <td> {item.title ? item.title : "-"}</td>
 
-                        <td>
+                        {/* <td>
                           {" "}
                           {item.resource_format ? item.resource_format : "-"}
                         </td>
                         <td>
                           {item.price ? item.price.value || item.price : "-"}
-                        </td>
+                        </td> */}
 
 
                         <td>
