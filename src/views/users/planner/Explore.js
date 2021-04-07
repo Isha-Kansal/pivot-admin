@@ -21,8 +21,9 @@ import {
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Explore = (props) => {
-  const { explore,loading } = props;
 
+  const { explore, loading } = props;
+ 
   const [accordion, setAccordion] = useState(1);
   const [search, setSearch] = useState("");
   const getBadge = (status) => {
@@ -57,7 +58,7 @@ const Explore = (props) => {
 
   let introspectionData =
     explore && explore.introspection && explore.introspection.data;
-
+ 
   let extrospectionData =
     explore && explore.extrospection && explore.extrospection.data;
   let personality_assessmentData =
@@ -146,419 +147,421 @@ const Explore = (props) => {
   let filteredPracticalUnderstanding =
     filterRecordsPracticalUnderstanding() || [];
   let filteredCareerOptions = filterRecordsCareerOptions() || [];
-
-  if(!explore&&!loading)
-  {
-    
-  return(<div className="no-records-planner">
-  <h5 className="mb-0">
-    <i>No Records Found</i>
-  </h5>
   
-  </div>)
-    
+  if ((!explore&&!loading)) {
+
+    return (<div className="no-records-planner">
+      <h5 className="mb-0">
+        <i>No Records Found</i>
+      </h5>
+
+    </div>)
+
   }
-else{
-  return (
-    <div id="accordion">
-      <CCard className="mb-0">
-        <CCardHeader id="headingOne">
-          <CButton
-            block
-            color="link"
-            className="text-left m-0 p-0 d-flex justify-content-between"
-            onClick={() => setAccordion(accordion === 0 ? null : 0)}
-          >
-            <h5 className="m-0 p-0">Introspection</h5>
-          </CButton>
-        </CCardHeader>
-        <CCollapse show={accordion === 0}>
-          <CCardBody>
-            <CCardHeader>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <td>Status</td>
-                    <td>
-                      {" "}
-                      <CBadge
-                        color={getBadge(
-                          explore &&
+
+  else {
+    return (
+      <div id="accordion">
+        <CCard className="mb-0">
+          <CCardHeader id="headingOne">
+            <CButton
+              block
+              color="link"
+              className="text-left m-0 p-0 d-flex justify-content-between"
+              onClick={() => setAccordion(accordion === 0 ? null : 0)}
+            >
+              <h5 className="m-0 p-0">Introspection</h5>
+            </CButton>
+          </CCardHeader>
+          <CCollapse show={accordion === 0}>
+            <CCardBody>
+              <CCardHeader>
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <td>Status</td>
+                      <td>
+                        {" "}
+                        <CBadge
+                          color={getBadge(
+                            explore &&
                             explore.introspection &&
                             explore.introspection.status
-                        )}
-                      >
-                        {explore &&
-                          explore.introspection &&
-                          explore.introspection.status}
-                      </CBadge>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              {/* <Search handleSearch={handleSearch} /> */}
-            </CCardHeader>
-            <Table responsive>
-              <thead>
-                <th className="text-nowrap ">ID</th>
-                <th>Priority Level</th>
-
-                <th>My Interests</th>
-                <th>My Skills</th>
-
-                <th>My Values</th>
-              </thead>
-              {filteredIntrospection &&
-                filteredIntrospection.length > 0 &&
-                filteredIntrospection.map((item) => {
-                  return (
-                    <tbody>
-                      <td>{item.id ? item.id : "-"}</td>
-                      <td>
-                        <CBadge color={getBadge(item.fields[0].value)}>
-                          {item.fields[0].value}
+                          )}
+                        >
+                          {explore &&
+                            explore.introspection &&
+                            explore.introspection.status}
                         </CBadge>
                       </td>
+                    </tr>
+                  </tbody>
+                </table>
 
-                      <td>
-                        {item.fields[1].value ? item.fields[1].value : "-"}
-                      </td>
-                      <td>
-                        {item.fields[2].value ? item.fields[2].value : "-"}
-                      </td>
-                      <td>
-                        {item.fields[3].value ? item.fields[3].value : "-"}
-                      </td>
-                    </tbody>
-                  );
-                })}
-              {filteredIntrospection && filteredIntrospection.length === 0 && (
-                 <div className="no-records">
-                 <h5 className="mb-0">
-                   <i>No Records Found</i>
-                 </h5>
-               </div>
-              )}
-            </Table>
+                {/* <Search handleSearch={handleSearch} /> */}
+              </CCardHeader>
+              <Table responsive>
+                <thead>
+                  <th className="text-nowrap ">ID</th>
+                  <th>Priority Level</th>
 
-            {/* <PaginationCommon pageChange={pageChange} /> */}
-          </CCardBody>
-        </CCollapse>
-      </CCard>
-      <CCard className="mb-0">
-        <CCardHeader id="headingTwo">
-          <CButton
-            block
-            color="link"
-            className="text-left m-0 p-0"
-            onClick={() => setAccordion(accordion === 1 ? null : 1)}
-          >
-            <h5 className="m-0 p-0">Extrospection</h5>
-          </CButton>
-        </CCardHeader>
-        <CCollapse show={accordion === 1}>
-          <CCardBody>
-            <CCardHeader>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <td>Status</td>
-                    <td>
-                      {" "}
-                      <CBadge
-                        color={getBadge(
-                          explore &&
+                  <th>My Interests</th>
+                  <th>My Skills</th>
+
+                  <th>My Values</th>
+                </thead>
+                {filteredIntrospection &&
+                  filteredIntrospection.length > 0 &&
+                  filteredIntrospection.map((item) => {
+                
+                    return (
+                      <tbody>
+                        <td>{item.id ? item.id : "-"}</td>
+                        <td>
+                          <CBadge color={getBadge(item.fields[0].value)}>
+                            {item.fields[0].value}
+                          </CBadge>
+                        </td>
+
+                        <td>
+                          {item.fields[1].value ? item.fields[1].value : "-"}
+                        </td>
+                        <td>
+                          {item.fields[2].value ? item.fields[2].value : "-"}
+                        </td>
+                        <td>
+                          {item.fields[3].value ? item.fields[3].value : "-"}
+                        </td>
+                      </tbody>
+                    );
+                  })}
+                {filteredIntrospection && filteredIntrospection.length === 0 && (
+
+                  <div className="no-records">
+                    <h5 className="mb-0">
+                      <i>No Records Found</i>
+                    </h5>
+                  </div>
+                )}
+              </Table>
+
+              {/* <PaginationCommon pageChange={pageChange} /> */}
+            </CCardBody>
+          </CCollapse>
+        </CCard>
+        <CCard className="mb-0">
+          <CCardHeader id="headingTwo">
+            <CButton
+              block
+              color="link"
+              className="text-left m-0 p-0"
+              onClick={() => setAccordion(accordion === 1 ? null : 1)}
+            >
+              <h5 className="m-0 p-0">Extrospection</h5>
+            </CButton>
+          </CCardHeader>
+          <CCollapse show={accordion === 1}>
+            <CCardBody>
+              <CCardHeader>
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <td>Status</td>
+                      <td>
+                        {" "}
+                        <CBadge
+                          color={getBadge(
+                            explore &&
                             explore.extrospection &&
                             explore.extrospection.status
-                        )}
-                      >
-                        {explore &&
-                          explore.extrospection &&
-                          explore.extrospection.status}
-                      </CBadge>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              {/* <Search handleSearch={handleSearch} /> */}
-            </CCardHeader>
-            <Table responsive>
-              <thead>
-                <th className="text-nowrap ">ID</th>
-                <th>My Interests, Skills and Values</th>
-
-                <th>World Needs</th>
-                <th>World Pays For</th>
-              </thead>
-              {filteredExtrospection &&
-                filteredExtrospection.length > 0 &&
-                filteredExtrospection.map((item) => {
-                  return (
-                    <tbody>
-                      <td>{item.id ? item.id : "-"}</td>
-                      <td>
-                        {item.fields[0].value ? item.fields[0].value : "-"}
+                          )}
+                        >
+                          {explore &&
+                            explore.extrospection &&
+                            explore.extrospection.status}
+                        </CBadge>
                       </td>
+                    </tr>
+                  </tbody>
+                </table>
 
-                      <td>
-                        {item.fields[1].value ? item.fields[1].value : "-"}
-                      </td>
-                      <td>
-                        {item.fields[2].value ? item.fields[2].value : "-"}
-                      </td>
-                    </tbody>
-                  );
-                })}
-              {filteredExtrospection && filteredExtrospection.length === 0 && (
-                <div className="no-records">
-                  <h5 className="mb-0">
-                    <i>No Records Found</i>
-                  </h5>
-                </div>
-              )}
-            </Table>
-            {/* <PaginationCommon pageChange={pageChange} /> */}
-          </CCardBody>
-        </CCollapse>
-      </CCard>
-      <CCard className="mb-0">
-        <CCardHeader id="headingThree">
-          <CButton
-            block
-            color="link"
-            className="text-left m-0 p-0"
-            onClick={() => setAccordion(accordion === 2 ? null : 2)}
-          >
-            <h5 className="m-0 p-0">Personality Assessment</h5>
-          </CButton>
-        </CCardHeader>
-        <CCollapse show={accordion === 2}>
-          <CCardHeader>
-            <table className="table">
-              <tbody>
-                <tr>
-                  <td>Status</td>
-                  <td>
-                    {" "}
-                    <CBadge
-                      color={getBadge(
-                        explore &&
+                {/* <Search handleSearch={handleSearch} /> */}
+              </CCardHeader>
+              <Table responsive>
+                <thead>
+                  <th className="text-nowrap ">ID</th>
+                  <th>My Interests, Skills and Values</th>
+
+                  <th>World Needs</th>
+                  <th>World Pays For</th>
+                </thead>
+                {filteredExtrospection &&
+                  filteredExtrospection.length > 0 &&
+                  filteredExtrospection.map((item) => {
+                    return (
+                      <tbody>
+                        <td>{item.id ? item.id : "-"}</td>
+                        <td>
+                          {item.fields[0].value ? item.fields[0].value : "-"}
+                        </td>
+
+                        <td>
+                          {item.fields[1].value ? item.fields[1].value : "-"}
+                        </td>
+                        <td>
+                          {item.fields[2].value ? item.fields[2].value : "-"}
+                        </td>
+                      </tbody>
+                    );
+                  })}
+                {filteredExtrospection && filteredExtrospection.length === 0 && (
+                  <div className="no-records">
+                    <h5 className="mb-0">
+                      <i>No Records Found</i>
+                    </h5>
+                  </div>
+                )}
+              </Table>
+              {/* <PaginationCommon pageChange={pageChange} /> */}
+            </CCardBody>
+          </CCollapse>
+        </CCard>
+        <CCard className="mb-0">
+          <CCardHeader id="headingThree">
+            <CButton
+              block
+              color="link"
+              className="text-left m-0 p-0"
+              onClick={() => setAccordion(accordion === 2 ? null : 2)}
+            >
+              <h5 className="m-0 p-0">Personality Assessment</h5>
+            </CButton>
+          </CCardHeader>
+          <CCollapse show={accordion === 2}>
+            <CCardHeader>
+              <table className="table">
+                <tbody>
+                  <tr>
+                    <td>Status</td>
+                    <td>
+                      {" "}
+                      <CBadge
+                        color={getBadge(
+                          explore &&
                           explore.personality_assessment &&
                           explore.personality_assessment.status
-                      )}
-                    >
-                      {explore &&
-                        explore.personality_assessment &&
-                        explore.personality_assessment.status}
-                    </CBadge>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                        )}
+                      >
+                        {explore &&
+                          explore.personality_assessment &&
+                          explore.personality_assessment.status}
+                      </CBadge>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
 
-            {/* <Search handleSearch={handleSearch} /> */}
+              {/* <Search handleSearch={handleSearch} /> */}
+            </CCardHeader>
+            <CCardBody>
+              <Table responsive>
+                <thead>
+                  <th className="text-nowrap ">ID</th>
+                  <th>Career Option</th>
+                </thead>
+
+                {filteredPersonalityAssessment &&
+                  filteredPersonalityAssessment.length > 0 &&
+                  filteredPersonalityAssessment.map((item) => {
+                    return (
+                      <tbody>
+                        <td>{item.id ? item.id : "-"}</td>
+                        <td>{item.value ? item.value : "-"}</td>
+                      </tbody>
+                    );
+                  })}
+                {filteredPersonalityAssessment &&
+                  filteredPersonalityAssessment.length === 0 && (
+                    <div className="no-records">
+                      <h5 className="mb-0">
+                        <i>No Records Found</i>
+                      </h5>
+                    </div>
+                  )}
+              </Table>
+              {/* <PaginationCommon pageChange={pageChange} /> */}
+            </CCardBody>
+          </CCollapse>
+        </CCard>
+
+        <CCard className="mb-0">
+          <CCardHeader id="headingThree">
+            <CButton
+              block
+              color="link"
+              className="text-left m-0 p-0"
+              onClick={() => setAccordion(accordion === 3 ? null : 3)}
+            >
+              <h5 className="m-0 p-0">Practical Understanding</h5>
+            </CButton>
           </CCardHeader>
-          <CCardBody>
-            <Table responsive>
-              <thead>
-                <th className="text-nowrap ">ID</th>
-                <th>Career Option</th>
-              </thead>
-
-              {filteredPersonalityAssessment &&
-                filteredPersonalityAssessment.length > 0 &&
-                filteredPersonalityAssessment.map((item) => {
-                  return (
-                    <tbody>
-                      <td>{item.id ? item.id : "-"}</td>
-                      <td>{item.value ? item.value : "-"}</td>
-                    </tbody>
-                  );
-                })}
-              {filteredPersonalityAssessment &&
-                filteredPersonalityAssessment.length === 0 && (
-                  <div className="no-records">
-                    <h5 className="mb-0">
-                      <i>No Records Found</i>
-                    </h5>
-                  </div>
-                )}
-            </Table>
-            {/* <PaginationCommon pageChange={pageChange} /> */}
-          </CCardBody>
-        </CCollapse>
-      </CCard>
-
-      <CCard className="mb-0">
-        <CCardHeader id="headingThree">
-          <CButton
-            block
-            color="link"
-            className="text-left m-0 p-0"
-            onClick={() => setAccordion(accordion === 3 ? null : 3)}
-          >
-            <h5 className="m-0 p-0">Practical Understanding</h5>
-          </CButton>
-        </CCardHeader>
-        <CCollapse show={accordion === 3}>
-          <CCardBody>
-            <CCardHeader>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <td>Status</td>
-                    <td>
-                      {" "}
-                      <CBadge
-                        color={getBadge(
-                          explore &&
+          <CCollapse show={accordion === 3}>
+            <CCardBody>
+              <CCardHeader>
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <td>Status</td>
+                      <td>
+                        {" "}
+                        <CBadge
+                          color={getBadge(
+                            explore &&
                             explore.practical_understanding &&
                             explore.practical_understanding.status
-                        )}
-                      >
-                        {explore &&
-                          explore.practical_understanding &&
-                          explore.practical_understanding.status}
-                      </CBadge>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              {/* <Search handleSearch={handleSearch} /> */}
-            </CCardHeader>
-            <Table responsive>
-              <thead>
-                <th className="text-nowrap ">ID</th>
-                <th>Career Option</th>
-
-                <th>Practical Understanding Via</th>
-                <th>Contact Person</th>
-                <th>Contact Email</th>
-                <th>Notes On</th>
-              </thead>
-              {filteredPracticalUnderstanding &&
-                filteredPracticalUnderstanding.length > 0 &&
-                filteredPracticalUnderstanding.map((item) => {
-                  return (
-                    <tbody>
-                      <td>{item.id ? item.id : "-"}</td>
-                      <td>{item.career_option ? item.career_option : "-"}</td>
-                      <td>
-                        {item.practical_understanding_via
-                          ? item.practical_understanding_via
-                          : "-"}
+                          )}
+                        >
+                          {explore &&
+                            explore.practical_understanding &&
+                            explore.practical_understanding.status}
+                        </CBadge>
                       </td>
-                      <td>{item.contact_person ? item.contact_person : "-"}</td>
-                      <td>{item.contact_email ? item.contact_email : "-"}</td>
-                      <td>{item.notes ? item.notes : "-"}</td>
-                    </tbody>
-                  );
-                })}
-              {filteredPracticalUnderstanding &&
-                filteredPracticalUnderstanding.length === 0 && (
+                    </tr>
+                  </tbody>
+                </table>
+
+                {/* <Search handleSearch={handleSearch} /> */}
+              </CCardHeader>
+              <Table responsive>
+                <thead>
+                  <th className="text-nowrap ">ID</th>
+                  <th>Career Option</th>
+
+                  <th>Practical Understanding Via</th>
+                  <th>Contact Person</th>
+                  <th>Contact Email</th>
+                  <th>Notes On</th>
+                </thead>
+                {filteredPracticalUnderstanding &&
+                  filteredPracticalUnderstanding.length > 0 &&
+                  filteredPracticalUnderstanding.map((item) => {
+                    return (
+                      <tbody>
+                        <td>{item.id ? item.id : "-"}</td>
+                        <td>{item.career_option ? item.career_option : "-"}</td>
+                        <td>
+                          {item.practical_understanding_via
+                            ? item.practical_understanding_via
+                            : "-"}
+                        </td>
+                        <td>{item.contact_person ? item.contact_person : "-"}</td>
+                        <td>{item.contact_email ? item.contact_email : "-"}</td>
+                        <td>{item.notes ? item.notes : "-"}</td>
+                      </tbody>
+                    );
+                  })}
+                {filteredPracticalUnderstanding &&
+                  filteredPracticalUnderstanding.length === 0 && (
+                    <div className="no-records">
+                      <h5 className="mb-0">
+                        <i>No Records Found</i>
+                      </h5>
+                    </div>
+                  )}
+              </Table>
+              {/* <PaginationCommon pageChange={pageChange} /> */}
+            </CCardBody>
+          </CCollapse>
+        </CCard>
+
+        <CCard className="mb-0">
+          <CCardHeader id="headingThree">
+            <CButton
+              block
+              color="link"
+              className="text-left m-0 p-0"
+              onClick={() => setAccordion(accordion === 4 ? null : 4)}
+            >
+              <h5 className="m-0 p-0">Career Options</h5>
+            </CButton>
+          </CCardHeader>
+          <CCollapse show={accordion === 4}>
+            <CCardBody>
+              <CCardHeader>
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <td>Status</td>
+                      <td>
+                        {" "}
+                        <CBadge
+                          color={getBadge(
+                            explore &&
+                            explore.career_options &&
+                            explore.career_options.status
+                          )}
+                        >
+                          {explore &&
+                            explore.career_options &&
+                            explore.career_options.status}
+                        </CBadge>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                {/* <Search handleSearch={handleSearch} /> */}
+              </CCardHeader>
+              <Table responsive>
+                <thead>
+                  <th className="text-nowrap ">ID</th>
+                  <th>Career Option</th>
+
+                  <th>Pros</th>
+                  <th>Cons</th>
+                  <th>Net Score</th>
+                  <th>Decision</th>
+                </thead>
+                {filteredCareerOptions &&
+                  filteredCareerOptions.length > 0 &&
+                  filteredCareerOptions.map((item) => {
+                    return (
+                      <tbody>
+                        <td>{item.id ? item.id : "-"}</td>
+                        <td>
+                          {item.fields[0].value ? item.fields[0].value : "-"}
+                        </td>
+                        <td>
+                          {item.fields[1].value ? item.fields[1].value : "-"}
+                        </td>
+                        <td>
+                          {item.fields[2].value ? item.fields[2].value : "-"}
+                        </td>
+                        <td>
+                          {item.fields[3].value ? item.fields[3].value : "-"}
+                        </td>
+                        <td>
+                          {item.fields[4].value ? item.fields[4].value : "-"}
+                        </td>
+                      </tbody>
+                    );
+                  })}
+                {filteredCareerOptions && filteredCareerOptions.length === 0 && (
                   <div className="no-records">
                     <h5 className="mb-0">
                       <i>No Records Found</i>
                     </h5>
                   </div>
                 )}
-            </Table>
-            {/* <PaginationCommon pageChange={pageChange} /> */}
-          </CCardBody>
-        </CCollapse>
-      </CCard>
+              </Table>
+              {/* <PaginationCommon pageChange={pageChange} /> */}
+            </CCardBody>
+          </CCollapse>
+        </CCard>
+      </div>
+    );
+  }
 
-      <CCard className="mb-0">
-        <CCardHeader id="headingThree">
-          <CButton
-            block
-            color="link"
-            className="text-left m-0 p-0"
-            onClick={() => setAccordion(accordion === 4 ? null : 4)}
-          >
-            <h5 className="m-0 p-0">Career Options</h5>
-          </CButton>
-        </CCardHeader>
-        <CCollapse show={accordion === 4}>
-          <CCardBody>
-            <CCardHeader>
-              <table className="table">
-                <tbody>
-                  <tr>
-                    <td>Status</td>
-                    <td>
-                      {" "}
-                      <CBadge
-                        color={getBadge(
-                          explore &&
-                            explore.career_options &&
-                            explore.career_options.status
-                        )}
-                      >
-                        {explore &&
-                          explore.career_options &&
-                          explore.career_options.status}
-                      </CBadge>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
 
-              {/* <Search handleSearch={handleSearch} /> */}
-            </CCardHeader>
-            <Table responsive>
-              <thead>
-                <th className="text-nowrap ">ID</th>
-                <th>Career Option</th>
-
-                <th>Pros</th>
-                <th>Cons</th>
-                <th>Net Score</th>
-                <th>Decision</th>
-              </thead>
-              {filteredCareerOptions &&
-                filteredCareerOptions.length > 0 &&
-                filteredCareerOptions.map((item) => {
-                  return (
-                    <tbody>
-                      <td>{item.id ? item.id : "-"}</td>
-                      <td>
-                        {item.fields[0].value ? item.fields[0].value : "-"}
-                      </td>
-                      <td>
-                        {item.fields[1].value ? item.fields[1].value : "-"}
-                      </td>
-                      <td>
-                        {item.fields[2].value ? item.fields[2].value : "-"}
-                      </td>
-                      <td>
-                        {item.fields[3].value ? item.fields[3].value : "-"}
-                      </td>
-                      <td>
-                        {item.fields[4].value ? item.fields[4].value : "-"}
-                      </td>
-                    </tbody>
-                  );
-                })}
-              {filteredCareerOptions && filteredCareerOptions.length === 0 && (
-                <div className="no-records">
-                  <h5 className="mb-0">
-                    <i>No Records Found</i>
-                  </h5>
-                </div>
-              )}
-            </Table>
-            {/* <PaginationCommon pageChange={pageChange} /> */}
-          </CCardBody>
-        </CCollapse>
-      </CCard>
-    </div>
-  );
-}
-
- 
 };
 export default Explore;

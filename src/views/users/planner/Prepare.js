@@ -51,16 +51,17 @@ const Prepare = (props) => {
     prepare.job_application_prep.data;
   let interview_prepData =
     prepare && prepare.interview_prep && prepare.interview_prep.data;
-    if (!prepare) {
+  if (!prepare) {
 
-      return (<div className="no-records-planner">
-        <h5 className="mb-0">
-          <i>No Records Found</i>
-        </h5>
-  
-      </div>)
-  
-    }
+    return (<div className="no-records-planner">
+      <h5 className="mb-0">
+        <i>No Records Found</i>
+      </h5>
+
+    </div>)
+
+  }
+ 
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -101,16 +102,16 @@ const Prepare = (props) => {
 
               {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
-          
+
             <table className="table">
               {job_application_prepData && (
                 <tbody>
                   <tr>
                     <td>Resume</td>
                     <td>
-                      <a href={job_application_prepData.resume}>
-                        {job_application_prepData.resume
-                          ? job_application_prepData.resume
+                      <a href={job_application_prepData.resume &&job_application_prepData.resume.fileUrl}>
+                        {job_application_prepData.resume && job_application_prepData.resume.fileUrl
+                          ? job_application_prepData.resume.fileUrl
                           : "-"}
                       </a>
                     </td>
@@ -118,9 +119,9 @@ const Prepare = (props) => {
                   <tr>
                     <td>Cover Letter Template</td>
                     <td>
-                      <a href={job_application_prepData.cover_letter}>
-                        {job_application_prepData.cover_letter
-                          ? job_application_prepData.cover_letter
+                      <a href={job_application_prepData.cover_letter_template&&job_application_prepData.cover_letter_template.fileUrl}>
+                        {job_application_prepData.cover_letter_template&&job_application_prepData.cover_letter_template.fileUrl
+                          ? job_application_prepData.cover_letter_template.fileUrl
                           : "-"}
                       </a>
                     </td>
@@ -128,9 +129,9 @@ const Prepare = (props) => {
                   <tr>
                     <td>Portfolio / Work Sample</td>
                     <td>
-                      <a href={job_application_prepData.portfolio_work_sample}>
-                        {job_application_prepData.portfolio_work_sample
-                          ? job_application_prepData.portfolio_work_sample
+                      <a href={job_application_prepData.portfolio_work_sample&&job_application_prepData.portfolio_work_sample.fileUrl}>
+                        {job_application_prepData.portfolio_work_sample&&job_application_prepData.portfolio_work_sample.fileUrl
+                          ? job_application_prepData.portfolio_work_sample.fileUrl
                           : "-"}
                       </a>
                     </td>
@@ -138,9 +139,9 @@ const Prepare = (props) => {
                   <tr>
                     <td>Video Profile</td>
                     <td>
-                      <a href={job_application_prepData.video_profile}>
-                        {job_application_prepData.video_profile
-                          ? job_application_prepData.video_profile
+                      <a href={job_application_prepData.video_profile&&job_application_prepData.video_profile.url}>
+                        {job_application_prepData.video_profile&&job_application_prepData.video_profile.url
+                          ? job_application_prepData.video_profile.url
                           : "-"}
                       </a>
                     </td>
@@ -148,9 +149,9 @@ const Prepare = (props) => {
                   <tr>
                     <td>LinkedIn Profile</td>
                     <td>
-                      <a href={job_application_prepData.linkedin_profile}>
-                        {job_application_prepData.linkedin_profile
-                          ? job_application_prepData.linkedin_profile
+                      <a href={job_application_prepData.linkedin_profile&&job_application_prepData.linkedin_profile.url}>
+                        {job_application_prepData.linkedin_profile&&job_application_prepData.linkedin_profile.url
+                          ? job_application_prepData.linkedin_profile.url
                           : "-"}
                       </a>
                     </td>
@@ -209,7 +210,7 @@ const Prepare = (props) => {
                   {/* <th>Sample Question</th> */}
                   <th>Talking Points</th>
                 </thead>
-              
+
                 {interview_prepData && interview_prepData.length > 0 && interview_prepData.map((data) => {
                   return (
                     <tbody>
@@ -405,7 +406,7 @@ const Prepare = (props) => {
               </Table>
             )}
             {interview_prepData && interview_prepData.length === 0 && (
-              <div className="no-records">
+              <div className="no-records-prepare">
                 <h5 className="mb-0">
                   <i>No Records Found</i>
                 </h5>

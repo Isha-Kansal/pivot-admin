@@ -25,6 +25,7 @@ import Explore from "./planner/Explore";
 import Learn from "./planner/Learn";
 import Prepare from "./planner/Prepare";
 import Apply from "./planner/Apply";
+
 const UserPlanner = (props) => {
   const [user, setUser] = useState({});
   const [plannerData, setPlannerData] = useState({});
@@ -33,12 +34,11 @@ const UserPlanner = (props) => {
   const dispatch = useDispatch();
   useEffect(() => {
     setLoading(true);
-
     const user_id = props && props.match.params.id;
     dispatch(
       fetchOneUser(`user?id=${user_id}`, (value) => {
-      
         setUser(value.data.user);
+      
         setPlannerData(value.data.planner);
         setLoading(false);
       })
@@ -47,7 +47,7 @@ const UserPlanner = (props) => {
   let istDate = new Date(plannerData && plannerData.createdAt);
 
   let createdAt = moment(istDate).format("DD-MM-YYYY, hh:mm a");
-
+ 
   return (
     <CRow>
       <CCol lg={12}>
@@ -79,7 +79,7 @@ const UserPlanner = (props) => {
               </CNav>
               <CTabContent>
                 <CTabPane>
-                  <Explore explore={plannerData && plannerData.explore} loading={loading}/>
+                  <Explore explore={plannerData && plannerData.explore} loading={loading} />
                 </CTabPane>
                 <CTabPane>
                   <Network network={plannerData && plannerData.network} />
