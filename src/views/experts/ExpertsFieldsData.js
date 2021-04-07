@@ -31,7 +31,7 @@ export const optionsSkill = [
 ];
 
 export const optionsCountry = [
-  { value: "India", label: "India" },
+  { value: "India, US", label: "India, US" },
   { value: "United States", label: "United States" },
   { value: "United Kingdom", label: "United Kingdom" },
   { value: "Singapore", label: "Singapore" },
