@@ -74,7 +74,7 @@ const Expert = (props) => {
     expert.rates &&
     expert.rates.map((item, index) => {
       let length = expert.rates && expert.rates.length;
-      console.log("89456845907450", length);
+
       if (index === length - 1) {
         return `${item.serviceName} and ${item.value} ${item.unit} \n`;
       } else {
