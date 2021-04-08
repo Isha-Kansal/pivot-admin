@@ -72,10 +72,16 @@ const Expert = (props) => {
   let serviceName =
     expert &&
     expert.rates &&
-    expert.rates.map((item) => {
-      return `${item.serviceName} and ${item.value} ${item.unit}, \n`;
+    expert.rates.map((item, index) => {
+      let length = expert.rates && expert.rates.length;
+      console.log("89456845907450", length);
+      if (index === length - 1) {
+        return `${item.serviceName} and ${item.value} ${item.unit} \n`;
+      } else {
+        return `${item.serviceName} and ${item.value} ${item.unit}, \n`;
+      }
     });
-console.log("89456845907450",serviceName)
+
   const onClick = () => {
     const expert_id = props && props.match.params.id;
     props.history.push(`/experts/${expert_id}/calls-with-users`);
@@ -256,12 +262,12 @@ console.log("89456845907450",serviceName)
                         {expert.linkedIn && (
                           <tr>
                             <td>Social Media URL</td>
-                           
+
                             <td>
-                          <a href={expert.linkedIn ? expert.linkedIn : "-"}>
-                            {expert.linkedIn ? expert.linkedIn : "-"}
-                          </a>
-                        </td>
+                              <a href={expert.linkedIn ? expert.linkedIn : "-"}>
+                                {expert.linkedIn ? expert.linkedIn : "-"}
+                              </a>
+                            </td>
                           </tr>
                         )}
                         {expert.calendar_id && (
