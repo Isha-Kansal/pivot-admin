@@ -15,7 +15,7 @@ import { withRouter } from "react-router-dom";
 
 import { fetchUsers, userStatus } from "../store/action";
 import PaginationCommon from "../../common/pagination";
-const offsetLimit = 10;
+const offsetLimit = 2;
 const Users = (props) => {
   const history = useHistory();
 
@@ -30,10 +30,21 @@ const Users = (props) => {
   const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
     setLoading(true);
-
+// let difference=newPage-1
+// console.log("differencedifference",difference)
+// let aa;
+// if(difference===1)
+// {
+//  aa=1
+// } 
+// else if(difference>1)
+// {
+//   aa=difference
+// }
     props.fetchUsers(
       `user/all?offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
+       
         const { users, count } = value.data;
         setLoading(false);
         setUsersDetails(users);
@@ -41,6 +52,7 @@ const Users = (props) => {
         setOffset(users.length && users[users.length - 1]._id);
         setPage(newPage);
       }
+     
     );
   };
   const handleSearch = (e) => {

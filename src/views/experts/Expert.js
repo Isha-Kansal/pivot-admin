@@ -75,7 +75,7 @@ const Expert = (props) => {
     expert.rates.map((item) => {
       return `${item.serviceName} and ${item.value} ${item.unit}, \n`;
     });
-
+console.log("89456845907450",serviceName)
   const onClick = () => {
     const expert_id = props && props.match.params.id;
     props.history.push(`/experts/${expert_id}/calls-with-users`);

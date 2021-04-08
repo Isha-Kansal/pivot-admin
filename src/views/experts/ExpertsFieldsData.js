@@ -11,7 +11,7 @@ export const optionsFields = [
   { value: "HR/Recruitment", label: "HR/Recruitment" },
   { value: "Healthcare", label: "Healthcare" },
   { value: "Education", label: "Education" },
- 
+
   { value: "Sustainability", label: "Sustainability" },
   { value: "Consumer Goods", label: "Consumer Goods" },
   { value: "Ecommerce", label: "Ecommerce" },
@@ -31,10 +31,12 @@ export const optionsSkill = [
 ];
 
 export const optionsCountry = [
+  { value: "India", label: "India" },
   { value: "India, US", label: "India, US" },
-  { value: "United States", label: "United States" },
-  { value: "United Kingdom", label: "United Kingdom" },
-  { value: "Singapore", label: "Singapore" },
+  { value: "US", label: "US" },
+  { value: "UK", label: "UK" },
+  { value: "Singapore, US", label: "Singapore, US" },
+  { value: "Germany", label: "Germany" },
   { value: "Other", label: "Other" },
 ];
 
@@ -55,7 +57,59 @@ export const optionsExpertise = [
   { value: "Management Consulting", label: "Management Consulting" },
   { value: "HR", label: "HR" },
   { value: "Compensation & Benefits", label: "Compensation & Benefits" },
-  { value: "Equity Incentives/ESOPs", label: "Equity Incentives/ESOPs" },
+  { value: "Equity Incentives / ESOPs", label: "Equity Incentives / ESOPs" },
+  { value: "Product Management", label: "Product Management" },
+  { value: "Agile Product Delivery", label: "Agile Product Delivery" },
+  { value: "User Experience", label: "User Experience" },
+  { value: "Digital Transformation", label: "Digital Transformation" },
+
+  { value: "Electric Mobility", label: "Electric Mobility" },
+  { value: "Strategy", label: "Strategy" },
+  { value: "Blogging", label: "Blogging" },
+  { value: "Public Speaking", label: "Public Speaking" },
+  { value: "Digital Marketing", label: "Digital Marketing" },
+  { value: "Agency Life", label: "Agency Life" },
+  { value: "Freelancing", label: "Freelancing" },
+  { value: "Content Strategy", label: "Content Strategy" },
+  {
+    value: "Equity Compensation / ESOPs",
+    label: "Equity Compensation / ESOPs",
+  },
+  { value: "Market Research", label: "Market Research" },
+
+  { value: "MBA Education", label: "MBA Education" },
+  { value: "PhD Education", label: "PhD Education" },
+  { value: "Marketing", label: "Marketing" },
+  { value: "Career Change", label: "Career Change" },
+
+  {
+    value: "Product Strategy & Management",
+    label: "Product Strategy & Management",
+  },
+  { value: "Storytelling", label: "Storytelling" },
+  { value: "User Research", label: "User Research" },
+  { value: "TV Production", label: "TV Production" },
+  { value: "Writing", label: "Writing" },
+  { value: "Editing", label: "Editing" },
+  { value: "Public Speaking", label: "Public Speaking" },
+  { value: "Community Building", label: "Community Building" },
+
+  { value: "Data Science", label: "Data Science" },
+  { value: "Advanced Analytics", label: "Advanced Analytics" },
+  { value: "Predictive Modeling", label: "Predictive Modeling" },
+  { value: "Marketing Science", label: "Marketing Science" },
+  { value: "Advertising Strategy", label: "Advertising Strategy" },
+  { value: "Scaling Up Organizations", label: "Scaling Up Organizations" },
+ 
+  { value: "Insurance", label: "Insurance" },
+  { value: "Corporate Leadership", label: "Corporate Leadership" },
+  { value: "Mergers & Acquisitions", label: "Mergers & Acquisitions" },
+  { value: "Corporate Finance", label: "Corporate Finance" },
+  { value: "Consumer Brands Strategy", label: "Consumer Brands Strategy" },
+  { value: "Mental Health & Wellbeing", label: "Mental Health & Wellbeing" },
+  { value: "Non-Profit", label: "Non-Profit" },
+
+  { value: "Digital Content", label: "Digital Content" },
 ];
 
 export const optionsRole = [
@@ -84,6 +138,10 @@ export const optionsIndustry = [
   {
     value: "Alternative Medicine",
     label: "Alternative Medicine",
+  },
+  {
+    value: "Amazon",
+    label: "Amazon",
   },
   {
     value: "Animation",
@@ -138,6 +196,10 @@ export const optionsIndustry = [
     label: "Chemicals",
   },
   {
+    value: "Carta",
+    label: "Carta",
+  },
+  {
     value: "Civic/Social Organization",
     label: "Civic/Social Organization",
   },
@@ -190,6 +252,14 @@ export const optionsIndustry = [
     label: "Cosmetics",
   },
   {
+    value: "Credit Suisse",
+    label: "Credit Suisse",
+  },
+  {
+    value: "Content & Digital Marketer",
+    label: "Content & Digital Marketer",
+  },
+  {
     value: "Dairy",
     label: "Dairy",
   },
@@ -216,6 +286,10 @@ export const optionsIndustry = [
   {
     value: "Electrical/Electronic Manufacturing",
     label: "Electrical/Electronic Manufacturing",
+  },
+  {
+    value: "ETSY",
+    label: "ETSY",
   },
   {
     value: "Entertainment/Movie Production",
@@ -371,6 +445,10 @@ export const optionsIndustry = [
     label: "Law Practice/Law Firms",
   },
   {
+    value: "Law & Crime Network",
+    label: "Law & Crime Network",
+  },
+  {
     value: "Legal Services",
     label: "Legal Services",
   },
@@ -455,8 +533,20 @@ export const optionsIndustry = [
     label: "Music",
   },
   {
+    value: "McKinsey",
+    label: "McKinsey",
+  },
+  {
+    value: "Mercer Consulting",
+    label: "Mercer Consulting",
+  },
+  {
     value: "Nanotechnology",
     label: "Nanotechnology",
+  },
+  {
+    value: "National University",
+    label: "National University",
   },
   {
     value: "Newspapers/Journalism",
@@ -489,6 +579,10 @@ export const optionsIndustry = [
   {
     value: "Packaging/Containers",
     label: "Packaging/Containers",
+  },
+  {
+    value: "Pace Revenue",
+    label: "Pace Revenue",
   },
   {
     value: "Paper/Forest Products",
