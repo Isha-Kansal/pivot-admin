@@ -11,7 +11,7 @@ export const optionsFields = [
   { value: "HR/Recruitment", label: "HR/Recruitment" },
   { value: "Healthcare", label: "Healthcare" },
   { value: "Education", label: "Education" },
-
+  { value: "Advertising", label: "Advertising" },
   { value: "Sustainability", label: "Sustainability" },
   { value: "Consumer Goods", label: "Consumer Goods" },
   { value: "Ecommerce", label: "Ecommerce" },
@@ -100,7 +100,7 @@ export const optionsExpertise = [
   { value: "Marketing Science", label: "Marketing Science" },
   { value: "Advertising Strategy", label: "Advertising Strategy" },
   { value: "Scaling Up Organizations", label: "Scaling Up Organizations" },
- 
+
   { value: "Insurance", label: "Insurance" },
   { value: "Corporate Leadership", label: "Corporate Leadership" },
   { value: "Mergers & Acquisitions", label: "Mergers & Acquisitions" },
