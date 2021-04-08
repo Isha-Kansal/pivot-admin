@@ -32,7 +32,7 @@ const ExpertUserUsage = (props) => {
 
     dispatch(
       fetchUserExpert(
-        `appointment/all?id=${expert_id}&type=expert&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        `appointment/all?id=${expert_id}&type=expert&offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
           const { appointments, count } = value.data;
 

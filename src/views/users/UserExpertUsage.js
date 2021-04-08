@@ -27,7 +27,7 @@ const UserExpertUsage = (props) => {
     setLoading(true);
 
     const user_id = props && props.match.params.id;
-
+console.log("935698948698945",offset)
     dispatch(
       fetchUserExpert(
         `appointment/all?id=${user_id}&type=user&offset=${offset}&limit=${offsetLimit}&search=${search}`,
@@ -52,11 +52,12 @@ const UserExpertUsage = (props) => {
   };
 
   const pageChange = (newPage) => {
+    console.log("3856989838638",newPage,appointments.length && appointments[appointments.length - 1]._id)
     setLoading(true);
     const user_id = props && props.match.params.id;
     dispatch(
       fetchUserExpert(
-        `appointment/all?id=${user_id}&type=user&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        `appointment/all?id=${user_id}&type=user&offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
           const { appointments, count } = value.data;
 

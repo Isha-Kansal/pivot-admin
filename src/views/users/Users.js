@@ -32,7 +32,7 @@ const Users = (props) => {
     setLoading(true);
 
     props.fetchUsers(
-      `user/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      `user/all?offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
         const { users, count } = value.data;
         setLoading(false);

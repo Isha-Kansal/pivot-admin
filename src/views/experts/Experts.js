@@ -38,7 +38,7 @@ const Experts = (props) => {
   const pageChange = (newPage) => {
     setLoading(true);
     props.fetchExperts(
-      `expert/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      `expert/all?offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
         const { experts, count } = value.data;
         setLoading(false);

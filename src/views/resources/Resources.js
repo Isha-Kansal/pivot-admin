@@ -35,7 +35,7 @@ const Resources = (props) => {
   const pageChange = (newPage) => {
     setLoading(true);
     props.fetchResources(
-      `resource/all?offset=${offset}&limit=${offsetLimit}&search=${search}`,
+      `resource/all?offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
       (value) => {
         const { resources, count } = value.data;
         setLoading(false);

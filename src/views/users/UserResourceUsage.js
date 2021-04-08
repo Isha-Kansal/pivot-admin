@@ -54,7 +54,7 @@ const UserResourceUsage = (props) => {
 
     dispatch(
       fetchUserResource(
-        `user/used-resources?user_id=${user_id}&offset=${offset}&limit=${offsetLimit}&search=${search}`,
+        `user/used-resources?user_id=${user_id}&offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
         (value) => {
           const { resources, count, user } = value.data;
           setUser(user);
