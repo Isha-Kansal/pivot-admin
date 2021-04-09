@@ -30,17 +30,6 @@ const Users = (props) => {
   const [count, setCount] = useState(0);
   const pageChange = (newPage) => {
     setLoading(true);
-    // let difference=newPage-1
-    // console.log("differencedifference",difference)
-    // let aa;
-    // if(difference===1)
-    // {
-    //  aa=1
-    // }
-    // else if(difference>1)
-    // {
-    //   aa=difference
-    // }
     props.fetchUsers(
       `user/all?offset=${
         newPage === 1 ? "" : offset
