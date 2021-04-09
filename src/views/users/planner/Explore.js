@@ -135,7 +135,7 @@ const Explore = (props) => {
   let filteredPracticalUnderstanding =
     filterRecordsPracticalUnderstanding() || [];
   let filteredCareerOptions = filterRecordsCareerOptions() || [];
-  console.log("846070470049", accordion);
+
   if (!explore && !loading) {
     return (
       <div className="no-records-planner">
