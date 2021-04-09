@@ -29,17 +29,6 @@ const Users = (props) => {
   const [loading, setLoading] = useState(false);
   const [count, setCount] = useState(0);
 
-  const fetchRecords = ({ limit }) => {
-    return new Promise((resolve) => {
-      props.fetchUsers(
-        `user/all?offset=${offset}&limit=${limit}&search=${search}`,
-        (value) => {
-          resolve(value);
-        }
-      );
-    });
-  };
-
   const pageChange = async (newPage) => {
     setLoading(true);
     const diff = newPage - page;
@@ -62,11 +51,13 @@ const Users = (props) => {
       if (diff > 1) {
         totalLimit = offsetLimit * (diff - 1);
       } else {
-        totalLimit = offsetLimit * diff;
+        totalLimit = offsetLimit * (newPage - 1);
       }
       const users = await new Promise((resolve) => {
         return props.fetchUsers(
-          `user/all?offset=${offset}&limit=${totalLimit}&search=${search}`,
+          `user/all?offset=${
+            diff > 0 ? offset : ""
+          }&limit=${totalLimit}&search=${search}`,
           (value) => {
             const { users } = value.data;
             resolve(users);
@@ -74,22 +65,19 @@ const Users = (props) => {
         );
       });
       if (users) {
-        new Promise((resolve) => {
-          props.fetchUsers(
-            `user/all?offset=${
-              users[users.length - 1]._id
-            }&limit=${offsetLimit}&search=${search}`,
-            (value) => {
-              const { users, count } = value.data;
-              setLoading(false);
-              setUsersDetails(users);
-              setCount(count);
-              setOffset(users.length && users[users.length - 1]._id);
-              setPage(newPage);
-              resolve(true);
-            }
-          );
-        });
+        props.fetchUsers(
+          `user/all?offset=${
+            users[users.length - 1]._id
+          }&limit=${offsetLimit}&search=${search}`,
+          (value) => {
+            const { users, count } = value.data;
+            setLoading(false);
+            setUsersDetails(users);
+            setCount(count);
+            setOffset(users.length && users[users.length - 1]._id);
+            setPage(newPage);
+          }
+        );
       }
     }
   };
