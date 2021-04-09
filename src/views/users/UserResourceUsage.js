@@ -49,23 +49,68 @@ const UserResourceUsage = (props) => {
     setPage(1);
     setOffset("");
   };
-  const pageChange = (newPage) => {
+  const pageChange = async (newPage) => {
     const user_id = props && props.match.params.id;
-
-    dispatch(
-      fetchUserResource(
-        `user/used-resources?user_id=${user_id}&offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
-        (value) => {
-          const { resources, count, user } = value.data;
-          setUser(user);
-          setResources(resources);
-          setLoading(false);
-          setCount(count);
-          setOffset(resources.length && resources[resources.length - 1]._id);
-          setPage(newPage);
-        }
-      )
-    );
+    const diff = newPage - page;
+    if (newPage === 1 || diff === 1) {
+      dispatch(
+        fetchUserResource(
+          `user/used-resources?user_id=${user_id}&offset=${
+            newPage === 1 ? "" : offset
+          }&limit=${offsetLimit}&search=${search}`,
+          (value) => {
+            const { resources, count, user } = value.data;
+            setUser(user);
+            setResources(resources);
+            setLoading(false);
+            setCount(count);
+            setOffset(resources.length && resources[resources.length - 1]._id);
+            setPage(newPage);
+          }
+        )
+      );
+    } else {
+      let totalLimit = 0;
+      if (diff > 1) {
+        totalLimit = offsetLimit * (diff - 1);
+      } else {
+        totalLimit = offsetLimit * (newPage - 1);
+      }
+      const resources = await new Promise((resolve) => {
+        return dispatch(
+          fetchUserResource(
+            `user/used-resources?user_id=${user_id}&offset=${
+              diff > 0 ? offset : ""
+            }&limit=${totalLimit}&search=${search}`,
+            (value) => {
+              const { resources, user } = value.data;
+              setUser(user);
+              resolve(resources);
+            }
+          )
+        );
+      });
+      if (resources) {
+        dispatch(
+          fetchUserResource(
+            `user/used-resources?user_id=${user_id}&offset=${
+              resources[resources.length - 1]._id
+            }&limit=${offsetLimit}&search=${search}`,
+            (value) => {
+              const { resources, count, user } = value.data;
+              setUser(user);
+              setResources(resources);
+              setLoading(false);
+              setCount(count);
+              setOffset(
+                resources.length && resources[resources.length - 1]._id
+              );
+              setPage(newPage);
+            }
+          )
+        );
+      }
+    }
   };
   return (
     <CRow>
@@ -84,13 +129,14 @@ const UserResourceUsage = (props) => {
           <CCardBody>
             <Table
               responsive
-              className={`table ${resources && resources.length === 0 ? "tableHeight" : ""
-                }`}
+              className={`table ${
+                resources && resources.length === 0 ? "tableHeight" : ""
+              }`}
             >
               {resources && resources.length > 0 && (
                 <thead>
                   <tr>
-                  <th className="text-nowrap ">ID</th>
+                    <th className="text-nowrap ">ID</th>
                     <th>Resources</th>
 
                     {/* <th>Name</th>
@@ -111,7 +157,6 @@ const UserResourceUsage = (props) => {
                 {resources &&
                   resources.length > 0 &&
                   resources.map((item, index) => {
-
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -132,13 +177,11 @@ const UserResourceUsage = (props) => {
                           {item.price ? item.price.value || item.price : "-"}
                         </td> */}
 
-
                         <td>
                           <a href={item.website ? item.website : "-"}>
                             {item.website ? item.website : "-"}
                           </a>
                         </td>
-
                       </tr>
                     );
                   })}

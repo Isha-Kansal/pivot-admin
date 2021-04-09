@@ -32,19 +32,57 @@ const Resources = (props) => {
   const [loading, setLoading] = useState(false);
   const [idResource, setIdResource] = useState("");
   const [count, setCount] = useState(0);
-  const pageChange = (newPage) => {
+  const pageChange = async (newPage) => {
     setLoading(true);
-    props.fetchResources(
-      `resource/all?offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
-      (value) => {
-        const { resources, count } = value.data;
-        setLoading(false);
-        setResourcesDetails(resources);
-        setCount(count);
-        setOffset(resources.length && resources[resources.length - 1]._id);
-        setPage(newPage);
+    const diff = newPage - page;
+    if (newPage === 1 || diff === 1) {
+      props.fetchResources(
+        `resource/all?offset=${
+          newPage === 1 ? "" : offset
+        }&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { resources, count } = value.data;
+          setLoading(false);
+          setResourcesDetails(resources);
+          setCount(count);
+          setOffset(resources.length && resources[resources.length - 1]._id);
+          setPage(newPage);
+        }
+      );
+    } else {
+      let totalLimit = 0;
+      if (diff > 1) {
+        totalLimit = offsetLimit * (diff - 1);
+      } else {
+        totalLimit = offsetLimit * (newPage - 1);
       }
-    );
+      const resources = await new Promise((resolve) => {
+        return props.fetchResources(
+          `resource/all?offset=${
+            diff > 0 ? offset : ""
+          }&limit=${totalLimit}&search=${search}`,
+          (value) => {
+            const { resources } = value.data;
+            resolve(resources);
+          }
+        );
+      });
+      if (resources) {
+        props.fetchResources(
+          `resource/all?offset=${
+            resources[resources.length - 1]._id
+          }&limit=${offsetLimit}&search=${search}`,
+          (value) => {
+            const { resources, count } = value.data;
+            setLoading(false);
+            setResourcesDetails(resources);
+            setCount(count);
+            setOffset(resources.length && resources[resources.length - 1]._id);
+            setPage(newPage);
+          }
+        );
+      }
+    }
   };
 
   const addResource = () => {

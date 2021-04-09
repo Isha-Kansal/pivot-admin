@@ -50,27 +50,70 @@ const UserExpertUsage = (props) => {
     setOffset("");
   };
 
-  const pageChange = (newPage) => {
+  const pageChange = async (newPage) => {
     setLoading(true);
     const user_id = props && props.match.params.id;
-    dispatch(
-      fetchUserExpert(
-        `appointment/all?id=${user_id}&type=user&offset=${
-          newPage === 1 ? "" : offset
-        }&limit=${offsetLimit}&search=${search}`,
-        (value) => {
-          const { appointments, count } = value.data;
+    const diff = newPage - page;
+    if (newPage === 1 || diff === 1) {
+      dispatch(
+        fetchUserExpert(
+          `appointment/all?id=${user_id}&type=user&offset=${
+            newPage === 1 ? "" : offset
+          }&limit=${offsetLimit}&search=${search}`,
+          (value) => {
+            const { appointments, count } = value.data;
 
-          setAppointments(appointments);
-          setLoading(false);
-          setCount(count);
-          setOffset(
-            appointments.length && appointments[appointments.length - 1]._id
-          );
-          setPage(newPage);
-        }
-      )
-    );
+            setAppointments(appointments);
+            setLoading(false);
+            setCount(count);
+            setOffset(
+              appointments.length && appointments[appointments.length - 1]._id
+            );
+            setPage(newPage);
+          }
+        )
+      );
+    } else {
+      let totalLimit = 0;
+      if (diff > 1) {
+        totalLimit = offsetLimit * (diff - 1);
+      } else {
+        totalLimit = offsetLimit * (newPage - 1);
+      }
+      const appointments = await new Promise((resolve) => {
+        return dispatch(
+          fetchUserExpert(
+            `appointment/all?id=${user_id}&type=user&offset=${
+              diff > 0 ? offset : ""
+            }&limit=${totalLimit}&search=${search}`,
+            (value) => {
+              const { appointments } = value.data;
+              resolve(appointments);
+            }
+          )
+        );
+      });
+      if (appointments) {
+        dispatch(
+          fetchUserExpert(
+            `appointment/all?id=${user_id}&type=user&offset=${
+              appointments[appointments.length - 1]._id
+            }&limit=${offsetLimit}&search=${search}`,
+            (value) => {
+              const { appointments, count } = value.data;
+
+              setAppointments(appointments);
+              setLoading(false);
+              setCount(count);
+              setOffset(
+                appointments.length && appointments[appointments.length - 1]._id
+              );
+              setPage(newPage);
+            }
+          )
+        );
+      }
+    }
   };
 
   return (
