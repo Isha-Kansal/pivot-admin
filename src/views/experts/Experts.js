@@ -35,19 +35,58 @@ const Experts = (props) => {
   const [type, setType] = useState("");
   const [offset, setOffset] = useState("");
 
-  const pageChange = (newPage) => {
+  const pageChange = async (newPage) => {
     setLoading(true);
-    props.fetchExperts(
-      `expert/all?offset=${newPage===1?"":offset}&limit=${offsetLimit}&search=${search}`,
-      (value) => {
-        const { experts, count } = value.data;
-        setLoading(false);
-        setExpertsDetails(experts);
-        setCount(count);
-        setOffset(experts.length && experts[experts.length - 1]._id);
-        setPage(newPage);
+    const diff = newPage - page;
+    if (newPage === 1 || diff === 1) {
+      props.fetchExperts(
+        `expert/all?offset=${
+          newPage === 1 ? "" : offset
+        }&limit=${offsetLimit}&search=${search}`,
+        (value) => {
+          const { experts, count } = value.data;
+          setLoading(false);
+          setExpertsDetails(experts);
+          setCount(count);
+          setOffset(experts.length && experts[experts.length - 1]._id);
+          setPage(newPage);
+        }
+      );
+    } else {
+      let totalLimit = 0;
+      if (diff > 1) {
+        totalLimit = offsetLimit * (diff - 1);
+      } else {
+        totalLimit = offsetLimit * (newPage - 1);
       }
-    );
+      const experts = await new Promise((resolve) => {
+        return props.fetchExperts(
+          `expert/all?offset=${
+            diff > 0 ? offset : ""
+          }&limit=${totalLimit}&search=${search}`,
+          (value) => {
+            const { experts } = value.data;
+            resolve(experts);
+          }
+        );
+      });
+
+      if (experts) {
+        props.fetchExperts(
+          `expert/all?offset=${
+            experts[experts.length - 1]._id
+          }&limit=${offsetLimit}&search=${search}`,
+          (value) => {
+            const { experts, count } = value.data;
+            setLoading(false);
+            setExpertsDetails(experts);
+            setCount(count);
+            setOffset(experts.length && experts[experts.length - 1]._id);
+            setPage(newPage);
+          }
+        );
+      }
+    }
   };
 
   const addExpert = () => {

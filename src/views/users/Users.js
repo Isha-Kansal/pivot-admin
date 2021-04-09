@@ -15,7 +15,7 @@ import { withRouter } from "react-router-dom";
 
 import { fetchUsers, userStatus } from "../store/action";
 import PaginationCommon from "../../common/pagination";
-const offsetLimit = 2;
+const offsetLimit = 10;
 const Users = (props) => {
   const history = useHistory();
 
