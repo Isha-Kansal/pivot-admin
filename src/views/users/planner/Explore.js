@@ -1,29 +1,17 @@
 import React, { useState } from "react";
-import Loader from "../../../loader";
-import Search from "../../../common/search";
-import PaginationCommon from "../../../common/pagination";
-import exploreData from "../planner/exploreData";
+
 import {
   CCard,
   CCardBody,
   CCardHeader,
-  CCol,
-  CRow,
   CBadge,
-  CTabs,
-  CNavItem,
-  CNavLink,
-  CNav,
-  CTabContent,
-  CTabPane,
   CButton,
   CCollapse,
 } from "@coreui/react";
 import { Table } from "reactstrap";
 const Explore = (props) => {
-
   const { explore, loading } = props;
- 
+
   const [accordion, setAccordion] = useState(1);
   const [search, setSearch] = useState("");
   const getBadge = (status) => {
@@ -58,7 +46,7 @@ const Explore = (props) => {
 
   let introspectionData =
     explore && explore.introspection && explore.introspection.data;
- 
+
   let extrospectionData =
     explore && explore.extrospection && explore.extrospection.data;
   let personality_assessmentData =
@@ -147,19 +135,16 @@ const Explore = (props) => {
   let filteredPracticalUnderstanding =
     filterRecordsPracticalUnderstanding() || [];
   let filteredCareerOptions = filterRecordsCareerOptions() || [];
-  
-  if ((!explore&&!loading)) {
-
-    return (<div className="no-records-planner">
-      <h5 className="mb-0">
-        <i>No Records Found</i>
-      </h5>
-
-    </div>)
-
-  }
-
-  else {
+  console.log("846070470049", accordion);
+  if (!explore && !loading) {
+    return (
+      <div className="no-records-planner">
+        <h5 className="mb-0">
+          <i>No Records Found</i>
+        </h5>
+      </div>
+    );
+  } else {
     return (
       <div id="accordion">
         <CCard className="mb-0">
@@ -185,8 +170,8 @@ const Explore = (props) => {
                         <CBadge
                           color={getBadge(
                             explore &&
-                            explore.introspection &&
-                            explore.introspection.status
+                              explore.introspection &&
+                              explore.introspection.status
                           )}
                         >
                           {explore &&
@@ -213,7 +198,6 @@ const Explore = (props) => {
                 {filteredIntrospection &&
                   filteredIntrospection.length > 0 &&
                   filteredIntrospection.map((item) => {
-                
                     return (
                       <tbody>
                         <td>{item.id ? item.id : "-"}</td>
@@ -236,7 +220,6 @@ const Explore = (props) => {
                     );
                   })}
                 {filteredIntrospection && filteredIntrospection.length === 0 && (
-
                   <div className="no-records">
                     <h5 className="mb-0">
                       <i>No Records Found</i>
@@ -272,8 +255,8 @@ const Explore = (props) => {
                         <CBadge
                           color={getBadge(
                             explore &&
-                            explore.extrospection &&
-                            explore.extrospection.status
+                              explore.extrospection &&
+                              explore.extrospection.status
                           )}
                         >
                           {explore &&
@@ -348,8 +331,8 @@ const Explore = (props) => {
                       <CBadge
                         color={getBadge(
                           explore &&
-                          explore.personality_assessment &&
-                          explore.personality_assessment.status
+                            explore.personality_assessment &&
+                            explore.personality_assessment.status
                         )}
                       >
                         {explore &&
@@ -417,8 +400,8 @@ const Explore = (props) => {
                         <CBadge
                           color={getBadge(
                             explore &&
-                            explore.practical_understanding &&
-                            explore.practical_understanding.status
+                              explore.practical_understanding &&
+                              explore.practical_understanding.status
                           )}
                         >
                           {explore &&
@@ -454,7 +437,9 @@ const Explore = (props) => {
                             ? item.practical_understanding_via
                             : "-"}
                         </td>
-                        <td>{item.contact_person ? item.contact_person : "-"}</td>
+                        <td>
+                          {item.contact_person ? item.contact_person : "-"}
+                        </td>
                         <td>{item.contact_email ? item.contact_email : "-"}</td>
                         <td>{item.notes ? item.notes : "-"}</td>
                       </tbody>
@@ -497,8 +482,8 @@ const Explore = (props) => {
                         <CBadge
                           color={getBadge(
                             explore &&
-                            explore.career_options &&
-                            explore.career_options.status
+                              explore.career_options &&
+                              explore.career_options.status
                           )}
                         >
                           {explore &&
@@ -561,7 +546,5 @@ const Explore = (props) => {
       </div>
     );
   }
-
-
 };
 export default Explore;
