@@ -12,7 +12,7 @@ import { Table } from "reactstrap";
 const Explore = (props) => {
   const { explore, loading } = props;
 
-  const [accordion, setAccordion] = useState(1);
+  const [accordion, setAccordion] = useState(0);
   const [search, setSearch] = useState("");
   const getBadge = (status) => {
     switch (status) {

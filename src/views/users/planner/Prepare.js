@@ -21,7 +21,7 @@ import {
 import { Table } from "reactstrap";
 const Prepare = (props) => {
   const { prepare } = props;
-  const [accordion, setAccordion] = useState(1);
+  const [accordion, setAccordion] = useState(0);
   const getBadge = (status) => {
     switch (status) {
       case "Done":
@@ -44,7 +44,7 @@ const Prepare = (props) => {
     // setOffset("");
     // setPage(1);
   };
-  const pageChange = (newPage) => { };
+  const pageChange = (newPage) => {};
   let job_application_prepData =
     prepare &&
     prepare.job_application_prep &&
@@ -52,16 +52,15 @@ const Prepare = (props) => {
   let interview_prepData =
     prepare && prepare.interview_prep && prepare.interview_prep.data;
   if (!prepare) {
-
-    return (<div className="no-records-planner">
-      <h5 className="mb-0">
-        <i>No Records Found</i>
-      </h5>
-
-    </div>)
-
+    return (
+      <div className="no-records-planner">
+        <h5 className="mb-0">
+          <i>No Records Found</i>
+        </h5>
+      </div>
+    );
   }
- 
+
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -87,8 +86,8 @@ const Prepare = (props) => {
                       <CBadge
                         color={getBadge(
                           prepare &&
-                          prepare.job_application_prep &&
-                          prepare.job_application_prep.status
+                            prepare.job_application_prep &&
+                            prepare.job_application_prep.status
                         )}
                       >
                         {prepare &&
@@ -109,8 +108,14 @@ const Prepare = (props) => {
                   <tr>
                     <td>Resume</td>
                     <td>
-                      <a href={job_application_prepData.resume &&job_application_prepData.resume.fileUrl}>
-                        {job_application_prepData.resume && job_application_prepData.resume.fileUrl
+                      <a
+                        href={
+                          job_application_prepData.resume &&
+                          job_application_prepData.resume.fileUrl
+                        }
+                      >
+                        {job_application_prepData.resume &&
+                        job_application_prepData.resume.fileUrl
                           ? job_application_prepData.resume.fileUrl
                           : "-"}
                       </a>
@@ -119,9 +124,16 @@ const Prepare = (props) => {
                   <tr>
                     <td>Cover Letter Template</td>
                     <td>
-                      <a href={job_application_prepData.cover_letter_template&&job_application_prepData.cover_letter_template.fileUrl}>
-                        {job_application_prepData.cover_letter_template&&job_application_prepData.cover_letter_template.fileUrl
-                          ? job_application_prepData.cover_letter_template.fileUrl
+                      <a
+                        href={
+                          job_application_prepData.cover_letter_template &&
+                          job_application_prepData.cover_letter_template.fileUrl
+                        }
+                      >
+                        {job_application_prepData.cover_letter_template &&
+                        job_application_prepData.cover_letter_template.fileUrl
+                          ? job_application_prepData.cover_letter_template
+                              .fileUrl
                           : "-"}
                       </a>
                     </td>
@@ -129,9 +141,16 @@ const Prepare = (props) => {
                   <tr>
                     <td>Portfolio / Work Sample</td>
                     <td>
-                      <a href={job_application_prepData.portfolio_work_sample&&job_application_prepData.portfolio_work_sample.fileUrl}>
-                        {job_application_prepData.portfolio_work_sample&&job_application_prepData.portfolio_work_sample.fileUrl
-                          ? job_application_prepData.portfolio_work_sample.fileUrl
+                      <a
+                        href={
+                          job_application_prepData.portfolio_work_sample &&
+                          job_application_prepData.portfolio_work_sample.fileUrl
+                        }
+                      >
+                        {job_application_prepData.portfolio_work_sample &&
+                        job_application_prepData.portfolio_work_sample.fileUrl
+                          ? job_application_prepData.portfolio_work_sample
+                              .fileUrl
                           : "-"}
                       </a>
                     </td>
@@ -139,8 +158,14 @@ const Prepare = (props) => {
                   <tr>
                     <td>Video Profile</td>
                     <td>
-                      <a href={job_application_prepData.video_profile&&job_application_prepData.video_profile.url}>
-                        {job_application_prepData.video_profile&&job_application_prepData.video_profile.url
+                      <a
+                        href={
+                          job_application_prepData.video_profile &&
+                          job_application_prepData.video_profile.url
+                        }
+                      >
+                        {job_application_prepData.video_profile &&
+                        job_application_prepData.video_profile.url
                           ? job_application_prepData.video_profile.url
                           : "-"}
                       </a>
@@ -149,8 +174,14 @@ const Prepare = (props) => {
                   <tr>
                     <td>LinkedIn Profile</td>
                     <td>
-                      <a href={job_application_prepData.linkedin_profile&&job_application_prepData.linkedin_profile.url}>
-                        {job_application_prepData.linkedin_profile&&job_application_prepData.linkedin_profile.url
+                      <a
+                        href={
+                          job_application_prepData.linkedin_profile &&
+                          job_application_prepData.linkedin_profile.url
+                        }
+                      >
+                        {job_application_prepData.linkedin_profile &&
+                        job_application_prepData.linkedin_profile.url
                           ? job_application_prepData.linkedin_profile.url
                           : "-"}
                       </a>
@@ -186,8 +217,8 @@ const Prepare = (props) => {
                       <CBadge
                         color={getBadge(
                           prepare &&
-                          prepare.interview_prep &&
-                          prepare.interview_prep.status
+                            prepare.interview_prep &&
+                            prepare.interview_prep.status
                         )}
                       >
                         {prepare &&
@@ -211,16 +242,18 @@ const Prepare = (props) => {
                   <th>Talking Points</th>
                 </thead>
 
-                {interview_prepData && interview_prepData.length > 0 && interview_prepData.map((data) => {
-                  return (
-                    <tbody>
-                      <td>{data.label ? data.label : "-"}</td>
-                      <td>{data.description ? data.description : "-"}</td>
-                      {/* <td></td> */}
-                      <td>{data.value ? data.value : "-"}</td>
-                    </tbody>
-                  )
-                })}
+                {interview_prepData &&
+                  interview_prepData.length > 0 &&
+                  interview_prepData.map((data) => {
+                    return (
+                      <tbody>
+                        <td>{data.label ? data.label : "-"}</td>
+                        <td>{data.description ? data.description : "-"}</td>
+                        {/* <td></td> */}
+                        <td>{data.value ? data.value : "-"}</td>
+                      </tbody>
+                    );
+                  })}
                 {/* {interview_prepData.personal_background && (
                   <tbody>
                     <td>Personal Background</td>

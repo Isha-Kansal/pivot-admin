@@ -22,7 +22,7 @@ import {
 import { Table } from "reactstrap";
 const Apply = (props) => {
   const { apply } = props;
-  const [accordion, setAccordion] = useState(1);
+  const [accordion, setAccordion] = useState(0);
   const getBadge = (status) => {
     switch (status) {
       case "Done":
@@ -50,21 +50,17 @@ const Apply = (props) => {
     apply &&
     apply.job_application_tracker &&
     apply.job_application_tracker.data;
-   
 
-    if (!apply) {
-
-      return (<div className="no-records-planner">
+  if (!apply) {
+    return (
+      <div className="no-records-planner">
         <h5 className="mb-0">
           <i>No Records Found</i>
         </h5>
-  
-      </div>)
-  
-    }
-  
+      </div>
+    );
+  }
 
-  
   return (
     <div id="accordion">
       <CCard className="mb-0">
@@ -105,7 +101,7 @@ const Apply = (props) => {
 
               {/* <Search handleSearch={handleSearch} /> */}
             </CCardHeader>
-            <Table responsive style={{minHeight: '110px'}}>
+            <Table responsive style={{ minHeight: "110px" }}>
               <thead>
                 <th className="text-nowrap ">ID</th>
                 <th>Company</th>
@@ -134,8 +130,10 @@ const Apply = (props) => {
                 job_application_trackerData.map((item) => {
                   let istDate = new Date(item && item.applied_date);
 
-                  let appliedDate = moment(istDate).format("DD-MM-YYYY, hh:mm a");
-               
+                  let appliedDate = moment(istDate).format(
+                    "DD-MM-YYYY, hh:mm a"
+                  );
+
                   return (
                     <tbody>
                       <td>{item.id ? item.id : "-"}</td>
@@ -143,7 +141,9 @@ const Apply = (props) => {
                       <td>{item.job_title ? item.job_title : "-"}</td>
                       <td>{item.location ? item.location : "-"}</td>
                       {/* <td></td> */}
-                      <td>{appliedDate!=="Invalid date" ? appliedDate : "-"}</td>
+                      <td>
+                        {appliedDate !== "Invalid date" ? appliedDate : "-"}
+                      </td>
                       <td>
                         <a href={item.job_post_url ? item.job_post_url : "-"}>
                           {item.job_post_url ? item.job_post_url : "-"}
@@ -172,12 +172,29 @@ const Apply = (props) => {
                       </td> */}
 
                       <td>
-                      {item.offer_log&&!item.offer_log.benefits&&!item.offer_log.bonus&&!item.offer_log.commission&&!item.offer_log.equity&&!item.offer_log.salary&&"-"}
-                        {item.offer_log&&item.offer_log.bonus&& `Bonus: ${item.offer_log.bonus}`}<br/>
-                        {item.offer_log&&item.offer_log.commission&& `Commission: ${item.offer_log.commission}`}
-                        {item.offer_log&&item.offer_log.equity&& `Equity: ${item.offer_log.equity}`}
-                        {item.offer_log&&item.offer_log.salary&& `Salary: ${item.offer_log.salary}`}
-                        {item.offer_log&&item.offer_log.benefits&& `Benefits: ${item.offer_log.benefits}`}
+                        {item.offer_log &&
+                          !item.offer_log.benefits &&
+                          !item.offer_log.bonus &&
+                          !item.offer_log.commission &&
+                          !item.offer_log.equity &&
+                          !item.offer_log.salary &&
+                          "-"}
+                        {item.offer_log &&
+                          item.offer_log.bonus &&
+                          `Bonus: ${item.offer_log.bonus}`}
+                        <br />
+                        {item.offer_log &&
+                          item.offer_log.commission &&
+                          `Commission: ${item.offer_log.commission}`}
+                        {item.offer_log &&
+                          item.offer_log.equity &&
+                          `Equity: ${item.offer_log.equity}`}
+                        {item.offer_log &&
+                          item.offer_log.salary &&
+                          `Salary: ${item.offer_log.salary}`}
+                        {item.offer_log &&
+                          item.offer_log.benefits &&
+                          `Benefits: ${item.offer_log.benefits}`}
                       </td>
                       <td>
                         {item.interview_log &&
@@ -202,13 +219,14 @@ const Apply = (props) => {
                     </tbody>
                   );
                 })}
-                    {job_application_trackerData && job_application_trackerData.length === 0 && (
-              <div className="no-records">
-                <h5 className="mb-0">
-                  <i>No Records Found</i>
-                </h5>
-              </div>
-            )}
+              {job_application_trackerData &&
+                job_application_trackerData.length === 0 && (
+                  <div className="no-records">
+                    <h5 className="mb-0">
+                      <i>No Records Found</i>
+                    </h5>
+                  </div>
+                )}
             </Table>
             {/* <PaginationCommon pageChange={pageChange} /> */}
           </CCardBody>

@@ -21,7 +21,7 @@ import {
 import { Table } from "reactstrap";
 const Learn = (props) => {
   const { learn } = props;
-  const [accordion, setAccordion] = useState(1);
+  const [accordion, setAccordion] = useState(0);
   const getBadge = (status) => {
     switch (status) {
       case "Done":
@@ -44,25 +44,22 @@ const Learn = (props) => {
     // setOffset("");
     // setPage(1);
   };
-  const pageChange = (newPage) => { };
+  const pageChange = (newPage) => {};
   let skillsData = learn && learn.skills && learn.skills.data;
   let learning_platformsData =
     learn && learn.learning_platforms && learn.learning_platforms.data;
   let experiential_learningData =
     learn && learn.experiential_learning && learn.experiential_learning.data;
 
-
   if (!learn) {
-
-    return (<div className="no-records-planner">
-      <h5 className="mb-0">
-        <i>No Records Found</i>
-      </h5>
-
-    </div>)
-
-  }
-  else {
+    return (
+      <div className="no-records-planner">
+        <h5 className="mb-0">
+          <i>No Records Found</i>
+        </h5>
+      </div>
+    );
+  } else {
     return (
       <div id="accordion">
         <CCard className="mb-0">
@@ -164,8 +161,8 @@ const Learn = (props) => {
                         <CBadge
                           color={getBadge(
                             learn &&
-                            learn.learning_platforms &&
-                            learn.learning_platforms.status
+                              learn.learning_platforms &&
+                              learn.learning_platforms.status
                           )}
                         >
                           {learn &&
@@ -244,8 +241,8 @@ const Learn = (props) => {
                         <CBadge
                           color={getBadge(
                             learn &&
-                            learn.experiential_learning &&
-                            learn.experiential_learning.status
+                              learn.experiential_learning &&
+                              learn.experiential_learning.status
                           )}
                         >
                           {learn &&
@@ -289,13 +286,14 @@ const Learn = (props) => {
                       </tbody>
                     );
                   })}
-                {experiential_learningData && experiential_learningData.length === 0 && (
-                  <div className="no-records">
-                    <h5 className="mb-0">
-                      <i>No Records Found</i>
-                    </h5>
-                  </div>
-                )}
+                {experiential_learningData &&
+                  experiential_learningData.length === 0 && (
+                    <div className="no-records">
+                      <h5 className="mb-0">
+                        <i>No Records Found</i>
+                      </h5>
+                    </div>
+                  )}
               </Table>
               {/* <PaginationCommon pageChange={pageChange} /> */}
             </CCardBody>
@@ -304,6 +302,5 @@ const Learn = (props) => {
       </div>
     );
   }
-
 };
 export default Learn;
