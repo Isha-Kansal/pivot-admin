@@ -181,17 +181,21 @@ const Apply = (props) => {
                           "-"}
                         {item.offer_log &&
                           item.offer_log.bonus &&
-                          `Bonus: ${item.offer_log.bonus}`}
+                          `Bonus: 
+                          ${item.offer_log.bonus}`}
                         <br />
                         {item.offer_log &&
                           item.offer_log.commission &&
                           `Commission: ${item.offer_log.commission}`}
+                        <br />
                         {item.offer_log &&
                           item.offer_log.equity &&
                           `Equity: ${item.offer_log.equity}`}
+                        <br />
                         {item.offer_log &&
                           item.offer_log.salary &&
                           `Salary: ${item.offer_log.salary}`}
+                        <br />
                         {item.offer_log &&
                           item.offer_log.benefits &&
                           `Benefits: ${item.offer_log.benefits}`}

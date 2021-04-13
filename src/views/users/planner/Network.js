@@ -195,22 +195,21 @@ const Network = (props) => {
               {new_connectionsData && new_connectionsData.length > 0 && (
                 <Table responsive>
                   <thead>
-                    <th className="text-nowrap ">ID</th>
+                    <th>Networking Platform</th>
+                    {/* <th className="text-nowrap ">ID</th>
                     <th>Pivot</th>
 
                     <th>Meetup</th>
                     <th>Lunchclub</th>
                     <th>Online Groups</th>
-                    <th>Conferences</th>
+                    <th>Conferences</th> */}
                   </thead>
                   {new_connectionsData &&
                     new_connectionsData.length > 0 &&
                     new_connectionsData.map((item) => {
                       return (
                         <tbody>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>{item.value}</td>
                         </tbody>
                       );
                     })}
