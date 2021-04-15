@@ -128,6 +128,16 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
+
+                  {resource.country && (
+                    <tr>
+                      <td>Country</td>
+                      <td>
+                        <strong>{resource.country}</strong>
+                      </td>
+                    </tr>
+                  )}
+
                   {resource.resource_format && (
                     <tr>
                       <td>Format</td>
@@ -178,10 +188,10 @@ const Resource = (props) => {
                         <strong>{resource.website}</strong>
                       </td> */}
                       <td>
-                          <a href={resource.website ? resource.website : "-"}>
-                            {resource.website ? resource.website : "-"}
-                          </a>
-                        </td>
+                        <a href={resource.website ? resource.website : "-"}>
+                          {resource.website ? resource.website : "-"}
+                        </a>
+                      </td>
                     </tr>
                   )}
                   {resource.unique_selling_proposition && (

@@ -47,6 +47,7 @@ export const optionsDesignation = [
 export const optionsUnit = [
   { value: "INR", label: "INR" },
   { value: "USD", label: "USD" },
+  { value: "EUR", label: "EUR" },
 ];
 export const optionsExpertise = [
   { value: "Startups", label: "Startups" },
@@ -91,7 +92,7 @@ export const optionsExpertise = [
   { value: "TV Production", label: "TV Production" },
   { value: "Writing", label: "Writing" },
   { value: "Editing", label: "Editing" },
-  { value: "Public Speaking", label: "Public Speaking" },
+
   { value: "Community Building", label: "Community Building" },
 
   { value: "Data Science", label: "Data Science" },
@@ -545,8 +546,8 @@ export const optionsIndustry = [
     label: "Nanotechnology",
   },
   {
-    value: "National University",
-    label: "National University",
+    value: "National University of Singapore",
+    label: "National University of Singapore",
   },
   {
     value: "Newspapers/Journalism",

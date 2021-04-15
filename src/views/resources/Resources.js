@@ -105,6 +105,7 @@ const Resources = (props) => {
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
+    setPage(1);
   };
   const deleteResource = (id) => {
     if (idResource === id) setModalOpen(false);
@@ -181,7 +182,7 @@ const Resources = (props) => {
               <thead>
                 <tr>
                   <th className="text-nowrap ">Name</th>
-
+                  <th>Country</th>
                   <th>Format</th>
                   <th>Price</th>
                   <th>Category</th>
@@ -214,6 +215,7 @@ const Resources = (props) => {
                         }
                       >
                         <td>{item.title ? item.title : "-"}</td>
+                        <td>{item.country ? item.country : "-"}</td>
                         <td>
                           {item.resource_format ? item.resource_format : "-"}
                         </td>

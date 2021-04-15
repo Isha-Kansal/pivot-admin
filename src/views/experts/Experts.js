@@ -111,6 +111,7 @@ const Experts = (props) => {
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
+    setPage(1);
   };
 
   const deleteExpert = (id) => {
@@ -185,6 +186,7 @@ const Experts = (props) => {
     e.preventDefault();
     e.stopPropagation();
     setModalOpen(!modalOpen);
+    setPage(1);
   };
 
   return (

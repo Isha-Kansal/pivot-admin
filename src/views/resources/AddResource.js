@@ -34,6 +34,7 @@ import {
   optionsPace,
   optionsFeaturedFormat,
   optionsUnit,
+  optionsCountry,
 } from "./ResourcesFieldsData";
 
 import ADD from "../../assets/icons/add.svg";
@@ -53,6 +54,7 @@ class AddResource extends Component {
       featuredResource: "",
       pricing: "",
       category: [],
+      country: "",
       uniqueSellingProposition: "",
       errorType: "",
       errorText: "",
@@ -106,6 +108,7 @@ class AddResource extends Component {
           resourceData: value.data.resource,
           name: title.trim(),
           format: resource_format,
+          // country,
           featuredResource: is_featured ? "True" : "False",
 
           pricing:
@@ -201,6 +204,7 @@ class AddResource extends Component {
     const {
       name,
       format,
+      country,
       featuredResource,
       pricing,
       details,
@@ -243,6 +247,17 @@ class AddResource extends Component {
         });
         return;
       }
+    }
+    if (country === "") {
+      this.setState({
+        errorType: "country",
+        errorText: (
+          <span className="text-danger">
+            <b>Select any country</b>
+          </span>
+        ),
+      });
+      return;
     }
 
     if (format === "") {
@@ -447,6 +462,7 @@ class AddResource extends Component {
     const {
       name,
       format,
+      country,
       pricing,
       // unit,
       websiteLink,
@@ -474,6 +490,7 @@ class AddResource extends Component {
       id: resource_id,
       title: name,
       format,
+      country,
       isFeatured: featuredResource === "True" ? true : false,
 
       // price:
@@ -511,6 +528,7 @@ class AddResource extends Component {
     const {
       name,
       format,
+      country,
       featuredResource,
       pricing,
       websiteLink,
@@ -537,6 +555,7 @@ class AddResource extends Component {
     let obj = {
       title: name,
       format,
+      country,
       isFeatured: featuredResource === "True" ? true : false,
 
       // price:
@@ -576,6 +595,7 @@ class AddResource extends Component {
       name: "",
       format: "",
       // unit: "",
+      country: "",
       featuredResource: "",
       pricing: "",
       category: [],
@@ -674,6 +694,11 @@ class AddResource extends Component {
         format: data.value,
       });
     }
+    if (type === "country") {
+      this.setState({
+        country: data.value,
+      });
+    }
     if (type === "featuredResource") {
       this.setState({
         featuredResource: data.value,
@@ -713,6 +738,7 @@ class AddResource extends Component {
     const {
       name,
       format,
+      country,
       featuredResource,
       pricing,
       uniqueSellingProposition,
@@ -790,6 +816,28 @@ class AddResource extends Component {
                     </div>
                   </CCol>
                 </CFormGroup>
+
+                <CFormGroup row>
+                  <CCol md="3">
+                    <CLabel htmlFor="country">Country</CLabel>
+                    <CLabel className="text-danger">*</CLabel>
+                  </CCol>
+                  <CCol xs="12" md="9">
+                    <Select
+                      custom
+                      name="country"
+                      placeholder="Select Country"
+                      id="country"
+                      value={
+                        country ? { value: country, label: country } : null
+                      }
+                      options={optionsCountry}
+                      onChange={(data) => this.handleSelect(data, "country")}
+                    ></Select>
+                    {this.errorShow("country")}
+                  </CCol>
+                </CFormGroup>
+
                 <CFormGroup row>
                   <CCol md="3">
                     <CLabel htmlFor="format">Format</CLabel>

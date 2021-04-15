@@ -1,7 +1,18 @@
 export const optionsFormat = [
-  { value: "Online", label: "Online" },
+  { value: "Remote", label: "Remote" },
   { value: "In Person", label: "In Person" },
   { value: "Hybrid", label: "Hybrid" },
+  { value: "Online", label: "Online" },
+];
+
+export const optionsCountry = [
+  { value: "India", label: "India" },
+  { value: "India, US", label: "India, US" },
+  { value: "US", label: "US" },
+  { value: "UK", label: "UK" },
+  { value: "Singapore, US", label: "Singapore, US" },
+  { value: "Germany", label: "Germany" },
+  { value: "Other", label: "Other" },
 ];
 
 export const optionsPricing = [
@@ -27,7 +38,7 @@ export const optionsCategory = [
   { value: "Job Board", label: "Job Board" },
   { value: "Enterpreneurship", label: "Enterpreneurship" },
   { value: "Freelance", label: "Freelance" },
- 
+
   { value: "Test Prep", label: "Test Prep" },
   { value: "Content Creator", label: "Content Creator" },
   { value: "Influencer", label: "Influencer" },
