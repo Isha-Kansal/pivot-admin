@@ -1,7 +1,13 @@
 export const optionsFormat = [
   { value: "Remote", label: "Remote" },
+  { value: "In Person", label: "In Person" },
   { value: "In Person (Singapore Only)", label: "In Person (Singapore Only)" },
   { value: "In Person (India Only)", label: "In Person (India Only)" },
+
+  {
+    value: "In-Person (UK, US, Singapore, Canada, Australia, France)",
+    label: "In-Person (UK, US, Singapore, Canada, Australia, France)",
+  },
   { value: "Hybrid", label: "Hybrid" },
   { value: "Online", label: "Online" },
 ];
@@ -26,6 +32,13 @@ export const optionsCountry = [
 ];
 
 export const optionsPricing = [
+  {
+    value:
+      "Free (although hosting and domain fees have to be purchased externally)",
+    label:
+      "Free (although hosting and domain fees have to be purchased externally)",
+  },
+
   { value: "Free", label: "Free" },
   {
     value: "Economical (<USD 500 or <INR10,000)",
@@ -50,7 +63,7 @@ export const optionsCategory = [
   { value: "Freelance", label: "Freelance" },
 
   { value: "Test Prep", label: "Test Prep" },
-  { value: "Content Creator", label: "Content Creator" },
+  { value: "Content Creation", label: "Content Creation" },
   { value: "Influencer", label: "Influencer" },
   { value: "Small Business", label: "Small Business" },
   { value: "Investing", label: "Investing" },

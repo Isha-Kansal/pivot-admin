@@ -231,25 +231,25 @@ class AddResource extends Component {
       });
       return;
     }
-    if (name !== "") {
-      let filter = /^[a-zA-Z0-9]+([-_\s]{1}[a-zA-Z0-9]+)*$/;
+    // if (name !== "") {
+    //   let filter = /^[a-zA-Z0-9]+([-_\s]{1}[a-zA-Z0-9]+)*$/;
 
-      if (!filter.test(name)) {
-        this.setState({
-          errorType: "name",
-          errorText: (
-            <span className="text-danger">
-              <b>
-                {" "}
-                Name should be combination of alphanumeric text, underscore,
-                space and hyphen
-              </b>
-            </span>
-          ),
-        });
-        return;
-      }
-    }
+    //   if (!filter.test(name)) {
+    //     this.setState({
+    //       errorType: "name",
+    //       errorText: (
+    //         <span className="text-danger">
+    //           <b>
+    //             {" "}
+    //             Name should be combination of alphanumeric text, underscore,
+    //             space and hyphen
+    //           </b>
+    //         </span>
+    //       ),
+    //     });
+    //     return;
+    //   }
+    // }
     if (country === "") {
       this.setState({
         errorType: "country",
@@ -722,16 +722,16 @@ class AddResource extends Component {
     // }
     if (type === "category") {
       let arr;
-      if (data.length <= 3) {
-        arr = data.map((el) => {
-          return el.value;
-        });
-        this.setState({
-          category: arr,
-        });
-      } else {
-        NotificationManager.info("You can select upto 3 only", "", 1000);
-      }
+      // if (data.length <= 3) {
+      arr = data.map((el) => {
+        return el.value;
+      });
+      this.setState({
+        category: arr,
+      });
+      // } else {
+      //   NotificationManager.info("You can select upto 3 only", "", 1000);
+      // }
     }
     if (type === "pace") {
       this.setState({
