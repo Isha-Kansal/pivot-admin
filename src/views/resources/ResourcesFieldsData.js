@@ -7,6 +7,10 @@ export const optionsFormat = [
     value: "In-person (London, Paris, Berlin)",
     label: "In-person (London, Paris, Berlin)",
   },
+  {
+    value: "In-person (global meetups)",
+    label: "In-person (global meetups)",
+  },
 
   {
     value: "In-Person (UK, US, Singapore, Canada, Australia, France)",
