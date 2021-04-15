@@ -1,6 +1,7 @@
 export const optionsFormat = [
   { value: "Remote", label: "Remote" },
   { value: "In Person (Singapore Only)", label: "In Person (Singapore Only)" },
+  { value: "In Person (India Only)", label: "In Person (India Only)" },
   { value: "Hybrid", label: "Hybrid" },
   { value: "Online", label: "Online" },
 ];
@@ -39,7 +40,7 @@ export const optionsPricing = [
 
 export const optionsCategory = [
   { value: "Self-Reflection", label: "Self-Reflection" },
-  { value: "Online Course", label: "Online Course" },
+  { value: "Online Courses", label: "Online Courses" },
   { value: "Bootcamp", label: "Bootcamp" },
   { value: "Personal Development", label: "Personal Development" },
   { value: "Networking", label: "Networking" },
