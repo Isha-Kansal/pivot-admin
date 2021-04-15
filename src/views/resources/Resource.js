@@ -38,6 +38,12 @@ const Resource = (props) => {
     resource.category.length > 0 &&
     resource.category.join(", ");
 
+  let format =
+    resource &&
+    resource.resource_format &&
+    resource.resource_format.length > 0 &&
+    resource.resource_format.join(", ");
+
   let pros =
     resource &&
     resource.pros &&
@@ -142,7 +148,7 @@ const Resource = (props) => {
                     <tr>
                       <td>Format</td>
                       <td>
-                        <strong>{resource.resource_format}</strong>
+                        <strong>{format}</strong>
                       </td>
                     </tr>
                   )}

@@ -205,6 +205,16 @@ const Resources = (props) => {
                       item.category &&
                       item.category.length > 0 &&
                       item.category.join(", ");
+                    console.log(
+                      "0594709407904970",
+                      typeof item.resource_format
+                    );
+
+                    let format =
+                      item &&
+                      item.resource_format &&
+                      item.resource_format.length > 0 &&
+                      item.resource_format.join(", ");
                     return (
                       <tr
                         style={{ cursor: "pointer" }}
@@ -216,9 +226,7 @@ const Resources = (props) => {
                       >
                         <td>{item.title ? item.title : "-"}</td>
                         <td>{item.country ? item.country : "-"}</td>
-                        <td>
-                          {item.resource_format ? item.resource_format : "-"}
-                        </td>
+                        <td>{format ? format : "-"}</td>
 
                         <td>
                           {item.price && item.price.value && item.price.unit

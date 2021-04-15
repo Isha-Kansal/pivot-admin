@@ -50,7 +50,7 @@ class AddResource extends Component {
     this.state = {
       name: "",
       addPrice: "",
-      format: "",
+      format: [],
       featuredResource: "",
       pricing: "",
       category: [],
@@ -89,6 +89,7 @@ class AddResource extends Component {
           pros,
           cons,
           info,
+          country,
           profile_pic,
           is_featured,
         } = value.data.resource;
@@ -108,6 +109,7 @@ class AddResource extends Component {
           resourceData: value.data.resource,
           name: title.trim(),
           format: resource_format,
+          country,
           // country,
           featuredResource: is_featured ? "True" : "False",
 
@@ -260,7 +262,7 @@ class AddResource extends Component {
       return;
     }
 
-    if (format === "") {
+    if (format.length === 0) {
       this.setState({
         errorType: "format",
         errorText: (
@@ -593,7 +595,7 @@ class AddResource extends Component {
     e.preventDefault();
     this.setState({
       name: "",
-      format: "",
+      format: [],
       // unit: "",
       country: "",
       featuredResource: "",
@@ -690,8 +692,12 @@ class AddResource extends Component {
   handleSelect = (data, type) => {
     this.clearError();
     if (type === "format") {
+      let arr;
+      arr = data.map((el) => {
+        return el.value;
+      });
       this.setState({
-        format: data.value,
+        format: arr,
       });
     }
     if (type === "country") {
@@ -757,6 +763,9 @@ class AddResource extends Component {
 
     let categoryVal = optionsCategory.filter((item) => {
       return category.includes(item.label);
+    });
+    let formatVal = optionsFormat.filter((item) => {
+      return format.includes(item.label);
     });
 
     return (
@@ -845,11 +854,13 @@ class AddResource extends Component {
                   </CCol>
                   <CCol xs="12" md="9">
                     <Select
+                      isMulti
                       custom
                       name="format"
                       placeholder="Select Format"
                       id="format"
-                      value={format ? { value: format, label: format } : null}
+                      value={formatVal}
+                      // value={format ? { value: format, label: format } : null}
                       options={optionsFormat}
                       onChange={(data) => this.handleSelect(data, "format")}
                     ></Select>

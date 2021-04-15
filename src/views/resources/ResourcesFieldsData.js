@@ -1,17 +1,26 @@
 export const optionsFormat = [
   { value: "Remote", label: "Remote" },
-  { value: "In Person", label: "In Person" },
+  { value: "In Person (Singapore Only)", label: "In Person (Singapore Only)" },
   { value: "Hybrid", label: "Hybrid" },
   { value: "Online", label: "Online" },
 ];
 
 export const optionsCountry = [
   { value: "India", label: "India" },
+  { value: "US and India", label: "US and India" },
   { value: "India, US", label: "India, US" },
   { value: "US", label: "US" },
   { value: "UK", label: "UK" },
-  { value: "Singapore, US", label: "Singapore, US" },
+
+  { value: "Singapore", label: "Singapore" },
   { value: "Germany", label: "Germany" },
+  { value: "Israel", label: "Israel" },
+  { value: "Canada", label: "Canada" },
+  { value: "Denmark", label: "Denmark" },
+  { value: "Poland", label: "Poland" },
+  { value: "Australia", label: "Australia" },
+  { value: "Spain", label: "Spain" },
+  { value: "Netherlands", label: "Netherlands" },
   { value: "Other", label: "Other" },
 ];
 
