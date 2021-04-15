@@ -1,4 +1,4 @@
-export const isProduction = false;
+export const isProduction = true;
 export const config = {
   apiUrlInnow8: isProduction
     ? process.env.REACT_APP_PROD_API_URL
