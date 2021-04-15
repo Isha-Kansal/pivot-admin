@@ -3,6 +3,10 @@ export const optionsFormat = [
   { value: "In Person", label: "In Person" },
   { value: "In Person (Singapore Only)", label: "In Person (Singapore Only)" },
   { value: "In Person (India Only)", label: "In Person (India Only)" },
+  {
+    value: "In-person (London, Paris, Berlin)",
+    label: "In-person (London, Paris, Berlin)",
+  },
 
   {
     value: "In-Person (UK, US, Singapore, Canada, Australia, France)",
