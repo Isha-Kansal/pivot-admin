@@ -205,10 +205,6 @@ const Resources = (props) => {
                       item.category &&
                       item.category.length > 0 &&
                       item.category.join(", ");
-                    console.log(
-                      "0594709407904970",
-                      typeof item.resource_format
-                    );
 
                     let format =
                       item &&

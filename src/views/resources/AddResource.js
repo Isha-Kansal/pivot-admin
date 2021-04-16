@@ -64,7 +64,7 @@ class AddResource extends Component {
       cons: [],
       details: [],
       pace: "",
-      websiteLink: "",
+      websiteLink: [],
       resourceData: {},
       loadiing: false,
       // unit: "",
@@ -93,7 +93,7 @@ class AddResource extends Component {
           profile_pic,
           is_featured,
         } = value.data.resource;
-
+        let webLinkData;
         const detailsData = info.map((el) => {
           return { value: el };
         });
@@ -103,6 +103,14 @@ class AddResource extends Component {
         const consData = cons.map((el) => {
           return { value: el };
         });
+
+        if (typeof website === "string") {
+          webLinkData = [{ value: website }];
+        } else {
+          webLinkData = website.map((el) => {
+            return { value: el };
+          });
+        }
 
         this.setState({
           loadiing: false,
@@ -122,7 +130,7 @@ class AddResource extends Component {
           addPrice: price.value || price,
           category,
           pace,
-          websiteLink: website,
+          websiteLink: webLinkData,
           uniqueSellingProposition: unique_selling_proposition,
           pros: prosData,
           cons: consData,
@@ -198,6 +206,20 @@ class AddResource extends Component {
 
       this.clearError();
       this.setState({ [e.target.name]: e.target.value, details: newArray });
+    }
+
+    if (type === "webLinkAdd") {
+      let websiteLinkToUpdate = this.state.websiteLink[index];
+      const newArray = [...this.state.websiteLink];
+      websiteLinkToUpdate = {
+        ...websiteLinkToUpdate,
+        value: e.target.value,
+      };
+
+      newArray[index] = websiteLinkToUpdate;
+
+      this.clearError();
+      this.setState({ [e.target.name]: e.target.value, websiteLink: newArray });
     }
   };
   onSubmit = (e) => {
@@ -328,7 +350,7 @@ class AddResource extends Component {
       });
       return;
     }
-    if (websiteLink === "") {
+    if (websiteLink.length === 0) {
       this.setState({
         errorType: "websiteLink",
         errorText: (
@@ -340,20 +362,32 @@ class AddResource extends Component {
       return;
     }
 
-    if (websiteLink !== "") {
-      let filter = /(http(s)?:\/\/.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}/g;
+    //     if (websiteLink.length !== 0) {
+    //       let filter = /(http(s)?:\/\/.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}/g;
+    // console.log("756754968945684",websiteLink)
+    //       if (!filter.test(websiteLink)) {
+    //         this.setState({
+    //           errorType: "websiteLink",
+    //           errorText: (
+    //             <span className="text-danger">
+    //               <b> Please enter valid website link</b>
+    //             </span>
+    //           ),
+    //         });
+    //         return;
+    //       }
+    //     }
 
-      if (!filter.test(websiteLink)) {
-        this.setState({
-          errorType: "websiteLink",
-          errorText: (
-            <span className="text-danger">
-              <b> Please enter valid website link</b>
-            </span>
-          ),
-        });
-        return;
-      }
+    if (websiteLink.length === 1 && websiteLink[0].value === "") {
+      this.setState({
+        errorType: "websiteLink",
+        errorText: (
+          <span className="text-danger">
+            <b>Please enter website link</b>
+          </span>
+        ),
+      });
+      return;
     }
 
     if (pros.length === 0) {
@@ -487,6 +521,9 @@ class AddResource extends Component {
     let consdata = cons.map((el) => {
       return el.value;
     });
+    let websiteLinkdata = websiteLink.map((el) => {
+      return el.value;
+    });
 
     let obj = {
       id: resource_id,
@@ -501,7 +538,7 @@ class AddResource extends Component {
       //     : { value: pricing, type: pricing },
       price: pricing === "Others" ? addPrice : pricing,
 
-      website: websiteLink,
+      website: websiteLinkdata,
       category,
       pros: prosdata,
       cons: consdata,
@@ -553,6 +590,9 @@ class AddResource extends Component {
     let consdata = cons.map((el) => {
       return el.value;
     });
+    let websiteLinkdata = websiteLink.map((el) => {
+      return el.value;
+    });
 
     let obj = {
       title: name,
@@ -566,7 +606,7 @@ class AddResource extends Component {
       //     : { value: pricing, type: pricing },
 
       price: pricing === "Others" ? addPrice : pricing,
-      website: websiteLink,
+      website: websiteLinkdata,
       category,
       pros: prosdata,
       cons: consdata,
@@ -609,7 +649,7 @@ class AddResource extends Component {
       errorType: "",
       errorText: "",
       pace: "",
-      websiteLink: "",
+      websiteLink: [],
     });
   };
   handleBack = (e) => {
@@ -656,6 +696,20 @@ class AddResource extends Component {
         details: newArr,
       });
     }
+
+    if (type === "webLinkAdd") {
+      const { websiteLink } = this.state;
+      const newArr = [...websiteLink];
+      e.preventDefault();
+      e.stopPropagation();
+      let newLinks = {
+        value: "",
+      };
+      newArr.push(newLinks);
+      this.setState({
+        websiteLink: newArr,
+      });
+    }
   };
   handleCancel = (e, index, type) => {
     e.preventDefault();
@@ -685,6 +739,15 @@ class AddResource extends Component {
       newArr.splice(index, 1);
       this.setState({
         details: newArr,
+      });
+    }
+    if (type === "webLinkAdd") {
+      const { websiteLink } = this.state;
+
+      const newArr = [...websiteLink];
+      newArr.splice(index, 1);
+      this.setState({
+        websiteLink: newArr,
       });
     }
   };
@@ -996,14 +1059,46 @@ class AddResource extends Component {
                     <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
-                    <CInput
-                      id="websiteLink"
-                      name="websiteLink"
-                      placeholder="Website Link"
-                      onChange={this.inputHandler}
-                      value={websiteLink}
-                    />
+                    <div
+                      class="d-flex justify-content-between add-list"
+                      onClick={(e) => this.handlePlusButton(e, "webLinkAdd")}
+                    >
+                      <CLabel htmlFor="addDetails">Add Website Link</CLabel>
+                      <button className="icon">
+                        <img src={ADD} className="ml-3" />
+                      </button>
+                    </div>
+
                     {this.errorShow("websiteLink")}
+
+                    {websiteLink &&
+                      websiteLink.length > 0 &&
+                      websiteLink.map((el, index) => {
+                        return (
+                          <div className="d-flex align-items-center mb-2">
+                            <CInput
+                              type="text"
+                              id={`websiteLink${index}`}
+                              name={`websiteLink${index}`}
+                              placeholder={`${index + 1}.`}
+                              autoComplete={`websiteLink${index}`}
+                              onChange={(e) => {
+                                this.inputProsCons(e, index, "webLinkAdd");
+                              }}
+                              value={el.value}
+                            />
+
+                            <button
+                              className="icon"
+                              onClick={(e) =>
+                                this.handleCancel(e, index, "webLinkAdd")
+                              }
+                            >
+                              <img src={CANCEL} className="ml-3" />
+                            </button>
+                          </div>
+                        );
+                      })}
                   </CCol>
                 </CFormGroup>
 

@@ -60,11 +60,21 @@ const Resource = (props) => {
     resource.info.length > 0 &&
     resource.info.join(", ");
 
+  let website;
+  if (typeof (resource && resource.website) === "string") {
+    website = resource && resource.website;
+  } else {
+    website =
+      resource &&
+      resource.website &&
+      resource.website.length > 0 &&
+      resource.website.join(" , ");
+  }
+
   let price =
     resource.price && resource.price.value && resource.price.unit
       ? resource.price.value + " " + resource.price.unit
       : resource.price && (resource.price.value || resource.price);
-  // let price = resource && resource.price;
 
   let featured = resource.is_featured ? "Yes" : "No";
   const editResource = (e, item) => {
@@ -187,16 +197,12 @@ const Resource = (props) => {
                       </td>
                     </tr>
                   )}
-                  {resource.website && (
+                  {website && (
                     <tr>
                       <td>Website Link</td>
-                      {/* <td>
-                        <strong>{resource.website}</strong>
-                      </td> */}
+
                       <td>
-                        <a href={resource.website ? resource.website : "-"}>
-                          {resource.website ? resource.website : "-"}
-                        </a>
+                        <strong>{website ? website : "-"}</strong>
                       </td>
                     </tr>
                   )}
