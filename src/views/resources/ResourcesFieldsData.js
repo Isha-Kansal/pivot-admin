@@ -67,7 +67,7 @@ export const optionsCategory = [
   { value: "Networking", label: "Networking" },
   { value: "Job Application Support", label: "Job Application Support" },
   { value: "Job Board", label: "Job Board" },
-  { value: "Enterpreneurship", label: "Enterpreneurship" },
+  { value: "Entrepreneurship", label: "Entrepreneurship" },
   { value: "Freelance", label: "Freelance" },
 
   { value: "Test Prep", label: "Test Prep" },

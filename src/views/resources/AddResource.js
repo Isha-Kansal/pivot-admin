@@ -1055,7 +1055,7 @@ class AddResource extends Component {
 
                 <CFormGroup row>
                   <CCol md="3">
-                    <CLabel htmlFor="websiteLink">Website Link</CLabel>
+                    <CLabel htmlFor="websiteLink">Website Links</CLabel>
                     <CLabel className="text-danger">*</CLabel>
                   </CCol>
                   <CCol xs="12" md="9">
@@ -1063,7 +1063,7 @@ class AddResource extends Component {
                       class="d-flex justify-content-between add-list"
                       onClick={(e) => this.handlePlusButton(e, "webLinkAdd")}
                     >
-                      <CLabel htmlFor="addDetails">Add Website Link</CLabel>
+                      <CLabel htmlFor="addDetails">Add Website Links</CLabel>
                       <button className="icon">
                         <img src={ADD} className="ml-3" />
                       </button>
