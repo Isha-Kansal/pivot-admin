@@ -538,8 +538,8 @@ export const optionsIndustry = [
     label: "McKinsey",
   },
   {
-    value: "Mercer Consulting",
-    label: "Mercer Consulting",
+    value: "Mercer India",
+    label: "Mercer India",
   },
   {
     value: "Nanotechnology",
