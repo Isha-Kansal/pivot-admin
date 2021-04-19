@@ -111,6 +111,31 @@ export const optionsExpertise = [
   { value: "Non-Profit", label: "Non-Profit" },
 
   { value: "Digital Content", label: "Digital Content" },
+  { value: "Machine Learning", label: "Machine Learning" },
+  { value: "Tech", label: "Tech" },
+  { value: "Program Management", label: "Program Management" },
+  { value: "Roadmapping", label: "Roadmapping" },
+  { value: "Release Management", label: "Release Management" },
+  { value: "Vendor Due Diligence", label: "Vendor Due Diligence" },
+  { value: "Life Coaching", label: "Life Coaching" },
+  { value: "Voiceover", label: "Voiceover" },
+  { value: "Event Management", label: "Event Management" },
+  {
+    value: "Community Building & Engagement",
+    label: "Community Building & Engagement",
+  },
+  { value: "Product Design", label: "Product Design" },
+  {
+    value: "User Experience (UX) Design",
+    label: "User Experience (UX) Design",
+  },
+  { value: "User Interface (UI) Design", label: "User Interface (UI) Design" },
+  {
+    value: "UX Writing / Content Design",
+    label: "UX Writing / Content Design",
+  },
+  { value: "", label: "" },
+  { value: "", label: "" },
 ];
 
 export const optionsRole = [
@@ -261,6 +286,10 @@ export const optionsIndustry = [
     label: "Content & Digital Marketer",
   },
   {
+    value: "Cure.Fit",
+    label: "Cure.Fit",
+  },
+  {
     value: "Dairy",
     label: "Dairy",
   },
@@ -368,6 +397,10 @@ export const optionsIndustry = [
   {
     value: "Graphic Design/Web Design",
     label: "Graphic Design/Web Design",
+  },
+  {
+    value: "HBO Max",
+    label: "HBO Max",
   },
   {
     value: "Health/Fitness",
