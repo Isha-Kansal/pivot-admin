@@ -322,6 +322,10 @@ export const optionsIndustry = [
     label: "ETSY",
   },
   {
+    value: "Etsy",
+    label: "Etsy",
+  },
+  {
     value: "Entertainment/Movie Production",
     label: "Entertainment/Movie Production",
   },
