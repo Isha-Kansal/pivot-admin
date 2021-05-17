@@ -54,6 +54,9 @@ import {
   FETCH_USER_RESOURCE_REQUEST,
   FETCH_USER_RESOURCE_SUCCESS,
   FETCH_USER_RESOURCE_FAILED,
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILED,
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -111,6 +114,13 @@ async function callDeleteResource(data) {
   return res;
 }
 async function callDeleteExpert(data) {
+  const res = await apiCallGet(data.payload);
+  return res;
+}
+
+
+
+async function callDeleteUser(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
@@ -413,6 +423,28 @@ function* deleteExpert(action) {
     }
   }
 }
+
+
+function* deleteUser(action) {
+  const response = yield call(callDeleteUser, action);
+
+  if (response && response.data) {
+    action.callback(response.data);
+    if (response.status === 200) {
+      yield put({
+        type: DELETE_USER_SUCCESS,
+        deleteUserData: response.data,
+      });
+    } else {
+      yield put({ type: DELETE_USER_FAILED });
+    }
+  }
+}
+
+
+
+
+
 
 function* fetchService(action) {
   const response = yield call(callFetchService, action);

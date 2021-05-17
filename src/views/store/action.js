@@ -19,6 +19,8 @@ import {
   FETCH_EXPERT_SERVICE_REQUEST,
   FETCH_USER_EXPERT_REQUEST,
   FETCH_USER_RESOURCE_REQUEST,
+  DELETE_USER_REQUEST,
+  
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -121,6 +123,16 @@ export const deleteResource = (body, callback) => {
 export const deleteExpert = (body, callback) => {
   return {
     type: DELETE_EXPERT_REQUEST,
+
+    payload: body,
+    callback,
+  };
+};
+
+
+export const deleteUser = (body, callback) => {
+  return {
+    type: DELETE_USER_REQUEST,
 
     payload: body,
     callback,

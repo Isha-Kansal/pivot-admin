@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import Search from "../../common/search";
 import moment from "moment";
-
+import DELETE from "../../assets/icons/delete.svg";
+import Tooltip from "../../common/toolTip";
 import CommonModal from "../../common/commonModal";
 import { NotificationManager } from "react-notifications";
 import { Table } from "reactstrap";
@@ -13,7 +14,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 
-import { fetchUsers, userStatus } from "../store/action";
+import { fetchUsers, userStatus ,deleteUser} from "../store/action";
 import PaginationCommon from "../../common/pagination";
 const offsetLimit = 10;
 const Users = (props) => {
@@ -141,11 +142,37 @@ const Users = (props) => {
     setModalOpen(!modalOpen);
   };
   const blockUser = (id) => {
-    if (idUser === id) {
-      setModalOpen(false);
+    console.log("89894897894879894", id);
+    if (type === "deleteUser") {
+    //  if (idUser === id) {
+    //     setModalOpen(false);
 
-      callApi(type, id);
+    //     setLoading(true);
+    //     props.deleteUser(`user/delete?id=${id}`, (value) => {
+    //       if (value.status === 200) {
+    //         NotificationManager.success("User deleted successfully", "", 1000);
+    //         setLoading(false);
+
+    //         callApiToFetchAllUsers(true);
+    //       }
+    //     });
+    //   }
+    } else {
+      if (idUser === id) {
+        setModalOpen(false);
+
+        callApi(type, id);
+      }
     }
+  };
+
+  const onDelete = (e, type, id) => {
+    setIdUser(id);
+    setType(type);
+    e.preventDefault();
+    e.stopPropagation();
+    setModalOpen(!modalOpen);
+    setPage(1);
   };
 
   const callApi = (type, id) => {
@@ -236,39 +263,54 @@ const Users = (props) => {
                           {createdAt !== "Invalid date" ? createdAt : "-"}
                         </td>
                         <td>
-                          {item.user_status === "blocked" ? (
-                            <CButton
-                              onClick={(e) => onBlock(e, "unblock", item)}
-                              className="Unblock-btn block-btn"
-                            >
-                              UnBlock
-                            </CButton>
-                          ) : item.user_status === "activated" ? (
-                            <div>
+                          <div className="d-flex align-items-center">
+                            {item.user_status === "blocked" ? (
                               <CButton
-                                onClick={(e) => onBlock(e, "block", item)}
-                                className="block-btn block-btn"
+                                onClick={(e) => onBlock(e, "unblock", item)}
+                                className="Unblock-btn block-btn"
                               >
-                                Block
-                              </CButton>{" "}
-                            </div>
-                          ) : item.user_status === "deactivated" ? (
-                            <div>
+                                UnBlock
+                              </CButton>
+                            ) : item.user_status === "activated" ? (
+                              <div>
+                                <CButton
+                                  onClick={(e) => onBlock(e, "block", item)}
+                                  className="block-btn block-btn"
+                                >
+                                  Block
+                                </CButton>{" "}
+                              </div>
+                            ) : item.user_status === "deactivated" ? (
+                              <div>
+                                <CButton
+                                  onClick={(e) => onBlock(e, "block", item)}
+                                  className="block-btn block-btn"
+                                >
+                                  Block
+                                </CButton>
+                              </div>
+                            ) : (
                               <CButton
                                 onClick={(e) => onBlock(e, "block", item)}
                                 className="block-btn block-btn"
                               >
                                 Block
                               </CButton>
-                            </div>
-                          ) : (
-                            <CButton
-                              onClick={(e) => onBlock(e, "block", item)}
-                              className="block-btn block-btn"
+                            )}
+
+                            <button
+                              className="icon"
+                              onClick={(e) =>
+                                onDelete(e, "deleteUser", item._id)
+                              }
+                              id={`delete-${index}`}
                             >
-                              Block
-                            </CButton>
-                          )}
+                              <img src={DELETE} className="ml-3" />
+                            </button>
+                            <Tooltip placement="top" target={`delete-${index}`}>
+                              Delete
+                            </Tooltip>
+                          </div>
                         </td>
                       </tr>
                     );
@@ -308,6 +350,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     {
       fetchUsers,
+      deleteUser,
       userStatus,
     },
     dispatch

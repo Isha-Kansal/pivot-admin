@@ -44,7 +44,9 @@ const {
   DELETE_EXPERT_REQUEST,
   DELETE_EXPERT_SUCCESS,
   DELETE_EXPERT_FAILED,
-
+  DELETE_USER_REQUEST,
+  DELETE_USER_SUCCESS,
+  DELETE_USER_FAILED,
   EDIT_EXPERT_REQUEST,
   EDIT_EXPERT_SUCCESS,
   EDIT_EXPERT_FAILED,
@@ -76,6 +78,7 @@ const initialState = {
   saveToken: "",
   deleteResourceData: {},
   deleteExpertData: {},
+  deleteUserData: {},
   editResourceData: {},
   editExpertData: {},
   saveResourceData: {},
@@ -321,6 +324,30 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
         ...state,
       };
     }
+
+
+    case DELETE_USER_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case DELETE_USER_SUCCESS: {
+      return {
+        ...state,
+        deleteUserData: action.deleteUserData || {},
+      };
+    }
+    case DELETE_USER_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+
+
+
+
+
 
     case EDIT_RESOURCE_REQUEST: {
       return {
