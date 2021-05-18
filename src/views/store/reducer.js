@@ -60,11 +60,14 @@ const {
   FETCH_USER_RESOURCE_REQUEST,
   FETCH_USER_RESOURCE_SUCCESS,
   FETCH_USER_RESOURCE_FAILED,
+
+  FETCH_USERS_CSV_REQUEST,FETCH_USERS_CSV_FAILED,FETCH_USERS_CSV_SUCCESS
 } = require("./types");
 
 const initialState = {
   loginData: {},
   usersData: {},
+  usersCsv:{},
   userStatus: {},
   oneUserData: {},
   oneExpertData: {},
@@ -117,6 +120,24 @@ const LoginAndNavigationReducer = (state = initialState, action) => {
       };
     }
     case FETCH_USERS_FAILED: {
+      return {
+        ...state,
+      };
+    }
+
+
+    case FETCH_USERS_CSV_REQUEST: {
+      return {
+        ...state,
+      };
+    }
+    case FETCH_USERS_CSV_SUCCESS: {
+      return {
+        ...state,
+        usersCsv: action.usersCsv || {},
+      };
+    }
+    case FETCH_USERS_CSV_FAILED: {
       return {
         ...state,
       };

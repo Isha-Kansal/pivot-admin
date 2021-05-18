@@ -20,7 +20,7 @@ import {
   FETCH_USER_EXPERT_REQUEST,
   FETCH_USER_RESOURCE_REQUEST,
   DELETE_USER_REQUEST,
-  
+  FETCH_USERS_CSV_REQUEST
 } from "./types";
 
 export const loginByAdmin = (url, body, callback) => {
@@ -97,6 +97,16 @@ export const addImage = (url, body, callback) => {
 export const fetchUsers = (body, callback) => {
   return {
     type: FETCH_USERS_REQUEST,
+
+    payload: body,
+    callback,
+  };
+};
+
+
+export const fetchUsersCsv = (body, callback) => {
+  return {
+    type: FETCH_USERS_CSV_REQUEST,
 
     payload: body,
     callback,
