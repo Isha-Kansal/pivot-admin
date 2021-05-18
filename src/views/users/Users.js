@@ -147,7 +147,7 @@ const Users = (props) => {
     setModalOpen(!modalOpen);
   };
   const blockUser = (id) => {
-    console.log("89894897894879894", id);
+ 
     if (type === "deleteUser") {
       if (idUser === id) {
         setModalOpen(false);

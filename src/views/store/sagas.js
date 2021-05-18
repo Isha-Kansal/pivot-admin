@@ -195,7 +195,7 @@ function* fetchUsers(action) {
 
 function* fetchUsersCsv(action) {
   const response = yield call(callFetchUsersCsv, action);
-console.log("9456894589895879",response)
+
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {
