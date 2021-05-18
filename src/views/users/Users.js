@@ -10,11 +10,11 @@ import { Table } from "reactstrap";
 import { CBadge, CButton, CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import Loader from "../../loader";
 import { connect } from "react-redux";
-
+import CsvDownloader from 'react-csv-downloader';
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 
-import { fetchUsers, userStatus ,deleteUser} from "../store/action";
+import { fetchUsers, userStatus ,deleteUser,fetchUsersCsv} from "../store/action";
 import PaginationCommon from "../../common/pagination";
 const offsetLimit = 10;
 const Users = (props) => {
@@ -189,11 +189,34 @@ const Users = (props) => {
       }
     });
   };
-
+const onDownload=()=>{
+  props.fetchUsersCsv(
+    "user/download-csv",
+    (value) => {
+      console.log("877876848567",value)
+    }
+  );
+}
   return (
     <CRow>
       <CCol xl={12}>
         <Search handleSearch={handleSearch} />
+      </CCol>
+
+      <CCol>
+      <div>
+      {/* <CsvDownloader> */}
+        <button   onClick={(e) => onDownload(e)}>Download</button>
+      {/* </CsvDownloader> */}
+    
+        {/* // filename="Users_List"
+        // extension=".csv"
+        // separator=";"
+        // wrapColumnChar="'"
+        // columns={columns}
+        // datas={datas}
+        text="DOWNLOAD" /> */}
+    </div>
       </CCol>
 
       <CCol xl={12}>
@@ -352,6 +375,7 @@ const mapDispatchToProps = (dispatch) => {
       fetchUsers,
       deleteUser,
       userStatus,
+      fetchUsersCsv
     },
     dispatch
   );
