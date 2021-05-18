@@ -507,6 +507,6 @@ export default function* LoginByAdminWatcher() {
 
   yield takeLatest(FETCH_USER_EXPERT_REQUEST, fetchUserExpert);
   yield takeLatest(FETCH_USER_RESOURCE_REQUEST, fetchUserResource);
-
+  yield takeLatest(DELETE_USER_REQUEST, deleteUser);
   yield takeLatest(FETCH_USERS_CSV_REQUEST, fetchUsersCsv);
 }
