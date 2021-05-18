@@ -57,7 +57,8 @@ import {
   DELETE_USER_REQUEST,
   DELETE_USER_SUCCESS,
   DELETE_USER_FAILED,
-  FETCH_USERS_CSV_REQUEST,FETCH_USERS_CSV_FAILED,FETCH_USERS_CSV_SUCCESS
+  FETCH_USERS_CSV_REQUEST,
+  FETCH_USERS_CSV_FAILED,FETCH_USERS_CSV_SUCCESS
 } from "./types";
 
 import { apiCallGet } from "../../common/axios";
@@ -95,6 +96,7 @@ async function callFetchUsers(data) {
   const res = await apiCallGet(data.payload);
   return res;
 }
+
 async function callFetchUsersCsv(data) {
   const res = await apiCallGet(data.payload);
   return res;
@@ -190,9 +192,10 @@ function* fetchUsers(action) {
 }
 
 
+
 function* fetchUsersCsv(action) {
   const response = yield call(callFetchUsersCsv, action);
-
+console.log("9456894589895879",response)
   if (response && response.data) {
     action.callback(response.data);
     if (response.status === 200) {
@@ -487,8 +490,6 @@ function* fetchService(action) {
 export default function* LoginByAdminWatcher() {
   yield takeLatest(LOGIN_BY_ADMIN_REQUEST, loginByAdmin);
   yield takeLatest(FETCH_USERS_REQUEST, fetchUsers);
-
-  yield takeLatest(FETCH_USERS_CSV_REQUEST, fetchUsersCsv);
   yield takeLatest(FETCH_ONE_USER_REQUEST, fetchOneUser);
   yield takeLatest(USER_STATUS_REQUEST, userStatus);
   yield takeLatest(ADD_RESOURCE_REQUEST, addResource);
@@ -506,4 +507,6 @@ export default function* LoginByAdminWatcher() {
 
   yield takeLatest(FETCH_USER_EXPERT_REQUEST, fetchUserExpert);
   yield takeLatest(FETCH_USER_RESOURCE_REQUEST, fetchUserResource);
+
+  yield takeLatest(FETCH_USERS_CSV_REQUEST, fetchUsersCsv);
 }
