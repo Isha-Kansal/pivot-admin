@@ -147,15 +147,14 @@ const Users = (props) => {
     setModalOpen(!modalOpen);
   };
   const blockUser = (id) => {
- 
     if (type === "deleteUser") {
       if (idUser === id) {
         setModalOpen(false);
         setLoading(true);
         props.deleteUser(`user/delete?id=${id}`, (value) => {
           if (value.status === 200) {
-            NotificationManager.success("User deleted successfully", "", 1000);
             setLoading(false);
+            NotificationManager.success("User deleted successfully", "", 1000);
             callApiToFetchAllUsers(true);
           }
         });
@@ -211,7 +210,7 @@ const Users = (props) => {
           <Search handleSearch={handleSearch} />
           <div className="text-right resource-btn">
             <CButton block color="info" onClick={(e) => onDownload(e)}>
-              Download
+              Download CSV file of Users
             </CButton>
           </div>
         </form>
