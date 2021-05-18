@@ -195,33 +195,28 @@ const Users = (props) => {
   const onDownload = () => {
     props.fetchUsersCsv("user/download-csv", (value) => {
       console.log("877876848567", value);
-      var data = new Blob([value], {type: 'text/csv'});
-                    var csvURL = window.URL.createObjectURL(data);
-                    //window.open(csvURL);
-                    // then commenting out the window.open & replacing
-                    // with this allowed a file name to be passed out
-                    const tempLink = document.createElement('a');
-                    tempLink.href = csvURL;
-                    tempLink.setAttribute('download', 'filename.csv');
-                    tempLink.click();
-     
+      var data = new Blob([value], { type: "text/csv" });
+      var csvURL = window.URL.createObjectURL(data);
 
+      const tempLink = document.createElement("a");
+      tempLink.href = csvURL;
+      tempLink.setAttribute("download", "filename.csv");
+      tempLink.click();
     });
   };
 
-
-  
   return (
     <CRow>
       <CCol xl={12}>
+      <form className="position-relative">
         <Search handleSearch={handleSearch} />
+        <div className="text-right resource-btn">
+          <CButton block color="info" onClick={(e) => onDownload(e)}>Download</CButton>
+        </div>
+        </form>
       </CCol>
 
-      <CCol>
-        <div>
-          <button onClick={(e) => onDownload(e)}>Download</button>
-        </div>
-      </CCol>
+     
 
       <CCol xl={12}>
         <CCard className="position-relative">
