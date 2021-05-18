@@ -195,7 +195,17 @@ const Users = (props) => {
   const onDownload = () => {
     props.fetchUsersCsv("user/download-csv", (value) => {
       console.log("877876848567", value);
+      var data = new Blob([value], {type: 'text/csv'});
+                    var csvURL = window.URL.createObjectURL(data);
+                    //window.open(csvURL);
+                    // then commenting out the window.open & replacing
+                    // with this allowed a file name to be passed out
+                    const tempLink = document.createElement('a');
+                    tempLink.href = csvURL;
+                    tempLink.setAttribute('download', 'filename.csv');
+                    tempLink.click();
      
+
     });
   };
 
