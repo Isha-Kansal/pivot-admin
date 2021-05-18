@@ -10,11 +10,16 @@ import { Table } from "reactstrap";
 import { CBadge, CButton, CCard, CCardBody, CCol, CRow } from "@coreui/react";
 import Loader from "../../loader";
 import { connect } from "react-redux";
-import CsvDownloader from 'react-csv-downloader';
+import CsvDownloader from "react-csv-downloader";
 import { bindActionCreators } from "redux";
 import { withRouter } from "react-router-dom";
 
-import { fetchUsers, userStatus ,deleteUser,fetchUsersCsv} from "../store/action";
+import {
+  fetchUsers,
+  userStatus,
+  deleteUser,
+  fetchUsersCsv,
+} from "../store/action";
 import PaginationCommon from "../../common/pagination";
 const offsetLimit = 10;
 const Users = (props) => {
@@ -144,19 +149,17 @@ const Users = (props) => {
   const blockUser = (id) => {
     console.log("89894897894879894", id);
     if (type === "deleteUser") {
-    //  if (idUser === id) {
-    //     setModalOpen(false);
-
-    //     setLoading(true);
-    //     props.deleteUser(`user/delete?id=${id}`, (value) => {
-    //       if (value.status === 200) {
-    //         NotificationManager.success("User deleted successfully", "", 1000);
-    //         setLoading(false);
-
-    //         callApiToFetchAllUsers(true);
-    //       }
-    //     });
-    //   }
+      //  if (idUser === id) {
+      //     setModalOpen(false);
+      //     setLoading(true);
+      //     props.deleteUser(`user/delete?id=${id}`, (value) => {
+      //       if (value.status === 200) {
+      //         NotificationManager.success("User deleted successfully", "", 1000);
+      //         setLoading(false);
+      //         callApiToFetchAllUsers(true);
+      //       }
+      //     });
+      //   }
     } else {
       if (idUser === id) {
         setModalOpen(false);
@@ -189,14 +192,15 @@ const Users = (props) => {
       }
     });
   };
-const onDownload=()=>{
-  props.fetchUsersCsv(
-    "user/download-csv",
-    (value) => {
-      console.log("877876848567",value)
-    }
-  );
-}
+  const onDownload = () => {
+    props.fetchUsersCsv("user/download-csv", (value) => {
+      console.log("877876848567", value);
+     
+    });
+  };
+
+
+  
   return (
     <CRow>
       <CCol xl={12}>
@@ -204,19 +208,9 @@ const onDownload=()=>{
       </CCol>
 
       <CCol>
-      <div>
-      {/* <CsvDownloader> */}
-        <button   onClick={(e) => onDownload(e)}>Download</button>
-      {/* </CsvDownloader> */}
-    
-        {/* // filename="Users_List"
-        // extension=".csv"
-        // separator=";"
-        // wrapColumnChar="'"
-        // columns={columns}
-        // datas={datas}
-        text="DOWNLOAD" /> */}
-    </div>
+        <div>
+          <button onClick={(e) => onDownload(e)}>Download</button>
+        </div>
       </CCol>
 
       <CCol xl={12}>
@@ -375,7 +369,7 @@ const mapDispatchToProps = (dispatch) => {
       fetchUsers,
       deleteUser,
       userStatus,
-      fetchUsersCsv
+      fetchUsersCsv,
     },
     dispatch
   );
