@@ -194,22 +194,63 @@ button:focus {
 ::-webkit-scrollbar-thumb:hover {
 	background: #f9ae76;
 }
-.date-picker {
-	@media (max-width: 991px) {
-		flex-wrap: wrap;
-	}
-	label {
-		margin-right: 10px;
-		margin-bottom: 0;
-	}
-	.react-datepicker__input-container input {
-		border: 1px solid;
-		color: #768192;
-		background-color: #fff;
-		border-color: #d8dbe0;
-		height: 38px;
-		border-radius: 4px;
-		padding: 8px;
-		font-size: 14px;
+.download-btn{
+	color: #ffffff;
+    font-weight: 800;
+    font-size: 13px;
+    border: 1px solid #f9ae76 !important;
+    background-color: #f9ae76 !important;
+    padding: 7px 15px;
+	padding: 8px 2px;
+	margin: 0px 8px;
+	width: 300px;
+    max-width: 100%;
+    margin-right: 0;
+    margin-bottom: 10px;
+}
+.download-csv{
+	.search-input{
+		margin: 0;
+		
+		input{
+		    max-width: 300px;
+			height: 38px;
+			min-width: 200px;
+		}
 	}
 }
+.date-picker-outer{
+	margin-bottom: 20px;
+	.date-picker {
+		@media (max-width: 1100px) {
+			flex-wrap: wrap;
+			justify-content: flex-end;
+		}
+		label {
+			margin-right: 10px;
+			margin-bottom: 0;
+		}
+		.react-datepicker__input-container input {
+			border: 1px solid;
+			color: #768192;
+			background-color: #fff;
+			border-color: #d8dbe0;
+			height: 38px;
+			border-radius: 4px;
+			padding: 8px;
+			font-size: 14px;
+			@media  (max-width:767px) {
+				width: 100px;
+			}
+		}
+	}
+	.select-country{
+		width: 200px;
+		margin-left: 15px;
+		@media   (max-width:767px){
+			width: 100%;
+			margin: 0;
+		}
+	}
+}
+

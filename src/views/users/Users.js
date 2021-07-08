@@ -246,59 +246,64 @@ const Users = (props) => {
 
 	return (
 		<>
-			<div className="d-flex justify-content-end flex-wrap">
-				<div>
-					<CFormGroup className="d-flex date-picker ">
-						<div className="d-flex align-items-center mr-3">
-							<CLabel>From</CLabel>
-							<DatePicker
-								selected={startDate}
-								onSelect={(date) => handleChangeFilter(date, 'start')} //when day is clicked
-								// onChange={handleDateChange} //only when value has changed
-								dateFormat="dd/MM/yyyy"
-								maxDate={new Date()}
-							/>
-						</div>
-						<div className="d-flex align-items-center ml-3">
-							<CLabel>To</CLabel>
-							<DatePicker
-								selected={endDate}
-								onSelect={(date) => handleChangeFilter(date, 'end')} //when day is clicked
-								// onChange={handleDateChange} //only when value has changed
-								dateFormat="dd/MM/yyyy"
-								minDate={startDate}
-								maxDate={new Date()}
-							/>
-						</div>
-					</CFormGroup>
-				</div>
-				<div>
-					<CFormGroup>
-						<Select
-							custom
-							placeholder="Select country"
-							name="country"
-							id="country"
-							onChange={(data) => handleChangeFilter(data, 'country')}
-							// value={country ? { value: country, label: country } : null}
-							value={country}
-							// options={optionsGender}
-						></Select>
-					</CFormGroup>
-				</div>
-			</div>
+		
 
-			<CRow>
-				<CCol xl={12}>
-					<form className="position-relative">
+			<CRow className="justify-content-between download-csv">
+			
+				<CCol lg={6} md={6} xs={12}>
+					<form className="d-flex flex-wrap flex-lg-nowrap">
 						<Search handleSearch={handleSearch} />
-						<div className="text-right resource-btn">
-							<CButton block color="info" onClick={(e) => onDownload(e)}>
+							<CButton block color="info" className="download-btn" onClick={(e) => onDownload(e)}>
 								Download CSV file of Users
 							</CButton>
-						</div>
 					</form>
+				
 				</CCol>
+				<CCol lg={6} md={6} xs={12}>
+						<div className="d-flex justify-content-end flex-wrap date-picker-outer">
+						<div className="d-flex date-picker ">
+							<div className="d-flex align-items-center mr-0 mr-sm-3">
+								<CLabel>From</CLabel>
+								<DatePicker
+									selected={startDate}
+									onSelect={(date) => handleChangeFilter(date, 'start')} //when day is clicked
+									// onChange={handleDateChange} //only when value has changed
+									dateFormat="dd/MM/yyyy"
+									maxDate={new Date()}
+								/>
+							</div>
+							<div className="d-flex align-items-center ">
+								<CLabel>To</CLabel>
+								<DatePicker
+									selected={endDate}
+									onSelect={(date) => handleChangeFilter(date, 'end')} //when day is clicked
+									// onChange={handleDateChange} //only when value has changed
+									dateFormat="dd/MM/yyyy"
+									minDate={startDate}
+									maxDate={new Date()}
+								/>
+							</div>
+						</div>
+					<div className="select-country">
+						<div>
+							<Select
+								custom
+								placeholder="Select country"
+								name="country"
+								id="country"
+								onChange={(data) => handleChangeFilter(data, 'country')}
+								// value={country ? { value: country, label: country } : null}
+								value={country}
+								// options={optionsGender}
+							></Select>
+						</div>
+					</div>
+				</div>
+				</CCol>
+				</CRow>
+				<CRow>
+
+				
 
 				<CCol xl={12}>
 					<CCard className="position-relative">
