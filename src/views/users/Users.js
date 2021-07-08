@@ -64,6 +64,7 @@ const Users = (props) => {
 	const [count, setCount] = useState(0);
 	const [startDate, setStartDate] = useState(new Date());
 	const [endDate, setEndDate] = useState(new Date());
+	const [country, setCountry] = useState('');
 
 	const pageChange = async (newPage) => {
 		setLoading(true);
@@ -233,11 +234,13 @@ const Users = (props) => {
 		});
 	};
 
-	const handleDateSelect = (date, type) => {
+	const handleChangeFilter = (data, type) => {
 		if (type === 'start') {
-			setStartDate(date);
-		} else {
-			setEndDate(date);
+			setStartDate(data);
+		} else if (type === 'end') {
+			setEndDate(data);
+		} else if (type === 'country') {
+			setCountry(data);
 		}
 	};
 
@@ -250,7 +253,7 @@ const Users = (props) => {
 							<CLabel>From</CLabel>
 							<DatePicker
 								selected={startDate}
-								onSelect={(date) => handleDateSelect(date, 'start')} //when day is clicked
+								onSelect={(date) => handleChangeFilter(date, 'start')} //when day is clicked
 								// onChange={handleDateChange} //only when value has changed
 								dateFormat="dd/MM/yyyy"
 								maxDate={new Date()}
@@ -260,7 +263,7 @@ const Users = (props) => {
 							<CLabel>To</CLabel>
 							<DatePicker
 								selected={endDate}
-								onSelect={(date) => handleDateSelect(date, 'end')} //when day is clicked
+								onSelect={(date) => handleChangeFilter(date, 'end')} //when day is clicked
 								// onChange={handleDateChange} //only when value has changed
 								dateFormat="dd/MM/yyyy"
 								minDate={startDate}
@@ -276,8 +279,9 @@ const Users = (props) => {
 							placeholder="Select country"
 							name="country"
 							id="country"
-							// onChange={(data) => this.handleChange(data, 'gender')}
-							// value={gender ? { value: gender, label: gender } : null}
+							onChange={(data) => handleChangeFilter(data, 'country')}
+							// value={country ? { value: country, label: country } : null}
+							value={country}
 							// options={optionsGender}
 						></Select>
 					</CFormGroup>
