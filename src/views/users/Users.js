@@ -62,6 +62,8 @@ const Users = (props) => {
 	const [usersDetails, setUsersDetails] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [count, setCount] = useState(0);
+	const [startDate, setStartDate] = useState(new Date());
+	const [endDate, setEndDate] = useState(new Date());
 
 	const pageChange = async (newPage) => {
 		setLoading(true);
@@ -231,6 +233,14 @@ const Users = (props) => {
 		});
 	};
 
+	const handleDateSelect = (date, type) => {
+		if (type === 'start') {
+			setStartDate(date);
+		} else {
+			setEndDate(date);
+		}
+	};
+
 	return (
 		<>
 			<div className="d-flex justify-content-end flex-wrap">
@@ -239,18 +249,22 @@ const Users = (props) => {
 						<div className="d-flex align-items-center mr-3">
 							<CLabel>From</CLabel>
 							<DatePicker
-								selected={new Date()}
-								// onSelect={handleDateSelect} //when day is clicked
+								selected={startDate}
+								onSelect={(date) => handleDateSelect(date, 'start')} //when day is clicked
 								// onChange={handleDateChange} //only when value has changed
+								dateFormat="dd/MM/yyyy"
+								maxDate={new Date()}
 							/>
 						</div>
 						<div className="d-flex align-items-center ml-3">
 							<CLabel>To</CLabel>
-
 							<DatePicker
-								selected={new Date()}
-								// onSelect={handleDateSelect} //when day is clicked
+								selected={endDate}
+								onSelect={(date) => handleDateSelect(date, 'end')} //when day is clicked
 								// onChange={handleDateChange} //only when value has changed
+								dateFormat="dd/MM/yyyy"
+								minDate={startDate}
+								maxDate={new Date()}
 							/>
 						</div>
 					</CFormGroup>
@@ -259,9 +273,9 @@ const Users = (props) => {
 					<CFormGroup>
 						<Select
 							custom
-							placeholder="Select gender"
-							name="gender"
-							id="gender"
+							placeholder="Select country"
+							name="country"
+							id="country"
 							// onChange={(data) => this.handleChange(data, 'gender')}
 							// value={gender ? { value: gender, label: gender } : null}
 							// options={optionsGender}
