@@ -201,30 +201,50 @@ button:focus {
     border: 1px solid #f9ae76 !important;
     background-color: #f9ae76 !important;
     padding: 7px 15px;
-	padding: 8px 2px;
+	
 	margin: 0px 8px;
-	width: 300px;
+	width: auto;
     max-width: 100%;
     margin-right: 0;
     margin-bottom: 10px;
+	
+	@media (max-width:550px) {
+	
+		margin:  0;
+	}
+	@media (max-width:450px) {
+	width: 100%;
+		margin: 10px 0;
+	}
 }
 .download-csv{
 	.search-input{
 		margin: 0;
 		
 		input{
-		    max-width: 300px;
+			width: 200px;
 			height: 38px;
-			min-width: 200px;
+			
 		}
 	}
 }
 .date-picker-outer{
 	margin-bottom: 20px;
 	.date-picker {
+	
 		@media (max-width: 1100px) {
-			flex-wrap: wrap;
+			
 			justify-content: flex-end;
+		}
+	
+		@media (max-width:767px) {
+			justify-content: flex-start;
+			margin-bottom: 10px;
+			width: 100%;
+		}
+		@media (max-width:480px) {
+			justify-content: space-between;
+			
 		}
 		label {
 			margin-right: 10px;
@@ -233,6 +253,7 @@ button:focus {
 		.react-datepicker__input-container input {
 			border: 1px solid;
 			color: #768192;
+			width: 100px;
 			background-color: #fff;
 			border-color: #d8dbe0;
 			height: 38px;
@@ -251,6 +272,9 @@ button:focus {
 			width: 100%;
 			margin: 0;
 		}
+	}
+	@media   (max-width:480px){
+		flex-wrap: wrap;
 	}
 }
 

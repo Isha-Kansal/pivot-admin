@@ -251,7 +251,7 @@ const Users = (props) => {
 			<CRow className="justify-content-between download-csv">
 			
 				<CCol lg={6} md={6} xs={12}>
-					<form className="d-flex flex-wrap flex-lg-nowrap">
+					<form className="d-flex flex-sm-nowrap flex-wrap">
 						<Search handleSearch={handleSearch} />
 							<CButton block color="info" className="download-btn" onClick={(e) => onDownload(e)}>
 								Download CSV file of Users
@@ -260,9 +260,9 @@ const Users = (props) => {
 				
 				</CCol>
 				<CCol lg={6} md={6} xs={12}>
-						<div className="d-flex justify-content-end flex-wrap date-picker-outer">
+						<div className="d-flex justify-content-end  date-picker-outer">
 						<div className="d-flex date-picker ">
-							<div className="d-flex align-items-center mr-0 mr-sm-3">
+							<div className="d-flex align-items-center mr-0 mr-xl-3">
 								<CLabel>From</CLabel>
 								<DatePicker
 									selected={startDate}
