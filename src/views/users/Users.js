@@ -47,9 +47,12 @@ import {
 	userStatus,
 	deleteUser,
 	fetchUsersCsv,
+	fetchUserCountries,
 } from '../store/action';
 import PaginationCommon from '../../common/pagination';
+
 const offsetLimit = 10;
+
 const Users = (props) => {
 	const history = useHistory();
 
@@ -65,6 +68,7 @@ const Users = (props) => {
 	const [startDate, setStartDate] = useState(new Date());
 	const [endDate, setEndDate] = useState(new Date());
 	const [country, setCountry] = useState('');
+	const [userCountries, setUserCountries] = useState([]);
 
 	const pageChange = async (newPage) => {
 		setLoading(true);
@@ -123,6 +127,22 @@ const Users = (props) => {
 		setPage(1);
 		setOffset('');
 	};
+
+	useEffect(() => {
+		props.fetchUserCountries('user/countries', (response) => {
+			if (response?.data) {
+				const { countries } = response.data;
+
+				if (countries && countries.length) {
+					const options = countries.map((country) => ({
+						value: country,
+						label: country,
+					}));
+					setUserCountries(options);
+				}
+			}
+		});
+	}, []);
 
 	useEffect(() => {
 		callApiToFetchAllUsers();
@@ -246,21 +266,22 @@ const Users = (props) => {
 
 	return (
 		<>
-		
-
 			<CRow className="justify-content-between download-csv">
-			
 				<CCol lg={6} md={6} xs={12}>
 					<form className="d-flex flex-wrap flex-lg-nowrap">
 						<Search handleSearch={handleSearch} />
-							<CButton block color="info" className="download-btn" onClick={(e) => onDownload(e)}>
-								Download CSV file of Users
-							</CButton>
+						<CButton
+							block
+							color="info"
+							className="download-btn"
+							onClick={(e) => onDownload(e)}
+						>
+							Download CSV file of Users
+						</CButton>
 					</form>
-				
 				</CCol>
 				<CCol lg={6} md={6} xs={12}>
-						<div className="d-flex justify-content-end flex-wrap date-picker-outer">
+					<div className="d-flex justify-content-end flex-wrap date-picker-outer">
 						<div className="d-flex date-picker ">
 							<div className="d-flex align-items-center mr-0 mr-sm-3">
 								<CLabel>From</CLabel>
@@ -284,27 +305,24 @@ const Users = (props) => {
 								/>
 							</div>
 						</div>
-					<div className="select-country">
-						<div>
-							<Select
-								custom
-								placeholder="Select country"
-								name="country"
-								id="country"
-								onChange={(data) => handleChangeFilter(data, 'country')}
-								// value={country ? { value: country, label: country } : null}
-								value={country}
-								// options={optionsGender}
-							></Select>
+						<div className="select-country">
+							<div>
+								<Select
+									custom
+									placeholder="Select country"
+									name="country"
+									id="country"
+									onChange={(data) => handleChangeFilter(data, 'country')}
+									// value={country ? { value: country, label: country } : null}
+									value={country}
+									options={userCountries}
+								></Select>
+							</div>
 						</div>
 					</div>
-				</div>
 				</CCol>
-				</CRow>
-				<CRow>
-
-				
-
+			</CRow>
+			<CRow>
 				<CCol xl={12}>
 					<CCard className="position-relative">
 						{loading && <Loader />}
@@ -468,6 +486,7 @@ const mapDispatchToProps = (dispatch) => {
 			deleteUser,
 			userStatus,
 			fetchUsersCsv,
+			fetchUserCountries,
 		},
 		dispatch
 	);

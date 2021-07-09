@@ -60,6 +60,9 @@ import {
 	FETCH_USERS_CSV_REQUEST,
 	FETCH_USERS_CSV_FAILED,
 	FETCH_USERS_CSV_SUCCESS,
+	USER_COUNTRIES_REQUEST,
+	USER_COUNTRIES_SUCCESS,
+	USER_COUNTRIES_FAILED,
 } from './types';
 
 import { apiCallGet } from '../../common/axios';
@@ -158,6 +161,12 @@ async function callUserStatus(data) {
 	const res = await apiCallPost(data.url, data.payload);
 	return res;
 }
+
+async function callUserCountries(data) {
+	const res = await apiCallGet(data.url);
+	return res;
+}
+
 function* loginByAdmin(action) {
 	const response = yield call(callLoginByAdmin, action);
 
@@ -478,6 +487,22 @@ function* fetchService(action) {
 	}
 }
 
+function* fetchUserCountries(action) {
+	const response = yield call(callUserCountries, action);
+
+	if (response && response.data) {
+		action.callback(response.data);
+		if (response.status === 200) {
+			yield put({
+				type: USER_COUNTRIES_SUCCESS,
+				countriesData: response.data,
+			});
+		} else {
+			yield put({ type: USER_COUNTRIES_FAILED });
+		}
+	}
+}
+
 export default function* LoginByAdminWatcher() {
 	yield takeLatest(LOGIN_BY_ADMIN_REQUEST, loginByAdmin);
 	yield takeLatest(FETCH_USERS_REQUEST, fetchUsers);
@@ -500,4 +525,6 @@ export default function* LoginByAdminWatcher() {
 	yield takeLatest(FETCH_USER_RESOURCE_REQUEST, fetchUserResource);
 	yield takeLatest(DELETE_USER_REQUEST, deleteUser);
 	yield takeLatest(FETCH_USERS_CSV_REQUEST, fetchUsersCsv);
+	yield takeLatest(FETCH_USERS_CSV_REQUEST, fetchUsersCsv);
+	yield takeLatest(USER_COUNTRIES_REQUEST, fetchUserCountries);
 }
