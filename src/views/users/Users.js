@@ -47,9 +47,12 @@ import {
 	userStatus,
 	deleteUser,
 	fetchUsersCsv,
+	fetchUserCountries,
 } from '../store/action';
 import PaginationCommon from '../../common/pagination';
+
 const offsetLimit = 10;
+
 const Users = (props) => {
 	const history = useHistory();
 
@@ -62,9 +65,10 @@ const Users = (props) => {
 	const [usersDetails, setUsersDetails] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [count, setCount] = useState(0);
-	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date());
+	const [startDate, setStartDate] = useState('');
+	const [endDate, setEndDate] = useState('');
 	const [country, setCountry] = useState('');
+	const [userCountries, setUserCountries] = useState([]);
 
 	const pageChange = async (newPage) => {
 		setLoading(true);
@@ -123,6 +127,22 @@ const Users = (props) => {
 		setPage(1);
 		setOffset('');
 	};
+
+	useEffect(() => {
+		props.fetchUserCountries('user/countries', (response) => {
+			if (response?.data) {
+				const { countries } = response.data;
+
+				if (countries && countries.length) {
+					const options = countries.map((country) => ({
+						value: country,
+						label: country,
+					}));
+					setUserCountries(options);
+				}
+			}
+		});
+	}, []);
 
 	useEffect(() => {
 		callApiToFetchAllUsers();
@@ -222,16 +242,25 @@ const Users = (props) => {
 			}
 		});
 	};
-	const onDownload = () => {
-		props.fetchUsersCsv('user/download-csv', (value) => {
-			var data = new Blob([value], { type: 'text/csv' });
-			var csvURL = window.URL.createObjectURL(data);
 
-			const tempLink = document.createElement('a');
-			tempLink.href = csvURL;
-			tempLink.setAttribute('download', 'users_list.csv');
-			tempLink.click();
-		});
+	const getUtcDate = (date) => {
+		return date ? moment(date).utc().format('DD/MM/YYYY') : '';
+	};
+
+	const onDownload = () => {
+		props.fetchUsersCsv(
+			`user/download-csv?startDate=${getUtcDate(
+				startDate
+			)}&endDate=${getUtcDate(endDate)}&country=${country?.value || ''}`,
+			(value) => {
+				var data = new Blob([value], { type: 'text/csv' });
+				var csvURL = window.URL.createObjectURL(data);
+				const tempLink = document.createElement('a');
+				tempLink.href = csvURL;
+				tempLink.setAttribute('download', 'users_list.csv');
+				tempLink.click();
+			}
+		);
 	};
 
 	const handleChangeFilter = (data, type) => {
@@ -246,28 +275,28 @@ const Users = (props) => {
 
 	return (
 		<>
-		
-
 			<CRow className="justify-content-between download-csv">
-			
 				<CCol lg={6} md={6} xs={12}>
 					<form className="d-flex flex-sm-nowrap flex-wrap">
 						<Search handleSearch={handleSearch} />
-							<CButton block color="info" className="download-btn" onClick={(e) => onDownload(e)}>
-								Download CSV file of Users
-							</CButton>
+						<CButton
+							block
+							color="info"
+							className="download-btn"
+							onClick={onDownload}
+						>
+							Download CSV file of Users
+						</CButton>
 					</form>
-				
 				</CCol>
 				<CCol lg={6} md={6} xs={12}>
-						<div className="d-flex justify-content-end  date-picker-outer">
+					<div className="d-flex justify-content-end flex-wrap date-picker-outer">
 						<div className="d-flex date-picker ">
 							<div className="d-flex align-items-center mr-0 mr-xl-3">
 								<CLabel>From</CLabel>
 								<DatePicker
 									selected={startDate}
-									onSelect={(date) => handleChangeFilter(date, 'start')} //when day is clicked
-									// onChange={handleDateChange} //only when value has changed
+									onSelect={(date) => handleChangeFilter(date, 'start')}
 									dateFormat="dd/MM/yyyy"
 									maxDate={new Date()}
 								/>
@@ -276,35 +305,30 @@ const Users = (props) => {
 								<CLabel>To</CLabel>
 								<DatePicker
 									selected={endDate}
-									onSelect={(date) => handleChangeFilter(date, 'end')} //when day is clicked
-									// onChange={handleDateChange} //only when value has changed
+									onSelect={(date) => handleChangeFilter(date, 'end')}
 									dateFormat="dd/MM/yyyy"
-									minDate={startDate}
+									minDate={startDate || new Date()}
 									maxDate={new Date()}
 								/>
 							</div>
 						</div>
-					<div className="select-country">
-						<div>
-							<Select
-								custom
-								placeholder="Select country"
-								name="country"
-								id="country"
-								onChange={(data) => handleChangeFilter(data, 'country')}
-								// value={country ? { value: country, label: country } : null}
-								value={country}
-								// options={optionsGender}
-							></Select>
+						<div className="select-country">
+							<div>
+								<Select
+									custom
+									placeholder="Select country"
+									name="country"
+									id="country"
+									onChange={(data) => handleChangeFilter(data, 'country')}
+									value={country}
+									options={userCountries}
+								></Select>
+							</div>
 						</div>
 					</div>
-				</div>
 				</CCol>
-				</CRow>
-				<CRow>
-
-				
-
+			</CRow>
+			<CRow>
 				<CCol xl={12}>
 					<CCard className="position-relative">
 						{loading && <Loader />}
@@ -468,6 +492,7 @@ const mapDispatchToProps = (dispatch) => {
 			deleteUser,
 			userStatus,
 			fetchUsersCsv,
+			fetchUserCountries,
 		},
 		dispatch
 	);
