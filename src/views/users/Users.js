@@ -65,8 +65,8 @@ const Users = (props) => {
 	const [usersDetails, setUsersDetails] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [count, setCount] = useState(0);
-	const [startDate, setStartDate] = useState(new Date());
-	const [endDate, setEndDate] = useState(new Date());
+	const [startDate, setStartDate] = useState('');
+	const [endDate, setEndDate] = useState('');
 	const [country, setCountry] = useState('');
 	const [userCountries, setUserCountries] = useState([]);
 
@@ -242,16 +242,25 @@ const Users = (props) => {
 			}
 		});
 	};
-	const onDownload = () => {
-		props.fetchUsersCsv('user/download-csv', (value) => {
-			var data = new Blob([value], { type: 'text/csv' });
-			var csvURL = window.URL.createObjectURL(data);
 
-			const tempLink = document.createElement('a');
-			tempLink.href = csvURL;
-			tempLink.setAttribute('download', 'users_list.csv');
-			tempLink.click();
-		});
+	const getUtcDate = (date) => {
+		return date ? moment(date).utc().format('DD/MM/YYYY') : '';
+	};
+
+	const onDownload = () => {
+		props.fetchUsersCsv(
+			`user/download-csv?startDate=${getUtcDate(
+				startDate
+			)}&endDate=${getUtcDate(endDate)}&country=${country?.value || ''}`,
+			(value) => {
+				var data = new Blob([value], { type: 'text/csv' });
+				var csvURL = window.URL.createObjectURL(data);
+				const tempLink = document.createElement('a');
+				tempLink.href = csvURL;
+				tempLink.setAttribute('download', 'users_list.csv');
+				tempLink.click();
+			}
+		);
 	};
 
 	const handleChangeFilter = (data, type) => {
@@ -274,7 +283,7 @@ const Users = (props) => {
 							block
 							color="info"
 							className="download-btn"
-							onClick={(e) => onDownload(e)}
+							onClick={onDownload}
 						>
 							Download CSV file of Users
 						</CButton>
@@ -286,7 +295,7 @@ const Users = (props) => {
 							<div className="d-flex align-items-center mr-0 mr-sm-3">
 								<CLabel>From</CLabel>
 								<DatePicker
-									selected={startDate}
+									selected={startDate || new Date()}
 									onSelect={(date) => handleChangeFilter(date, 'start')} //when day is clicked
 									// onChange={handleDateChange} //only when value has changed
 									dateFormat="dd/MM/yyyy"
@@ -296,11 +305,11 @@ const Users = (props) => {
 							<div className="d-flex align-items-center ">
 								<CLabel>To</CLabel>
 								<DatePicker
-									selected={endDate}
+									selected={endDate || new Date()}
 									onSelect={(date) => handleChangeFilter(date, 'end')} //when day is clicked
 									// onChange={handleDateChange} //only when value has changed
 									dateFormat="dd/MM/yyyy"
-									minDate={startDate}
+									minDate={startDate || new Date()}
 									maxDate={new Date()}
 								/>
 							</div>
