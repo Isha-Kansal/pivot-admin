@@ -295,9 +295,8 @@ const Users = (props) => {
 							<div className="d-flex align-items-center mr-0 mr-sm-3">
 								<CLabel>From</CLabel>
 								<DatePicker
-									selected={startDate || new Date()}
-									onSelect={(date) => handleChangeFilter(date, 'start')} //when day is clicked
-									// onChange={handleDateChange} //only when value has changed
+									selected={startDate}
+									onSelect={(date) => handleChangeFilter(date, 'start')}
 									dateFormat="dd/MM/yyyy"
 									maxDate={new Date()}
 								/>
@@ -305,9 +304,8 @@ const Users = (props) => {
 							<div className="d-flex align-items-center ">
 								<CLabel>To</CLabel>
 								<DatePicker
-									selected={endDate || new Date()}
-									onSelect={(date) => handleChangeFilter(date, 'end')} //when day is clicked
-									// onChange={handleDateChange} //only when value has changed
+									selected={endDate}
+									onSelect={(date) => handleChangeFilter(date, 'end')}
 									dateFormat="dd/MM/yyyy"
 									minDate={startDate || new Date()}
 									maxDate={new Date()}

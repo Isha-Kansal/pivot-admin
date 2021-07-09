@@ -102,7 +102,7 @@ async function callFetchUsers(data) {
 }
 
 async function callFetchUsersCsv(data) {
-	const res = await apiCallGet(data.payload);
+	const res = await apiCallGet(data.url);
 	return res;
 }
 

@@ -104,14 +104,14 @@ export const fetchUsers = (body, callback) => {
 	};
 };
 
-export const fetchUsersCsv = (body, callback) => {
+export const fetchUsersCsv = (url, callback) => {
 	return {
 		type: FETCH_USERS_CSV_REQUEST,
-
-		payload: body,
+		url,
 		callback,
 	};
 };
+
 export const fetchService = (body, callback) => {
 	return {
 		type: FETCH_EXPERT_SERVICE_REQUEST,
