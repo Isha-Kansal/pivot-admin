@@ -320,7 +320,6 @@ const Users = (props) => {
 									name="country"
 									id="country"
 									onChange={(data) => handleChangeFilter(data, 'country')}
-									// value={country ? { value: country, label: country } : null}
 									value={country}
 									options={userCountries}
 								></Select>
