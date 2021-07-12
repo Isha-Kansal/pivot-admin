@@ -290,7 +290,7 @@ const Users = (props) => {
 					</form>
 				</CCol>
 				<CCol lg={6} md={6} xs={12}>
-					<div className="d-flex justify-content-end flex-wrap date-picker-outer">
+					<div className="d-flex justify-content-end flex-sm-wrap flex-nowrap date-picker-outer">
 						<div className="d-flex date-picker ">
 							<div className="d-flex align-items-center mr-0 mr-xl-3">
 								<CLabel>From</CLabel>
