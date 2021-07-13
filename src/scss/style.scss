@@ -216,6 +216,9 @@ button:focus {
 	width: 100%;
 		margin: 10px 0;
 	}
+	@media (max-width:1250px) {
+		font-size: 8px;
+	}
 }
 .download-csv{
 	.search-input{
@@ -224,9 +227,13 @@ button:focus {
 		input{
 			width: 200px;
 			height: 38px;
+			@media  (max-width:540px) {
+				width: 291px;
+			}
 			
 		}
 	}
+	
 }
 .date-picker-outer{
 	margin-bottom: 20px;
@@ -268,7 +275,7 @@ button:focus {
 	.select-country{
 		width: 200px;
 		margin-left: 15px;
-		@media   (max-width:767px){
+		@media   (max-width:540px){
 			width: 100%;
 			margin: 0;
 		}
