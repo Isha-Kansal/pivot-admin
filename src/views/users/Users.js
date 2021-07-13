@@ -276,20 +276,13 @@ const Users = (props) => {
 	return (
 		<>
 			<CRow className="justify-content-between download-csv">
-				<CCol lg={6} md={6} xs={12}>
+				<CCol lg={3} md={3} xs={12}>
 					<form className="d-flex flex-sm-nowrap flex-wrap">
 						<Search handleSearch={handleSearch} />
-						<CButton
-							block
-							color="info"
-							className="download-btn"
-							onClick={onDownload}
-						>
-							Download CSV file of Users
-						</CButton>
+						
 					</form>
 				</CCol>
-				<CCol lg={6} md={6} xs={12}>
+				<CCol lg={9} md={9} xs={12}>
 					<div className="d-flex justify-content-end flex-sm-wrap flex-nowrap date-picker-outer">
 						<div className="d-flex date-picker ">
 							<div className="d-flex align-items-center mr-0 mr-xl-3">
@@ -325,6 +318,14 @@ const Users = (props) => {
 								></Select>
 							</div>
 						</div>
+						<CButton
+							block
+							color="info"
+							className="download-btn"
+							onClick={onDownload}
+						>
+							Download CSV file of Users
+						</CButton>
 					</div>
 				</CCol>
 			</CRow>
