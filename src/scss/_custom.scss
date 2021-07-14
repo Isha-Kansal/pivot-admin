@@ -1,0 +1,169 @@
+// Here you can add other styles
+
+.card {
+  min-height: 300px;
+}
+.search-input {
+  max-width: 500px;
+  margin: 0px auto;
+  margin-bottom: 25px;
+}
+
+.pagination-input {
+  display: flex;
+  justify-content: center;
+}
+button {
+  &.icon {
+    border: 0;
+    background: transparent;
+    padding: 0;
+    outline: 0;
+  }
+}
+.add-list {
+  background: #f2f2f2;
+  padding: 5px 10px;
+  margin-bottom: 10px;
+}
+.c-main {
+  position: relative;
+  .no-user-found {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.tableHeight {
+  min-height: 500px;
+}
+.resource-btn {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  @media (max-width: 991px) {
+    position: relative;
+    max-width: 130px;
+    margin: 13px auto 0;
+    top: 7px;
+    width: 100%;
+  }
+  button {
+    color: #ffffff;
+    font-weight: 800;
+    font-size: 13px;
+    border: 1px solid #f9ae76 !important;
+
+    background-color: #f9ae76 !important;
+    padding: 7px 15px;
+  }
+}
+.breadcrumb-item {
+  a {
+    color: rgb(255, 174, 117);
+  }
+}
+.login-btn {
+  background: rgb(255, 174, 117) !important;
+  border: 0 !important;
+  &:focus,
+  &:active {
+    box-shadow: 0 0 0 0.2rem #fab37e7d !important;
+  }
+}
+.image-file {
+  display: flex !important;
+  background: #f2f2f2;
+  align-items: center;
+  padding: 10px;
+}
+/*nav tabs*/
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  background-color: #f9ae76;
+  border-color: transparent;
+  color: white;
+}
+.nav-tabs a {
+  color: #000000;
+}
+.nav-tabs .nav-link {
+  border: 1px solid #e7e7e7;
+}
+
+div#accordion .card {
+  min-height: unset;
+}
+.tab-content {
+  .table th,
+  .table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-bottom: 1px solid;
+    border-bottom-color: #d8dbe0;
+  }
+  .btn-link {
+    color: #f9ae76;
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.calls-with-experts {
+  text-align: right;
+  font-size: 10px;
+  background-color: #b8b5b333;
+  padding: 10px 15px;
+  h5 {
+    font-size: 14px;
+    margin: 0;
+  }
+}
+.btn-orange {
+  background: #f9ae76 !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  outline: 0;
+  max-width: 175px;
+}
+table {
+  a {
+    color: #f9ae76;
+    &:hover {
+      color: #f9ae76;
+    }
+  }
+}
+
+
+/*no records title*/
+.no-records {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  margin-top: 7px;
+}
+.no-records-planner {
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  margin-top: 69px;
+}
+.no-records-prepare{
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  margin-top: -8px;
+}

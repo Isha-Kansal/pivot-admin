@@ -1,0 +1,287 @@
+// If you want to override variables do it here
+@import 'variables';
+
+// Import CoreUI styles
+@import '~@coreui/coreui/scss/coreui.scss';
+
+// Some temp fixes
+@import 'fixes';
+
+// If you want to add something do it here
+@import 'custom';
+@import 'loader';
+
+.c-sidebar {
+	.c-sidebar-nav-link:hover {
+		background-color: rgba(249, 175, 118, 0.502);
+	}
+	.c-sidebar-nav-dropdown-toggle:hover {
+		background-color: rgba(249, 175, 118, 0.502);
+	}
+	.c-sidebar-nav-link.c-active {
+		background-color: rgba(249, 175, 118, 0.502);
+	}
+	// .c-sidebar-brand.d-md-down-none {
+	//   svg {
+	//     width: 150px;
+	//     margin-left: 0;
+	//     margin-right: auto;
+	//     padding-left: 15px;
+	//   }
+	// }
+}
+
+.error {
+	font-size: 14px;
+}
+
+.block-btn {
+	color: white;
+	margin: 0px 3px;
+	padding: 2px 9px;
+	font-size: 13px;
+	font-weight: 600;
+	border: none;
+	&.Unblock-btn {
+		background-color: #3db85c !important;
+	}
+	&.block-btn {
+		background-color: #e55353;
+	}
+	&.Deactive-btn {
+		background-color: #e48a44;
+	}
+}
+
+.modal-content {
+	border-radius: 10px;
+	padding: 20px;
+	.modal-header {
+		justify-content: center;
+		padding: 0;
+		border-bottom: none;
+
+		.modal-title {
+			text-align: center;
+
+			font-size: 27px;
+		}
+		.close {
+			background-color: #fffefe;
+			border-radius: 50%;
+			color: black;
+			width: 40px;
+			height: 40px;
+			display: inline-block;
+			line-height: 5px;
+			padding: 0 !important;
+			position: absolute;
+			right: 8px;
+			top: 12px;
+			opacity: 1;
+
+			box-shadow: 1px 1px 7px #6a6969;
+			&:not(:disabled):not(.disabled):hover,
+			&e:not(:disabled):not(.disabled):focus {
+				opacity: 1;
+			}
+		}
+	}
+	.modal-body {
+		padding: 0;
+	}
+}
+
+/*btn focus color common css*/
+.btn:focus,
+.btn.focus {
+	outline: 0;
+	box-shadow: none;
+}
+button:focus {
+	outline: 1px dotted;
+	outline: none;
+	opacity: 1 !important;
+}
+.logout-btn {
+	color: #ffffff;
+	font-weight: 800;
+	font-size: 13px;
+	border: 1px solid #f9ae76;
+	box-shadow: 0px 0px 11px #94949494;
+	background-color: #f9ae76;
+	padding: 8px 15px;
+}
+.expert-card {
+	max-width: 800px;
+	margin: 0 auto 30px;
+	.update-profile-image {
+		text-align: center;
+	}
+}
+
+#hcsd0p5eefbackdrop {
+	display: none !important;
+}
+.update-profile-image {
+	text-align: center;
+	position: relative;
+	width: 100px;
+	margin: 0 auto;
+	.profile {
+		border-radius: 50px;
+		width: 100px;
+		height: 100px;
+		object-fit: cover;
+	}
+	.upload-box {
+		position: absolute;
+		right: 0px;
+		bottom: 6px;
+		line-height: 0;
+		width: 27px;
+		height: 27px;
+		box-shadow: 1px 1px 3px #575757;
+		background-color: white;
+		line-height: 23px;
+		border-radius: 50%;
+	}
+}
+
+.done-txt {
+	color: black;
+}
+
+.badge {
+	&-yellow {
+		background: #ffd27b;
+	}
+	&-orange {
+		background: #ffae75;
+	}
+	&-green {
+		background: #cee2dd;
+	}
+	&-purple {
+		background: #d9ccf3;
+	}
+	&-gray {
+		background: #b2b2b270;
+	}
+	&-pink {
+		background: #f2cac8;
+	}
+}
+
+/* width */
+::-webkit-scrollbar {
+	width: 4px;
+	height: 7px;
+	border-radius: 50px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #f9ae76;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #f9ae76;
+}
+.download-btn{
+	color: #ffffff;
+    font-weight: 800;
+    font-size: 13px;
+    border: 1px solid #f9ae76 !important;
+    background-color: #f9ae76 !important;
+    padding: 7px 15px;
+	
+	margin: 0px 8px;
+	width: auto;
+    max-width: 100%;
+    margin-right: 0;
+    // margin-bottom: 10px;
+	
+	// @media (max-width:550px) {
+	
+	// 	margin:  0;
+	// }
+	@media (max-width:450px) {
+	width: 100%;
+		margin: 10px 0;
+	}
+	@media (max-width:1250px) {
+		font-size: 8px;
+	}
+}
+.download-csv{
+	.search-input{
+		margin: 0;
+		
+		input{
+			width: 200px;
+			height: 38px;
+			@media (max-width:540px) {
+				width: 291px;
+			}
+			
+		}
+	}
+	
+}
+.date-picker-outer{
+	margin-bottom: 20px;
+	.date-picker {
+	
+		@media (max-width: 1100px) {
+			
+			justify-content: flex-end;
+		}
+	
+		@media (max-width:767px) {
+			justify-content: flex-start;
+			margin-bottom: 10px;
+			width: 100%;
+		}
+		@media (max-width:480px) {
+			justify-content: space-between;
+			
+		}
+		label {
+			margin-right: 10px;
+			margin-bottom: 0;
+		}
+		.react-datepicker__input-container input {
+			border: 1px solid;
+			color: #768192;
+			width: 100px;
+			background-color: #fff;
+			border-color: #d8dbe0;
+			height: 38px;
+			border-radius: 4px;
+			padding: 8px;
+			font-size: 14px;
+			@media  (max-width:767px) {
+				width: 100px;
+			}
+		}
+	}
+	.select-country{
+		width: 200px;
+		margin-left: 15px;
+		@media   (max-width:540px){
+			width: 100%;
+			margin: 0;
+		}
+	}
+	@media   (max-width:480px){
+		flex-wrap: wrap;
+	}
+}
+
