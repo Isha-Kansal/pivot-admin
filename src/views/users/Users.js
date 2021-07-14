@@ -244,7 +244,7 @@ const Users = (props) => {
 	};
 
 	const getUtcDate = (date) => {
-		return date ? moment(date).utc().format('DD/MM/YYYY') : '';
+		return date ? moment(date).format('DD/MM/YYYY') : '';
 	};
 
 	const onDownload = () => {
@@ -279,7 +279,6 @@ const Users = (props) => {
 				<CCol lg={3} md={3} xs={12}>
 					<form className="d-flex flex-md-nowrap flex-wrap">
 						<Search handleSearch={handleSearch} />
-						
 					</form>
 				</CCol>
 				<CCol lg={9} md={9} xs={12}>
